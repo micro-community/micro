@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/micro-community/micro/v3/client/cli/namespace"
-	"github.com/micro-community/micro/v3/internal/config"
+	"github.com/micro-community/micro/v3/platform/config"
 )
 
 // Test no default account generation in non-default namespaces

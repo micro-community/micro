@@ -19,7 +19,7 @@ package pool
 import (
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/platform/network/transport"
 )
 
 type Options struct {

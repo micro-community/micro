@@ -19,7 +19,7 @@ import (
 	"context"
 	"net"
 
-	"github.com/micro-community/micro/v3/internal/network/resolver"
+	"github.com/micro-community/micro/v3/platform/network/resolver"
 	"github.com/miekg/dns"
 )
 

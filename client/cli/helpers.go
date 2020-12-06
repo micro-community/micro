@@ -10,8 +10,8 @@ import (
 
 	"github.com/micro-community/micro/v3/client/cli/util"
 	cliutil "github.com/micro-community/micro/v3/client/cli/util"
-	cbytes "github.com/micro-community/micro/v3/internal/codec/bytes"
-	clic "github.com/micro-community/micro/v3/internal/command"
+	cbytes "github.com/micro-community/micro/v3/platform/codec/bytes"
+	clic "github.com/micro-community/micro/v3/platform/command"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/urfave/cli/v2"
 )

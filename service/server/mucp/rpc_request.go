@@ -19,9 +19,9 @@ package mucp
 import (
 	"bytes"
 
-	"github.com/micro-community/micro/v3/internal/client/buf"
-	"github.com/micro-community/micro/v3/internal/codec"
-	"github.com/micro-community/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/platform/client/buf"
+	"github.com/micro-community/micro/v3/platform/codec"
+	"github.com/micro-community/micro/v3/platform/network/transport"
 )
 
 type rpcRequest struct {

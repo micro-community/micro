@@ -8,7 +8,7 @@ import (
 
 	"github.com/micro-community/micro/v3/service/runtime"
 
-	"github.com/micro-community/micro/v3/internal/kubernetes/api"
+	"github.com/micro-community/micro/v3/platform/kubernetes/api"
 	"github.com/micro-community/micro/v3/test/fakes"
 
 	. "github.com/onsi/gomega"

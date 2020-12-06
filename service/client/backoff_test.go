@@ -21,7 +21,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/codec"
+	"github.com/micro-community/micro/v3/platform/codec"
 )
 
 func TestBackoff(t *testing.T) {

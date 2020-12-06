@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/micro-community/micro/v3/internal/auth/namespace"
+	"github.com/micro-community/micro/v3/platform/auth/namespace"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"

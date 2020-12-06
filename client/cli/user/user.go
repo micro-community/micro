@@ -10,7 +10,7 @@ import (
 	"github.com/micro-community/micro/v3/client/cli/token"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/cmd"
-	"github.com/micro-community/micro/v3/internal/config"
+	"github.com/micro-community/micro/v3/platform/config"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/client"

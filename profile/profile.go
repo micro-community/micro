@@ -32,8 +32,8 @@ import (
 	mem "github.com/micro-community/micro/v3/service/store/memory"
 	"github.com/urfave/cli/v2"
 
-	inAuth "github.com/micro-community/micro/v3/internal/auth"
-	"github.com/micro-community/micro/v3/internal/user"
+	inAuth "github.com/micro-community/micro/v3/platform/auth"
+	"github.com/micro-community/micro/v3/platform/user"
 	microAuth "github.com/micro-community/micro/v3/service/auth"
 	microBuilder "github.com/micro-community/micro/v3/service/build"
 	microEvents "github.com/micro-community/micro/v3/service/events"

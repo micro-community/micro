@@ -27,8 +27,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/micro-community/micro/v3/internal/api/handler"
-	"github.com/micro-community/micro/v3/internal/ctx"
+	"github.com/micro-community/micro/v3/platform/api/handler"
+	"github.com/micro-community/micro/v3/platform/ctx"
 	proto "github.com/micro-community/micro/v3/proto/api"
 	"github.com/oxtoacart/bpool"
 )

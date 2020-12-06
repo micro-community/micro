@@ -13,7 +13,7 @@ import (
 	clitoken "github.com/micro-community/micro/v3/client/cli/token"
 	cliutil "github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/cmd"
-	"github.com/micro-community/micro/v3/internal/report"
+	"github.com/micro-community/micro/v3/platform/report"
 	pb "github.com/micro-community/micro/v3/proto/signup"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/client"

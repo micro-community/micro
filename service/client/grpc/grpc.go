@@ -27,7 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	raw "github.com/micro-community/micro/v3/internal/codec/bytes"
+	raw "github.com/micro-community/micro/v3/platform/codec/bytes"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"

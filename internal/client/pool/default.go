@@ -21,7 +21,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/micro-community/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/platform/network/transport"
 )
 
 type pool struct {

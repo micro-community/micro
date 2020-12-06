@@ -16,7 +16,7 @@
 package registry
 
 import (
-	"github.com/micro-community/micro/v3/internal/network/resolver"
+	"github.com/micro-community/micro/v3/platform/network/resolver"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/registry/mdns"
 )

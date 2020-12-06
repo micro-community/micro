@@ -18,7 +18,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/micro-community/micro/v3/internal/network/tunnel"
+	"github.com/micro-community/micro/v3/platform/network/tunnel"
 	"github.com/micro-community/micro/v3/service/logger"
 )
 

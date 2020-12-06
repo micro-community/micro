@@ -22,7 +22,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/micro-community/micro/v3/internal/codec"
+	"github.com/micro-community/micro/v3/platform/codec"
 	"github.com/micro-community/micro/v3/service/server"
 )
 

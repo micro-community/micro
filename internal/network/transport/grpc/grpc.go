@@ -20,10 +20,10 @@ import (
 	"crypto/tls"
 	"net"
 
-	maddr "github.com/micro-community/micro/v3/internal/addr"
-	mnet "github.com/micro-community/micro/v3/internal/net"
-	"github.com/micro-community/micro/v3/internal/network/transport"
-	mls "github.com/micro-community/micro/v3/internal/tls"
+	maddr "github.com/micro-community/micro/v3/platform/addr"
+	mnet "github.com/micro-community/micro/v3/platform/net"
+	"github.com/micro-community/micro/v3/platform/network/transport"
+	mls "github.com/micro-community/micro/v3/platform/tls"
 	pb "github.com/micro-community/micro/v3/proto/transport"
 
 	"google.golang.org/grpc"

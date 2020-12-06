@@ -17,8 +17,8 @@
 package mucp
 
 import (
-	"github.com/micro-community/micro/v3/internal/codec"
-	thttp "github.com/micro-community/micro/v3/internal/network/transport/http"
+	"github.com/micro-community/micro/v3/platform/codec"
+	thttp "github.com/micro-community/micro/v3/platform/network/transport/http"
 	"github.com/micro-community/micro/v3/service/broker/memory"
 	"github.com/micro-community/micro/v3/service/registry/mdns"
 	"github.com/micro-community/micro/v3/service/server"

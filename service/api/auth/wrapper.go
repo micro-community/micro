@@ -7,12 +7,12 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/micro-community/micro/v3/internal/api/resolver"
-	"github.com/micro-community/micro/v3/internal/api/resolver/subdomain"
-	"github.com/micro-community/micro/v3/internal/api/server"
-	inauth "github.com/micro-community/micro/v3/internal/auth"
-	"github.com/micro-community/micro/v3/internal/ctx"
-	"github.com/micro-community/micro/v3/internal/namespace"
+	"github.com/micro-community/micro/v3/platform/api/resolver"
+	"github.com/micro-community/micro/v3/platform/api/resolver/subdomain"
+	"github.com/micro-community/micro/v3/platform/api/server"
+	inauth "github.com/micro-community/micro/v3/platform/auth"
+	"github.com/micro-community/micro/v3/platform/ctx"
+	"github.com/micro-community/micro/v3/platform/namespace"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 )

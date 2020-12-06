@@ -24,9 +24,9 @@ import (
 	"sync"
 	"time"
 
-	maddr "github.com/micro-community/micro/v3/internal/addr"
-	mnet "github.com/micro-community/micro/v3/internal/net"
-	"github.com/micro-community/micro/v3/internal/network/transport"
+	maddr "github.com/micro-community/micro/v3/platform/addr"
+	mnet "github.com/micro-community/micro/v3/platform/net"
+	"github.com/micro-community/micro/v3/platform/network/transport"
 )
 
 type memorySocket struct {

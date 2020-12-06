@@ -24,9 +24,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/micro-community/micro/v3/internal/api/router"
-	rutil "github.com/micro-community/micro/v3/internal/registry"
-	util "github.com/micro-community/micro/v3/internal/router"
+	"github.com/micro-community/micro/v3/platform/api/router"
+	rutil "github.com/micro-community/micro/v3/platform/registry"
+	util "github.com/micro-community/micro/v3/platform/router"
 	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/logger"

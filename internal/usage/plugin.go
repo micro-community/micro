@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/backoff"
+	"github.com/micro-community/micro/v3/platform/backoff"
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/urfave/cli/v2"

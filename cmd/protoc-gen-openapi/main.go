@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
-	"github.com/micro-community/micro/v3/internal/openapi/converter"
+	"github.com/micro-community/micro/v3/platform/openapi/converter"
 	"github.com/micro-community/micro/v3/service/logger"
 )
 

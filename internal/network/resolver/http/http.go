@@ -22,7 +22,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/micro-community/micro/v3/internal/network/resolver"
+	"github.com/micro-community/micro/v3/platform/network/resolver"
 )
 
 // Resolver is a HTTP network resolver

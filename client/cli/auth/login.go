@@ -11,7 +11,7 @@ import (
 	"github.com/micro-community/micro/v3/client/cli/signup"
 	"github.com/micro-community/micro/v3/client/cli/token"
 	"github.com/micro-community/micro/v3/client/cli/util"
-	"github.com/micro-community/micro/v3/internal/report"
+	"github.com/micro-community/micro/v3/platform/report"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/crypto/ssh/terminal"

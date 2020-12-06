@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/micro-community/micro/v3/internal/config"
+	"github.com/micro-community/micro/v3/platform/config"
 	"github.com/micro-community/micro/v3/service/registry"
 )
 

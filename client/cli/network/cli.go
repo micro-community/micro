@@ -12,7 +12,7 @@ import (
 
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/cmd"
-	clic "github.com/micro-community/micro/v3/internal/command"
+	clic "github.com/micro-community/micro/v3/platform/command"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/olekukonko/tablewriter"

@@ -17,7 +17,7 @@
 package handler
 
 import (
-	"github.com/micro-community/micro/v3/internal/api/router"
+	"github.com/micro-community/micro/v3/platform/api/router"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/client/grpc"
 )

@@ -25,8 +25,8 @@ import (
 
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
-	"github.com/micro-community/micro/v3/internal/codec"
-	"github.com/micro-community/micro/v3/internal/codec/bytes"
+	"github.com/micro-community/micro/v3/platform/codec"
+	"github.com/micro-community/micro/v3/platform/codec/bytes"
 	"github.com/oxtoacart/bpool"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"

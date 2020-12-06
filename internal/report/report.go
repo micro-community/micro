@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/micro-community/micro/v3/internal/helper"
+	"github.com/micro-community/micro/v3/platform/helper"
 	pb "github.com/micro-community/micro/v3/proto/alert"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/urfave/cli/v2"

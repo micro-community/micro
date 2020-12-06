@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/auth/namespace"
+	"github.com/micro-community/micro/v3/platform/auth/namespace"
 	pb "github.com/micro-community/micro/v3/proto/registry"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/errors"

@@ -27,11 +27,11 @@ import (
 	"sync"
 	"time"
 
-	maddr "github.com/micro-community/micro/v3/internal/addr"
-	"github.com/micro-community/micro/v3/internal/client/buf"
-	mnet "github.com/micro-community/micro/v3/internal/net"
-	"github.com/micro-community/micro/v3/internal/network/transport"
-	mls "github.com/micro-community/micro/v3/internal/tls"
+	maddr "github.com/micro-community/micro/v3/platform/addr"
+	"github.com/micro-community/micro/v3/platform/client/buf"
+	mnet "github.com/micro-community/micro/v3/platform/net"
+	"github.com/micro-community/micro/v3/platform/network/transport"
+	mls "github.com/micro-community/micro/v3/platform/tls"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )

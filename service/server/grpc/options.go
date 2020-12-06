@@ -22,7 +22,7 @@ import (
 	"net"
 
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	"github.com/micro-community/micro/v3/internal/codec"
+	"github.com/micro-community/micro/v3/platform/codec"
 	"github.com/micro-community/micro/v3/service/broker/memory"
 	"github.com/micro-community/micro/v3/service/registry/mdns"
 	"github.com/micro-community/micro/v3/service/server"

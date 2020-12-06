@@ -25,7 +25,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 
-	"github.com/micro-community/micro/v3/internal/api/handler"
+	"github.com/micro-community/micro/v3/platform/api/handler"
 	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/registry"
 )

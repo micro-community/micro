@@ -21,7 +21,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/mdns"
+	"github.com/micro-community/micro/v3/platform/mdns"
 	"github.com/micro-community/micro/v3/service/router"
 )
 

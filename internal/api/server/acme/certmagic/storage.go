@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"github.com/caddyserver/certmagic"
-	"github.com/micro-community/micro/v3/internal/sync"
+	"github.com/micro-community/micro/v3/platform/sync"
 	"github.com/micro-community/micro/v3/service/store"
 )
 

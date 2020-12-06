@@ -22,11 +22,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/micro-community/micro/v3/internal/api/handler"
-	"github.com/micro-community/micro/v3/internal/api/resolver"
-	"github.com/micro-community/micro/v3/internal/api/resolver/vpath"
-	"github.com/micro-community/micro/v3/internal/api/router"
-	regRouter "github.com/micro-community/micro/v3/internal/api/router/registry"
+	"github.com/micro-community/micro/v3/platform/api/handler"
+	"github.com/micro-community/micro/v3/platform/api/resolver"
+	"github.com/micro-community/micro/v3/platform/api/resolver/vpath"
+	"github.com/micro-community/micro/v3/platform/api/router"
+	regRouter "github.com/micro-community/micro/v3/platform/api/router/registry"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/registry/memory"
 )

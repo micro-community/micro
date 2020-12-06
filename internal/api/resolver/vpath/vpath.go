@@ -23,7 +23,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/micro-community/micro/v3/internal/api/resolver"
+	"github.com/micro-community/micro/v3/platform/api/resolver"
 )
 
 func NewResolver(opts ...resolver.Option) resolver.Resolver {

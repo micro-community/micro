@@ -15,7 +15,7 @@
 package noop
 
 import (
-	"github.com/micro-community/micro/v3/internal/debug/log"
+	"github.com/micro-community/micro/v3/platform/debug/log"
 )
 
 type noop struct{}

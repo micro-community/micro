@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/auth/namespace"
+	"github.com/micro-community/micro/v3/platform/auth/namespace"
 	pb "github.com/micro-community/micro/v3/proto/store"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/store"

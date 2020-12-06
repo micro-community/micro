@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
-	inauth "github.com/micro-community/micro/v3/internal/auth"
-	"github.com/micro-community/micro/v3/internal/auth/namespace"
-	"github.com/micro-community/micro/v3/internal/debug/trace"
+	inauth "github.com/micro-community/micro/v3/platform/auth"
+	"github.com/micro-community/micro/v3/platform/auth/namespace"
+	"github.com/micro-community/micro/v3/platform/debug/trace"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/client/cache"

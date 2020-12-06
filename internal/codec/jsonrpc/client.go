@@ -20,7 +20,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/micro-community/micro/v3/internal/codec"
+	"github.com/micro-community/micro/v3/platform/codec"
 )
 
 type clientCodec struct {

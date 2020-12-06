@@ -20,7 +20,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/micro-community/micro/v3/internal/debug/log"
+	"github.com/micro-community/micro/v3/platform/debug/log"
 )
 
 func write(l log.Record) error {

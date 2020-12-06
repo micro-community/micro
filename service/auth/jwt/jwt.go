@@ -21,9 +21,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/auth/rules"
-	"github.com/micro-community/micro/v3/internal/auth/token"
-	"github.com/micro-community/micro/v3/internal/auth/token/jwt"
+	"github.com/micro-community/micro/v3/platform/auth/rules"
+	"github.com/micro-community/micro/v3/platform/auth/token"
+	"github.com/micro-community/micro/v3/platform/auth/token/jwt"
 	"github.com/micro-community/micro/v3/service/auth"
 )
 

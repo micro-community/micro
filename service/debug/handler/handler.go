@@ -5,9 +5,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/debug/log"
-	"github.com/micro-community/micro/v3/internal/debug/stats"
-	"github.com/micro-community/micro/v3/internal/debug/trace"
+	"github.com/micro-community/micro/v3/platform/debug/log"
+	"github.com/micro-community/micro/v3/platform/debug/stats"
+	"github.com/micro-community/micro/v3/platform/debug/trace"
 	pb "github.com/micro-community/micro/v3/proto/debug"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/debug"

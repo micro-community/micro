@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/blang/semver"
-	"github.com/micro-community/micro/v3/internal/config"
+	"github.com/micro-community/micro/v3/platform/config"
 	"github.com/rhysd/go-github-selfupdate/selfupdate"
 	"github.com/urfave/cli/v2"
 )

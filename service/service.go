@@ -9,7 +9,7 @@ import (
 	"runtime"
 
 	"github.com/micro-community/micro/v3/cmd"
-	signalutil "github.com/micro-community/micro/v3/internal/signal"
+	signalutil "github.com/micro-community/micro/v3/platform/signal"
 	"github.com/micro-community/micro/v3/service/client"
 	mudebug "github.com/micro-community/micro/v3/service/debug"
 	debug "github.com/micro-community/micro/v3/service/debug/handler"

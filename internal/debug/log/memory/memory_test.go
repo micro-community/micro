@@ -18,7 +18,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/micro-community/micro/v3/internal/debug/log"
+	"github.com/micro-community/micro/v3/platform/debug/log"
 )
 
 func TestLogger(t *testing.T) {

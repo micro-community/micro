@@ -26,8 +26,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro-community/micro/v3/internal/api/router"
-	util "github.com/micro-community/micro/v3/internal/router"
+	"github.com/micro-community/micro/v3/platform/api/router"
+	util "github.com/micro-community/micro/v3/platform/router"
 	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/logger"

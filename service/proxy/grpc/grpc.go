@@ -22,8 +22,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/micro-community/micro/v3/internal/codec"
-	"github.com/micro-community/micro/v3/internal/codec/bytes"
+	"github.com/micro-community/micro/v3/platform/codec"
+	"github.com/micro-community/micro/v3/platform/codec/bytes"
 	"github.com/micro-community/micro/v3/service/client"
 	grpcc "github.com/micro-community/micro/v3/service/client/grpc"
 	"github.com/micro-community/micro/v3/service/errors"

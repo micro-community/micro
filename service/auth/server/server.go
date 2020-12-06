@@ -1,8 +1,8 @@
 package server
 
 import (
-	"github.com/micro-community/micro/v3/internal/auth/token"
-	"github.com/micro-community/micro/v3/internal/auth/token/jwt"
+	"github.com/micro-community/micro/v3/platform/auth/token"
+	"github.com/micro-community/micro/v3/platform/auth/token/jwt"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"

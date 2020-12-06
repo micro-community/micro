@@ -22,7 +22,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/micro-community/micro/v3/internal/auth/token"
+	"github.com/micro-community/micro/v3/platform/auth/token"
 	"github.com/micro-community/micro/v3/service/auth"
 )
 

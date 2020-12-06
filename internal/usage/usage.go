@@ -13,8 +13,8 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/google/uuid"
-	pb "github.com/micro-community/micro/v3/internal/usage/proto"
-	"github.com/micro-community/micro/v3/internal/version"
+	pb "github.com/micro-community/micro/v3/platform/usage/proto"
+	"github.com/micro-community/micro/v3/platform/version"
 )
 
 var (
