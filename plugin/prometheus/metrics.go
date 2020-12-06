@@ -20,7 +20,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/micro/micro/v3/service/metrics"
+	"github.com/micro-community/micro/v3/service/metrics"
 )
 
 // ErrPrometheusPanic is a catch-all for the panics which can be thrown by the Prometheus client:

@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/metrics/go
+// Original source: github.com/micro-community/micro/v3/metrics/go
 
 // Package metrics is for instrumentation and debugging
 package metrics

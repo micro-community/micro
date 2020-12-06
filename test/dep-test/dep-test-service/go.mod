@@ -26,7 +26,7 @@ require (
 	github.com/jonboulle/clockwork v0.1.0 // indirect
 	github.com/lucas-clemente/quic-go v0.14.1 // indirect
 	github.com/micro/go-micro/v3 v3.0.0-beta.3.0.20201009122815-dad05be95ee0
-	github.com/micro/micro/v3 v3.0.0-20200728090928-ad22505562c9
+	github.com/micro-community/micro/v3 v3.0.0-20200728090928-ad22505562c9
 	github.com/mitchellh/hashstructure v1.0.0 // indirect
 	github.com/nats-io/nats-streaming-server v0.18.0 // indirect
 	github.com/nlopes/slack v0.6.1-0.20191106133607-d06c2a2b3249 // indirect
@@ -42,6 +42,6 @@ require (
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 
-replace github.com/micro/micro/v3 => ../../..
+replace github.com/micro-community/micro/v3 => ../../..
 
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0

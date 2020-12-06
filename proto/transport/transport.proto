@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package transport;
-option go_package = "github.com/micro/micro/v3/proto/transport;transport";
+option go_package = "github.com/micro-community/micro/v3/proto/transport;transport";
 
 service Transport {
 	rpc Stream(stream Message) returns (stream Message) {}

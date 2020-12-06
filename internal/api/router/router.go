@@ -20,7 +20,7 @@ package router
 import (
 	"net/http"
 
-	"github.com/micro/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/api"
 )
 
 // Router is used to determine an endpoint for a request

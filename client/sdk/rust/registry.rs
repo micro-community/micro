@@ -3129,7 +3129,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \0\x12:\n\nDeregister\x12\x11.registry.Service\x1a\x17.registry.EmptyRes\
     ponse\"\0\x12?\n\x0cListServices\x12\x15.registry.ListRequest\x1a\x16.re\
     gistry.ListResponse\"\0\x125\n\x05Watch\x12\x16.registry.WatchRequest\
-    \x1a\x10.registry.Result\"\00\x01B3Z1github.com/micro/micro/v3/proto/reg\
+    \x1a\x10.registry.Result\"\00\x01B3Z1github.com/micro-community/micro/v3/proto/reg\
     istry;registryJ\x84\x1c\n\x06\x12\x04\0\0f\x01\n\x08\n\x01\x0c\x12\x03\0\
     \0\x12\n\x08\n\x01\x02\x12\x03\x02\x08\x10\n\x08\n\x01\x08\x12\x03\x04\0\
     H\n\t\n\x02\x08\x0b\x12\x03\x04\0H\n\n\n\x02\x06\0\x12\x04\x06\0\x0c\x01\

@@ -21,12 +21,12 @@ import (
 	"net"
 	"testing"
 
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/errors"
-	"github.com/micro/micro/v3/service/registry"
-	"github.com/micro/micro/v3/service/registry/memory"
-	"github.com/micro/micro/v3/service/router"
-	regRouter "github.com/micro/micro/v3/service/router/registry"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry/memory"
+	"github.com/micro-community/micro/v3/service/router"
+	regRouter "github.com/micro-community/micro/v3/service/router/registry"
 	pgrpc "google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )

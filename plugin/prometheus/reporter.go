@@ -20,8 +20,8 @@ import (
 	"net/http"
 	"strings"
 
-	log "github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/metrics"
+	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/metrics"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

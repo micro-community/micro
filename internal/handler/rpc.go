@@ -7,14 +7,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/micro/micro/v3/internal/api/handler"
-	"github.com/micro/micro/v3/internal/api/resolver"
-	"github.com/micro/micro/v3/internal/api/resolver/subdomain"
-	"github.com/micro/micro/v3/internal/api/server/cors"
-	"github.com/micro/micro/v3/internal/helper"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/errors"
-	goerrors "github.com/micro/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/internal/api/handler"
+	"github.com/micro-community/micro/v3/internal/api/resolver"
+	"github.com/micro-community/micro/v3/internal/api/resolver/subdomain"
+	"github.com/micro-community/micro/v3/internal/api/server/cors"
+	"github.com/micro-community/micro/v3/internal/helper"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/errors"
+	goerrors "github.com/micro-community/micro/v3/service/errors"
 )
 
 type rpcRequest struct {

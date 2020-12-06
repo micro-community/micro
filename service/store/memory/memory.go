@@ -22,7 +22,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/store"
 	"github.com/patrickmn/go-cache"
 	"github.com/pkg/errors"
 )

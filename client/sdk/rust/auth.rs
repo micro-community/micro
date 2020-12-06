@@ -5971,7 +5971,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     Rules\x125\n\x06Create\x12\x13.auth.CreateRequest\x1a\x14.auth.CreateRes\
     ponse\"\0\x125\n\x06Delete\x12\x13.auth.DeleteRequest\x1a\x14.auth.Delet\
     eResponse\"\0\x12/\n\x04List\x12\x11.auth.ListRequest\x1a\x12.auth.ListR\
-    esponse\"\0B+Z)github.com/micro/micro/v3/proto/auth;authJ\xaf+\n\x07\x12\
+    esponse\"\0B+Z)github.com/micro-community/micro/v3/proto/auth;authJ\xaf+\n\x07\x12\
     \x05\0\0\xa1\x01\x1e\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\x12\
     \x03\x02\x08\x0c\n\x08\n\x01\x08\x12\x03\x04\0@\n\t\n\x02\x08\x0b\x12\
     \x03\x04\0@\n\n\n\x02\x06\0\x12\x04\x06\0\n\x01\n\n\n\x03\x06\0\x01\x12\

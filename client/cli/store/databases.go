@@ -3,11 +3,11 @@ package cli
 import (
 	"fmt"
 
-	"github.com/micro/micro/v3/client/cli/namespace"
-	"github.com/micro/micro/v3/client/cli/util"
-	pb "github.com/micro/micro/v3/proto/store"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/context"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/client/cli/util"
+	pb "github.com/micro-community/micro/v3/proto/store"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/context"
 	"github.com/urfave/cli/v2"
 )
 

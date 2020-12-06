@@ -18,7 +18,7 @@ package noop
 
 import (
 	"github.com/google/uuid"
-	"github.com/micro/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/auth"
 )
 
 func NewAuth(opts ...auth.Option) auth.Auth {

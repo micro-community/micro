@@ -28,8 +28,8 @@ import (
 	"time"
 
 	"github.com/lib/pq"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/store"
 	"github.com/pkg/errors"
 )
 

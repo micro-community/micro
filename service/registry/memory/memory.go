@@ -21,8 +21,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/registry"
 )
 
 var (

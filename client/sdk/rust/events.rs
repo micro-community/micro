@@ -2012,7 +2012,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     nse\x122\n\x07Consume\x12\x16.events.ConsumeRequest\x1a\r.events.Event0\
     \x012p\n\x05Store\x121\n\x04Read\x12\x13.events.ReadRequest\x1a\x14.even\
     ts.ReadResponse\x124\n\x05Write\x12\x14.events.WriteRequest\x1a\x15.even\
-    ts.WriteResponseB.Z,github.com/micro/micro/v3/proto/event;eventsJ\x85\
+    ts.WriteResponseB.Z,github.com/micro-community/micro/v3/proto/event;eventsJ\x85\
     \x11\n\x06\x12\x04\0\0>\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\x01\
     \x02\x12\x03\x02\x08\x0e\n\x08\n\x01\x08\x12\x03\x03\0C\n\t\n\x02\x08\
     \x0b\x12\x03\x03\0C\n\n\n\x02\x06\0\x12\x04\x05\0\x08\x01\n\n\n\x03\x06\

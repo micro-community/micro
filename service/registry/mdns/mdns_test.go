@@ -19,7 +19,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry"
 )
 
 func TestMDNS(t *testing.T) {

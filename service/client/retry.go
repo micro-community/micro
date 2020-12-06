@@ -19,7 +19,7 @@ package client
 import (
 	"context"
 
-	"github.com/micro/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/errors"
 )
 
 // note that returning either false or a non-nil error will result in the call not being retried

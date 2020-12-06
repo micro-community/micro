@@ -17,7 +17,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/micro/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/internal/network/transport"
 )
 
 func expectedPort(t *testing.T, expected string, lsn transport.Listener) {

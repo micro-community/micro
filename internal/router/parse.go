@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
 )
 
 // InvalidTemplateError indicates that the path template is not valid.

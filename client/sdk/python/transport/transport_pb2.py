@@ -17,9 +17,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='transport/transport.proto',
   package='transport',
   syntax='proto3',
-  serialized_options=b'Z3github.com/micro/micro/v3/proto/transport;transport',
+  serialized_options=b'Z3github.com/micro-community/micro/v3/proto/transport;transport',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19transport/transport.proto\x12\ttransport\"v\n\x07Message\x12.\n\x06header\x18\x01 \x03(\x0b\x32\x1e.transport.Message.HeaderEntry\x12\x0c\n\x04\x62ody\x18\x02 \x01(\x0c\x1a-\n\x0bHeaderEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32\x43\n\tTransport\x12\x36\n\x06Stream\x12\x12.transport.Message\x1a\x12.transport.Message\"\x00(\x01\x30\x01\x42\x35Z3github.com/micro/micro/v3/proto/transport;transportb\x06proto3'
+  serialized_pb=b'\n\x19transport/transport.proto\x12\ttransport\"v\n\x07Message\x12.\n\x06header\x18\x01 \x03(\x0b\x32\x1e.transport.Message.HeaderEntry\x12\x0c\n\x04\x62ody\x18\x02 \x01(\x0c\x1a-\n\x0bHeaderEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32\x43\n\tTransport\x12\x36\n\x06Stream\x12\x12.transport.Message\x1a\x12.transport.Message\"\x00(\x01\x30\x01\x42\x35Z3github.com/micro-community/micro/v3/proto/transport;transportb\x06proto3'
 )
 
 

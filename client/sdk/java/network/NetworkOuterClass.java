@@ -14931,7 +14931,7 @@ public final class NetworkOuterClass {
       "\n\010Services\022\030.network.ServicesRequest\032\031.n" +
       "etwork.ServicesResponse\"\000\022;\n\006Status\022\026.ne" +
       "twork.StatusRequest\032\027.network.StatusResp" +
-      "onse\"\000B1Z/github.com/micro/micro/v3/prot" +
+      "onse\"\000B1Z/github.com/micro-community/micro/v3/prot" +
       "o/network;networkb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

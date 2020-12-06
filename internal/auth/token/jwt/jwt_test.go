@@ -21,8 +21,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro/micro/v3/internal/auth/token"
-	"github.com/micro/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/internal/auth/token"
+	"github.com/micro-community/micro/v3/service/auth"
 )
 
 func TestGenerate(t *testing.T) {

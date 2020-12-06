@@ -10,14 +10,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/metrics/noop/reporter_test.go
+// Original source: github.com/micro-community/micro/v3/metrics/noop/reporter_test.go
 
 package noop
 
 import (
 	"testing"
 
-	"github.com/micro/micro/v3/service/metrics"
+	"github.com/micro-community/micro/v3/service/metrics"
 	"github.com/stretchr/testify/assert"
 )
 

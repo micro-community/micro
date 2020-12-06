@@ -24,13 +24,13 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/micro/micro/v3/internal/api/router"
-	rutil "github.com/micro/micro/v3/internal/registry"
-	util "github.com/micro/micro/v3/internal/router"
-	"github.com/micro/micro/v3/service/api"
-	"github.com/micro/micro/v3/service/context/metadata"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/internal/api/router"
+	rutil "github.com/micro-community/micro/v3/internal/registry"
+	util "github.com/micro-community/micro/v3/internal/router"
+	"github.com/micro-community/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/context/metadata"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/registry"
 )
 
 type endpoint struct {

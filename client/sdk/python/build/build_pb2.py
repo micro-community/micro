@@ -17,9 +17,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='build/build.proto',
   package='build',
   syntax='proto3',
-  serialized_options=b'Z+github.com/micro/micro/v3/proto/build;build',
+  serialized_options=b'Z+github.com/micro-community/micro/v3/proto/build;build',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x62uild/build.proto\x12\x05\x62uild\"=\n\x0c\x42uildRequest\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x1f\n\x07options\x18\x02 \x01(\x0b\x32\x0e.build.Options\".\n\x07Options\x12\x0f\n\x07\x61rchive\x18\x01 \x01(\t\x12\x12\n\nentrypoint\x18\x02 \x01(\t\"\x16\n\x06Result\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x32:\n\x05\x42uild\x12\x31\n\x05\x42uild\x12\x13.build.BuildRequest\x1a\r.build.Result\"\x00(\x01\x30\x01\x42-Z+github.com/micro/micro/v3/proto/build;buildb\x06proto3'
+  serialized_pb=b'\n\x11\x62uild/build.proto\x12\x05\x62uild\"=\n\x0c\x42uildRequest\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x1f\n\x07options\x18\x02 \x01(\x0b\x32\x0e.build.Options\".\n\x07Options\x12\x0f\n\x07\x61rchive\x18\x01 \x01(\t\x12\x12\n\nentrypoint\x18\x02 \x01(\t\"\x16\n\x06Result\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x32:\n\x05\x42uild\x12\x31\n\x05\x42uild\x12\x13.build.BuildRequest\x1a\r.build.Result\"\x00(\x01\x30\x01\x42-Z+github.com/micro-community/micro/v3/proto/build;buildb\x06proto3'
 )
 
 

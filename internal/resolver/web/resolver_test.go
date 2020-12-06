@@ -8,12 +8,12 @@ import (
 
 	// load the cmd package to load defaults since we're using a test profile without importing
 	// micro or service
-	_ "github.com/micro/micro/v3/cmd"
+	_ "github.com/micro-community/micro/v3/cmd"
 
-	"github.com/micro/micro/v3/internal/api/resolver"
-	"github.com/micro/micro/v3/profile"
-	"github.com/micro/micro/v3/service/registry"
-	"github.com/micro/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/internal/api/resolver"
+	"github.com/micro-community/micro/v3/profile"
+	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/router"
 )
 
 type testCase struct {

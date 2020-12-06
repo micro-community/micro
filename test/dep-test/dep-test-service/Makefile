@@ -1,6 +1,6 @@
 
 GOPATH:=$(shell go env GOPATH)
-MODIFY=Mproto/imports/api.proto=github.com/micro/micro/v3/proto/api
+MODIFY=Mproto/imports/api.proto=github.com/micro-community/micro/v3/proto/api
 
 .PHONY: proto
 proto:

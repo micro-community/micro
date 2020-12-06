@@ -8,13 +8,13 @@ import (
 	"os/signal"
 	"runtime"
 
-	"github.com/micro/micro/v3/cmd"
-	signalutil "github.com/micro/micro/v3/internal/signal"
-	"github.com/micro/micro/v3/service/client"
-	mudebug "github.com/micro/micro/v3/service/debug"
-	debug "github.com/micro/micro/v3/service/debug/handler"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/cmd"
+	signalutil "github.com/micro-community/micro/v3/internal/signal"
+	"github.com/micro-community/micro/v3/service/client"
+	mudebug "github.com/micro-community/micro/v3/service/debug"
+	debug "github.com/micro-community/micro/v3/service/debug/handler"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/server"
 	"github.com/urfave/cli/v2"
 )
 

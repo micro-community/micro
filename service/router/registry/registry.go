@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/router/registry/registry.go
+// Original source: github.com/micro-community/micro/v3/router/registry/registry.go
 
 package registry
 
@@ -20,9 +20,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/registry"
-	"github.com/micro/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/router"
 )
 
 var (

@@ -55,7 +55,7 @@ and `micro user set [namespace]`.
 **From Source**
 
 ```sh
-go get github.com/micro/micro/v3
+go get github.com/micro-community/micro/v3
 ```
 
 **Using Docker**
@@ -157,8 +157,8 @@ package main
 import (
 	"context"
   
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/logger"
 	pb "github.com/micro/services/helloworld/proto"
 )
 
@@ -193,7 +193,7 @@ Call with the client:
 import (
 	"context"
   
-	"github.com/micro/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/client"
 	pb "github.com/micro/services/helloworld/proto"
 )
 

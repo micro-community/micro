@@ -3,16 +3,16 @@ package server
 import (
 	"context"
 
-	authns "github.com/micro/micro/v3/internal/auth/namespace"
-	"github.com/micro/micro/v3/internal/namespace"
-	pb "github.com/micro/micro/v3/proto/network"
-	pbRtr "github.com/micro/micro/v3/proto/router"
-	"github.com/micro/micro/v3/service/errors"
-	log "github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/network"
-	"github.com/micro/micro/v3/service/network/mucp"
-	"github.com/micro/micro/v3/service/network/util"
-	"github.com/micro/micro/v3/service/router"
+	authns "github.com/micro-community/micro/v3/internal/auth/namespace"
+	"github.com/micro-community/micro/v3/internal/namespace"
+	pb "github.com/micro-community/micro/v3/proto/network"
+	pbRtr "github.com/micro-community/micro/v3/proto/router"
+	"github.com/micro-community/micro/v3/service/errors"
+	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/network"
+	"github.com/micro-community/micro/v3/service/network/mucp"
+	"github.com/micro-community/micro/v3/service/network/util"
+	"github.com/micro-community/micro/v3/service/router"
 )
 
 // Network implements network handler

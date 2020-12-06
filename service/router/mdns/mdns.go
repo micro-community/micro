@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/router/mdns/mdns.go
+// Original source: github.com/micro-community/micro/v3/router/mdns/mdns.go
 
 // Package mdns is an mdns router
 package mdns
@@ -21,8 +21,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/micro/micro/v3/internal/mdns"
-	"github.com/micro/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/internal/mdns"
+	"github.com/micro-community/micro/v3/service/router"
 )
 
 // NewRouter returns an initialized dns router

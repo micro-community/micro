@@ -23,7 +23,7 @@ In go-micro, you would create a service by importing `github.com/micro/go-micro`
   )
 ```
 
-In Micro V3, we've removed namespaces from service names, so the above service would now be named simply **foo**. We've also created a package specifically for services: `github.com/micro/micro/v3/service`. Dotted service names can still be used, however the full service name will be required when calling the API, such as: "http://localhost:8080/go.micro.service.foo/Bar", unless the API is configured with the namespace flag.
+In Micro V3, we've removed namespaces from service names, so the above service would now be named simply **foo**. We've also created a package specifically for services: `github.com/micro-community/micro/v3/service`. Dotted service names can still be used, however the full service name will be required when calling the API, such as: "http://localhost:8080/go.micro.service.foo/Bar", unless the API is configured with the namespace flag.
 
 The above service can now be defined as:
 ```go
@@ -34,15 +34,15 @@ The above service can now be defined as:
 
 ### Packages
 
-In go-micro, modules such as config could only be accessed via the service object, for example `srv.Options().Config.Read()`. In Micro this has been made easier by providing public functions in each package which can be accessed by importing any package, nested within "github.com/micro/micro/v3/service". Here is an example of how you can load config in Micro:
+In go-micro, modules such as config could only be accessed via the service object, for example `srv.Options().Config.Read()`. In Micro this has been made easier by providing public functions in each package which can be accessed by importing any package, nested within "github.com/micro-community/micro/v3/service". Here is an example of how you can load config in Micro:
 
 ```go
 package main
 
 import (
-  "github.com/micro/micro/v3/service"
-  "github.com/micro/micro/v3/service/config"
-  "github.com/micro/micro/v3/service/logger"
+  "github.com/micro-community/micro/v3/service"
+  "github.com/micro-community/micro/v3/service/config"
+  "github.com/micro-community/micro/v3/service/logger"
 )
 
 func main() {

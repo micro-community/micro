@@ -5,12 +5,12 @@ import (
 	"unicode"
 
 	"github.com/google/uuid"
-	"github.com/micro/micro/v3/client/cli/namespace"
-	clitoken "github.com/micro/micro/v3/client/cli/token"
-	"github.com/micro/micro/v3/client/cli/util"
-	"github.com/micro/micro/v3/service/auth"
-	"github.com/micro/micro/v3/service/errors"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	clitoken "github.com/micro-community/micro/v3/client/cli/token"
+	"github.com/micro-community/micro/v3/client/cli/util"
+	"github.com/micro-community/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/urfave/cli/v2"
 )
 

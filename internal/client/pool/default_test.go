@@ -20,8 +20,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro/micro/v3/internal/network/transport"
-	"github.com/micro/micro/v3/internal/network/transport/memory"
+	"github.com/micro-community/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/internal/network/transport/memory"
 )
 
 func testPool(t *testing.T, size int, ttl time.Duration) {

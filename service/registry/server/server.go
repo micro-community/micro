@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	pb "github.com/micro/micro/v3/proto/registry"
-	"github.com/micro/micro/v3/service"
-	log "github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/registry"
-	"github.com/micro/micro/v3/service/registry/util"
+	pb "github.com/micro-community/micro/v3/proto/registry"
+	"github.com/micro-community/micro/v3/service"
+	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry/util"
 	"github.com/urfave/cli/v2"
 )
 

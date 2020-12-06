@@ -1,16 +1,16 @@
 package server
 
 import (
-	"github.com/micro/micro/v3/internal/auth/token"
-	"github.com/micro/micro/v3/internal/auth/token/jwt"
-	pb "github.com/micro/micro/v3/proto/auth"
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/auth"
-	authHandler "github.com/micro/micro/v3/service/auth/server/auth"
-	rulesHandler "github.com/micro/micro/v3/service/auth/server/rules"
-	log "github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/store"
-	mustore "github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/internal/auth/token"
+	"github.com/micro-community/micro/v3/internal/auth/token/jwt"
+	pb "github.com/micro-community/micro/v3/proto/auth"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/auth"
+	authHandler "github.com/micro-community/micro/v3/service/auth/server/auth"
+	rulesHandler "github.com/micro-community/micro/v3/service/auth/server/rules"
+	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/store"
+	mustore "github.com/micro-community/micro/v3/service/store"
 	"github.com/urfave/cli/v2"
 )
 

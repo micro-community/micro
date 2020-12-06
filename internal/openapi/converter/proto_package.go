@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
 )
 
 // ProtoPackage describes a package of Protobuf, which is an container of message types.

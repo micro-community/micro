@@ -28,11 +28,11 @@ import (
 	"github.com/gobwas/httphead"
 	"github.com/gobwas/ws"
 	"github.com/gobwas/ws/wsutil"
-	raw "github.com/micro/micro/v3/internal/codec/bytes"
-	"github.com/micro/micro/v3/internal/router"
-	"github.com/micro/micro/v3/service/api"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/logger"
+	raw "github.com/micro-community/micro/v3/internal/codec/bytes"
+	"github.com/micro-community/micro/v3/internal/router"
+	"github.com/micro-community/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/logger"
 )
 
 // serveWebsocket will stream rpc back over websockets assuming json

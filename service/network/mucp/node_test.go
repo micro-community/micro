@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/service/network/mucp/mucp_test.go
+// Original source: github.com/micro-community/micro/v3/service/network/mucp/mucp_test.go
 
 package mucp
 
@@ -18,8 +18,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro/micro/v3/service/network"
-	pb "github.com/micro/micro/v3/service/network/mucp/proto"
+	"github.com/micro-community/micro/v3/service/network"
+	pb "github.com/micro-community/micro/v3/service/network/mucp/proto"
 )
 
 var (

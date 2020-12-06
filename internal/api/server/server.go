@@ -20,8 +20,8 @@ import (
 	"crypto/tls"
 	"net/http"
 
-	"github.com/micro/micro/v3/internal/api/resolver"
-	"github.com/micro/micro/v3/internal/api/server/acme"
+	"github.com/micro-community/micro/v3/internal/api/resolver"
+	"github.com/micro-community/micro/v3/internal/api/server/acme"
 )
 
 // Server serves api requests

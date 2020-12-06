@@ -1,4 +1,4 @@
-module github.com/micro/micro/v3
+module github.com/micro-community/micro/v3
 
 go 1.15
 
@@ -14,8 +14,9 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
 	github.com/evanphx/json-patch/v5 v5.1.0
-	github.com/go-acme/lego/v3 v3.9.0
 	github.com/getkin/kin-openapi v0.26.0
+	github.com/go-acme/lego/v3 v3.9.0
+	github.com/gobwas/httphead v0.0.0-20200921212729-da3d93bc3c58
 	github.com/gobwas/pool v0.2.1 // indirect
 	github.com/gobwas/ws v1.0.4
 	github.com/golang/protobuf v1.4.3
@@ -28,6 +29,7 @@ require (
 	github.com/improbable-eng/grpc-web v0.13.0
 	github.com/juju/fslock v0.0.0-20160525022230-4d5c94c67b4b
 	github.com/kr/pretty v0.2.1
+	github.com/micro/micro/v3 v3.0.2
 	github.com/miekg/dns v1.1.35
 	github.com/minio/minio-go/v7 v7.0.5
 	github.com/olekukonko/tablewriter v0.0.4

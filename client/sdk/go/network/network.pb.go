@@ -9,7 +9,7 @@ package network
 import (
 	context "context"
 	proto "github.com/golang/protobuf/proto"
-	router "github.com/micro/micro/v3/proto/router"
+	router "github.com/micro-community/micro/v3/proto/router"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

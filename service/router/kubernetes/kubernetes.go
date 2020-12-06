@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/router/kubernetes/kubernetes.go
+// Original source: github.com/micro-community/micro/v3/router/kubernetes/kubernetes.go
 
 // Package kubernetes is a kubernetes router which uses the service name and network to route
 package kubernetes
@@ -18,7 +18,7 @@ package kubernetes
 import (
 	"fmt"
 
-	"github.com/micro/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/service/router"
 )
 
 // NewRouter returns an initialized kubernetes router

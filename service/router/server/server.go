@@ -1,11 +1,11 @@
 package server
 
 import (
-	pb "github.com/micro/micro/v3/proto/router"
-	"github.com/micro/micro/v3/service"
-	muregistry "github.com/micro/micro/v3/service/registry"
-	"github.com/micro/micro/v3/service/router"
-	"github.com/micro/micro/v3/service/router/registry"
+	pb "github.com/micro-community/micro/v3/proto/router"
+	"github.com/micro-community/micro/v3/service"
+	muregistry "github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/service/router/registry"
 	"github.com/urfave/cli/v2"
 )
 

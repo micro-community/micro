@@ -18,8 +18,8 @@ package memory
 import (
 	"fmt"
 
-	"github.com/micro/micro/v3/internal/debug/log"
-	"github.com/micro/micro/v3/internal/ring"
+	"github.com/micro-community/micro/v3/internal/debug/log"
+	"github.com/micro-community/micro/v3/internal/ring"
 )
 
 // memoryLog is default micro log

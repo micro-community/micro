@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package debug;
 
-option go_package = "github.com/micro/micro/v3/debug/proto;debug";
+option go_package = "github.com/micro-community/micro/v3/debug/proto;debug";
 
 service Debug {
 	rpc Log(LogRequest) returns (LogResponse) {};

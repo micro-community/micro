@@ -19,7 +19,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/micro/micro/v3/service/context/metadata"
+	"github.com/micro-community/micro/v3/service/context/metadata"
 )
 
 // Tracer is an interface for distributed tracing

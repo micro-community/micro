@@ -12248,7 +12248,7 @@ public final class RegistryOuterClass {
       "\"\000\022?\n\014ListServices\022\025.registry.ListReques" +
       "t\032\026.registry.ListResponse\"\000\0225\n\005Watch\022\026.r" +
       "egistry.WatchRequest\032\020.registry.Result\"\000" +
-      "0\001B3Z1github.com/micro/micro/v3/proto/re" +
+      "0\001B3Z1github.com/micro-community/micro/v3/proto/re" +
       "gistry;registryb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

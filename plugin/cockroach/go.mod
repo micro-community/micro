@@ -4,8 +4,8 @@ go 1.15
 
 require (
 	github.com/lib/pq v1.8.0
-	github.com/micro/micro/v3 v3.0.0-beta.6
+	github.com/micro-community/micro/v3 v3.0.0-beta.6
 	github.com/pkg/errors v0.9.1
 )
 
-replace github.com/micro/micro/v3 => ../..
+replace github.com/micro-community/micro/v3 => ../..

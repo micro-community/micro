@@ -164,8 +164,8 @@ A main package for a Micro service looks something like this
 package main
 
 import (
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro/services/helloworld/handler"
 )
 
@@ -188,7 +188,7 @@ func main() {
 When you want to make use of something like the Config service just import it like so.
 
 ```go
-import "github.com/micro/micro/v3/service/config"
+import "github.com/micro-community/micro/v3/service/config"
 
 val, err := config.Get("key")
 ```

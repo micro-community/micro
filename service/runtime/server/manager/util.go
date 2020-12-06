@@ -7,16 +7,16 @@ import (
 	"os"
 	"strings"
 
-	"github.com/micro/micro/v3/service/auth"
-	"github.com/micro/micro/v3/service/build"
-	"github.com/micro/micro/v3/service/build/util/tar"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/runtime"
-	gorun "github.com/micro/micro/v3/service/runtime"
-	"github.com/micro/micro/v3/service/runtime/source/git"
-	"github.com/micro/micro/v3/service/store"
-	gostore "github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/build"
+	"github.com/micro-community/micro/v3/service/build/util/tar"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/runtime"
+	gorun "github.com/micro-community/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/service/runtime/source/git"
+	"github.com/micro-community/micro/v3/service/store"
+	gostore "github.com/micro-community/micro/v3/service/store"
 )
 
 func (m *manager) buildAndRun(srv *service) {

@@ -19,7 +19,7 @@ package etcd
 import (
 	"context"
 
-	"github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry"
 	"go.uber.org/zap"
 )
 

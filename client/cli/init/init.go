@@ -7,7 +7,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/micro/micro/v3/cmd"
+	"github.com/micro-community/micro/v3/cmd"
 	"github.com/urfave/cli/v2"
 )
 

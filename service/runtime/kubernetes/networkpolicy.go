@@ -15,9 +15,9 @@
 package kubernetes
 
 import (
-	"github.com/micro/micro/v3/internal/kubernetes/client"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/internal/kubernetes/client"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/runtime"
 )
 
 // createNetworkPolicy creates a networkpolicy resource

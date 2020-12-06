@@ -19,7 +19,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/micro/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/internal/network/transport"
 )
 
 const (

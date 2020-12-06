@@ -18,9 +18,9 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/micro/micro/v3/service/events"
-	gostore "github.com/micro/micro/v3/service/store"
-	"github.com/micro/micro/v3/service/store/memory"
+	"github.com/micro-community/micro/v3/service/events"
+	gostore "github.com/micro-community/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/store/memory"
 	"github.com/pkg/errors"
 )
 

@@ -763,7 +763,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x03key\x18\x01\x20\x01(\tR\x03key\x12\x14\n\x05value\x18\x02\x20\x01(\t\
     R\x05value:\x028\x012x\n\x06Broker\x122\n\x07Publish\x12\x16.broker.Publ\
     ishRequest\x1a\r.broker.Empty\"\0\x12:\n\tSubscribe\x12\x18.broker.Subsc\
-    ribeRequest\x1a\x0f.broker.Message\"\00\x01B/Z-github.com/micro/micro/v3\
+    ribeRequest\x1a\x0f.broker.Message\"\00\x01B/Z-github.com/micro-community/micro/v3\
     /proto/broker;brokerJ\xc8\x05\n\x06\x12\x04\0\0\x1a\x01\n\x08\n\x01\x0c\
     \x12\x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x02\x08\x0e\n\x08\n\x01\x08\x12\
     \x03\x04\0D\n\t\n\x02\x08\x0b\x12\x03\x04\0D\n\n\n\x02\x06\0\x12\x04\x06\

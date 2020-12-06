@@ -22,8 +22,8 @@ import (
 	"io"
 	"sync"
 
-	"github.com/micro/micro/v3/internal/codec"
-	"github.com/micro/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/internal/codec"
+	"github.com/micro-community/micro/v3/service/server"
 )
 
 // Implements the Streamer interface

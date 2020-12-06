@@ -16926,7 +16926,7 @@ public final class StoreOuterClass {
       "tore.BlobWriteRequest\032\030.store.BlobWriteR" +
       "esponse\"\000(\001\022?\n\006Delete\022\030.store.BlobDelete" +
       "Request\032\031.store.BlobDeleteResponse\"\000B-Z+" +
-      "github.com/micro/micro/v3/proto/store;st" +
+      "github.com/micro-community/micro/v3/proto/store;st" +
       "oreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

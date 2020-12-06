@@ -18,9 +18,9 @@ package transport
 import (
 	"context"
 
-	"github.com/micro/micro/v3/internal/network/transport"
-	"github.com/micro/micro/v3/internal/network/tunnel"
-	"github.com/micro/micro/v3/internal/network/tunnel/mucp"
+	"github.com/micro-community/micro/v3/internal/network/transport"
+	"github.com/micro-community/micro/v3/internal/network/tunnel"
+	"github.com/micro-community/micro/v3/internal/network/tunnel/mucp"
 )
 
 type tunTransport struct {

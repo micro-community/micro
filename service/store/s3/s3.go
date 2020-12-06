@@ -21,7 +21,7 @@ import (
 	"path/filepath"
 	"regexp"
 
-	"github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/store"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/pkg/errors"

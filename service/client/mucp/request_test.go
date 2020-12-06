@@ -19,7 +19,7 @@ package mucp
 import (
 	"testing"
 
-	"github.com/micro/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/client"
 )
 
 func TestRequestOptions(t *testing.T) {

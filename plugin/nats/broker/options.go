@@ -17,7 +17,7 @@
 package nats
 
 import (
-	"github.com/micro/micro/v3/service/broker"
+	"github.com/micro-community/micro/v3/service/broker"
 	nats "github.com/nats-io/nats.go"
 )
 

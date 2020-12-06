@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/metrics/wrapper/metrics_wrapper.go
+// Original source: github.com/micro-community/micro/v3/metrics/wrapper/metrics_wrapper.go
 
 package wrapper
 
@@ -19,8 +19,8 @@ import (
 
 	"context"
 
-	"github.com/micro/micro/v3/service/metrics"
-	"github.com/micro/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/service/metrics"
+	"github.com/micro-community/micro/v3/service/server"
 )
 
 // Wrapper provides a HandlerFunc for metrics.Reporter implementations:

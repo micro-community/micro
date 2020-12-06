@@ -7,8 +7,8 @@ import (
 	"{{.Dir}}/handler"
 	pb "{{.Dir}}/proto"
 
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/logger"
 )
 
 func main() {

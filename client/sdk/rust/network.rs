@@ -3718,7 +3718,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x12\x16.network.RoutesRequest\x1a\x17.network.RoutesResponse\"\0\x12A\n\
     \x08Services\x12\x18.network.ServicesRequest\x1a\x19.network.ServicesRes\
     ponse\"\0\x12;\n\x06Status\x12\x16.network.StatusRequest\x1a\x17.network\
-    .StatusResponse\"\0B1Z/github.com/micro/micro/v3/proto/network;networkJ\
+    .StatusResponse\"\0B1Z/github.com/micro-community/micro/v3/proto/network;networkJ\
     \xe1\x1d\n\x07\x12\x05\0\0\x84\x01\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\
     \x08\n\x01\x02\x12\x03\x02\x08\x0f\n\t\n\x02\x03\0\x12\x03\x04\x07\x1c\n\
     \x08\n\x01\x08\x12\x03\x06\0F\n\t\n\x02\x08\x0b\x12\x03\x06\0F\nG\n\x02\

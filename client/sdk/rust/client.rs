@@ -721,7 +721,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x04body2\x97\x01\n\x06Client\x12+\n\x04Call\x12\x0f.client.Request\x1a\
     \x10.client.Response\"\0\x121\n\x06Stream\x12\x0f.client.Request\x1a\x10\
     .client.Response\"\0(\x010\x01\x12-\n\x07Publish\x12\x0f.client.Message\
-    \x1a\x0f.client.Message\"\0B/Z-github.com/micro/micro/v3/proto/client;cl\
+    \x1a\x0f.client.Message\"\0B/Z-github.com/micro-community/micro/v3/proto/client;cl\
     ientJ\xb5\x08\n\x06\x12\x04\0\0\x1f\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\
     \n\x08\n\x01\x02\x12\x03\x02\x08\x0e\n\x08\n\x01\x08\x12\x03\x04\0D\n\t\
     \n\x02\x08\x0b\x12\x03\x04\0D\n2\n\x02\x06\0\x12\x04\x07\0\x0e\x01\x1a&\

@@ -18,7 +18,7 @@ import (
 	"bytes"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/micro/micro/v3/internal/codec"
+	"github.com/micro-community/micro/v3/internal/codec"
 	"github.com/oxtoacart/bpool"
 )
 

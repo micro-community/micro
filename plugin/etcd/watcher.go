@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"github.com/coreos/etcd/clientv3"
-	"github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry"
 )
 
 type etcdWatcher struct {

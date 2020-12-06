@@ -5,11 +5,11 @@ import (
 	"os"
 	"os/exec"
 
-	runtime "github.com/micro/micro/v3/proto/runtime"
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/context"
-	"github.com/micro/micro/v3/service/logger"
+	runtime "github.com/micro-community/micro/v3/proto/runtime"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/context"
+	"github.com/micro-community/micro/v3/service/logger"
 )
 
 func main() {

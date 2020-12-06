@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	goregistry "github.com/micro/micro/v3/service/registry"
+	goregistry "github.com/micro-community/micro/v3/service/registry"
 )
 
 type parseCase struct {

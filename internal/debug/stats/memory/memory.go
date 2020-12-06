@@ -19,8 +19,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro/micro/v3/internal/debug/stats"
-	"github.com/micro/micro/v3/internal/ring"
+	"github.com/micro-community/micro/v3/internal/debug/stats"
+	"github.com/micro-community/micro/v3/internal/ring"
 )
 
 type memoryStats struct {

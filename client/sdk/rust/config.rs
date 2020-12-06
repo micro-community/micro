@@ -2536,7 +2536,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     t\x1a\x13.config.GetResponse\"\0\x120\n\x03Set\x12\x12.config.SetRequest\
     \x1a\x13.config.SetResponse\"\0\x129\n\x06Delete\x12\x15.config.DeleteRe\
     quest\x1a\x16.config.DeleteResponse\"\0\x123\n\x04Read\x12\x13.config.Re\
-    adRequest\x1a\x14.config.ReadResponse\"\0B/Z-github.com/micro/micro/v3/p\
+    adRequest\x1a\x14.config.ReadResponse\"\0B/Z-github.com/micro-community/micro/v3/p\
     roto/config;configJ\xed\x12\n\x06\x12\x04\0\0I\x01\n\x08\n\x01\x0c\x12\
     \x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x02\x08\x0e\n\x08\n\x01\x08\x12\x03\
     \x04\0D\n\t\n\x02\x08\x0b\x12\x03\x04\0D\n\n\n\x02\x06\0\x12\x04\x06\0\

@@ -10,12 +10,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/micro/micro/v3/client/cli/namespace"
-	"github.com/micro/micro/v3/client/cli/util"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/context"
-	"github.com/micro/micro/v3/service/registry"
-	goregistry "github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/client/cli/util"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/context"
+	"github.com/micro-community/micro/v3/service/registry"
+	goregistry "github.com/micro-community/micro/v3/service/registry"
 	"github.com/urfave/cli/v2"
 )
 

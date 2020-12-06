@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Original source: github.com/micro/micro/v3/router/static/static.go
+// Original source: github.com/micro-community/micro/v3/router/static/static.go
 
 // Package static is a static router which returns the service name as the address + port
 package static
@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/micro/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/service/router"
 )
 
 var (

@@ -17,9 +17,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='broker/broker.proto',
   package='broker',
   syntax='proto3',
-  serialized_options=b'Z-github.com/micro/micro/v3/proto/broker;broker',
+  serialized_options=b'Z-github.com/micro-community/micro/v3/proto/broker;broker',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13\x62roker/broker.proto\x12\x06\x62roker\"\x07\n\x05\x45mpty\"A\n\x0ePublishRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12 \n\x07message\x18\x02 \x01(\x0b\x32\x0f.broker.Message\"0\n\x10SubscribeRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\r\n\x05queue\x18\x02 \x01(\t\"s\n\x07Message\x12+\n\x06header\x18\x01 \x03(\x0b\x32\x1b.broker.Message.HeaderEntry\x12\x0c\n\x04\x62ody\x18\x02 \x01(\x0c\x1a-\n\x0bHeaderEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32x\n\x06\x42roker\x12\x32\n\x07Publish\x12\x16.broker.PublishRequest\x1a\r.broker.Empty\"\x00\x12:\n\tSubscribe\x12\x18.broker.SubscribeRequest\x1a\x0f.broker.Message\"\x00\x30\x01\x42/Z-github.com/micro/micro/v3/proto/broker;brokerb\x06proto3'
+  serialized_pb=b'\n\x13\x62roker/broker.proto\x12\x06\x62roker\"\x07\n\x05\x45mpty\"A\n\x0ePublishRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12 \n\x07message\x18\x02 \x01(\x0b\x32\x0f.broker.Message\"0\n\x10SubscribeRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\r\n\x05queue\x18\x02 \x01(\t\"s\n\x07Message\x12+\n\x06header\x18\x01 \x03(\x0b\x32\x1b.broker.Message.HeaderEntry\x12\x0c\n\x04\x62ody\x18\x02 \x01(\x0c\x1a-\n\x0bHeaderEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32x\n\x06\x42roker\x12\x32\n\x07Publish\x12\x16.broker.PublishRequest\x1a\r.broker.Empty\"\x00\x12:\n\tSubscribe\x12\x18.broker.SubscribeRequest\x1a\x0f.broker.Message\"\x00\x30\x01\x42/Z-github.com/micro-community/micro/v3/proto/broker;brokerb\x06proto3'
 )
 
 

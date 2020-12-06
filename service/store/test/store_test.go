@@ -26,10 +26,10 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/kr/pretty"
-	"github.com/micro/micro/v3/service/store"
-	"github.com/micro/micro/v3/service/store/cache"
-	"github.com/micro/micro/v3/service/store/file"
-	"github.com/micro/micro/v3/service/store/memory"
+	"github.com/micro-community/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/store/cache"
+	"github.com/micro-community/micro/v3/service/store/file"
+	"github.com/micro-community/micro/v3/service/store/memory"
 )
 
 func fileStoreCleanup(db string, s store.Store) {

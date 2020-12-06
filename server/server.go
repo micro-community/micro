@@ -5,11 +5,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/micro/micro/v3/cmd"
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/auth"
-	log "github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/cmd"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/auth"
+	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/urfave/cli/v2"
 )
 

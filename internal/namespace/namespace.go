@@ -3,7 +3,7 @@ package namespace
 import (
 	"context"
 
-	"github.com/micro/micro/v3/service/context/metadata"
+	"github.com/micro-community/micro/v3/service/context/metadata"
 )
 
 const (

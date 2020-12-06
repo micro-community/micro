@@ -13,9 +13,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/micro/micro/v3/internal/helper"
-	pb "github.com/micro/micro/v3/proto/alert"
-	"github.com/micro/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/internal/helper"
+	pb "github.com/micro-community/micro/v3/proto/alert"
+	"github.com/micro-community/micro/v3/service/client"
 	"github.com/urfave/cli/v2"
 )
 

@@ -12,12 +12,12 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/micro/micro/v3/client/cli/namespace"
-	"github.com/micro/micro/v3/client/cli/util"
-	proto "github.com/micro/micro/v3/proto/debug"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/registry"
-	goregistry "github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/client/cli/util"
+	proto "github.com/micro-community/micro/v3/proto/debug"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/registry"
+	goregistry "github.com/micro-community/micro/v3/service/registry"
 )
 
 func quit(c *cli.Context, args []string) ([]byte, error) {

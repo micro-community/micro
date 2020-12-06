@@ -7,7 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	router "github.com/micro/micro/v3/proto/router"
+	router "github.com/micro-community/micro/v3/proto/router"
 	grpc "google.golang.org/grpc"
 	math "math"
 )

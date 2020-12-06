@@ -8256,7 +8256,7 @@ public final class DebugOuterClass {
       "esponse\"\000\0224\n\005Stats\022\023.debug.StatsRequest\032" +
       "\024.debug.StatsResponse\"\000\0224\n\005Trace\022\023.debug" +
       ".TraceRequest\032\024.debug.TraceResponse\"\000B-Z" +
-      "+github.com/micro/micro/v3/debug/proto;d" +
+      "+github.com/micro-community/micro/v3/debug/proto;d" +
       "ebugb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

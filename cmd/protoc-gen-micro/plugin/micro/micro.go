@@ -8,17 +8,17 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"github.com/micro/micro/v3/cmd/protoc-gen-micro/generator"
+	"github.com/micro-community/micro/v3/cmd/protoc-gen-micro/generator"
 	options "google.golang.org/genproto/googleapis/api/annotations"
 )
 
 // Paths for packages used by code generated in this file,
 // relative to the import_prefix of the generator.Generator.
 const (
-	apiPkgPath     = "github.com/micro/micro/v3/service/api"
+	apiPkgPath     = "github.com/micro-community/micro/v3/service/api"
 	contextPkgPath = "context"
-	clientPkgPath  = "github.com/micro/micro/v3/service/client"
-	serverPkgPath  = "github.com/micro/micro/v3/service/server"
+	clientPkgPath  = "github.com/micro-community/micro/v3/service/client"
+	serverPkgPath  = "github.com/micro-community/micro/v3/service/server"
 )
 
 func init() {

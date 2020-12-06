@@ -23079,7 +23079,7 @@ public final class RuntimeOuterClass {
       "oad\022\026.runtime.UploadRequest\032\027.runtime.Up" +
       "loadResponse\"\000(\0012A\n\005Build\0228\n\004Read\022\020.runt" +
       "ime.Service\032\032.runtime.BuildReadResponse\"" +
-      "\0000\001B1Z/github.com/micro/micro/v3/proto/r" +
+      "\0000\001B1Z/github.com/micro-community/micro/v3/proto/r" +
       "untime;runtimeb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

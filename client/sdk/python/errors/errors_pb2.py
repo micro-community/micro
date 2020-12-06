@@ -17,9 +17,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='errors/errors.proto',
   package='errors',
   syntax='proto3',
-  serialized_options=b'Z-github.com/micro/micro/v3/proto/errors;errors',
+  serialized_options=b'Z-github.com/micro-community/micro/v3/proto/errors;errors',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13\x65rrors/errors.proto\x12\x06\x65rrors\"A\n\x05\x45rror\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\x12\x0e\n\x06\x64\x65tail\x18\x03 \x01(\t\x12\x0e\n\x06status\x18\x04 \x01(\tB/Z-github.com/micro/micro/v3/proto/errors;errorsb\x06proto3'
+  serialized_pb=b'\n\x13\x65rrors/errors.proto\x12\x06\x65rrors\"A\n\x05\x45rror\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\x12\x0e\n\x06\x64\x65tail\x18\x03 \x01(\t\x12\x0e\n\x06status\x18\x04 \x01(\tB/Z-github.com/micro-community/micro/v3/proto/errors;errorsb\x06proto3'
 )
 
 

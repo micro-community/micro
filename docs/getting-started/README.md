@@ -30,7 +30,7 @@ You will need protoc-gen-micro for code generation
 # Download latest proto releaes
 # https://github.com/protocolbuffers/protobuf/releases
 go get github.com/golang/protobuf/protoc-gen-go
-go get github.com/micro/micro/v3/cmd/protoc-gen-micro
+go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 ```
 
 ## Install
@@ -40,7 +40,7 @@ go get github.com/micro/micro/v3/cmd/protoc-gen-micro
 Using Go:
 
 ```sh
-go get github.com/micro/micro/v3
+go get github.com/micro-community/micro/v3
 ```
 
 ### Release Binary
@@ -208,7 +208,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/micro/micro/v3/service"
+	"github.com/micro-community/micro/v3/service"
 	proto "github.com/micro/services/helloworld/proto"
 )
 
@@ -295,7 +295,7 @@ download protobuf for micro:
 
 go get -u github.com/golang/protobuf/proto
 go get -u github.com/golang/protobuf/protoc-gen-go
-go get github.com/micro/micro/v3/cmd/protoc-gen-micro
+go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 
 compile the proto file helloworld.proto:
 
@@ -389,8 +389,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/store"
 )
 
 func main() {
@@ -496,8 +496,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/config"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/config"
 )
 
 func main() {

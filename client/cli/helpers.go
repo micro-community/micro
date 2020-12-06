@@ -8,11 +8,11 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/micro/micro/v3/client/cli/util"
-	cliutil "github.com/micro/micro/v3/client/cli/util"
-	cbytes "github.com/micro/micro/v3/internal/codec/bytes"
-	clic "github.com/micro/micro/v3/internal/command"
-	"github.com/micro/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/client/cli/util"
+	cliutil "github.com/micro-community/micro/v3/client/cli/util"
+	cbytes "github.com/micro-community/micro/v3/internal/codec/bytes"
+	clic "github.com/micro-community/micro/v3/internal/command"
+	"github.com/micro-community/micro/v3/service/client"
 	"github.com/urfave/cli/v2"
 )
 

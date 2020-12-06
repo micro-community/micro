@@ -36,7 +36,7 @@ Micro can be installed locally in the following way. We assume for the most part
 #### Go Get
 
 ```
-go get github.com/micro/micro/v3
+go get github.com/micro-community/micro/v3
 ```
 
 #### Docker
@@ -685,8 +685,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/config"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/config"
 )
 
 type keyConfig struct {
@@ -791,7 +791,7 @@ Error codes are also used when handling retries. If your service returns a 500 (
 
 ```go
 import (
-	"github.com/micro/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/errors"
 )
 
 func (u *Users) Read(ctx context.Context, req *pb.ReadRequest, rsp *pb.ReadResponse) error {
@@ -1060,7 +1060,7 @@ id4         {"id":"id4", "name":"Betty","class":"thirdGrade"    "avgScore": 94}
 ```
 
 ```go
-import "github.com/micro/micro/v3/service/store"
+import "github.com/micro-community/micro/v3/service/store"
 
 records, err := store.Read("id1")
 if err != nil {
@@ -1093,7 +1093,7 @@ thirdGrade/id4  {"id":"id4", "name":"Betty","class":"thirdGrade"    "avgScore": 
 
 
 ```go
-import "github.com/micro/micro/v3/service/store"
+import "github.com/micro-community/micro/v3/service/store"
 
 records, err := store.Read("", store.Prefix("secondGrade"))
 if err != nil {
@@ -1146,7 +1146,7 @@ usersByClass/thirdGrade/id4  {"id":"id4", "name":"Betty","class":"thirdGrade"   
 Respective go examples this way become:
 
 ```go
-import "github.com/micro/micro/v3/service/store"
+import "github.com/micro-community/micro/v3/service/store"
 
 const idPrefix = "usersById/"
 
@@ -1159,7 +1159,7 @@ fmt.Println(records[0].Value)
 ```
 
 ```go
-import "github.com/micro/micro/v3/service/store"
+import "github.com/micro-community/micro/v3/service/store"
 
 const classPrefix = "usersByClass/"
 
@@ -1180,7 +1180,7 @@ Metadata / headers can be passed via the context in RPC calls. The context/metad
 ```go
 import (
 	"context"
-	"github.com/micro/micro/v3/service/context/metadata"
+	"github.com/micro-community/micro/v3/service/context/metadata"
 )
 
 ...
@@ -1233,9 +1233,9 @@ package staging
 import (
 	"github.com/urfave/cli/v2"
 
-	"github.com/micro/micro/v3/profile"
-	"github.com/micro/micro/v3/service/store"
-	"github.com/micro/micro/v3/service/store/memory"
+	"github.com/micro-community/micro/v3/profile"
+	"github.com/micro-community/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/store/memory"
 )
 
 func init() {

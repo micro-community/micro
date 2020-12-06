@@ -18,7 +18,7 @@ package mdns
 import (
 	"context"
 
-	"github.com/micro/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry"
 )
 
 // Domain sets the mdnsDomain

@@ -12,11 +12,11 @@ import (
 
 	context "context"
 
-	api "github.com/micro/micro/v3/service/api"
+	api "github.com/micro-community/micro/v3/service/api"
 
-	client "github.com/micro/micro/v3/service/client"
+	client "github.com/micro-community/micro/v3/service/client"
 
-	server "github.com/micro/micro/v3/service/server"
+	server "github.com/micro-community/micro/v3/service/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

@@ -23,7 +23,7 @@ import (
 	"net/http"
 	"strings"
 
-	api "github.com/micro/micro/v3/proto/api"
+	api "github.com/micro-community/micro/v3/proto/api"
 	"github.com/oxtoacart/bpool"
 )
 

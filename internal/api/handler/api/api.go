@@ -20,13 +20,13 @@ package api
 import (
 	"net/http"
 
-	"github.com/micro/micro/v3/internal/api/handler"
-	"github.com/micro/micro/v3/internal/ctx"
-	"github.com/micro/micro/v3/internal/router"
-	api "github.com/micro/micro/v3/proto/api"
-	goapi "github.com/micro/micro/v3/service/api"
-	"github.com/micro/micro/v3/service/client"
-	"github.com/micro/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/internal/api/handler"
+	"github.com/micro-community/micro/v3/internal/ctx"
+	"github.com/micro-community/micro/v3/internal/router"
+	api "github.com/micro-community/micro/v3/proto/api"
+	goapi "github.com/micro-community/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/errors"
 )
 
 type apiHandler struct {

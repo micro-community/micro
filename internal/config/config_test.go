@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/juju/fslock"
-	"github.com/micro/micro/v3/internal/user"
+	"github.com/micro-community/micro/v3/internal/user"
 )
 
 func Test(t *testing.T) {

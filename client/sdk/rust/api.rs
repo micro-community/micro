@@ -1629,7 +1629,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     key\x18\x01\x20\x01(\tR\x03key\x12\x1f\n\x05value\x18\x02\x20\x01(\x0b2\
     \t.api.PairR\x05value:\x028\x012i\n\x03Api\x12/\n\x08Register\x12\r.api.\
     Endpoint\x1a\x12.api.EmptyResponse\"\0\x121\n\nDeregister\x12\r.api.Endp\
-    oint\x1a\x12.api.EmptyResponse\"\0B)Z'github.com/micro/micro/v3/proto/ap\
+    oint\x1a\x12.api.EmptyResponse\"\0B)Z'github.com/micro-community/micro/v3/proto/ap\
     i;apiJ\x9e\x10\n\x06\x12\x04\0\07\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\
     \x08\n\x01\x02\x12\x03\x02\x08\x0b\n\x08\n\x01\x08\x12\x03\x04\0>\n\t\n\
     \x02\x08\x0b\x12\x03\x04\0>\n\n\n\x02\x06\0\x12\x04\x06\0\t\x01\n\n\n\

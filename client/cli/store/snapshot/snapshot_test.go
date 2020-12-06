@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/store"
 )
 
 func TestFileSnapshot(t *testing.T) {
