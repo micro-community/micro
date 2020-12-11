@@ -11,7 +11,7 @@ with the complexity of distributed systems and provides simpler programmable abs
 ## Contents
 
 - [Introduction](https://micro.mu/introduction) - A high level introduction to Micro
-- [Getting Started](https://micro.mu/getting-started) - The helloworld quickstart guide
+- [Getting Started](https://micro.mu/getting-started) - The hello-world quick-start guide
 - [Upgrade Guide](https://micro.mu/upgrade-guide) - Update your go-micro project to use micro v3.
 - [Architecture](https://micro.mu/architecture) - Describes the architecture, design and tradeoffs
 - [Reference](https://micro.mu/reference) - In-depth reference for Micro CLI and services
@@ -41,14 +41,14 @@ The server is composed of the following services.
 - **Network** - Inter-service networking, isolation and routing plane for all internal request traffic
 - **Proxy** - An identity aware proxy used for remote access and any external grpc request traffic
 - **Runtime** - Service lifecyle and process management with support for source to running auto build
-- **Registry** - Centralised service discovery and API endpoint explorer with feature rich metadata
+- **Registry** - Centralized service discovery and API endpoint explorer with feature rich metadata
 - **Store** - Key-Value storage with TTL expiry and persistent crud to keep microservices stateless
 
 **Framework**
 
-Micro additionaly now contains the incredibly popular Go Micro framework built in for service development. 
+Micro additionally now contains the incredibly popular Go Micro framework built in for service development. 
 The Go framework makes it drop dead simple to write your services without having to piece together lines and lines of boilerplate. Auto 
-configured and initialised by default, just import and get started quickly.
+configured and initialized by default, just import and get started quickly.
 
 **Command Line**
 
