@@ -32,7 +32,7 @@ var (
 
 // Store is a data storage interface
 type Store interface {
-	// Init initialises the store. It must perform any required setup on the backing storage implementation and check that it is ready for use, returning any errors.
+	// Init initializes the store. It must perform any required setup on the backing storage implementation and check that it is ready for use, returning any errors.
 	Init(...StoreOption) error
 	// Options allows you to view the current options.
 	Options() StoreOptions

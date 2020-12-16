@@ -94,7 +94,7 @@ We provide release tags and would recommend to stick with the latest stable rele
 ```
 # enable go modules
 export GO111MODULE=on
-# initialise go modules in your app
+# initialize go modules in your app
 go mod init
 # now go get
 go get ./...

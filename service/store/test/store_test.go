@@ -69,7 +69,7 @@ func TestStoreReInit(t *testing.T) {
 			defer tc.cleanup(file.DefaultDatabase, tc.s)
 			tc.s.Init(store.Table("bbb"))
 			if tc.s.Options().Table != "bbb" {
-				t.Error("Init didn't reinitialise the store")
+				t.Error("Init didn't reinitialize the store")
 			}
 		})
 	}

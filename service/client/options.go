@@ -63,6 +63,7 @@ type Options struct {
 	Context context.Context
 }
 
+//CallOptions for each call
 type CallOptions struct {
 	// Address of remote hosts
 	Address []string

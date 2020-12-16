@@ -103,7 +103,7 @@ m.Register(new(User))
 m.Register(new(User), model.AddIndex("name"))
 ```
 
-This should initialise the model to use the `users` table and map any necessary fields for indexing. Fields which need to be indexed 
+This should initialize the model to use the `users` table and map any necessary fields for indexing. Fields which need to be indexed 
 are mapped as metadata in the store.Record. An alternative strategy would be to index everything or index string and int fields 
 automatically. 
 

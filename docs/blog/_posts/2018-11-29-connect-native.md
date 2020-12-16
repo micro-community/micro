@@ -24,7 +24,7 @@ Consul Connect provides the ability to use proxies for communication but this ca
 systems concerns as a client library, which eliminates this overhead. Native integration with Connect gives us all its benefits 
 while maintaining direct point to point connections for performance.
 
-The consul documentation provides an overview of how this works. In Go Micro's case we initialise a consul registry with the 
+The consul documentation provides an overview of how this works. In Go Micro's case we initialize a consul registry with the 
 connect option enabled and setup the broker and transport tls config.
 
 <img src="https://www.consul.io/assets/images/connect-native-overview-cc9dc497.png" />

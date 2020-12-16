@@ -22,6 +22,7 @@ import (
 	"github.com/micro-community/micro/v3/service/store"
 )
 
+//Options for auth
 type Options struct {
 	// Store to persist the tokens
 	Store store.Store

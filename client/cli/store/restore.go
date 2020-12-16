@@ -35,7 +35,7 @@ func restore(ctx *cli.Context) error {
 
 	err = rs.Init()
 	if err != nil {
-		return errors.Wrap(err, "failed to initialise the restorer")
+		return errors.Wrap(err, "failed to initialize the restorer")
 	}
 
 	recordChan, err := rs.Start()

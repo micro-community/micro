@@ -34,7 +34,7 @@ func snapshot(ctx *cli.Context) error {
 	}
 	err = sn.Init()
 	if err != nil {
-		return errors.Wrap(err, "failed to initialise the snapshotter")
+		return errors.Wrap(err, "failed to initialize the snapshotter")
 	}
 
 	log.Logf(logger.InfoLevel, "Snapshotting store %s", s.String())

@@ -153,8 +153,8 @@ see Go as the dominant language for the cloud and believe most backend services 
 that reason we continue to include a Service Framework which acts as a framework for building your services and accessing 
 the underlying systems of the server.
 
-The Service Framework provides pre-initialised packages for all of the features of the server and creates a convenient 
-initialiser for defining your own services starting with `service.New`. A Service has a name, endpoints, contains 
+The Service Framework provides pre-initialized packages for all of the features of the server and creates a convenient 
+initializer for defining your own services starting with `service.New`. A Service has a name, endpoints, contains 
 a server of its own and a client to query other services. The framework does enough for you but then attempts to 
 get out of your way so the rest is up to you.
 

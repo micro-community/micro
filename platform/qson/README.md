@@ -1,7 +1,7 @@
 # qson
 
 This is copy from https://github.com/joncalhoun/qson
-As author says he is not acrivelly maintains the repo and not plan to do that.
+As author says he is not actively maintains the repo and not plan to do that.
 
 ## Usage
 

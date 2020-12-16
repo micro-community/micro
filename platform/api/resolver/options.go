@@ -41,7 +41,7 @@ func WithServicePrefix(p string) Option {
 	}
 }
 
-// NewOptions returns new initialised options
+// NewOptions returns new initialized options
 func NewOptions(opts ...Option) Options {
 	var options Options
 	for _, o := range opts {
@@ -65,7 +65,7 @@ func Domain(n string) ResolveOption {
 	}
 }
 
-// NewResolveOptions returns new initialised resolve options
+// NewResolveOptions returns new initialized resolve options
 func NewResolveOptions(opts ...ResolveOption) ResolveOptions {
 	var options ResolveOptions
 	for _, o := range opts {

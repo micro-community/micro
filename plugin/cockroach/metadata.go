@@ -22,7 +22,7 @@ import (
 	"errors"
 )
 
-// https://github.com/upper/db/blob/master/postgresql/custom_types.go#L43
+// Metadata https://github.com/upper/db/blob/master/postgresql/custom_types.go#L43
 type Metadata map[string]interface{}
 
 // Scan satisfies the sql.Scanner interface.

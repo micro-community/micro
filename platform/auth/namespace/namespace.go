@@ -47,7 +47,7 @@ func Authorize(ctx context.Context, namespace string, opts ...AuthorizeOption) e
 		return nil
 	}
 
-	// ensure the account is requesing access to it's own namespace
+	// ensure the account is requesting access to it's own namespace
 	if acc.Issuer != namespace {
 		return ErrForbidden
 	}

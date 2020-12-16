@@ -347,7 +347,7 @@ func main() {
 }
 ```
 
-Easy right? We find many companies create their own layer on top of Micro to initialise most of the default wrappers 
+Easy right? We find many companies create their own layer on top of Micro to initialize most of the default wrappers 
 they're looking for so if any new wrappers need to be added it can all be done in one place.
 
 Let's look at a couple wrappers now for resiliency and fault tolerance.

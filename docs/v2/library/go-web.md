@@ -16,7 +16,7 @@ heartbeating and the ability to create web apps as microservices.
 ## Features
 
 - **Service Discovery** - Services are automatically registered in service discovery on startup. Go Web includes 
-a http.Client with pre-initialised roundtripper which makes use of service discovery so you can use service names.
+a http.Client with pre-initialized roundtripper which makes use of service discovery so you can use service names.
 
 - **Heartbeating** - Go Web apps will periodically heartbeat with service discovery to provide liveness updates. 
 In the event a service fails it will be removed from the registry after a pre-defined expiry time.

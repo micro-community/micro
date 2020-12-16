@@ -213,7 +213,7 @@ func initStore(ctx *cli.Context) error {
 	}
 
 	if err := store.DefaultStore.Init(opts...); err != nil {
-		return errors.Wrap(err, "couldn't reinitialise store with options")
+		return errors.Wrap(err, "couldn't reinitialize store with options")
 	}
 	return nil
 }

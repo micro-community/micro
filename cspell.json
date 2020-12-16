@@ -4,6 +4,8 @@
         "Helloworld",
         "microservices",
         "pgrpc",
+        "proto",
+        "qson",
         "urfave"
     ]
 }

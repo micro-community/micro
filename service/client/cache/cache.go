@@ -12,7 +12,7 @@ import (
 	cache "github.com/patrickmn/go-cache"
 )
 
-// New returns an initialised cache.
+// New returns an initialized cache.
 func New() *Cache {
 	return &Cache{
 		cache: cache.New(cache.NoExpiration, 30*time.Second),

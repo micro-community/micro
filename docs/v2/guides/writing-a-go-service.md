@@ -279,7 +279,7 @@ other services. A quick getting started for that is [here](https://github.com/mi
 ## Writing a Client
 
 The [client](https://pkg.go.dev/github.com/micro/go-micro/v2/client) package is used to query services. When you create a 
-Service, a Client is included which matches the initialised packages used by the server.
+Service, a Client is included which matches the initialized packages used by the server.
 
 Querying the above service is as simple as the following.
 

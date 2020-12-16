@@ -41,7 +41,7 @@ import (
 )
 
 type Cmd interface {
-	// Init initialises options
+	// Init initializes options
 	// Note: Use Run to parse command line
 	Init(opts ...Option) error
 	// Options set within this command

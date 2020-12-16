@@ -109,7 +109,7 @@ func Run(ctx *cli.Context) error {
 	if len(ctx.String("api_address")) > 0 {
 		Address = ctx.String("api_address")
 	}
-	// initialise service
+	// initialize service
 	srv := service.New(service.Name(Name))
 
 	// Init API
@@ -299,7 +299,7 @@ func Run(ctx *cli.Context) error {
 
 	// create a new api server with wrappers
 	api := httpapi.NewServer(Address)
-	// initialise
+	// initialize
 	api.Init(opts...)
 	// register the handler
 	api.Handle("/", h)

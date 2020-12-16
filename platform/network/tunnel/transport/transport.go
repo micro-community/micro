@@ -95,13 +95,13 @@ func (t *tunTransport) String() string {
 	return "tunnel"
 }
 
-// NewTransport honours the initialiser used in
+// NewTransport honours the initializer used in
 func NewTransport(opts ...transport.Option) transport.Transport {
 	t := &tunTransport{
 		options: transport.Options{},
 	}
 
-	// initialise
+	// initialize
 	t.Init(opts...)
 
 	return t

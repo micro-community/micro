@@ -35,7 +35,7 @@ func logWrapper(fn server.HandlerFunc) server.HandlerFunc {
 }
 ```
 
-It can be initialised when creating the service
+It can be initialized when creating the service
 
 ```go
 service := micro.NewService(
@@ -65,7 +65,7 @@ func logWrap(c client.Client) client.Client {
 }
 ```
 
-It can be initialised when creating the service
+It can be initialized when creating the service
 
 ```go
 service := micro.NewService(

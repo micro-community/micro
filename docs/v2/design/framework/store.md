@@ -40,7 +40,7 @@ type Record struct {
 
 ### Init
 
-`Init()` initialises the store. It must any required setup on the backing storage
+`Init()` initializes the store. It must any required setup on the backing storage
 implementation and check that it is ready for use, returning any errors.
 `Init()` **must** be called successfully before the store is used.
 

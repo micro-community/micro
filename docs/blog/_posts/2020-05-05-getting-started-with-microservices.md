@@ -139,7 +139,7 @@ import (
 )
 
 func main() {
-	// create and initialise a new service
+	// create and initialize a new service
 	service := micro.NewService()
 	service.Init()
 

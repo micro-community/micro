@@ -85,7 +85,7 @@ func (n *Network) Connect(ctx context.Context, req *pb.ConnectRequest, resp *pb.
 
 	log.Infof("Network.Connect setting peers: %v", nodes)
 
-	// reinitialise the peers
+	// reinitialize the peers
 	n.Network.Init(
 		network.Nodes(nodes...),
 	)

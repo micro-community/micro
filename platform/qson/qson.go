@@ -12,7 +12,7 @@
 //
 // Original source: github.com/micro/go-micro/v3/util/qson/qson_test.go
 
-// Package qson implmenets decoding of URL query params
+// Package qson implements decoding of URL query params
 // into JSON and Go values (using JSON struct tags).
 //
 // See https://golang.org/pkg/encoding/json/ for more

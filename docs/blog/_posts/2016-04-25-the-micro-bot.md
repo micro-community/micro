@@ -87,7 +87,7 @@ type Input interface {
 The input provides a convenient feature for adding your own command line flags and processing the arguments. 
 The Flags() method is used before initialisation and any flags specified will be added to the global flags list. 
 
-After the flags have been parsed, Init() will be called next so that any context for the Input can be initialised. 
+After the flags have been parsed, Init() will be called next so that any context for the Input can be initialized. 
 Once everything is setup, the Bot will call Start() and then Stream() method to create a connection to the Input.
 
 

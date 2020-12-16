@@ -45,7 +45,7 @@ func (c *cache) init(opts ...store.StoreOption) error {
 	return nil
 }
 
-// Init initialises the underlying stores
+// Init initializes the underlying stores
 func (c *cache) Init(opts ...store.StoreOption) error {
 	if err := c.init(opts...); err != nil {
 		return err

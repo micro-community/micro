@@ -292,7 +292,7 @@ to query it. A quick getting started for that is [here](https://github.com/micro
 ## Writing a Client
 
 The [client](https://pkg.go.dev/github.com/micro/go-micro/v2/client) package is used to query functions and services. When you create a 
-Function, a Client is included which matches the initialised packages used by the server.
+Function, a Client is included which matches the initialized packages used by the server.
 
 Querying the above function is as simple as the following.
 

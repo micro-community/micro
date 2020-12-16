@@ -33,25 +33,25 @@ type Reporter interface {
 var (
 	// DefaultMetricsReporter implementation
 	DefaultMetricsReporter Reporter
-	initialised            bool = false
-	initialisedMutex       sync.Mutex
+	initialized            bool = false
+	initializedMutex       sync.Mutex
 )
 
 // IsSet lets you know if the DefaultMetricsReporter has been set already:
 func IsSet() bool {
-	initialisedMutex.Lock()
-	defer initialisedMutex.Unlock()
-	return initialised
+	initializedMutex.Lock()
+	defer initializedMutex.Unlock()
+	return initialized
 }
 
 // SetDefaultMetricsReporter allows other packages (such as profiles) to set the DefaultMetricsReporter
-// The "initialised" flag prevents this from being overwritten (because other packages may already be using it)
+// The "initialized" flag prevents this from being overwritten (because other packages may already be using it)
 func SetDefaultMetricsReporter(defaultReporter Reporter) {
-	initialisedMutex.Lock()
-	defer initialisedMutex.Unlock()
-	if !initialised {
+	initializedMutex.Lock()
+	defer initializedMutex.Unlock()
+	if !initialized {
 		DefaultMetricsReporter = defaultReporter
-		initialised = true
+		initialized = true
 	}
 }
 
