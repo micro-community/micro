@@ -27,7 +27,7 @@ var (
 var (
 	// DefaultLink is default network link
 	DefaultLink = "local"
-	// DefaultLocalMetric is default route cost for a local route
+	// DefaultMetric is default route cost for a local route
 	DefaultMetric int64 = 1
 	// DefaultNetwork is default micro network
 	DefaultNetwork = "micro"

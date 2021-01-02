@@ -67,12 +67,15 @@ func (s *static) Lookup(service string, opts ...router.LookupOption) ([]router.R
 	}
 
 	return []router.Route{
-		router.Route{
-			Service: service,
-			Address: options.Address,
-			Gateway: options.Gateway,
-			Network: options.Network,
-			Router:  options.Router,
+		{
+			Service:  service,
+			Address:  options.Address,
+			Gateway:  options.Gateway,
+			Network:  options.Network,
+			Router:   options.Router,
+			Link:     "",
+			Metric:   0,
+			Metadata: map[string]string{},
 		},
 	}, nil
 }
