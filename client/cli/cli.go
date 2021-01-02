@@ -75,7 +75,6 @@ func Run(c *cli.Context) error {
 		}
 	}
 
-	return nil
 }
 
 func init() {

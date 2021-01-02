@@ -39,8 +39,8 @@ var (
 func init() {
 	command := &cli.Command{
 		Name:  "server",
-		Usage: "Run the micro server",
-		Description: `Launching the micro server ('micro server') will enable one to connect to it by
+		Usage: "Run micro server",
+		Description: `Launching micro server ('micro server') will enable one to connect to it by
 		setting the appropriate Micro environment (see 'micro env' && 'micro env --help') commands.`,
 		Flags: []cli.Flag{
 			&cli.StringFlag{
@@ -81,7 +81,7 @@ func Run(context *cli.Context) error {
 		os.Exit(1)
 	}
 
-	// TODO: reimplement peering of servers e.g --peer=node1,node2,node3
+	// TODO: re-implement peering of servers e.g --peer=node1,node2,node3
 	// peers are configured as network nodes to cluster between
 	log.Info("Starting server")
 

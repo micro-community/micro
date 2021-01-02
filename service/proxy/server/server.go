@@ -30,6 +30,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+//service for proxy
 var (
 	// Name of the proxy
 	Name = "proxy"

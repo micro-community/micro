@@ -1,4 +1,4 @@
-// Package gen provides the micro gen command which simply runs go generate
+//Package gen provides the micro gen command which simply runs go generate
 package init
 
 import (

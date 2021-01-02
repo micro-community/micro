@@ -46,7 +46,7 @@ func Run() {
 // New returns a new Micro Service
 func New(opts ...Option) *Service {
 	// before extracts service options from the CLI flags. These
-	// aren't set by the cmd package to prevent a circular dependancy.
+	// aren't set by the cmd package to prevent a circular dependency.
 	// prepend them to the array so options passed by the user to this
 	// function are applied after (taking precedence)
 	before := func(ctx *cli.Context) error {
