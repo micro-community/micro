@@ -5,29 +5,35 @@ import (
 	"os"
 	"strings"
 
-	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
-	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	mCli "github.com/micro-community/micro/v3/client"
+	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/proxy"
+	"github.com/micro-community/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/service/store"
+
+	//Platform support
 	"github.com/micro-community/micro/v3/platform/api/server/acme"
 	"github.com/micro-community/micro/v3/platform/api/server/acme/autocert"
 	"github.com/micro-community/micro/v3/platform/api/server/acme/certmagic"
 	"github.com/micro-community/micro/v3/platform/helper"
 	"github.com/micro-community/micro/v3/platform/muxer"
 	"github.com/micro-community/micro/v3/platform/sync/memory"
-	"github.com/micro-community/micro/v3/service"
+
+	mProxyGrpc "github.com/micro-community/micro/v3/service/proxy/grpc"
+	mProxyHttp "github.com/micro-community/micro/v3/service/proxy/http"
+	mProxyMucp "github.com/micro-community/micro/v3/service/proxy/mucp"
+
 	mBrokerMemory "github.com/micro-community/micro/v3/service/broker/memory"
-	"github.com/micro-community/micro/v3/service/client"
-	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/service/proxy"
-	"github.com/micro-community/micro/v3/service/proxy/grpc"
-	"github.com/micro-community/micro/v3/service/proxy/http"
-	"github.com/micro-community/micro/v3/service/proxy/mucp"
-	"github.com/micro-community/micro/v3/service/registry/noop"
-	"github.com/micro-community/micro/v3/service/router"
-	"github.com/micro-community/micro/v3/service/server"
-	sGrpc "github.com/micro-community/micro/v3/service/server/grpc"
-	"github.com/micro-community/micro/v3/service/store"
+	mRegistryNoop "github.com/micro-community/micro/v3/service/registry/noop"
+	mServerGrpc "github.com/micro-community/micro/v3/service/server/grpc"
+
 	"github.com/urfave/cli/v2"
+
+	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
+	"github.com/improbable-eng/grpc-web/go/grpcweb"
 )
 
 //service for proxy
@@ -48,8 +54,37 @@ var (
 	ACMEProvider          = "autocert"
 	ACMEChallengeProvider = "cloudflare"
 	ACMECA                = acme.LetsEncryptProductionCA
+
+	Flags = append(mCli.Flags,
+		&cli.StringFlag{
+			Name:    "address",
+			Usage:   "Set the proxy http address e.g 0.0.0.0:8081",
+			EnvVars: []string{"MICRO_PROXY_ADDRESS"},
+		},
+		&cli.StringFlag{
+			Name:    "protocol",
+			Usage:   "Set the protocol used for proxying e.g mucp, grpc, http",
+			EnvVars: []string{"MICRO_PROXY_PROTOCOL"},
+		},
+		&cli.StringFlag{
+			Name:    "endpoint",
+			Usage:   "Set the endpoint to route to e.g greeter or localhost:9090",
+			EnvVars: []string{"MICRO_PROXY_ENDPOINT"},
+		},
+		&cli.BoolFlag{
+			Name:    "grpc-web",
+			Usage:   "Enable the gRPCWeb server",
+			EnvVars: []string{"MICRO_PROXY_GRPC_WEB"},
+		},
+		&cli.StringFlag{
+			Name:    "grpc-web-addr",
+			Usage:   "Set the gRPC web addr on the proxy",
+			EnvVars: []string{"MICRO_PROXY_GRPC_WEB_ADDRESS"},
+		},
+	)
 )
 
+//Run proxy
 func Run(ctx *cli.Context) error {
 	if len(ctx.String("server_name")) > 0 {
 		Name = ctx.String("server_name")
@@ -77,7 +112,7 @@ func Run(ctx *cli.Context) error {
 	service := service.New(service.Name(Name))
 
 	// set the context
-	popts := []proxy.Option{
+	pOpts := []proxy.Option{
 		proxy.WithRouter(router.DefaultRouter),
 		proxy.WithClient(client.DefaultClient),
 	}
@@ -97,13 +132,13 @@ func Run(ctx *cli.Context) error {
 			Protocol = "mucp"
 		}
 
-		popts = append(popts, proxy.WithEndpoint(ep))
+		pOpts = append(pOpts, proxy.WithEndpoint(ep))
 	}
 
 	serverOpts := []server.Option{
 		server.Name(Name),
 		server.Address(Address),
-		server.Registry(noop.NewRegistry()),
+		server.Registry(mRegistryNoop.NewRegistry()),
 		server.Broker(mBrokerMemory.NewBroker()),
 	}
 
@@ -174,13 +209,13 @@ func Run(ctx *cli.Context) error {
 	// set proxy
 	switch Protocol {
 	case "http":
-		p = http.NewProxy(popts...)
+		p = mProxyHttp.NewProxy(pOpts...)
 		// TODO: http server
 	case "mucp":
-		p = mucp.NewProxy(popts...)
+		p = mProxyMucp.NewProxy(pOpts...)
 	default:
 		// default to the grpc proxy
-		p = grpc.NewProxy(popts...)
+		p = mProxyGrpc.NewProxy(pOpts...)
 	}
 
 	// wrap the proxy using the proxy's authHandler
@@ -195,8 +230,8 @@ func Run(ctx *cli.Context) error {
 	}
 
 	if GRPCWebEnabled {
-		serverOpts = append(serverOpts, sGrpc.GRPCWebPort(GRPCWebAddress))
-		serverOpts = append(serverOpts, sGrpc.GRPCWebOptions(
+		serverOpts = append(serverOpts, mServerGrpc.GRPCWebPort(GRPCWebAddress))
+		serverOpts = append(serverOpts, mServerGrpc.GRPCWebOptions(
 			grpcweb.WithCorsForRegisteredEndpointsOnly(false),
 			grpcweb.WithOriginFunc(func(origin string) bool { return true })))
 
@@ -204,15 +239,13 @@ func Run(ctx *cli.Context) error {
 	}
 
 	// create a new grpc server
-	srv := sGrpc.NewServer(serverOpts...)
+	srv := mServerGrpc.NewServer(serverOpts...)
 
 	// create a new proxy muxer which includes the debug handler
 	muxer := muxer.New(Name, p)
 
 	// set the router
-	service.Server().Init(
-		server.WithRouter(muxer),
-	)
+	service.Server().Init(server.WithRouter(muxer))
 
 	// Start the proxy server
 	if err := srv.Start(); err != nil {
@@ -231,33 +264,3 @@ func Run(ctx *cli.Context) error {
 
 	return nil
 }
-
-var (
-	Flags = append(mCli.Flags,
-		&cli.StringFlag{
-			Name:    "address",
-			Usage:   "Set the proxy http address e.g 0.0.0.0:8081",
-			EnvVars: []string{"MICRO_PROXY_ADDRESS"},
-		},
-		&cli.StringFlag{
-			Name:    "protocol",
-			Usage:   "Set the protocol used for proxying e.g mucp, grpc, http",
-			EnvVars: []string{"MICRO_PROXY_PROTOCOL"},
-		},
-		&cli.StringFlag{
-			Name:    "endpoint",
-			Usage:   "Set the endpoint to route to e.g greeter or localhost:9090",
-			EnvVars: []string{"MICRO_PROXY_ENDPOINT"},
-		},
-		&cli.BoolFlag{
-			Name:    "grpc-web",
-			Usage:   "Enable the gRPCWeb server",
-			EnvVars: []string{"MICRO_PROXY_GRPC_WEB"},
-		},
-		&cli.StringFlag{
-			Name:    "grpc-web-addr",
-			Usage:   "Set the gRPC web addr on the proxy",
-			EnvVars: []string{"MICRO_PROXY_GRPC_WEB_ADDRESS"},
-		},
-	)
-)

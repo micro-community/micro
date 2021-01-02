@@ -1,6 +1,8 @@
 {
     "version": "0.2",
     "words": [
+        "Asim",
+        "Aslam",
         "chzyer",
         "Debugf",
         "envvars",
@@ -8,10 +10,13 @@
         "Helloworld",
         "kubernetes",
         "microservices",
+        "mucp",
+        "muxer",
         "pgrpc",
         "proto",
         "protobuf",
         "qson",
+        "Tracef",
         "urfave"
     ]
 }
