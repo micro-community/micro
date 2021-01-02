@@ -49,7 +49,6 @@ func Run(ctx *ccli.Context) {
 		if len(parts) < 2 {
 			continue
 		}
-
 		key := parts[0]
 		val := strings.Join(parts[1:], "=")
 
@@ -67,7 +66,6 @@ func Run(ctx *ccli.Context) {
 	if len(address) > 0 {
 		opts = append(opts, service.Address(address))
 	}
-
 	if len(endpoint) == 0 {
 		endpoint = prox.DefaultEndpoint
 	}
@@ -104,15 +102,11 @@ func Run(ctx *ccli.Context) {
 		r.Start()
 
 		// register the service
-		r.Create(&rt.Service{
-			Name: name,
-		}, args...)
+		r.Create(&rt.Service{Name: name}, args...)
 
 		// stop the runtime
 		defer func() {
-			r.Delete(&rt.Service{
-				Name: name,
-			})
+			r.Delete(&rt.Service{Name: name})
 			r.Stop()
 		}()
 	}

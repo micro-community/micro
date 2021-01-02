@@ -104,7 +104,6 @@ func Decode(e map[string]string) *Endpoint {
 	if e == nil {
 		return nil
 	}
-
 	return &Endpoint{
 		Name:        e["endpoint"],
 		Description: e["description"],
@@ -120,7 +119,6 @@ func Validate(e *Endpoint) error {
 	if e == nil {
 		return errors.New("endpoint is nil")
 	}
-
 	if len(e.Name) == 0 {
 		return errors.New("name required")
 	}
@@ -148,6 +146,7 @@ func Validate(e *Endpoint) error {
 	return nil
 }
 
+//WithEndpoint for api
 func WithEndpoint(e *Endpoint) server.HandlerOption {
 	return server.EndpointMetadata(e.Name, Encode(e))
 }

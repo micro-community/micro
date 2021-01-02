@@ -74,10 +74,8 @@ func TestEncoding(t *testing.T) {
 			if de != nil {
 				t.Fatalf("expected nil got %v", de)
 			}
-
 			continue
 		}
-
 		// check encoded map
 		name := e["endpoint"]
 		desc := e["description"]

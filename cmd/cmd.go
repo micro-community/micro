@@ -271,6 +271,7 @@ func action(c *cli.Context) error {
 	return helper.MissingCommand(c)
 }
 
+//New return a cmd
 func New(opts ...Option) *command {
 	options := Options{}
 	for _, o := range opts {
