@@ -58,12 +58,15 @@ func (k *kubernetes) Lookup(service string, opts ...router.LookupOption) ([]rout
 	address := fmt.Sprintf("%v.%v.svc.cluster.local:8080", service, options.Network)
 
 	return []router.Route{
-		router.Route{
-			Service: service,
-			Address: address,
-			Gateway: options.Gateway,
-			Network: options.Network,
-			Router:  options.Router,
+		{
+			Service:  service,
+			Address:  address,
+			Gateway:  options.Gateway,
+			Network:  options.Network,
+			Router:   options.Router,
+			Link:     "",
+			Metric:   0,
+			Metadata: map[string]string{},
 		},
 	}, nil
 }
