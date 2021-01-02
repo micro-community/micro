@@ -22,6 +22,7 @@ import (
 	"github.com/micro-community/micro/v3/service/router"
 )
 
+//Options for proxy
 type Options struct {
 	// Specific endpoint to always call
 	Endpoint string
@@ -33,6 +34,7 @@ type Options struct {
 	Links map[string]client.Client
 }
 
+//Option set proxy options
 type Option func(o *Options)
 
 // WithEndpoint sets a proxy endpoint

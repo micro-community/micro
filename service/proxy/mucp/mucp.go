@@ -31,7 +31,7 @@ import (
 	"github.com/micro-community/micro/v3/platform/selector"
 	"github.com/micro-community/micro/v3/platform/selector/roundrobin"
 	"github.com/micro-community/micro/v3/service/client"
-	grpcc "github.com/micro-community/micro/v3/service/client/grpc"
+	gGrpc "github.com/micro-community/micro/v3/service/client/grpc"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -515,19 +515,19 @@ func (p *Proxy) serveRequest(ctx context.Context, link client.Client, service, e
 	}
 
 	// create new request with raw bytes body
-	creq := link.NewRequest(service, endpoint, &bytes.Frame{Data: body}, client.WithContentType(req.ContentType()))
+	mReq := link.NewRequest(service, endpoint, &bytes.Frame{Data: body}, client.WithContentType(req.ContentType()))
 
 	// not a stream so make a client.Call request
 	if !req.Stream() {
-		crsp := new(bytes.Frame)
+		mRsp := new(bytes.Frame)
 
 		// make a call to the backend
-		if err := link.Call(ctx, creq, crsp, opts...); err != nil {
+		if err := link.Call(ctx, mReq, mRsp, opts...); err != nil {
 			return err
 		}
 
 		// write the response
-		if err := rsp.Write(crsp.Data); err != nil {
+		if err := rsp.Write(mRsp.Data); err != nil {
 			return err
 		}
 
@@ -536,9 +536,10 @@ func (p *Proxy) serveRequest(ctx context.Context, link client.Client, service, e
 
 	// new context with cancel
 	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
 
 	// create new stream
-	stream, err := link.Stream(ctx, creq, opts...)
+	stream, err := link.Stream(ctx, mReq, opts...)
 	if err != nil {
 		return err
 	}
@@ -643,7 +644,7 @@ func NewProxy(opts ...proxy.Option) proxy.Proxy {
 
 	// set the default client
 	if p.Client == nil {
-		p.Client = grpcc.NewClient()
+		p.Client = gGrpc.NewClient()
 	}
 
 	// create default router and start it

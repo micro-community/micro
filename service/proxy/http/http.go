@@ -94,31 +94,31 @@ func (p *Proxy) ProcessMessage(ctx context.Context, msg server.Message) error {
 	}
 
 	// send to backend
-	hreq, err := http.NewRequest("POST", endpoint, bytes.NewReader(msg.Body()))
+	hReq, err := http.NewRequest("POST", endpoint, bytes.NewReader(msg.Body()))
 	if err != nil {
 		return errors.InternalServerError(msg.Topic(), err.Error())
 	}
 
 	// set the headers
 	for k, v := range hdr {
-		hreq.Header.Set(k, v)
+		hReq.Header.Set(k, v)
 	}
 
 	// make the call
-	hrsp, err := http.DefaultClient.Do(hreq)
+	hRsp, err := http.DefaultClient.Do(hReq)
 	if err != nil {
 		return errors.InternalServerError(msg.Topic(), err.Error())
 	}
 
 	// read body
-	b, err := ioutil.ReadAll(hrsp.Body)
-	hrsp.Body.Close()
+	b, err := ioutil.ReadAll(hRsp.Body)
+	hRsp.Body.Close()
 	if err != nil {
 		return errors.InternalServerError(msg.Topic(), err.Error())
 	}
 
-	if hrsp.StatusCode != 200 {
-		return errors.New(msg.Topic(), string(b), int32(hrsp.StatusCode))
+	if hRsp.StatusCode != 200 {
+		return errors.New(msg.Topic(), string(b), int32(hRsp.StatusCode))
 	}
 
 	return nil
@@ -163,33 +163,33 @@ func (p *Proxy) ServeRequest(ctx context.Context, req server.Request, rsp server
 		}
 
 		// send to backend
-		hreq, err := http.NewRequest(method, endpoint, bytes.NewReader(body))
+		hReq, err := http.NewRequest(method, endpoint, bytes.NewReader(body))
 		if err != nil {
 			return errors.InternalServerError(req.Service(), err.Error())
 		}
 
 		// set the headers
 		for k, v := range hdr {
-			hreq.Header.Set(k, v)
+			hReq.Header.Set(k, v)
 		}
 
 		// make the call
-		hrsp, err := http.DefaultClient.Do(hreq)
+		hRsp, err := http.DefaultClient.Do(hReq)
 		if err != nil {
 			return errors.InternalServerError(req.Service(), err.Error())
 		}
 
 		// read body
-		b, err := ioutil.ReadAll(hrsp.Body)
-		hrsp.Body.Close()
+		b, err := ioutil.ReadAll(hRsp.Body)
+		hRsp.Body.Close()
 		if err != nil {
 			return errors.InternalServerError(req.Service(), err.Error())
 		}
 
 		// set response headers
 		hdr = map[string]string{}
-		for k := range hrsp.Header {
-			hdr[k] = hrsp.Header.Get(k)
+		for k := range hRsp.Header {
+			hdr[k] = hRsp.Header.Get(k)
 		}
 		// write the header
 		rsp.WriteHeader(hdr)

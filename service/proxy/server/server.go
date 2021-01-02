@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	"github.com/micro-community/micro/v3/client"
+	mCli "github.com/micro-community/micro/v3/client"
 	"github.com/micro-community/micro/v3/platform/api/server/acme"
 	"github.com/micro-community/micro/v3/platform/api/server/acme/autocert"
 	"github.com/micro-community/micro/v3/platform/api/server/acme/certmagic"
@@ -15,17 +15,17 @@ import (
 	"github.com/micro-community/micro/v3/platform/muxer"
 	"github.com/micro-community/micro/v3/platform/sync/memory"
 	"github.com/micro-community/micro/v3/service"
-	bmem "github.com/micro-community/micro/v3/service/broker/memory"
-	muclient "github.com/micro-community/micro/v3/service/client"
-	log "github.com/micro-community/micro/v3/service/logger"
+	mBrokerMemory "github.com/micro-community/micro/v3/service/broker/memory"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/proxy"
 	"github.com/micro-community/micro/v3/service/proxy/grpc"
 	"github.com/micro-community/micro/v3/service/proxy/http"
 	"github.com/micro-community/micro/v3/service/proxy/mucp"
 	"github.com/micro-community/micro/v3/service/registry/noop"
-	murouter "github.com/micro-community/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/service/router"
 	"github.com/micro-community/micro/v3/service/server"
-	sgrpc "github.com/micro-community/micro/v3/service/server/grpc"
+	sGrpc "github.com/micro-community/micro/v3/service/server/grpc"
 	"github.com/micro-community/micro/v3/service/store"
 	"github.com/urfave/cli/v2"
 )
@@ -78,8 +78,8 @@ func Run(ctx *cli.Context) error {
 
 	// set the context
 	popts := []proxy.Option{
-		proxy.WithRouter(murouter.DefaultRouter),
-		proxy.WithClient(muclient.DefaultClient),
+		proxy.WithRouter(router.DefaultRouter),
+		proxy.WithClient(client.DefaultClient),
 	}
 
 	// set endpoint
@@ -104,7 +104,7 @@ func Run(ctx *cli.Context) error {
 		server.Name(Name),
 		server.Address(Address),
 		server.Registry(noop.NewRegistry()),
-		server.Broker(bmem.NewBroker()),
+		server.Broker(mBrokerMemory.NewBroker()),
 	}
 
 	// enable acme will create a net.Listener which
@@ -116,12 +116,12 @@ func Run(ctx *cli.Context) error {
 			ap = autocert.NewProvider()
 		case "certmagic":
 			if ACMEChallengeProvider != "cloudflare" {
-				log.Fatal("The only implemented DNS challenge provider is cloudflare")
+				logger.Fatal("The only implemented DNS challenge provider is cloudflare")
 			}
 
 			apiToken := os.Getenv("CF_API_TOKEN")
 			if len(apiToken) == 0 {
-				log.Fatal("env variables CF_API_TOKEN and CF_ACCOUNT_ID must be set")
+				logger.Fatal("env variables CF_API_TOKEN and CF_ACCOUNT_ID must be set")
 			}
 
 			storage := certmagic.NewStorage(
@@ -134,7 +134,7 @@ func Run(ctx *cli.Context) error {
 			config.ZoneToken = apiToken
 			challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
 			if err != nil {
-				log.Fatal(err.Error())
+				logger.Fatal(err.Error())
 			}
 
 			// define the provider
@@ -146,13 +146,13 @@ func Run(ctx *cli.Context) error {
 				acme.OnDemand(false),
 			)
 		default:
-			log.Fatalf("Unsupported acme provider: %s\n", ACMEProvider)
+			logger.Fatalf("Unsupported acme provider: %s\n", ACMEProvider)
 		}
 
 		// generate the tls config
 		config, err := ap.TLSConfig(helper.ACMEHosts(ctx)...)
 		if err != nil {
-			log.Fatalf("Failed to generate acme tls config: %v", err)
+			logger.Fatalf("Failed to generate acme tls config: %v", err)
 		}
 
 		// set the tls config
@@ -162,7 +162,7 @@ func Run(ctx *cli.Context) error {
 		// get certificates from the context
 		config, err := helper.TLSConfig(ctx)
 		if err != nil {
-			log.Fatal(err)
+			logger.Fatal(err)
 			return err
 		}
 		serverOpts = append(serverOpts, server.TLSConfig(config))
@@ -189,22 +189,22 @@ func Run(ctx *cli.Context) error {
 	serverOpts = append(serverOpts, server.WithRouter(p))
 
 	if len(Endpoint) > 0 {
-		log.Infof("Proxy [%s] serving endpoint: %s", p.String(), Endpoint)
+		logger.Infof("Proxy [%s] serving endpoint: %s", p.String(), Endpoint)
 	} else {
-		log.Infof("Proxy [%s] serving protocol: %s", p.String(), Protocol)
+		logger.Infof("Proxy [%s] serving protocol: %s", p.String(), Protocol)
 	}
 
 	if GRPCWebEnabled {
-		serverOpts = append(serverOpts, sgrpc.GRPCWebPort(GRPCWebAddress))
-		serverOpts = append(serverOpts, sgrpc.GRPCWebOptions(
+		serverOpts = append(serverOpts, sGrpc.GRPCWebPort(GRPCWebAddress))
+		serverOpts = append(serverOpts, sGrpc.GRPCWebOptions(
 			grpcweb.WithCorsForRegisteredEndpointsOnly(false),
 			grpcweb.WithOriginFunc(func(origin string) bool { return true })))
 
-		log.Infof("Proxy [%s] serving gRPC-Web on %s", p.String(), GRPCWebAddress)
+		logger.Infof("Proxy [%s] serving gRPC-Web on %s", p.String(), GRPCWebAddress)
 	}
 
 	// create a new grpc server
-	srv := sgrpc.NewServer(serverOpts...)
+	srv := sGrpc.NewServer(serverOpts...)
 
 	// create a new proxy muxer which includes the debug handler
 	muxer := muxer.New(Name, p)
@@ -216,24 +216,24 @@ func Run(ctx *cli.Context) error {
 
 	// Start the proxy server
 	if err := srv.Start(); err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 	}
 
 	// Run internal service
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 	}
 
 	// Stop the server
 	if err := srv.Stop(); err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 	}
 
 	return nil
 }
 
 var (
-	Flags = append(client.Flags,
+	Flags = append(mCli.Flags,
 		&cli.StringFlag{
 			Name:    "address",
 			Usage:   "Set the proxy http address e.g 0.0.0.0:8081",
