@@ -82,7 +82,8 @@ type grpcServer struct {
 	started bool
 	// used for first registration
 	registered bool
-
+	//mark server run without registry
+	runWithoutRegistry bool
 	// registry service instance
 	rsvc *registry.Service
 }
@@ -108,7 +109,7 @@ func newGRPCServer(opts ...server.Option) server.Server {
 		wg:          wait(options.Context),
 	}
 
-	// configure the grpc server
+	// configure grpc server
 	srv.configure()
 
 	return srv
@@ -157,8 +158,11 @@ func (g *grpcServer) configure(opts ...server.Option) {
 	if opts := g.getGrpcOptions(); opts != nil {
 		gopts = append(gopts, opts...)
 	}
-
-	g.rsvc = nil
+	// only register if it exists or is not noop
+	if g.opts.Registry == nil || g.opts.Registry.String() == "noop" {
+		g.runWithoutRegistry = true
+	}
+	g.rsvc = nil //remote endpoint
 	g.srv = grpc.NewServer(gopts...)
 }
 
@@ -619,11 +623,9 @@ func (g *grpcServer) Register() error {
 	config := g.opts
 	g.RUnlock()
 
-	// only register if it exists or is not noop
-	if config.Registry == nil || config.Registry.String() == "noop" {
+	if g.runWithoutRegistry {
 		return nil
 	}
-
 	regFunc := func(service *registry.Service) error {
 		var regErr error
 
@@ -804,11 +806,9 @@ func (g *grpcServer) Deregister() error {
 	config := g.opts
 	g.RUnlock()
 
-	// only register if it exists or is not noop
-	if config.Registry == nil || config.Registry.String() == "noop" {
+	if g.runWithoutRegistry {
 		return nil
 	}
-
 	// check the advertise address first
 	// if it exists then use it, otherwise
 	// use the address
@@ -991,29 +991,31 @@ func (g *grpcServer) Start() error {
 		// return error chan
 		var ch chan error
 
-	Loop:
-		for {
-			select {
-			// register self on interval
-			case <-t.C:
-				if err := g.Register(); err != nil {
-					if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
-						logger.Error("Server register error: ", err)
+		if !g.runWithoutRegistry {
+		Loop:
+			for {
+				select {
+				// register self on interval
+				case <-t.C:
+					if err := g.Register(); err != nil {
+						if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
+							logger.Error("Server register error: ", err)
+						}
 					}
+				// wait for exit
+				case ch = <-g.exit:
+					break Loop
 				}
-			// wait for exit
-			case ch = <-g.exit:
-				break Loop
 			}
-		}
 
-		// deregister self
-		if err := g.Deregister(); err != nil {
-			if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
-				logger.Error("Server deregister error: ", err)
+			// deregister self
+			if err := g.Deregister(); err != nil {
+				if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
+					logger.Error("Server deregister error: ", err)
+				}
 			}
-		}
 
+		}
 		// wait for waitgroup
 		if g.wg != nil {
 			g.wg.Wait()

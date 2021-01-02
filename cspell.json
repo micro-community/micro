@@ -2,11 +2,13 @@
     "version": "0.2",
     "words": [
         "envvars",
+        "grpcweb",
         "Helloworld",
         "kubernetes",
         "microservices",
         "pgrpc",
         "proto",
+        "protobuf",
         "qson",
         "urfave"
     ]
