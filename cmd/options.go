@@ -26,7 +26,7 @@ type Options struct {
 	Context context.Context
 }
 
-// Command line Name
+//Name for Command line Name
 func Name(n string) Option {
 	return func(o *Options) {
 		o.Name = n

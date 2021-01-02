@@ -373,7 +373,6 @@ func flagsToRequest(flags map[string][]string, req *goregistry.Value) (map[strin
 		default:
 			return value, nil
 		}
-		return nil, nil
 	}
 loop:
 	for key, value := range flags {
