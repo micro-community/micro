@@ -20,6 +20,10 @@ import (
 	"github.com/micro-community/micro/v3/service/server"
 )
 
+var (
+	HeaderPrefix = "Micro-"
+)
+
 type authWrapper struct {
 	client.Client
 }
@@ -138,9 +142,10 @@ type fromServiceWrapper struct {
 	client.Client
 }
 
-var (
-	HeaderPrefix = "Micro-"
-)
+// FromService wraps a client to inject service and auth metadata
+func FromService(c client.Client) client.Client {
+	return &fromServiceWrapper{c}
+}
 
 func (f *fromServiceWrapper) setHeaders(ctx context.Context) context.Context {
 	return metadata.MergeContext(ctx, metadata.Metadata{
@@ -163,11 +168,6 @@ func (f *fromServiceWrapper) Publish(ctx context.Context, p client.Message, opts
 	return f.Client.Publish(ctx, p, opts...)
 }
 
-// FromService wraps a client to inject service and auth metadata
-func FromService(c client.Client) client.Client {
-	return &fromServiceWrapper{c}
-}
-
 type logWrapper struct {
 	client.Client
 }
@@ -177,10 +177,12 @@ func (l *logWrapper) Call(ctx context.Context, req client.Request, rsp interface
 	return l.Client.Call(ctx, req, rsp, opts...)
 }
 
+//LogClient wap  client for log
 func LogClient(c client.Client) client.Client {
 	return &logWrapper{c}
 }
 
+//LogHandler for server end
 func LogHandler() server.HandlerWrapper {
 	// return a handler wrapper
 	return func(h server.HandlerFunc) server.HandlerFunc {

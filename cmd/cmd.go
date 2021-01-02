@@ -211,7 +211,7 @@ var (
 		&cli.BoolFlag{
 			Name:    "prompt_update",
 			Usage:   "Provide an update prompt when a new binary is available. Enabled for release binaries only.",
-			Value:   true,
+			Value:   false,
 			EnvVars: []string{"MICRO_PROMPT_UPDATE"},
 		},
 		&cli.StringFlag{
@@ -219,6 +219,12 @@ var (
 			Usage:   "Key to use when encoding/decoding secret config values. Will be generated and saved to file if not provided.",
 			Value:   "",
 			EnvVars: []string{"MICRO_CONFIG_SECRET_KEY"},
+		},
+		&cli.BoolFlag{
+			Name:    "default_wrapper",
+			Usage:   "Provide a default wrapper for default client and server to handle auth,trace,log,cache etc.",
+			Value:   true,
+			EnvVars: []string{"MICRO_DEFAULT_WRAPPER"},
 		},
 	}
 )
@@ -314,6 +320,7 @@ func (c *command) Options() Options {
 func (c *command) Before(ctx *cli.Context) error {
 	if v := ctx.Args().First(); len(v) > 0 {
 		switch v {
+		//micro server or micro service ..
 		case "service", "server":
 			// do nothing
 		default:
@@ -325,7 +332,7 @@ func (c *command) Before(ctx *cli.Context) error {
 				return err
 			}
 			// if updated we expect to re-execute the command
-			// TODO: maybe require relogin or update of the
+			// TODO: maybe require re-login or update of the
 			// config...
 			if updated {
 				// considering nil actually continues
@@ -392,22 +399,25 @@ func (c *command) Before(ctx *cli.Context) error {
 	client.DefaultClient.Init(
 		client.Lookup(network.Lookup),
 	)
+	// default wrapper
+	if ctx.Bool("default_wrapper") {
+		// wrap the client
+		client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
+		client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
+		client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
+		client.DefaultClient = wrapper.FromService(client.DefaultClient)
+		client.DefaultClient = wrapper.LogClient(client.DefaultClient)
 
-	// wrap the client
-	client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
-	client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
-	client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
-	client.DefaultClient = wrapper.FromService(client.DefaultClient)
-	client.DefaultClient = wrapper.LogClient(client.DefaultClient)
+		// wrap the server
+		server.DefaultServer.Init(
+			server.WrapHandler(wrapper.AuthHandler()),
+			server.WrapHandler(wrapper.TraceHandler()),
+			server.WrapHandler(wrapper.HandlerStats()),
+			server.WrapHandler(wrapper.LogHandler()),
+			server.WrapHandler(wrapper.MetricsHandler()),
+		)
 
-	// wrap the server
-	server.DefaultServer.Init(
-		server.WrapHandler(wrapper.AuthHandler()),
-		server.WrapHandler(wrapper.TraceHandler()),
-		server.WrapHandler(wrapper.HandlerStats()),
-		server.WrapHandler(wrapper.LogHandler()),
-		server.WrapHandler(wrapper.MetricsHandler()),
-	)
+	}
 
 	// setup auth
 	authOpts := []auth.Option{}
