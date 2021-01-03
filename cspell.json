@@ -1,14 +1,17 @@
 {
     "version": "0.2",
     "words": [
+        "ACMECA",
         "Asim",
         "Aslam",
         "chzyer",
         "Debugf",
         "envvars",
         "grpcweb",
+        "hashicorp",
         "Helloworld",
         "kubernetes",
+        "ldflags",
         "microservices",
         "mucp",
         "muxer",
@@ -17,6 +20,7 @@
         "protobuf",
         "qson",
         "Tracef",
-        "urfave"
+        "urfave",
+        "Warnf"
     ]
 }
