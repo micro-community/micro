@@ -8,7 +8,7 @@ import (
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
-	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/urfave/cli/v2"
 )
@@ -83,7 +83,7 @@ func Run(context *cli.Context) error {
 
 	// TODO: re-implement peering of servers e.g --peer=node1,node2,node3
 	// peers are configured as network nodes to cluster between
-	log.Info("Starting server")
+	logger.Info("Starting server")
 
 	// parse the env vars
 	var envvars []string
@@ -108,7 +108,7 @@ func Run(context *cli.Context) error {
 
 	// start the services
 	for _, service := range services {
-		log.Infof("Registering %s", service)
+		logger.Infof("Registering %s", service)
 
 		// all things run by the server are `micro service [name]`
 		cmdArgs := []string{"service"}
@@ -185,7 +185,7 @@ func Run(context *cli.Context) error {
 		// NOTE: we use Version right now to check for the latest release
 		muService := &runtime.Service{Name: service, Version: "latest"}
 		if err := runtime.Create(muService, args...); err != nil {
-			log.Errorf("Failed to create runtime environment: %v", err)
+			logger.Errorf("Failed to create runtime environment: %v", err)
 			return err
 		}
 	}
@@ -195,11 +195,11 @@ func Run(context *cli.Context) error {
 		return nil
 	}
 
-	log.Info("Starting server runtime")
+	logger.Info("Starting server runtime")
 
 	// start the runtime
 	if err := runtime.DefaultRuntime.Start(); err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 		return err
 	}
 	defer runtime.DefaultRuntime.Stop()
@@ -212,9 +212,9 @@ func Run(context *cli.Context) error {
 
 	// start the server
 	if err := srv.Run(); err != nil {
-		log.Fatalf("Error running server: %v", err)
+		logger.Fatalf("Error running server: %v", err)
 	}
 
-	log.Info("Stopped server")
+	logger.Info("Stopped server")
 	return nil
 }
