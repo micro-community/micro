@@ -7,14 +7,15 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/micro-community/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/logger"
+
 	"github.com/micro-community/micro/v3/platform/api/resolver"
 	"github.com/micro-community/micro/v3/platform/api/resolver/subdomain"
 	"github.com/micro-community/micro/v3/platform/api/server"
-	inauth "github.com/micro-community/micro/v3/platform/auth"
+	inAuth "github.com/micro-community/micro/v3/platform/auth"
 	"github.com/micro-community/micro/v3/platform/ctx"
 	"github.com/micro-community/micro/v3/platform/namespace"
-	"github.com/micro-community/micro/v3/service/auth"
-	"github.com/micro-community/micro/v3/service/logger"
 )
 
 // Wrapper wraps a handler and authenticates requests
@@ -51,7 +52,7 @@ func (a authWrapper) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		*req = *req.Clone(ctx)
 	}
 
-	// If an error occured looking up the route, the domain isn't returned. TODO: Find a better way
+	// If an error occurred looking up the route, the domain isn't returned. TODO: Find a better way
 	// of resolving network for non-standard requests, e.g. "/rpc".
 	if r, ok := a.resolver.(*subdomain.Resolver); ok && len(endpoint.Domain) == 0 {
 		endpoint.Domain = r.Domain(req)
@@ -64,19 +65,19 @@ func (a authWrapper) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	var token string
 	if header := req.Header.Get("Authorization"); len(header) > 0 {
 		// Extract the auth token from the request
-		if strings.HasPrefix(header, inauth.BearerScheme) {
-			token = header[len(inauth.BearerScheme):]
+		if strings.HasPrefix(header, inAuth.BearerScheme) {
+			token = header[len(inAuth.BearerScheme):]
 		}
 	} else {
 		// Get the token out the cookies if not provided in headers
 		if c, err := req.Cookie("micro-token"); err == nil && c != nil {
-			token = strings.TrimPrefix(c.Value, inauth.TokenCookieName+"=")
-			req.Header.Set("Authorization", inauth.BearerScheme+token)
+			token = strings.TrimPrefix(c.Value, inAuth.TokenCookieName+"=")
+			req.Header.Set("Authorization", inAuth.BearerScheme+token)
 		}
 	}
 
 	// Get the account using the token, some are unauthenticated, so the lack of an
-	// account doesn't necesserially mean a forbidden request
+	// account doesn't necessarily mean a forbidden request
 	acc, _ := auth.Inspect(token)
 
 	// Determine the namespace and set it in the header. If the user passed auth creds
