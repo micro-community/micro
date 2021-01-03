@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/micro-community/micro/v3/profile"
-	proto "github.com/micro-community/micro/v3/proto/debug"
+	"github.com/micro-community/micro/v3/proto/debug"
 	"github.com/micro-community/micro/v3/service/client"
 )
 
@@ -45,10 +45,10 @@ func testRequest(ctx context.Context, c client.Client, name string) error {
 	req := c.NewRequest(
 		name,
 		"Debug.Health",
-		new(proto.HealthRequest),
+		new(debug.HealthRequest),
 	)
 
-	rsp := new(proto.HealthResponse)
+	rsp := new(debug.HealthResponse)
 
 	err := c.Call(context.TODO(), req, rsp)
 	if err != nil {
@@ -78,7 +78,7 @@ func benchmarkService(b *testing.B, n int, name string) {
 	// start the server
 	go func() {
 		if err := service.Run(); err != nil {
-			b.Fatal(err)
+			panic(err)
 		}
 	}()
 
@@ -88,7 +88,8 @@ func benchmarkService(b *testing.B, n int, name string) {
 	// make a test call to warm the cache
 	for i := 0; i < 10; i++ {
 		if err := testRequest(ctx, service.Client(), name); err != nil {
-			b.Fatal(err)
+			//b.Fatal(err)
+			panic(err)
 		}
 	}
 
@@ -105,7 +106,8 @@ func benchmarkService(b *testing.B, n int, name string) {
 				err := testRequest(ctx, service.Client(), name)
 				wg.Done()
 				if err != nil {
-					b.Fatal(err)
+					//b.Fatal(err)
+					panic(err)
 				}
 			}()
 		}

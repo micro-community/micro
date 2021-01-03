@@ -4,15 +4,14 @@ import (
 	"context"
 	"time"
 
-	authns "github.com/micro-community/micro/v3/platform/auth/namespace"
-	pb "github.com/micro-community/micro/v3/proto/broker"
+	inAuthNamespace "github.com/micro-community/micro/v3/platform/auth/namespace"
+	pbBroker "github.com/micro-community/micro/v3/proto/broker"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
-	log "github.com/micro-community/micro/v3/service/logger"
 	"github.com/urfave/cli/v2"
 )
 
@@ -42,7 +41,7 @@ func Run(ctx *cli.Context) error {
 	broker.DefaultBroker.Connect()
 
 	// register the broker handler
-	pb.RegisterBrokerHandler(srv.Server(), new(handler))
+	pbBroker.RegisterBrokerHandler(srv.Server(), new(handler))
 
 	// run the service
 	if err := srv.Run(); err != nil {
@@ -53,11 +52,11 @@ func Run(ctx *cli.Context) error {
 
 type handler struct{}
 
-func (h *handler) Publish(ctx context.Context, req *pb.PublishRequest, rsp *pb.Empty) error {
+func (h *handler) Publish(ctx context.Context, req *pbBroker.PublishRequest, rsp *pbBroker.Empty) error {
 	// authorize the request
 	acc, ok := auth.AccountFromContext(ctx)
 	if !ok {
-		return errors.Unauthorized("broker.Broker.Publish", authns.ErrForbidden.Error())
+		return errors.Unauthorized("broker.Broker.Publish", inAuthNamespace.ErrForbidden.Error())
 	}
 
 	// validate the request
@@ -79,23 +78,23 @@ func (h *handler) Publish(ctx context.Context, req *pb.PublishRequest, rsp *pb.E
 		}
 	}
 
-	log.Debugf("Publishing message to %s topic in the %v namespace", req.Topic, acc.Issuer)
+	logger.Debugf("Publishing message to %s topic in the %v namespace", req.Topic, acc.Issuer)
 	err := broker.DefaultBroker.Publish(acc.Issuer+"."+req.Topic, &broker.Message{
 		Header: req.Message.Header,
 		Body:   req.Message.Body,
 	})
-	log.Debugf("Published message to %s topic in the %v namespace", req.Topic, acc.Issuer)
+	logger.Debugf("Published message to %s topic in the %v namespace", req.Topic, acc.Issuer)
 	if err != nil {
 		return errors.InternalServerError("broker.Broker.Publish", err.Error())
 	}
 	return nil
 }
 
-func (h *handler) Subscribe(ctx context.Context, req *pb.SubscribeRequest, stream pb.Broker_SubscribeStream) error {
+func (h *handler) Subscribe(ctx context.Context, req *pbBroker.SubscribeRequest, stream pbBroker.Broker_SubscribeStream) error {
 	// authorize the request
 	acc, ok := auth.AccountFromContext(ctx)
 	if !ok {
-		return errors.Unauthorized("broker.Broker.Subscribe", authns.ErrForbidden.Error())
+		return errors.Unauthorized("broker.Broker.Subscribe", inAuthNamespace.ErrForbidden.Error())
 	}
 	ns := acc.Issuer
 
@@ -103,7 +102,7 @@ func (h *handler) Subscribe(ctx context.Context, req *pb.SubscribeRequest, strea
 
 	// message handler to stream back messages from broker
 	handler := func(m *broker.Message) error {
-		if err := stream.Send(&pb.Message{
+		if err := stream.Send(&pbBroker.Message{
 			Header: m.Header,
 			Body:   m.Body,
 		}); err != nil {
@@ -117,22 +116,22 @@ func (h *handler) Subscribe(ctx context.Context, req *pb.SubscribeRequest, strea
 		return nil
 	}
 
-	log.Debugf("Subscribing to %s topic in namespace %v", req.Topic, ns)
+	logger.Debugf("Subscribing to %s topic in namespace %v", req.Topic, ns)
 	sub, err := broker.DefaultBroker.Subscribe(ns+"."+req.Topic, handler, broker.Queue(ns+"."+req.Queue))
 	if err != nil {
 		return errors.InternalServerError("broker.Broker.Subscribe", err.Error())
 	}
 	defer func() {
-		log.Debugf("Unsubscribing from topic %s in namespace %v", req.Topic, ns)
+		logger.Debugf("Unsubscribing from topic %s in namespace %v", req.Topic, ns)
 		sub.Unsubscribe()
 	}()
 
 	select {
 	case <-ctx.Done():
-		log.Debugf("Context done for subscription to topic %s", req.Topic)
+		logger.Debugf("Context done for subscription to topic %s", req.Topic)
 		return nil
 	case err := <-errChan:
-		log.Debugf("Subscription error for topic %s: %v", req.Topic, err)
+		logger.Debugf("Subscription error for topic %s: %v", req.Topic, err)
 		return err
 	}
 }

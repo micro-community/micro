@@ -9,12 +9,13 @@ import (
 	"runtime"
 
 	"github.com/micro-community/micro/v3/cmd"
-	signalutil "github.com/micro-community/micro/v3/platform/signal"
 	"github.com/micro-community/micro/v3/service/client"
-	mudebug "github.com/micro-community/micro/v3/service/debug"
-	debug "github.com/micro-community/micro/v3/service/debug/handler"
+	"github.com/micro-community/micro/v3/service/debug"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/server"
+
+	inSignal "github.com/micro-community/micro/v3/platform/signal"
+	mDebugHandler "github.com/micro-community/micro/v3/service/debug/handler"
 	"github.com/urfave/cli/v2"
 )
 
@@ -167,23 +168,23 @@ func (s *Service) Run() error {
 	// register the debug handler
 	s.Server().Handle(
 		s.Server().NewHandler(
-			debug.NewHandler(s.Client()),
+			mDebugHandler.NewHandler(s.Client()),
 			server.InternalHandler(true),
 		),
 	)
 
 	// start the profiler
-	if mudebug.DefaultProfiler != nil {
+	if debug.DefaultProfiler != nil {
 		// to view mutex contention
 		runtime.SetMutexProfileFraction(5)
 		// to view blocking profile
 		runtime.SetBlockProfileRate(1)
 
-		if err := mudebug.DefaultProfiler.Start(); err != nil {
+		if err := debug.DefaultProfiler.Start(); err != nil {
 			return err
 		}
 
-		defer mudebug.DefaultProfiler.Stop()
+		defer debug.DefaultProfiler.Stop()
 	}
 
 	if logger.V(logger.InfoLevel, logger.DefaultLogger) {
@@ -196,7 +197,7 @@ func (s *Service) Run() error {
 
 	ch := make(chan os.Signal, 1)
 	if s.opts.Signal {
-		signal.Notify(ch, signalutil.Shutdown()...)
+		signal.Notify(ch, inSignal.Shutdown()...)
 	}
 
 	// wait on kill signal

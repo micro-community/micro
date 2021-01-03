@@ -140,7 +140,7 @@ type Handler interface {
 
 // Subscriber interface represents a subscription to a given topic using
 // a specific subscriber function or object with endpoints. It mirrors
-// the handler in its behaviour.
+// the handler in its behavior.
 type Subscriber interface {
 	Topic() string
 	Subscriber() interface{}

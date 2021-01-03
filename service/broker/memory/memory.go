@@ -182,6 +182,7 @@ func (m *memorySubscriber) Unsubscribe() error {
 	return nil
 }
 
+//NewBroker create a broker
 func NewBroker(opts ...broker.Option) broker.Broker {
 	options := broker.Options{
 		Context: context.Background(),
