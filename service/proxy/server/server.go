@@ -233,10 +233,10 @@ func Run(ctx *cli.Context) error {
 	}
 
 	// create a new grpc server
-	srv := mServerGrpc.NewServer(serverOpts...)
+	proxy := mServerGrpc.NewServer(serverOpts...)
 
 	// Start the proxy server
-	if err := srv.Start(); err != nil {
+	if err := proxy.Start(); err != nil {
 		logger.Fatal(err)
 	}
 	// create a new proxy muxer which includes the debug handler
@@ -259,7 +259,7 @@ func Run(ctx *cli.Context) error {
 	}
 
 	// Stop the server
-	if err := srv.Stop(); err != nil {
+	if err := proxy.Stop(); err != nil {
 		logger.Fatal(err)
 	}
 
