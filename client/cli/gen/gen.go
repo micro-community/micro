@@ -1,4 +1,4 @@
-//Package gen provides the micro gen command which simply runs go generate
+//Package init gen provides the micro gen command which simply runs go generate
 package init
 
 import (
@@ -9,10 +9,12 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+//exports var
 var (
 	Command = "go generate"
 )
 
+//Run go generate
 func Run(ctx *cli.Context) error {
 	cmd := exec.Command("go", "generate")
 	b, err := cmd.CombinedOutput()

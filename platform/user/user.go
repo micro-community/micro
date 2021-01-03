@@ -15,8 +15,9 @@ import (
 	"github.com/micro-community/micro/v3/service/logger"
 )
 
+//export current Dir for user
 var (
-	Dir  = ""
+	Dir  = "."
 	path = ".micro"
 )
 

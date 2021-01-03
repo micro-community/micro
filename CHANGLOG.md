@@ -2,7 +2,11 @@
 
 - open internal packages totally as platform abilities
 
+- default user dir to current dir
+
 - remove unreachable code
+
+- remove duplicate import
 
 - refine words spelling check
 

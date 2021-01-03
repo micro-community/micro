@@ -17,6 +17,7 @@ func init() {
 	plugin.Register(Plugin())
 }
 
+//Plugin for usage
 func Plugin() plugin.Plugin {
 	var requests uint64
 

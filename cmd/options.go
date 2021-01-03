@@ -6,8 +6,10 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+//Option set cmd Options
 type Option func(o *Options)
 
+//Options for cmd
 type Options struct {
 	// Name of the application
 	Name string
