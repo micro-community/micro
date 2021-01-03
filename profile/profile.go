@@ -26,8 +26,8 @@ import (
 	mBrokerMemory "github.com/micro-community/micro/v3/service/broker/memory"
 	mBuildGolang "github.com/micro-community/micro/v3/service/build/golang"
 	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
-	mEvtsStore "github.com/micro-community/micro/v3/service/events/store"
-	mEvtsStreamMem "github.com/micro-community/micro/v3/service/events/stream/memory"
+	mEventStore "github.com/micro-community/micro/v3/service/events/store"
+	mEventStream "github.com/micro-community/micro/v3/service/events/stream/memory"
 	mRegMdns "github.com/micro-community/micro/v3/service/registry/mdns"
 	mRegMemory "github.com/micro-community/micro/v3/service/registry/memory"
 	mRouterK8s "github.com/micro-community/micro/v3/service/router/kubernetes"
@@ -51,6 +51,7 @@ var profiles = map[string]*Profile{
 	"test":       Test,
 	"local":      Local,
 	"kubernetes": Kubernetes,
+	"simple":     Simple,
 }
 
 // Profile configures an environment
@@ -104,12 +105,12 @@ var Local = &Profile{
 		runtime.DefaultRuntime = mRuntimeLocal.NewRuntime()
 
 		var err error
-		events.DefaultStream, err = mEvtsStreamMem.NewStream()
+		events.DefaultStream, err = mEventStream.NewStream()
 		if err != nil {
 			logger.Fatalf("Error configuring stream: %v", err)
 		}
-		events.DefaultStore = mEvtsStore.NewStore(
-			mEvtsStore.WithStore(store.DefaultStore),
+		events.DefaultStore = mEventStore.NewStore(
+			mEventStore.WithStore(store.DefaultStore),
 		)
 
 		store.DefaultBlobStore, err = mStoreFile.NewBlobStore()
@@ -134,7 +135,7 @@ var Kubernetes = &Profile{
 			logger.Fatalf("Error configuring golang builder: %v", err)
 		}
 
-		events.DefaultStream, err = mEvtsStreamMem.NewStream()
+		events.DefaultStream, err = mEventStream.NewStream()
 		if err != nil {
 			logger.Fatalf("Error configuring stream: %v", err)
 		}
