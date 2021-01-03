@@ -14,30 +14,29 @@ import (
 	"time"
 
 	"github.com/micro-community/micro/v3/client/cli/util"
-	uconf "github.com/micro-community/micro/v3/platform/config"
-	"github.com/micro-community/micro/v3/platform/helper"
-	"github.com/micro-community/micro/v3/platform/network"
-	"github.com/micro-community/micro/v3/platform/report"
-	_ "github.com/micro-community/micro/v3/platform/usage"
-	"github.com/micro-community/micro/v3/platform/user"
-	"github.com/micro-community/micro/v3/platform/wrapper"
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/profile"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/config"
-	configCli "github.com/micro-community/micro/v3/service/config/client"
-	storeConf "github.com/micro-community/micro/v3/service/config/store"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
 	"github.com/micro-community/micro/v3/service/store"
-	"github.com/urfave/cli/v2"
 
-	muregistry "github.com/micro-community/micro/v3/service/registry"
-	muruntime "github.com/micro-community/micro/v3/service/runtime"
-	mustore "github.com/micro-community/micro/v3/service/store"
+	mConfigCli "github.com/micro-community/micro/v3/service/config/client"
+	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
+
+	inConfig "github.com/micro-community/micro/v3/platform/config"
+	"github.com/micro-community/micro/v3/platform/helper"
+	 "github.com/micro-community/micro/v3/platform/network"
+	 "github.com/micro-community/micro/v3/platform/report"
+	 "github.com/micro-community/micro/v3/platform/user"
+	 "github.com/micro-community/micro/v3/platform/wrapper"
+
+	"github.com/urfave/cli/v2"
 )
 
 type Cmd interface {
@@ -346,7 +345,7 @@ func (c *command) Before(ctx *cli.Context) error {
 
 	// set the config file if specified
 	if cf := ctx.String("c"); len(cf) > 0 {
-		uconf.SetConfig(cf)
+		inConfig.SetConfig(cf)
 	}
 
 	// initialize plugins
@@ -493,7 +492,7 @@ func (c *command) Before(ctx *cli.Context) error {
 		addresses := strings.Split(ctx.String("registry_address"), ",")
 		registryOpts = append(registryOpts, registry.Addrs(addresses...))
 	}
-	if err := muregistry.DefaultRegistry.Init(registryOpts...); err != nil {
+	if err := registry.DefaultRegistry.Init(registryOpts...); err != nil {
 		logger.Fatalf("Error configuring registry: %v", err)
 	}
 
@@ -532,7 +531,7 @@ func (c *command) Before(ctx *cli.Context) error {
 
 	// Setup runtime. This is a temporary fix to trigger the runtime to recreate
 	// its client now the client has been replaced with a wrapped one.
-	if err := muruntime.DefaultRuntime.Init(); err != nil {
+	if err := runtime.DefaultRuntime.Init(); err != nil {
 		logger.Fatalf("Error configuring runtime: %v", err)
 	}
 
@@ -547,27 +546,27 @@ func (c *command) Before(ctx *cli.Context) error {
 	if len(ctx.String("service_name")) > 0 {
 		storeOpts = append(storeOpts, store.Table(ctx.String("service_name")))
 	}
-	if err := mustore.DefaultStore.Init(storeOpts...); err != nil {
+	if err := store.DefaultStore.Init(storeOpts...); err != nil {
 		logger.Fatalf("Error configuring store: %v", err)
 	}
 
 	// set the registry and broker in the client and server
 	client.DefaultClient.Init(
 		client.Broker(broker.DefaultBroker),
-		client.Registry(muregistry.DefaultRegistry),
+		client.Registry(registry.DefaultRegistry),
 	)
 	server.DefaultServer.Init(
 		server.Broker(broker.DefaultBroker),
-		server.Registry(muregistry.DefaultRegistry),
+		server.Registry(registry.DefaultRegistry),
 	)
 
 	// Setup config. Do this after auth is configured since it'll load the config
 	// from the service immediately. We only do this if the action is nil, indicating
 	// a service is being run
 	if c.service && config.DefaultConfig == nil {
-		config.DefaultConfig = configCli.NewConfig(ctx.String("namespace"))
+		config.DefaultConfig = mConfigCli.NewConfig(ctx.String("namespace"))
 	} else if config.DefaultConfig == nil {
-		config.DefaultConfig, _ = storeConf.NewConfig(mustore.DefaultStore, ctx.String("namespace"))
+		config.DefaultConfig, _ = mConfigStore.NewConfig(store.DefaultStore, ctx.String("namespace"))
 	}
 
 	return nil
