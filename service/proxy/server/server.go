@@ -1,4 +1,4 @@
-// Package proxy is a cli proxy
+// Package proxy is a proxy for grpc/http/mucp
 package proxy
 
 import (
@@ -107,9 +107,6 @@ func Run(ctx *cli.Context) error {
 	if len(ctx.String("acme_provider")) > 0 {
 		ACMEProvider = ctx.String("acme_provider")
 	}
-
-	// new service
-	mService := service.New(service.Name(Name))
 
 	// set the context
 	pOpts := []proxy.Option{
@@ -238,19 +235,26 @@ func Run(ctx *cli.Context) error {
 	// create a new grpc server
 	srv := mServerGrpc.NewServer(serverOpts...)
 
-	// create a new proxy muxer which includes the debug handler
-	muxer := muxer.New(Name, p)
-
-	// set the router
-	mService.Server().Init(server.WithRouter(muxer))
-
 	// Start the proxy server
 	if err := srv.Start(); err != nil {
 		logger.Fatal(err)
 	}
+	// create a new proxy muxer which includes the debug handler
+	muxer := muxer.New(Name, p)
+
+	inSrvOpts := []server.Option{
+		server.Registry(mRegistryNoop.NewRegistry()),
+		server.WithRouter(muxer),
+	}
+
+	// new internal service
+	inSrv := service.New(service.Name(Name))
+
+	// set the router
+	inSrv.Server().Init(inSrvOpts...)
 
 	// Run internal service
-	if err := mService.Run(); err != nil {
+	if err := inSrv.Run(); err != nil {
 		logger.Fatal(err)
 	}
 

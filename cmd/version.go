@@ -6,8 +6,8 @@ import (
 	ver "github.com/hashicorp/go-version"
 )
 
+//export binary perperties
 var (
-	// populated by ldflags
 	GitCommit string
 	GitTag    string
 	BuildDate string

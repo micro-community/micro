@@ -6,7 +6,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
-	clitoken "github.com/micro-community/micro/v3/client/cli/token"
+	cliToken "github.com/micro-community/micro/v3/client/cli/token"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"
@@ -45,7 +45,7 @@ func setupAuthForCLI(ctx *cli.Context) error {
 		return err
 	}
 
-	tok, err := clitoken.Get(ctx)
+	tok, err := cliToken.Get(ctx)
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func setupAuthForCLI(ctx *cli.Context) error {
 		auth.ClientToken(tok),
 		auth.Issuer(ns),
 	)
-	return clitoken.Save(ctx, tok)
+	return cliToken.Save(ctx, tok)
 }
 
 // setupAuthForService generates auth credentials for the service
