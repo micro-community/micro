@@ -8,39 +8,39 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/micro-community/micro/v3/service/auth/jwt"
-	"github.com/micro-community/micro/v3/service/auth/noop"
+	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/broker"
-	memBroker "github.com/micro-community/micro/v3/service/broker/memory"
-	"github.com/micro-community/micro/v3/service/build/golang"
+	"github.com/micro-community/micro/v3/service/build"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/config"
-	storeConfig "github.com/micro-community/micro/v3/service/config/store"
-	evStore "github.com/micro-community/micro/v3/service/events/store"
-	memStream "github.com/micro-community/micro/v3/service/events/stream/memory"
+	"github.com/micro-community/micro/v3/service/events"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
-	"github.com/micro-community/micro/v3/service/registry/mdns"
-	"github.com/micro-community/micro/v3/service/registry/memory"
 	"github.com/micro-community/micro/v3/service/router"
-	k8sRouter "github.com/micro-community/micro/v3/service/router/kubernetes"
-	regRouter "github.com/micro-community/micro/v3/service/router/registry"
-	"github.com/micro-community/micro/v3/service/runtime/kubernetes"
-	"github.com/micro-community/micro/v3/service/runtime/local"
+	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
-	"github.com/micro-community/micro/v3/service/store/file"
-	mem "github.com/micro-community/micro/v3/service/store/memory"
-	"github.com/urfave/cli/v2"
+	"github.com/micro-community/micro/v3/service/store"
+
+	mAuthJwt "github.com/micro-community/micro/v3/service/auth/jwt"
+	mAuthNoop "github.com/micro-community/micro/v3/service/auth/noop"
+	mBrokerMemory "github.com/micro-community/micro/v3/service/broker/memory"
+	mBuildGolang "github.com/micro-community/micro/v3/service/build/golang"
+	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
+	mEvtsStore "github.com/micro-community/micro/v3/service/events/store"
+	mEvtsStreamMem "github.com/micro-community/micro/v3/service/events/stream/memory"
+	mRegMdns "github.com/micro-community/micro/v3/service/registry/mdns"
+	mRegMemory "github.com/micro-community/micro/v3/service/registry/memory"
+	mRouterK8s "github.com/micro-community/micro/v3/service/router/kubernetes"
+	mRouterReg "github.com/micro-community/micro/v3/service/router/registry"
+	mRuntimeK8s "github.com/micro-community/micro/v3/service/runtime/kubernetes"
+	mRuntimeLocal "github.com/micro-community/micro/v3/service/runtime/local"
+	mStoreFile "github.com/micro-community/micro/v3/service/store/file"
+	mStoreMemory "github.com/micro-community/micro/v3/service/store/memory"
 
 	inAuth "github.com/micro-community/micro/v3/platform/auth"
-	"github.com/micro-community/micro/v3/platform/user"
-	microAuth "github.com/micro-community/micro/v3/service/auth"
-	microBuilder "github.com/micro-community/micro/v3/service/build"
-	microEvents "github.com/micro-community/micro/v3/service/events"
-	microRegistry "github.com/micro-community/micro/v3/service/registry"
-	microRouter "github.com/micro-community/micro/v3/service/router"
-	microRuntime "github.com/micro-community/micro/v3/service/runtime"
-	microStore "github.com/micro-community/micro/v3/service/store"
+	inUser "github.com/micro-community/micro/v3/platform/user"
+
+	"github.com/urfave/cli/v2"
 )
 
 // profiles which when called will configure micro to run in that environment
@@ -91,28 +91,28 @@ var Client = &Profile{
 var Local = &Profile{
 	Name: "local",
 	Setup: func(ctx *cli.Context) error {
-		microAuth.DefaultAuth = jwt.NewAuth()
-		microStore.DefaultStore = file.NewStore(file.WithDir(filepath.Join(user.Dir, "server", "store")))
+		auth.DefaultAuth = mAuthJwt.NewAuth()
+		store.DefaultStore = mStoreFile.NewStore(mStoreFile.WithDir(filepath.Join(inUser.Dir, "server", "store")))
 		SetupConfigSecretKey(ctx)
-		config.DefaultConfig, _ = storeConfig.NewConfig(microStore.DefaultStore, "")
-		SetupBroker(memBroker.NewBroker())
-		SetupRegistry(mdns.NewRegistry())
+		config.DefaultConfig, _ = mConfigStore.NewConfig(store.DefaultStore, "")
+		SetupBroker(mBrokerMemory.NewBroker())
+		SetupRegistry(mRegMdns.NewRegistry())
 		SetupJWT(ctx)
 
 		// use the local runtime, note: the local runtime is designed to run source code directly so
 		// the runtime builder should NOT be set when using this implementation
-		microRuntime.DefaultRuntime = local.NewRuntime()
+		runtime.DefaultRuntime = mRuntimeLocal.NewRuntime()
 
 		var err error
-		microEvents.DefaultStream, err = memStream.NewStream()
+		events.DefaultStream, err = mEvtsStreamMem.NewStream()
 		if err != nil {
 			logger.Fatalf("Error configuring stream: %v", err)
 		}
-		microEvents.DefaultStore = evStore.NewStore(
-			evStore.WithStore(microStore.DefaultStore),
+		events.DefaultStore = mEvtsStore.NewStore(
+			mEvtsStore.WithStore(store.DefaultStore),
 		)
 
-		microStore.DefaultBlobStore, err = file.NewBlobStore()
+		store.DefaultBlobStore, err = mStoreFile.NewBlobStore()
 		if err != nil {
 			logger.Fatalf("Error configuring file blob store: %v", err)
 		}
@@ -125,22 +125,22 @@ var Local = &Profile{
 var Kubernetes = &Profile{
 	Name: "kubernetes",
 	Setup: func(ctx *cli.Context) (err error) {
-		microAuth.DefaultAuth = jwt.NewAuth()
+		auth.DefaultAuth = mAuthJwt.NewAuth()
 		SetupJWT(ctx)
 
-		microRuntime.DefaultRuntime = kubernetes.NewRuntime()
-		microBuilder.DefaultBuilder, err = golang.NewBuilder()
+		runtime.DefaultRuntime = mRuntimeK8s.NewRuntime()
+		build.DefaultBuilder, err = mBuildGolang.NewBuilder()
 		if err != nil {
 			logger.Fatalf("Error configuring golang builder: %v", err)
 		}
 
-		microEvents.DefaultStream, err = memStream.NewStream()
+		events.DefaultStream, err = mEvtsStreamMem.NewStream()
 		if err != nil {
 			logger.Fatalf("Error configuring stream: %v", err)
 		}
 
-		microStore.DefaultStore = file.NewStore(file.WithDir("/store"))
-		microStore.DefaultBlobStore, err = file.NewBlobStore(file.WithDir("/store/blob"))
+		store.DefaultStore = mStoreFile.NewStore(mStoreFile.WithDir("/store"))
+		store.DefaultBlobStore, err = mStoreFile.NewBlobStore(mStoreFile.WithDir("/store/blob"))
 		if err != nil {
 			logger.Fatalf("Error configuring file blob store: %v", err)
 		}
@@ -148,23 +148,23 @@ var Kubernetes = &Profile{
 		// the registry service uses the memory registry, the other core services will use the default
 		// rpc client and call the registry service
 		if ctx.Args().Get(1) == "registry" {
-			SetupRegistry(memory.NewRegistry())
+			SetupRegistry(mRegMemory.NewRegistry())
 		}
 
 		// the broker service uses the memory broker, the other core services will use the default
 		// rpc client and call the broker service
 		if ctx.Args().Get(1) == "broker" {
-			SetupBroker(memBroker.NewBroker())
+			SetupBroker(mBrokerMemory.NewBroker())
 		}
 
-		config.DefaultConfig, err = storeConfig.NewConfig(microStore.DefaultStore, "")
+		config.DefaultConfig, err = mConfigStore.NewConfig(store.DefaultStore, "")
 		if err != nil {
 			logger.Fatalf("Error configuring config: %v", err)
 		}
 		SetupConfigSecretKey(ctx)
 
-		microRouter.DefaultRouter = k8sRouter.NewRouter()
-		client.DefaultClient.Init(client.Router(microRouter.DefaultRouter))
+		router.DefaultRouter = mRouterK8s.NewRouter()
+		client.DefaultClient.Init(client.Router(router.DefaultRouter))
 		return nil
 	},
 }
@@ -179,19 +179,19 @@ var Service = &Profile{
 var Test = &Profile{
 	Name: "test",
 	Setup: func(ctx *cli.Context) error {
-		microAuth.DefaultAuth = noop.NewAuth()
-		microStore.DefaultStore = mem.NewStore()
-		microStore.DefaultBlobStore, _ = file.NewBlobStore()
-		config.DefaultConfig, _ = storeConfig.NewConfig(microStore.DefaultStore, "")
-		SetupRegistry(memory.NewRegistry())
+		auth.DefaultAuth = mAuthNoop.NewAuth()
+		store.DefaultStore = mStoreMemory.NewStore()
+		store.DefaultBlobStore, _ = mStoreFile.NewBlobStore()
+		config.DefaultConfig, _ = mConfigStore.NewConfig(store.DefaultStore, "")
+		SetupRegistry(mRegMemory.NewRegistry())
 		return nil
 	},
 }
 
 // SetupRegistry configures the registry
 func SetupRegistry(reg registry.Registry) {
-	microRegistry.DefaultRegistry = reg
-	microRouter.DefaultRouter = regRouter.NewRouter(router.Registry(reg))
+	registry.DefaultRegistry = reg
+	router.DefaultRouter = mRouterReg.NewRouter(router.Registry(reg))
 	client.DefaultClient.Init(client.Registry(reg))
 	server.DefaultServer.Init(server.Registry(reg))
 }
@@ -206,7 +206,7 @@ func SetupBroker(b broker.Broker) {
 // SetupJWT configures the default internal system rules
 func SetupJWT(ctx *cli.Context) {
 	for _, rule := range inAuth.SystemRules {
-		if err := microAuth.DefaultAuth.Grant(rule); err != nil {
+		if err := auth.DefaultAuth.Grant(rule); err != nil {
 			logger.Fatal("Error creating default rule: %v", err)
 		}
 	}
@@ -216,7 +216,7 @@ func SetupJWT(ctx *cli.Context) {
 func SetupConfigSecretKey(ctx *cli.Context) {
 	key := ctx.String("config_secret_key")
 	if len(key) == 0 {
-		k, err := user.GetConfigSecretKey()
+		k, err := inUser.GetConfigSecretKey()
 		if err != nil {
 			logger.Fatal("Error getting config secret: %v", err)
 		}
