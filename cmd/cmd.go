@@ -31,10 +31,10 @@ import (
 
 	inConfig "github.com/micro-community/micro/v3/platform/config"
 	"github.com/micro-community/micro/v3/platform/helper"
-	 "github.com/micro-community/micro/v3/platform/network"
-	 "github.com/micro-community/micro/v3/platform/report"
-	 "github.com/micro-community/micro/v3/platform/user"
-	 "github.com/micro-community/micro/v3/platform/wrapper"
+	"github.com/micro-community/micro/v3/platform/network"
+	"github.com/micro-community/micro/v3/platform/report"
+	"github.com/micro-community/micro/v3/platform/user"
+	"github.com/micro-community/micro/v3/platform/wrapper"
 
 	"github.com/urfave/cli/v2"
 )
@@ -271,7 +271,7 @@ func action(c *cli.Context) error {
 }
 
 //New return a cmd
-func New(opts ...Option) *command {
+func New(opts ...Option) Cmd {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
