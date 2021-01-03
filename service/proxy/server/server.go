@@ -72,12 +72,12 @@ var (
 			EnvVars: []string{"MICRO_PROXY_ENDPOINT"},
 		},
 		&cli.BoolFlag{
-			Name:    "grpc-web",
+			Name:    "grpc_web",
 			Usage:   "Enable the gRPCWeb server",
 			EnvVars: []string{"MICRO_PROXY_GRPC_WEB"},
 		},
 		&cli.StringFlag{
-			Name:    "grpc-web-addr",
+			Name:    "grpc_web_addr",
 			Usage:   "Set the gRPC web addr on the proxy",
 			EnvVars: []string{"MICRO_PROXY_GRPC_WEB_ADDRESS"},
 		},
@@ -92,11 +92,11 @@ func Run(ctx *cli.Context) error {
 	if len(ctx.String("address")) > 0 {
 		Address = ctx.String("address")
 	}
-	if ctx.Bool("grpc-web") {
-		GRPCWebEnabled = ctx.Bool("grpcWeb")
+	if ctx.Bool("grpc_web") {
+		GRPCWebEnabled = ctx.Bool("grpc_web")
 	}
-	if len(ctx.String("grpc-web-port")) > 0 {
-		GRPCWebAddress = ctx.String("grpcWebAddr")
+	if len(ctx.String("grpc_web_address")) > 0 {
+		GRPCWebAddress = ctx.String("grpc_web_address")
 	}
 	if len(ctx.String("endpoint")) > 0 {
 		Endpoint = ctx.String("endpoint")
@@ -159,10 +159,7 @@ func Run(ctx *cli.Context) error {
 				logger.Fatal("env variables CF_API_TOKEN and CF_ACCOUNT_ID must be set")
 			}
 
-			storage := certmagic.NewStorage(
-				memory.NewSync(),
-				store.DefaultStore,
-			)
+			storage := certmagic.NewStorage(memory.NewSync(), store.DefaultStore)
 
 			config := cloudflare.NewDefaultConfig()
 			config.AuthToken = apiToken

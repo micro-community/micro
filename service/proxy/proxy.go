@@ -33,6 +33,7 @@ type Proxy interface {
 	String() string
 }
 
+//export default Endpoint
 var (
 	DefaultEndpoint = "localhost:9090"
 )
