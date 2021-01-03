@@ -18,6 +18,7 @@ import (
 	"os"
 )
 
+//Helper for logger
 type Helper struct {
 	Logger
 	fields map[string]interface{}
@@ -119,10 +120,11 @@ func (h *Helper) WithError(err error) *Helper {
 	return &Helper{Logger: h.Logger, fields: fields}
 }
 
+//WithFields write logger fields
 func (h *Helper) WithFields(fields map[string]interface{}) *Helper {
-	nfields := copyFields(fields)
+	nFields := copyFields(fields)
 	for k, v := range h.fields {
-		nfields[k] = v
+		nFields[k] = v
 	}
-	return &Helper{Logger: h.Logger, fields: nfields}
+	return &Helper{Logger: h.Logger, fields: nFields}
 }

@@ -10,6 +10,7 @@ import (
 	memTrace "github.com/micro-community/micro/v3/platform/debug/trace/memory"
 )
 
+// export default
 var (
 	DefaultLog      log.Log         = memLog.NewLog()
 	DefaultTracer   trace.Tracer    = memTrace.NewTracer()

@@ -109,7 +109,7 @@ func Run(ctx *cli.Context) error {
 	}
 
 	// new service
-	service := service.New(service.Name(Name))
+	mService := service.New(service.Name(Name))
 
 	// set the context
 	pOpts := []proxy.Option{
@@ -245,7 +245,7 @@ func Run(ctx *cli.Context) error {
 	muxer := muxer.New(Name, p)
 
 	// set the router
-	service.Server().Init(server.WithRouter(muxer))
+	mService.Server().Init(server.WithRouter(muxer))
 
 	// Start the proxy server
 	if err := srv.Start(); err != nil {
@@ -253,7 +253,7 @@ func Run(ctx *cli.Context) error {
 	}
 
 	// Run internal service
-	if err := service.Run(); err != nil {
+	if err := mService.Run(); err != nil {
 		logger.Fatal(err)
 	}
 

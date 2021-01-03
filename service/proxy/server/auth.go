@@ -4,8 +4,9 @@ import (
 	"context"
 	"strings"
 
-	inauth "github.com/micro-community/micro/v3/platform/auth"
-	"github.com/micro-community/micro/v3/platform/auth/namespace"
+	inAuth "github.com/micro-community/micro/v3/platform/auth"
+	inAuthNamespace "github.com/micro-community/micro/v3/platform/auth/namespace"
+
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
@@ -21,12 +22,12 @@ func authHandler() server.HandlerWrapper {
 			var token string
 			if header, ok := metadata.Get(ctx, "Authorization"); ok {
 				// Ensure the correct scheme is being used
-				if !strings.HasPrefix(header, inauth.BearerScheme) {
+				if !strings.HasPrefix(header, inAuth.BearerScheme) {
 					return errors.Unauthorized(req.Service(), "invalid authorization header. expected Bearer schema")
 				}
 
 				// Strip the bearer scheme prefix
-				token = strings.TrimPrefix(header, inauth.BearerScheme)
+				token = strings.TrimPrefix(header, inAuth.BearerScheme)
 			}
 
 			// Inspect the token and decode an account
@@ -38,15 +39,15 @@ func authHandler() server.HandlerWrapper {
 				ns = account.Issuer
 				ctx = metadata.Set(ctx, "Micro-Namespace", ns)
 			} else if !ok {
-				ns = namespace.DefaultNamespace
+				ns = inAuthNamespace.DefaultNamespace
 				ctx = metadata.Set(ctx, "Micro-Namespace", ns)
 			}
 
 			// ensure only accounts with the correct namespace can access this namespace,
 			// since the auth package will verify access below, and some endpoints could
-			// be public, we allow nil accounts access using the namespace.Public option.
-			err := namespace.Authorize(ctx, ns, namespace.Public(ns))
-			if err == namespace.ErrForbidden {
+			// be public, we allow nil accounts access using the inAuthNamespace.Public option.
+			err := inAuthNamespace.Authorize(ctx, ns, inAuthNamespace.Public(ns))
+			if err == inAuthNamespace.ErrForbidden {
 				return errors.Forbidden(req.Service(), err.Error())
 			} else if err != nil {
 				return errors.InternalServerError(req.Service(), err.Error())
@@ -69,7 +70,7 @@ func authHandler() server.HandlerWrapper {
 				return errors.InternalServerError("proxy", "Error authorizing request: %v", err)
 			}
 
-			// The user is authorised, allow the call
+			// The user is authorized, allow the call
 			return h(ctx, req, rsp)
 		}
 	}

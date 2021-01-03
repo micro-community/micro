@@ -1,4 +1,4 @@
-// Package service provides a micro service
+//Package service provides a micro service
 package cli
 
 import (
@@ -10,27 +10,27 @@ import (
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/logger"
-	prox "github.com/micro-community/micro/v3/service/proxy"
-	"github.com/micro-community/micro/v3/service/proxy/grpc"
-	"github.com/micro-community/micro/v3/service/proxy/http"
-	"github.com/micro-community/micro/v3/service/proxy/mucp"
-	muruntime "github.com/micro-community/micro/v3/service/runtime"
-	rt "github.com/micro-community/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/service/proxy"
+	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
 	ccli "github.com/urfave/cli/v2"
 
-	// services
-	api "github.com/micro-community/micro/v3/service/api/server"
-	auth "github.com/micro-community/micro/v3/service/auth/server"
-	broker "github.com/micro-community/micro/v3/service/broker/server"
-	config "github.com/micro-community/micro/v3/service/config/server"
-	events "github.com/micro-community/micro/v3/service/events/server"
-	network "github.com/micro-community/micro/v3/service/network/server"
-	proxy "github.com/micro-community/micro/v3/service/proxy/server"
-	registry "github.com/micro-community/micro/v3/service/registry/server"
-	router "github.com/micro-community/micro/v3/service/router/server"
-	runtime "github.com/micro-community/micro/v3/service/runtime/server"
-	store "github.com/micro-community/micro/v3/service/store/server"
+	"github.com/micro-community/micro/v3/service/proxy/grpc"
+	"github.com/micro-community/micro/v3/service/proxy/http"
+	"github.com/micro-community/micro/v3/service/proxy/mucp"
+
+	// services: server implementation
+	mApiServer "github.com/micro-community/micro/v3/service/api/server"
+	mAuthServer "github.com/micro-community/micro/v3/service/auth/server"
+	mBrokerServer "github.com/micro-community/micro/v3/service/broker/server"
+	mConfigServer "github.com/micro-community/micro/v3/service/config/server"
+	mEventsServer "github.com/micro-community/micro/v3/service/events/server"
+	mNetworkServer "github.com/micro-community/micro/v3/service/network/server"
+	mProxyServer "github.com/micro-community/micro/v3/service/proxy/server"
+	mRegistryServer "github.com/micro-community/micro/v3/service/registry/server"
+	mRouterServer "github.com/micro-community/micro/v3/service/router/server"
+	mRuntimeServer "github.com/micro-community/micro/v3/service/runtime/server"
+	mStoreServer "github.com/micro-community/micro/v3/service/store/server"
 
 	// misc commands
 	"github.com/micro-community/micro/v3/service/handler/exec"
@@ -67,46 +67,46 @@ func Run(ctx *ccli.Context) {
 		opts = append(opts, service.Address(address))
 	}
 	if len(endpoint) == 0 {
-		endpoint = prox.DefaultEndpoint
+		endpoint = proxy.DefaultEndpoint
 	}
 
-	var p prox.Proxy
+	var p proxy.Proxy
 
 	switch {
 	case strings.HasPrefix(endpoint, "grpc"):
 		endpoint = strings.TrimPrefix(endpoint, "grpc://")
-		p = grpc.NewProxy(prox.WithEndpoint(endpoint))
+		p = grpc.NewProxy(proxy.WithEndpoint(endpoint))
 	case strings.HasPrefix(endpoint, "http"):
-		p = http.NewProxy(prox.WithEndpoint(endpoint))
+		p = http.NewProxy(proxy.WithEndpoint(endpoint))
 	case strings.HasPrefix(endpoint, "file"):
 		endpoint = strings.TrimPrefix(endpoint, "file://")
-		p = file.NewProxy(prox.WithEndpoint(endpoint))
+		p = file.NewProxy(proxy.WithEndpoint(endpoint))
 	case strings.HasPrefix(endpoint, "exec"):
 		endpoint = strings.TrimPrefix(endpoint, "exec://")
-		p = exec.NewProxy(prox.WithEndpoint(endpoint))
+		p = exec.NewProxy(proxy.WithEndpoint(endpoint))
 	default:
-		p = mucp.NewProxy(prox.WithEndpoint(endpoint))
+		p = mucp.NewProxy(proxy.WithEndpoint(endpoint))
 	}
 
 	// run the service if asked to
 	if ctx.Args().Len() > 0 {
-		args := []rt.CreateOption{
-			rt.WithCommand(ctx.Args().Slice()...),
-			rt.WithOutput(os.Stdout),
+		args := []runtime.CreateOption{
+			runtime.WithCommand(ctx.Args().Slice()...),
+			runtime.WithOutput(os.Stdout),
 		}
 
 		// create new local runtime
-		r := muruntime.DefaultRuntime
+		r := runtime.DefaultRuntime
 
 		// start the runtime
 		r.Start()
 
 		// register the service
-		r.Create(&rt.Service{Name: name}, args...)
+		r.Create(&runtime.Service{Name: name}, args...)
 
 		// stop the runtime
 		defer func() {
-			r.Delete(&rt.Service{Name: name})
+			r.Delete(&runtime.Service{Name: name})
 			r.Stop()
 		}()
 	}
@@ -120,9 +120,7 @@ func Run(ctx *ccli.Context) {
 	//	muxer := mux.New(name, p)
 
 	// set the router
-	srv.Server().Init(
-		server.WithRouter(p),
-	)
+	srv.Server().Init(server.WithRouter(p))
 
 	// run service
 	srv.Run()
@@ -137,54 +135,54 @@ type srvCommand struct {
 var srvCommands = []srvCommand{
 	{
 		Name:    "api",
-		Command: api.Run,
-		Flags:   api.Flags,
+		Command: mApiServer.Run,
+		Flags:   mApiServer.Flags,
 	},
 	{
 		Name:    "auth",
-		Command: auth.Run,
-		Flags:   auth.Flags,
+		Command: mAuthServer.Run,
+		Flags:   mAuthServer.Flags,
 	},
 	{
 		Name:    "broker",
-		Command: broker.Run,
+		Command: mBrokerServer.Run,
 	},
 	{
 		Name:    "config",
-		Command: config.Run,
-		Flags:   config.Flags,
+		Command: mConfigServer.Run,
+		Flags:   mConfigServer.Flags,
 	},
 	{
 		Name:    "events",
-		Command: events.Run,
+		Command: mEventsServer.Run,
 	},
 	{
 		Name:    "network",
-		Command: network.Run,
-		Flags:   network.Flags,
+		Command: mNetworkServer.Run,
+		Flags:   mNetworkServer.Flags,
 	},
 	{
 		Name:    "proxy",
-		Command: proxy.Run,
-		Flags:   proxy.Flags,
+		Command: mProxyServer.Run,
+		Flags:   mProxyServer.Flags,
 	},
 	{
 		Name:    "registry",
-		Command: registry.Run,
+		Command: mRegistryServer.Run,
 	},
 	{
 		Name:    "router",
-		Command: router.Run,
-		Flags:   router.Flags,
+		Command: mRouterServer.Run,
+		Flags:   mRouterServer.Flags,
 	},
 	{
 		Name:    "runtime",
-		Command: runtime.Run,
-		Flags:   runtime.Flags,
+		Command: mRuntimeServer.Run,
+		Flags:   mRuntimeServer.Flags,
 	},
 	{
 		Name:    "store",
-		Command: store.Run,
+		Command: mStoreServer.Run,
 	},
 }
 

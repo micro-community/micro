@@ -33,14 +33,14 @@ func Name(n string) Option {
 	}
 }
 
-// Command line Description
+//Description Command line Description
 func Description(d string) Option {
 	return func(o *Options) {
 		o.Description = d
 	}
 }
 
-// Command line Version
+// Version Command line Version
 func Version(v string) Option {
 	return func(o *Options) {
 		o.Version = v
