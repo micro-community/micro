@@ -13,10 +13,8 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
-	gorun "github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/runtime/source/git"
 	"github.com/micro-community/micro/v3/service/store"
-	gostore "github.com/micro-community/micro/v3/service/store"
 )
 
 func (m *manager) buildAndRun(srv *service) {
@@ -69,7 +67,7 @@ func (m *manager) build(srv *service) error {
 	var err error
 	if strings.HasPrefix(srv.Service.Source, "source://") {
 		// if the source was uploaded to the blob store, it'll have source:// as the prefix
-		nsOpt := gostore.BlobNamespace(srv.Options.Namespace)
+		nsOpt := store.BlobNamespace(srv.Options.Namespace)
 		source, err = store.DefaultBlobStore.Read(srv.Service.Source, nsOpt)
 	} else {
 		// the source will otherwise be a git remote, we'll clone it and then tar archive the result
@@ -115,7 +113,7 @@ func (m *manager) build(srv *service) error {
 	// which the cell (container) can then pull via the Runtime.Build.Read RPC.
 	if m.Runtime.String() != "local" {
 		logger.Infof("Uploading build %v:%v", srv.Service.Name, srv.Service.Version)
-		nsOpt := gostore.BlobNamespace(srv.Options.Namespace)
+		nsOpt := store.BlobNamespace(srv.Options.Namespace)
 		key := fmt.Sprintf("build://%v:%v", srv.Service.Name, srv.Service.Version)
 		if err := store.DefaultBlobStore.Write(key, build, nsOpt); err != nil {
 			handleError(err, "Error uploading build")
@@ -128,14 +126,14 @@ func (m *manager) build(srv *service) error {
 
 func (m *manager) updateServiceInRuntime(srv *service) error {
 	// construct the options
-	options := []gorun.UpdateOption{
-		gorun.UpdateEntrypoint(srv.Options.Entrypoint),
-		gorun.UpdateNamespace(srv.Options.Namespace),
+	options := []runtime.UpdateOption{
+		runtime.UpdateEntrypoint(srv.Options.Entrypoint),
+		runtime.UpdateNamespace(srv.Options.Namespace),
 	}
 
 	// add the secrets
 	for key, value := range srv.Options.Secrets {
-		options = append(options, gorun.UpdateSecret(key, value))
+		options = append(options, runtime.UpdateSecret(key, value))
 	}
 
 	// update the service
@@ -151,25 +149,25 @@ func (m *manager) createServiceInRuntime(srv *service) error {
 	}
 
 	// construct the options
-	options := []gorun.CreateOption{
-		gorun.CreateEntrypoint(srv.Options.Entrypoint),
-		gorun.CreateImage(srv.Options.Image),
-		gorun.CreateType(srv.Options.Type),
-		gorun.CreateNamespace(srv.Options.Namespace),
-		gorun.WithArgs(srv.Options.Args...),
-		gorun.WithCommand(srv.Options.Command...),
-		gorun.WithEnv(m.runtimeEnv(srv.Service, srv.Options)),
+	options := []runtime.CreateOption{
+		runtime.CreateEntrypoint(srv.Options.Entrypoint),
+		runtime.CreateImage(srv.Options.Image),
+		runtime.CreateType(srv.Options.Type),
+		runtime.CreateNamespace(srv.Options.Namespace),
+		runtime.WithArgs(srv.Options.Args...),
+		runtime.WithCommand(srv.Options.Command...),
+		runtime.WithEnv(m.runtimeEnv(srv.Service, srv.Options)),
 	}
 
 	// add the secrets
 	for key, value := range srv.Options.Secrets {
-		options = append(options, gorun.WithSecret(key, value))
+		options = append(options, runtime.WithSecret(key, value))
 	}
 
 	// inject the credentials into the service if present
 	if len(acc.ID) > 0 && len(acc.Secret) > 0 {
-		options = append(options, gorun.WithSecret("MICRO_AUTH_ID", acc.ID))
-		options = append(options, gorun.WithSecret("MICRO_AUTH_SECRET", acc.Secret))
+		options = append(options, runtime.WithSecret("MICRO_AUTH_ID", acc.ID))
+		options = append(options, runtime.WithSecret("MICRO_AUTH_SECRET", acc.Secret))
 	}
 
 	// create the service
@@ -191,7 +189,7 @@ func (m *manager) checkoutSource(srv *service) (string, error) {
 // attribute. It will then unarchive the source into a temp directory and return the location of
 // said directory.
 func (m *manager) checkoutBlobSource(srv *service) (string, error) {
-	nsOpt := gostore.BlobNamespace(srv.Options.Namespace)
+	nsOpt := store.BlobNamespace(srv.Options.Namespace)
 	source, err := store.DefaultBlobStore.Read(srv.Service.Source, nsOpt)
 	if err != nil {
 		return "", err
@@ -233,7 +231,7 @@ func (m *manager) checkoutGitSource(srv *service) (string, error) {
 }
 
 // runtimeEnv returns the environment variables which should  be used when creating a service.
-func (m *manager) runtimeEnv(srv *gorun.Service, options *gorun.CreateOptions) []string {
+func (m *manager) runtimeEnv(srv *runtime.Service, options *runtime.CreateOptions) []string {
 	setEnv := func(p []string, env map[string]string) {
 		for _, v := range p {
 			parts := strings.Split(v, "=")
@@ -307,7 +305,7 @@ func (m *manager) generateAccount(srv *service) (*auth.Account, error) {
 // running.
 func (m *manager) cleanupBlobStore(srv *service) {
 	// delete the raw source code
-	opt := gostore.BlobNamespace(srv.Options.Namespace)
+	opt := store.BlobNamespace(srv.Options.Namespace)
 	srcKey := fmt.Sprintf("source://%v:%v", srv.Service.Name, srv.Service.Version)
 	if err := store.DefaultBlobStore.Delete(srcKey, opt); err != nil && err != store.ErrNotFound {
 		logger.Warnf("Error deleting source %v: %v", srcKey, err)
