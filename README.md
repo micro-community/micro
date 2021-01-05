@@ -40,7 +40,7 @@ The server is composed of the following services.
 - **Events** - Event streaming with ordered messaging, replay from offsets and persistent storage
 - **Network** - Inter-service networking, isolation and routing plane for all internal request traffic
 - **Proxy** - An identity aware proxy used for remote access and any external grpc request traffic
-- **Runtime** - Service lifecyle and process management with support for source to running auto build
+- **Runtime** - Service lifecycle and process management with support for source to running auto build
 - **Registry** - Centralized service discovery and API endpoint explorer with feature rich metadata
 - **Store** - Key-Value storage with TTL expiry and persistent crud to keep microservices stateless
 
