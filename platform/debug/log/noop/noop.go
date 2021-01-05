@@ -32,6 +32,7 @@ func (n *noop) Stream() (log.Stream, error) {
 	return nil, nil
 }
 
+//NewLog return debug log
 func NewLog(opts ...log.Option) log.Log {
 	return new(noop)
 }

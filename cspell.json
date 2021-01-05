@@ -26,8 +26,10 @@
         "quic",
         "rhysd",
         "semver",
+        "serv",
         "Tracef",
         "urfave",
+        "vals",
         "Warnf"
     ]
 }
