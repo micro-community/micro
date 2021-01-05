@@ -113,6 +113,7 @@ func LoginURL(url string) Option {
 	}
 }
 
+//GenerateOptions of token
 type GenerateOptions struct {
 	// Metadata associated with the account
 	Metadata map[string]string
@@ -126,10 +127,11 @@ type GenerateOptions struct {
 	Secret string
 	// Issuer of the account, e.g. micro
 	Issuer string
-	// Name of the acouunt e.g. an email or username
+	// Name of the account e.g. an email or username
 	Name string
 }
 
+//GenerateOption for token gen
 type GenerateOption func(o *GenerateOptions)
 
 // WithSecret for the generated account
@@ -190,12 +192,13 @@ func NewGenerateOptions(opts ...GenerateOption) GenerateOptions {
 	return options
 }
 
+//TokenOptions for Token
 type TokenOptions struct {
 	// ID for the account
 	ID string
 	// Secret for the account
 	Secret string
-	// RefreshToken is used to refesh a token
+	// RefreshToken is used to refresh a token
 	RefreshToken string
 	// Expiry is the time the token should live for
 	Expiry time.Duration
@@ -203,6 +206,7 @@ type TokenOptions struct {
 	Issuer string
 }
 
+//TokenOption to set Token
 type TokenOption func(o *TokenOptions)
 
 // WithExpiry for the token
@@ -212,6 +216,7 @@ func WithExpiry(ex time.Duration) TokenOption {
 	}
 }
 
+//WithCredentials of TokenOption
 func WithCredentials(id, secret string) TokenOption {
 	return func(o *TokenOptions) {
 		o.ID = id
@@ -219,12 +224,14 @@ func WithCredentials(id, secret string) TokenOption {
 	}
 }
 
+//WithToken to refresh token
 func WithToken(rt string) TokenOption {
 	return func(o *TokenOptions) {
 		o.RefreshToken = rt
 	}
 }
 
+//WithTokenIssuer to set issuer
 func WithTokenIssuer(iss string) TokenOption {
 	return func(o *TokenOptions) {
 		o.Issuer = iss
@@ -238,7 +245,7 @@ func NewTokenOptions(opts ...TokenOption) TokenOptions {
 		o(&options)
 	}
 
-	// set defualt expiry of token
+	// set default expiry of token
 	if options.Expiry == 0 {
 		options.Expiry = time.Minute
 	}
@@ -246,37 +253,46 @@ func NewTokenOptions(opts ...TokenOption) TokenOptions {
 	return options
 }
 
+//VerifyOptions to Verify
 type VerifyOptions struct {
 	Context   context.Context
 	Namespace string
 }
 
+//VerifyOption to Verify
 type VerifyOption func(o *VerifyOptions)
 
+//VerifyContext to Context
 func VerifyContext(ctx context.Context) VerifyOption {
 	return func(o *VerifyOptions) {
 		o.Context = ctx
 	}
 }
+
+//VerifyNamespace to Verify Namespace
 func VerifyNamespace(ns string) VerifyOption {
 	return func(o *VerifyOptions) {
 		o.Namespace = ns
 	}
 }
 
+//RulesOptions of rule
 type RulesOptions struct {
 	Context   context.Context
 	Namespace string
 }
 
+//RulesOption of RulesOption
 type RulesOption func(o *RulesOptions)
 
+//RulesContext of Rules Context
 func RulesContext(ctx context.Context) RulesOption {
 	return func(o *RulesOptions) {
 		o.Context = ctx
 	}
 }
 
+//RulesNamespace of RulesOption
 func RulesNamespace(ns string) RulesOption {
 	return func(o *RulesOptions) {
 		o.Namespace = ns
