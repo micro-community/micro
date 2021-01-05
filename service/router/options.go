@@ -93,10 +93,12 @@ func DefaultOptions() Options {
 	}
 }
 
+//ReadOptions of router
 type ReadOptions struct {
 	Service string
 }
 
+//ReadOption of router
 type ReadOption func(o *ReadOptions)
 
 // ReadService sets the service to read from the table

@@ -23,6 +23,7 @@ import (
 	"github.com/micro-community/micro/v3/service/store"
 )
 
+//NewOptions of auth
 func NewOptions(opts ...Option) Options {
 	var options Options
 	for _, o := range opts {
@@ -31,6 +32,7 @@ func NewOptions(opts ...Option) Options {
 	return options
 }
 
+//Options of auth
 type Options struct {
 	// Issuer of the service's account
 	Issuer string

@@ -1,4 +1,4 @@
-// Package version
+// Package version for version
 package version
 
 const (
