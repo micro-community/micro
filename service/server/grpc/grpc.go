@@ -54,6 +54,7 @@ import (
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
+	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 )
 
@@ -164,6 +165,7 @@ func (g *grpcServer) configure(opts ...server.Option) {
 	}
 	g.rsvc = nil //remote endpoint
 	g.srv = grpc.NewServer(gopts...)
+	reflection.Register(g.srv)
 }
 
 func (g *grpcServer) getMaxMsgSize() int {

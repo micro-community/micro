@@ -5,7 +5,6 @@ go 1.15
 require (
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/boltdb/bolt v1.3.1
 	github.com/caddyserver/certmagic v0.10.6
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e
@@ -48,7 +47,7 @@ require (
 	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897
 	golang.org/x/net v0.0.0-20201031054903-ff519b6c9102
 	google.golang.org/genproto v0.0.0-20201106154455-f9bfe239b0ba
-	google.golang.org/grpc v1.33.1
+	google.golang.org/grpc v1.34.0
 	google.golang.org/grpc/examples v0.0.0-20201106075115-5d7f8c9ae422
 	google.golang.org/protobuf v1.25.0
 )
