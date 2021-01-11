@@ -225,6 +225,12 @@ var (
 			Value:   true,
 			EnvVars: []string{"MICRO_DEFAULT_WRAPPER"},
 		},
+		&cli.BoolFlag{
+			Name:    "debug_mode",
+			Usage:   "run service in debug mode",
+			EnvVars: []string{"MICRO_DEBUG_MODE"},
+			Value:   false,
+		},
 	}
 )
 
