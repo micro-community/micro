@@ -13,6 +13,7 @@ import (
 	"github.com/micro-community/micro/v3/service/registry/util"
 )
 
+//Registry server
 type Registry struct {
 	// service id
 	ID string
@@ -20,6 +21,7 @@ type Registry struct {
 	Event *service.Event
 }
 
+//ActionToEventType EventType
 func ActionToEventType(action string) registry.EventType {
 	switch action {
 	case "create":
