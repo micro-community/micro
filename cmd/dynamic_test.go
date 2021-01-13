@@ -4,12 +4,12 @@ import (
 	"reflect"
 	"testing"
 
-	goregistry "github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry"
 )
 
 type parseCase struct {
 	args     []string
-	values   *goregistry.Value
+	values   *registry.Value
 	expected map[string]interface{}
 }
 
@@ -17,8 +17,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 	cases := []parseCase{
 		{
 			args: []string{"--ss=a,b"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "ss",
 						Type: "[]string",
@@ -31,8 +31,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--ss", "a,b"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "ss",
 						Type: "[]string",
@@ -45,8 +45,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--ss=a", "--ss=b"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "ss",
 						Type: "[]string",
@@ -59,8 +59,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--ss", "a", "--ss", "b"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "ss",
 						Type: "[]string",
@@ -73,8 +73,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--bs=true,false"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "bs",
 						Type: "[]bool",
@@ -87,8 +87,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--bs", "true,false"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "bs",
 						Type: "[]bool",
@@ -101,8 +101,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--bs=true", "--bs=false"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "bs",
 						Type: "[]bool",
@@ -115,8 +115,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--bs", "true", "--bs", "false"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "bs",
 						Type: "[]bool",
@@ -129,8 +129,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is=10,20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int32",
@@ -143,8 +143,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is", "10,20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int32",
@@ -157,8 +157,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is=10", "--is=20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int32",
@@ -171,8 +171,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is", "10", "--is", "20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int32",
@@ -185,8 +185,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is=10,20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int64",
@@ -199,8 +199,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is", "10,20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int64",
@@ -213,8 +213,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is=10", "--is=20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int64",
@@ -227,8 +227,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--is", "10", "--is", "20"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "is",
 						Type: "[]int64",
@@ -241,8 +241,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--fs=10.1,20.2"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "fs",
 						Type: "[]float64",
@@ -255,8 +255,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--fs", "10.1,20.2"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "fs",
 						Type: "[]float64",
@@ -269,8 +269,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--fs=10.1", "--fs=20.2"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "fs",
 						Type: "[]float64",
@@ -283,8 +283,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--fs", "10.1", "--fs", "20.2"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "fs",
 						Type: "[]float64",
@@ -297,11 +297,11 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--user_email=someemail"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "user",
-						Values: []*goregistry.Value{
+						Values: []*registry.Value{
 							{
 								Name: "email",
 								Type: "string",
@@ -318,11 +318,11 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--user_email", "someemail"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "user",
-						Values: []*goregistry.Value{
+						Values: []*registry.Value{
 							{
 								Name: "email",
 								Type: "string",
@@ -339,11 +339,11 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--user_email=someemail", "--user_name=somename"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "user",
-						Values: []*goregistry.Value{
+						Values: []*registry.Value{
 							{
 								Name: "email",
 								Type: "string",
@@ -365,11 +365,11 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--user_email", "someemail", "--user_name", "somename"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "user",
-						Values: []*goregistry.Value{
+						Values: []*registry.Value{
 							{
 								Name: "email",
 								Type: "string",
@@ -391,8 +391,8 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--b"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "b",
 						Type: "bool",

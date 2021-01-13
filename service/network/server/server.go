@@ -20,7 +20,7 @@ import (
 	"github.com/micro-community/micro/v3/service/proxy"
 	grpcProxy "github.com/micro-community/micro/v3/service/proxy/grpc"
 	mucpProxy "github.com/micro-community/micro/v3/service/proxy/mucp"
-	muregistry "github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/router"
 	murouter "github.com/micro-community/micro/v3/service/router"
 	"github.com/micro-community/micro/v3/service/server"
@@ -138,7 +138,7 @@ func Run(ctx *cli.Context) error {
 	rtr.Init(
 		router.Network(networkName),
 		router.Id(id),
-		router.Registry(muregistry.DefaultRegistry),
+		router.Registry(registry.DefaultRegistry),
 		router.Gateway(gateway),
 		router.Cache(),
 	)
