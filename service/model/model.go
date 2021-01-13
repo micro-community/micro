@@ -18,13 +18,16 @@ import (
 	"github.com/micro-community/micro/v3/service/store"
 )
 
+//Error define
 var (
 	ErrorNotFound             = errors.New("not found")
 	ErrorMultipleRecordsFound = errors.New("multiple records found")
 )
 
+//OrderType type
 type OrderType string
 
+//const define
 const (
 	OrderTypeUnordered = OrderType("unordered")
 	OrderTypeAsc       = OrderType("ascending")
@@ -49,7 +52,7 @@ type model struct {
 	// physical database.
 	namespace string
 	indexes   []Index
-	options   ModelOptions
+	options   Options
 	instance  interface{}
 }
 
@@ -70,20 +73,22 @@ type Model interface {
 	Delete(query Query) error
 }
 
-type ModelOptions struct {
+//Options to set model
+type Options struct {
 	Debug     bool
-	IdIndex   Index
+	IDIndex   Index
 	Namespace string
 }
 
-func New(store store.Store, instance interface{}, indexes []Index, options *ModelOptions) Model {
+//New return a model
+func New(store store.Store, instance interface{}, indexes []Index, options *Options) Model {
 	debug := false
 	var idIndex Index
 	namespace := reflect.TypeOf(instance).String()
 	if options != nil {
 		debug = options.Debug
-		if options.IdIndex.Type != "" {
-			idIndex = options.IdIndex
+		if options.IDIndex.Type != "" {
+			idIndex = options.IDIndex
 		}
 
 		if len(options.Namespace) > 0 {
@@ -94,12 +99,13 @@ func New(store store.Store, instance interface{}, indexes []Index, options *Mode
 		idIndex = defaultIndex()
 	}
 	return &model{
-		store, namespace, indexes, ModelOptions{
+		store, namespace, indexes, Options{
 			Debug:   debug,
-			IdIndex: idIndex,
+			IDIndex: idIndex,
 		}, instance}
 }
 
+//Index of model
 type Index struct {
 	FieldName string
 	// Type of index, eg. equality
@@ -124,6 +130,7 @@ type Index struct {
 	Float32Max  float32
 }
 
+//Order for model
 type Order struct {
 	FieldName string
 	// Ordered or unordered keys. Ordered keys are padded.
@@ -132,6 +139,7 @@ type Order struct {
 	Type OrderType
 }
 
+//ToQuery To Query Object
 func (i Index) ToQuery(value interface{}) Query {
 	return Query{
 		Index: i,
@@ -140,11 +148,12 @@ func (i Index) ToQuery(value interface{}) Query {
 	}
 }
 
+//Indexes return index
 func Indexes(indexes ...Index) []Index {
 	return indexes
 }
 
-// ByEquality constructs an equiality index on `fieldName`
+// ByEquality constructs an equality index on `fieldName`
 func ByEquality(fieldName string) Index {
 	return Index{
 		FieldName: fieldName,
@@ -161,6 +170,7 @@ func ByEquality(fieldName string) Index {
 	}
 }
 
+//Query condition
 type Query struct {
 	Index
 	Order  Order
@@ -199,7 +209,7 @@ func (d *model) Create(instance interface{}) error {
 	// get the old entries so we can compare values
 	// @todo consider some kind of locking (even if it's not distributed) by key here
 	// to avoid 2 read-writes happening at the same time
-	idQuery := d.options.IdIndex.ToQuery(getFieldValue(instance, d.options.IdIndex.FieldName))
+	idQuery := d.options.IDIndex.ToQuery(getFieldValue(instance, d.options.IDIndex.FieldName))
 
 	oldEntry := reflect.New(reflect.ValueOf(instance).Type()).Interface()
 
@@ -224,8 +234,8 @@ func (d *model) Create(instance interface{}) error {
 		}
 	}
 
-	id := getFieldValue(instance, d.options.IdIndex.FieldName)
-	for _, index := range append(d.indexes, d.options.IdIndex) {
+	id := getFieldValue(instance, d.options.IDIndex.FieldName)
+	for _, index := range append(d.indexes, d.options.IDIndex) {
 		// delete non id index keys to prevent stale index values
 		// ie.
 		//
@@ -239,7 +249,7 @@ func (d *model) Create(instance interface{}) error {
 		// @todo this check will only work for POD types, ie no slices or maps
 		// but it's not an issue as right now indexes are only supported on POD
 		// types anyway
-		if !indexesMatch(d.options.IdIndex, index) &&
+		if !indexesMatch(d.options.IDIndex, index) &&
 			oldEntry != nil &&
 			!reflect.DeepEqual(getFieldValue(oldEntry, index.FieldName), getFieldValue(instance, index.FieldName)) {
 			k := d.indexToKey(index, id, oldEntry, true)
@@ -302,7 +312,7 @@ func (d *model) Read(query Query, resultPointer interface{}) error {
 	}
 
 	// otherwise continue on as normal
-	for _, index := range append(d.indexes, d.options.IdIndex) {
+	for _, index := range append(d.indexes, d.options.IDIndex) {
 		if indexMatchesQuery(index, query) {
 			k := d.queryToListKey(index, query)
 			if d.options.Debug {
@@ -328,7 +338,7 @@ func (d *model) Read(query Query, resultPointer interface{}) error {
 }
 
 func (d *model) List(query Query, resultSlicePointer interface{}) error {
-	for _, index := range append(d.indexes, d.options.IdIndex) {
+	for _, index := range append(d.indexes, d.options.IDIndex) {
 		if indexMatchesQuery(index, query) {
 			k := d.queryToListKey(index, query)
 			if d.options.Debug {
@@ -568,7 +578,7 @@ func (d *model) getOrderedStringFieldKey(i Index, fieldValue string) string {
 }
 
 func (d *model) Delete(query Query) error {
-	if !indexMatchesQuery(d.options.IdIndex, query) {
+	if !indexMatchesQuery(d.options.IDIndex, query) {
 		return errors.New("Delete query does not match default index")
 	}
 	oldEntry := reflect.New(reflect.ValueOf(d.instance).Type()).Interface()
@@ -581,8 +591,8 @@ func (d *model) Delete(query Query) error {
 	// if we delete id index first then the entry wont
 	// be deletable by id again but the maintained indexes
 	// will be stuck in limbo
-	for _, index := range append(d.indexes, d.options.IdIndex) {
-		key := d.indexToKey(index, getFieldValue(oldEntry, d.options.IdIndex.FieldName), oldEntry, true)
+	for _, index := range append(d.indexes, d.options.IDIndex) {
+		key := d.indexToKey(index, getFieldValue(oldEntry, d.options.IDIndex.FieldName), oldEntry, true)
 		if d.options.Debug {
 			fmt.Printf("Deleting key '%v'\n", key)
 		}
