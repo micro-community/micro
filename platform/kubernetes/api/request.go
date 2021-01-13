@@ -60,6 +60,7 @@ func (r *Request) verb(method string) *Request {
 	return r
 }
 
+//Context data
 func (r *Request) Context(ctx context.Context) {
 	r.context = ctx
 }
