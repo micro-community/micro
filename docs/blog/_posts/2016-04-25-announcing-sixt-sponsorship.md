@@ -21,7 +21,7 @@ Look to hear more from Sixt on their use of Micro in the near future.
 <center>...</center>
 <br>
 If you want to learn more about the services we offer or microservices, check out the [blog](/), the  website 
-[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro/micro).
+[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).

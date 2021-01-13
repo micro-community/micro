@@ -237,7 +237,7 @@ FLAGS:
 
 ```
 
-At this point it is useful to have a look at the proto of the [registry service here](https://github.com/micro/micro/blob/master/proto/registry/registry.proto).
+At this point it is useful to have a look at the proto of the [registry service here](https://github.com/micro-community/micro/blob/master/proto/registry/registry.proto).
 
 In particular, let's see the `GetService` endpoint definition to understand how request parameters map to flags:
 
@@ -336,8 +336,8 @@ Micro is built as a distributed operating system leveraging the microservices ar
 
 Below we describe the list of services provided by the Micro Server. Each service is considered a 
 building block primitive for a platform and distributed systems development. The proto 
-interfaces for each can be found in [micro/proto/auth](https://github.com/micro/micro/blob/master/proto/auth/auth.proto) 
-and the Go library, client and server implementations in [micro/service/auth](https://github.com/micro/micro/tree/master/service/auth).
+interfaces for each can be found in [micro/proto/auth](https://github.com/micro-community/micro/blob/master/proto/auth/auth.proto) 
+and the Go library, client and server implementations in [micro/service/auth](https://github.com/micro-community/micro/tree/master/service/auth).
 
 ### API
 
@@ -676,7 +676,7 @@ $ micro config get helloworld
 #### Service Framework
 
 It is similarly easy to access and set config values from a service.
-A good example of reading values is [the config example test service](https://github.com/micro/micro/tree/master/test/service/config-example):
+A good example of reading values is [the config example test service](https://github.com/micro-community/micro/tree/master/test/service/config-example):
 
 ```go
 package main
@@ -1256,7 +1256,7 @@ var staging = &profile.Profile{
 You can load a custom profile using a couple of commands, the first adds a replace to your go mod, indicating it should look for your custom profile within the profile directory:
 
 ```bash
-go mod edit -replace github.com/micro/micro/profile/staging/v3=./profile/staging
+go mod edit -replace github.com/micro-community/micro/profile/staging/v3=./profile/staging
 ```
 
 The second command creates a profile.go file which imports your profile. When your profile is imported, the init() function which is defined in staging.go is called, registering your profile.

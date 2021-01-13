@@ -4,7 +4,7 @@ title:  Micro on NATS - microservices with messaging
 date:   2016-04-11 09:00:00
 ---
 <br>
-In this post we're going to discuss using [**Micro**](https://github.com/micro/micro) on [**NATS**](http://nats.io/). 
+In this post we're going to discuss using [**Micro**](https://github.com/micro-community/micro) on [**NATS**](http://nats.io/). 
 It includes discussion around service discovery, synchronous and asynchronous communication for microservices.
 
 If you would like to learn more about Micro first, check out the blog post detailing the toolkit [here]({{ site.baseurl }}/2016/03/20/micro.html).
@@ -48,7 +48,7 @@ That briefly covers the what's and why's of NATS. So how does it fit in with Mic
 
 ###### Micro on NATS
 
-[**Micro**](https://github.com/micro/micro) is a microservice toolkit built with a pluggable architecture allowing the underlying dependencies to be swapped out with 
+[**Micro**](https://github.com/micro-community/micro) is a microservice toolkit built with a pluggable architecture allowing the underlying dependencies to be swapped out with 
 minimal changes. Each interface of the [**Go-Micro**](https://github.com/micro/go-micro) framework provides a building block for microservices; 
 the [registry](https://godoc.org/github.com/micro/go-micro/registry#Registry) 
 for service discovery, [transport](https://godoc.org/github.com/micro/go-micro/transport#Transport) for synchronous communication, 
@@ -301,10 +301,10 @@ to the community.
 Find the source for the NATS plugins at [github.com/micro/go-plugins](https://github.com/micro/go-plugins).
 
 If you want to learn more about the services we offer or microservices, check out the [blog](/), the  website 
-[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro/micro).
+[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).
 
-<h6><a href="https://github.com/micro/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>
+<h6><a href="https://github.com/micro-community/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>
 

@@ -7,7 +7,7 @@ date:   2016-05-15 00:00:00
 It's been a little while since the last blog post but we've been hard at work on Micro and it's definitely starting 
 to pay off. Let's dive into it all now!
 
-If you want to read up on the [**Micro**](https://github.com/micro/micro) toolkit first, check out the previous blog post 
+If you want to read up on the [**Micro**](https://github.com/micro-community/micro) toolkit first, check out the previous blog post 
 [here]({{ site.baseurl }}/2016/03/20/micro.html) or if you would like to learn more about the concept of microservices look [here]({{ site.baseurl }}/2016/03/17/introduction.html).
 
 It's no secret that building distributed systems can be challenging. While we've solved a lot of problems as an industry along 
@@ -438,7 +438,7 @@ The functionality of the server is purposely kept simple but pluggable so that f
 Most of what's being discussed here exists in the core [go-micro](https://github.com/micro/go-micro) library. While this is great 
 for all the Go programmers everyone else may be wondering, how do I get all these benefits.
 
-From the very beginning, Micro has included the concept of a [Sidecar](https://github.com/micro/micro/tree/master/car), a HTTP proxy with all 
+From the very beginning, Micro has included the concept of a [Sidecar](https://github.com/micro-community/micro/tree/master/car), a HTTP proxy with all 
 the features of go-micro built in. So regardless of which language you're building your applications with, you can benefit from all 
 we've discussed above by using the Micro Sidecar.
 
@@ -475,7 +475,7 @@ distributed systems platforms.
 ### How Do I Use All These Tools?
 
 As you can gather from the blog post, most of these features are built into the Micro toolkit. You can go check out the project on 
-[GitHub](https://github.com/micro/micro) and get started writing fault tolerant Micro services almost instantly.
+[GitHub](https://github.com/micro-community/micro) and get started writing fault tolerant Micro services almost instantly.
 
 If you need help or have questions, come join the community on [Slack](https://slack.m3o.com). It's very active and 
 growing fast, with a broad range of users, from people hacking on side projects to companies already using Micro in production today. 
@@ -492,7 +492,7 @@ Micro looks to help in this journey by providing the tools to simplify building 
 this blog post has helped demonstrate some of the ways we're looking to do just that.
 
 If you want to learn more about the services we offer or microservices, check out the [blog](/), the  website 
-[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro/micro).
+[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).

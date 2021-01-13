@@ -50,7 +50,7 @@ Go Micro was really at the heart of microservice development but as services wer
 how do I query these, how do I interact with them, how do I serve them by traditional means...
 
 Given go-micro used an rpc/protobuf based protocol that was both pluggable and runtime agnostic, we needed some way to address 
-this in a way that was true to go-micro itself. This led to the creation of [**micro**](https://github.com/micro/micro), 
+this in a way that was true to go-micro itself. This led to the creation of [**micro**](https://github.com/micro-community/micro), 
 the microservice toolkit. Micro provides an api gateway, web dashboard, cli, slack bot, service proxy and much more.
 
 <center>
@@ -96,7 +96,7 @@ authentication, etc.
 <img src="{{ site.baseurl }}/blog/images/go-micro-repo.png" style="width: 80%; height: auto;" />
 </center>
 
-We're not forgetting about [**micro**](https://github.com/micro/micro) either though. In our minds after you've built your microservices 
+We're not forgetting about [**micro**](https://github.com/micro-community/micro) either though. In our minds after you've built your microservices 
 there's still a need for a way to query, run and manage them. **Micro** is by all accounts going to be the runtime for micro 
 service development. We're working on providing a simpler way to manage the end to end flow of microservice development and 
 should have more to announce soon.
@@ -111,4 +111,4 @@ the cloud. We're making that process even simpler by consolidating our efforts i
 To learn more check out the [website](https://m3o.com), follow us on [twitter](https://twitter.com/m3ocloud) or 
 join the [slack](https://slack.m3o.com) community.
 
-<h6><a href="https://github.com/micro/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>
+<h6><a href="https://github.com/micro-community/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>

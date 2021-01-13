@@ -68,14 +68,14 @@ func main() {
 ```
 
 Other examples of packages which can be imported in this manner are:
-* [Auth](https://github.com/micro/micro/tree/master/service/auth)
-* [Broker](https://github.com/micro/micro/tree/master/service/broker)  
-* [Client](https://github.com/micro/micro/tree/master/service/client)
-* [Config](https://github.com/micro/micro/tree/master/service/config)
-* [Context](https://github.com/micro/micro/tree/master/service/context)
-* [Errors](https://github.com/micro/micro/tree/master/service/errors)
-* [Logger](https://github.com/micro/micro/tree/master/service/logger)
-* [Store](https://github.com/micro/micro/tree/master/service/store)
+* [Auth](https://github.com/micro-community/micro/tree/master/service/auth)
+* [Broker](https://github.com/micro-community/micro/tree/master/service/broker)  
+* [Client](https://github.com/micro-community/micro/tree/master/service/client)
+* [Config](https://github.com/micro-community/micro/tree/master/service/config)
+* [Context](https://github.com/micro-community/micro/tree/master/service/context)
+* [Errors](https://github.com/micro-community/micro/tree/master/service/errors)
+* [Logger](https://github.com/micro-community/micro/tree/master/service/logger)
+* [Store](https://github.com/micro-community/micro/tree/master/service/store)
 
 
 ### Running services

@@ -58,7 +58,7 @@ metadata and endpoint information. See below for more info.
 
 You'll need to install protobuf to code generate API interfaces:
 
-- [protoc-gen-micro](https://github.com/micro/micro/tree/master/cmd/protoc-gen-micro)
+- [protoc-gen-micro](https://github.com/micro-community/micro/tree/master/cmd/protoc-gen-micro)
 
 ### Discovery
 

@@ -21,4 +21,4 @@ What is the end game for developers? Let us know your thoughts.
 To learn more check out the [website](https://m3o.com), follow us on [twitter](https://twitter.com/m3ocloud) or 
 join the [slack](https://slack.m3o.com) community.
 
-<h6><a href="https://github.com/micro/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>
+<h6><a href="https://github.com/micro-community/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>

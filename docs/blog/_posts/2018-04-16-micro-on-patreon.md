@@ -109,7 +109,7 @@ Reach out to discuss or learn more.
 
 <center><p>...</p></center>
 If you want to learn more about micro, checkout the [website](https://m3o.com) or 
-visit [GitHub](https://github.com/micro/micro).
+visit [GitHub](https://github.com/micro-community/micro).
 
 Follow us on [Twitter](https://twitter.com/m3ocloud) or join the [Slack](http://slack.m3o.com) community.
 

@@ -27,7 +27,7 @@ what the effects are.
 
 ###### What does this have to do with micro services?
 
-[**Micro**](https://github.com/micro/micro), the microservice toolkit, includes a number of services which provide entry points into your 
+[**Micro**](https://github.com/micro-community/micro), the microservice toolkit, includes a number of services which provide entry points into your 
 running systems. The API, Web Dashboard, CLI, etc. These are all fixed points of entry to interact and observe your microservices environment. 
 Over the past few months it became clear that the Bot is another form of entry point to interact and observe and that it should be a first 
 class citizen in the Micro world.
@@ -240,7 +240,7 @@ Firstly create a command using the NewCommand helper. It's basically a quick sta
 You can implement the Command interface yourself too if you like.
 
 ```go
-import "github.com/micro/micro/bot/command"
+import "github.com/micro-community/micro/bot/command"
 
 func Ping() command.Command {
 	usage := "ping"
@@ -259,7 +259,7 @@ Add the command to the Commands map with a pattern key that can be matched by [g
 Here we're saying that we'll only respond to the word "ping".
 
 ```go
-import "github.com/micro/micro/bot/command"
+import "github.com/micro-community/micro/bot/command"
 
 func init() {
 	command.Commands["^ping$"] = Ping()
@@ -279,7 +279,7 @@ link_command.go:
 Build micro with your command
 
 ```go
-cd github.com/micro/micro
+cd github.com/micro-community/micro
 go build -o micro main.go link_command.go
 ```
 
@@ -317,7 +317,7 @@ type Input interface {
 Add the input to the Inputs map.
 
 ```go
-import "github.com/micro/micro/bot/input"
+import "github.com/micro-community/micro/bot/input"
 
 func init() {
 	input.Inputs["name"] = MyInput
@@ -337,7 +337,7 @@ import _ "path/to/import"
 Build micro with your input
 
 ```go
-cd github.com/micro/micro
+cd github.com/micro-community/micro
 go build -o micro main.go link_input.go
 ```
 
@@ -363,12 +363,12 @@ The bot revolution is upon is. The landscape of infrastructure and automation is
 vital role, initially in a classic ChatOps form but longer term achieving much more.
 
 Bots should be treated as first class citizens along side configuration management, command line interfaces and APIs. 
-We're doing just that in the Micro ecosystem by including a bot as part of the [Micro toolkit](https://github.com/micro/micro).
+We're doing just that in the Micro ecosystem by including a bot as part of the [Micro toolkit](https://github.com/micro-community/micro).
 
 It's still early days but looking very promising thus far.
 
 If you want to learn more about the services we offer or microservices, check out the [blog](/), the  website 
-[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro/micro).
+[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).

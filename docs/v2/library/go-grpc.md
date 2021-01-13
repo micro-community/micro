@@ -35,7 +35,7 @@ Protobuf is required for code generation
 
 You'll need to install:
 
-- [protoc-gen-micro](https://github.com/micro/micro/tree/master/cmd/protoc-gen-micro)
+- [protoc-gen-micro](https://github.com/micro-community/micro/tree/master/cmd/protoc-gen-micro)
 
 ## Writing a Service
 

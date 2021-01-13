@@ -14,7 +14,7 @@ The Micro CLI consists of both the server command and other client commands that
 Using Go:
 
 ```sh
-go install github.com/micro/micro/v2
+go install github.com/micro-community/micro/v2
 ```
 
 Or by downloading the binary
@@ -223,7 +223,7 @@ download protobuf for micro:
 brew install protobuf
 go get -u github.com/golang/protobuf/proto
 go get -u github.com/golang/protobuf/protoc-gen-go
-go get github.com/micro/micro/v2/cmd/protoc-gen-micro@master
+go get github.com/micro-community/micro/v2/cmd/protoc-gen-micro@master
 
 compile the proto file foobar.proto:
 

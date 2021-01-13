@@ -8,7 +8,7 @@ summary:
 
 # micro cli
 
-The **micro cli** is a command line interface for the micro toolkit [micro](https://github.com/micro/micro). 
+The **micro cli** is a command line interface for the micro toolkit [micro](https://github.com/micro-community/micro). 
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ The **micro cli** is a command line interface for the micro toolkit [micro](http
 ## Install
 
 ```shell
-go get github.com/micro/micro/v2
+go get github.com/micro-community/micro/v2
 ```
 
 ## Interactive Mode

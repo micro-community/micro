@@ -9,7 +9,7 @@ about Micro's origin.
 
 ### The origin of Micro
 
-[Micro](https://github.com/micro/micro) or more specifically [go-micro](https://github.com/micro/go-micro) began as a much needed platform 
+[Micro](https://github.com/micro-community/micro) or more specifically [go-micro](https://github.com/micro/go-micro) began as a much needed platform 
 library for an infrastructure based side project back in late 2014. At the time I was working at Hailo where we had built a microservice platform 
 called H2 for our own needs.
 
@@ -31,13 +31,13 @@ sparked my own desire to try build something similar as an open source project.
 
 ### The evolution of Micro
 
-Go-micro the pluggable RPC framework evolved into [Micro](https://github.com/micro/micro), a microservice toolkit. The toolkit began life 
-as an idea to develop a microservice protocol or a specification, as can be seen from the initial commits. [[1]](https://github.com/micro/micro/commit/6259b301a8f2bc8e143910fd320caf8071426504), [[2]](https://github.com/micro/micro/commit/d0610303bb44561064fb450c19264187d06d82f2), [[3]](https://github.com/micro/micro/commit/6876df2caf028b6dbff7d3a5b672d6a0aa7e6ef2)
+Go-micro the pluggable RPC framework evolved into [Micro](https://github.com/micro-community/micro), a microservice toolkit. The toolkit began life 
+as an idea to develop a microservice protocol or a specification, as can be seen from the initial commits. [[1]](https://github.com/micro-community/micro/commit/6259b301a8f2bc8e143910fd320caf8071426504), [[2]](https://github.com/micro-community/micro/commit/d0610303bb44561064fb450c19264187d06d82f2), [[3]](https://github.com/micro-community/micro/commit/6876df2caf028b6dbff7d3a5b672d6a0aa7e6ef2)
 
 For whatever reason I lost interest in the idea of a protocol and started to rethink what was actually important. Microservices being a 
 architecture pattern, it became clear that the tooling should really guide that architecture and simplify microservices in general.
 
-So appeared the API Gateway and CLI. The commit can be found [here](https://github.com/micro/micro/commit/b2ef68df31644442ad2de6398caf661328542a4f).
+So appeared the API Gateway and CLI. The commit can be found [here](https://github.com/micro-community/micro/commit/b2ef68df31644442ad2de6398caf661328542a4f).
 
 It all progressed rapidly from there and became something more featureful.
 
@@ -238,7 +238,7 @@ Happy new year!
 - [Simplifying Microservices with Micro](https://www.youtube.com/watch?v=xspaDovwk34) [Video]  [Golang UK Conf 2016]
 
 If you want to learn more about the services we offer or microservices, checkout the website [micro.mu](https://m3o.com) or 
-the github [repo](https://github.com/micro/micro).
+the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).

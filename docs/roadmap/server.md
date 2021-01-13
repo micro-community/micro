@@ -12,7 +12,7 @@ complexity of the underlying infrastructure.
 
 ## Design
 
-The server starts as a single binary called `micro` available at github.com/micro/micro. It takes 
+The server starts as a single binary called `micro` available at github.com/micro-community/micro. It takes 
 every Go Micro interface and provides it as a service with RPC endpoints equivalent to the interface. 
 These RPC services then leverage the Go Micro interfaces internally making them entirely pluggable. 
 So creating a runtime agnostic operating system and anti-corruption layer that forms the basis 

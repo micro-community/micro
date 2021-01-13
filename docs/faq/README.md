@@ -29,7 +29,7 @@ Here! a non-offical community, [Join Us](https://github.com/micro-community/how-
 
 ## Where do I start?
 
-Start by checking out the project itself at [github.com/micro/micro](https://github.com/micro/micro)
+Start by checking out the project itself at [github.com/micro-community/micro](https://github.com/micro-community/micro)
 
 ## Who's using Micro?
 

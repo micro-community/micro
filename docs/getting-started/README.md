@@ -24,7 +24,7 @@ You will need protoc-gen-micro for code generation
 
 - [protobuf](https://github.com/golang/protobuf)
 - [protoc-gen-go](https://github.com/golang/protobuf/tree/master/protoc-gen-go)
-- [protoc-gen-micro](https://github.com/micro/micro/tree/master/cmd/protoc-gen-micro)
+- [protoc-gen-micro](https://github.com/micro-community/micro/tree/master/cmd/protoc-gen-micro)
 
 ```
 # Download latest proto releaes

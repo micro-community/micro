@@ -35,7 +35,7 @@ A Dockerfile is included in the repo
 
 ```
 ## checkout the repo
-git clone https://github.com/micro/micro
+git clone https://github.com/micro-community/micro
 
 ## build the image
 cd micro && docker build -t micro .

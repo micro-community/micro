@@ -93,7 +93,7 @@ platforms.
 
 Our vision is to provide the fundamental building blocks to make it easier for anyone to adopt microservices.
 
-We're kicking all this off with an open source microservice toolkit, also called <b>[Micro](https://github.com/micro/micro)</b>.
+We're kicking all this off with an open source microservice toolkit, also called <b>[Micro](https://github.com/micro-community/micro)</b>.
 Expect a follow up blog post detailing the toolkit soon.
 
 ###### What now?
@@ -101,7 +101,7 @@ Expect a follow up blog post detailing the toolkit soon.
 When you hear the word microservices we want you to think, Micro - the microservices ecosystem. <br/>
 
 If you want to learn more about the services we offer or microservices, checkout the website [micro.mu](https://m3o.com) or 
-the github [repo](https://github.com/micro/micro).
+the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).

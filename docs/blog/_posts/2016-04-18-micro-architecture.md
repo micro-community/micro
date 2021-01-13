@@ -8,7 +8,7 @@ We've had a lot of questions about the micro architecture and design patterns fo
 
 ###### About Micro
 
-[**Micro**](https://github.com/micro/micro) is a microservices toolkit. It was built to be opinionated in it's features and interfaces while 
+[**Micro**](https://github.com/micro-community/micro) is a microservices toolkit. It was built to be opinionated in it's features and interfaces while 
 providing a powerful pluggable architecture allowing the underlying dependencies to be swapped out.
 
 Micro is focused on addressing the fundamental requirements for building microservices and has looked to do this by taking a thoughtful and measured 
@@ -24,18 +24,18 @@ We'll quickly recap on the features of Micro before delving into further archite
 [**Go Micro**](https://github.com/micro/go-micro) is a pluggable RPC framework for writing microservices in Go. It provides libraries for 
 service discovery, client side load balancing, encoding, synchronous and asynchronous communication.
 
-[**Micro API**](https://github.com/micro/micro/tree/master/api) is an API Gateway that serves HTTP and routes requests to appropriate micro services. 
+[**Micro API**](https://github.com/micro-community/micro/tree/master/api) is an API Gateway that serves HTTP and routes requests to appropriate micro services. 
 It acts as a single entry point and can either be used as a reverse proxy or translate HTTP requests to RPC.
 
-[**Micro Web**](https://github.com/micro/micro/tree/master/web) is a web dashboard and reverse proxy for micro web applications. We believe that 
+[**Micro Web**](https://github.com/micro-community/micro/tree/master/web) is a web dashboard and reverse proxy for micro web applications. We believe that 
 web apps should be built as microservices and therefore treated as a first class citizen in a microservice world. It behaves much the like the API 
 reverse proxy but also includes support for web sockets.
 
-[**Micro Sidecar**](https://github.com/micro/micro/tree/master/car) provides all the features of go-micro as a HTTP service. While we love Go and 
+[**Micro Sidecar**](https://github.com/micro-community/micro/tree/master/car) provides all the features of go-micro as a HTTP service. While we love Go and 
 believe it's a great language to build microservices, you may also want to use other languages, so the Sidecar provides a way to integrate 
 your other apps into the Micro world.
 
-[**Micro CLI**](https://github.com/micro/micro/tree/master/cli) is a straight forward command line interface to interact with your micro services. 
+[**Micro CLI**](https://github.com/micro-community/micro/tree/master/cli) is a straight forward command line interface to interact with your micro services. 
 It also allows you to leverage the Sidecar as a proxy where you may not want to directly connect to the service registry.
 
 That's the quick recap. Now let's go deeper.
@@ -90,7 +90,7 @@ So here's the types of services we currently define.
 
 **API** - Served by the **micro api**, an API service sits at the edge of your infrastructure, most likely serving public facing traffic and your 
 mobile or web apps. You can either build it with HTTP handlers and run the micro api in reverse proxy mode or by default handle a specific RPC API request response 
-format which can be found [here](https://github.com/micro/micro/blob/master/api/proto/api.proto).
+format which can be found [here](https://github.com/micro-community/micro/blob/master/api/proto/api.proto).
 
 **Web** - Served by the **micro web**, a Web service focuses on serving html content and dashboards. The micro web reverse proxies HTTP and WebSockets. 
 These are the only protocols supported for the moment but that may be extended in the future. As mentioned before, we believe in web apps as microservices.
@@ -299,7 +299,7 @@ sensitive then you may choose a transport plugin such as NATS or RabbitMQ instea
 The future of software development with a tool such as Micro is very exciting.
 
 If you want to learn more about the services we offer or microservices, check out the [blog](/), the  website 
-[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro/micro).
+[micro.mu](https://m3o.com) or the github [repo](https://github.com/micro-community/micro).
 
 Follow us on Twitter at [@MicroHQ](https://twitter.com/m3ocloud) or join the [Slack](https://slack.m3o.com) 
 community [here](http://slack.m3o.com).

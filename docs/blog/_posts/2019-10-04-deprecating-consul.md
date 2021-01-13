@@ -40,4 +40,4 @@ to operate as is but expect that the next release we do is micro v2.0.0.
 To learn more check out the [website](https://m3o.com), follow us on [twitter](https://twitter.com/m3ocloud) or 
 join the [slack](https://slack.m3o.com) community.
 
-<h6><a href="https://github.com/micro/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>
+<h6><a href="https://github.com/micro-community/micro"><i class="fab fa-github fa-2x"></i> Micro</a></h6>

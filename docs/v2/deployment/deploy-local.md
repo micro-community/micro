@@ -14,7 +14,7 @@ Micro is incredibly simple to spin up locally
 From source
 
 ```
-go get github.com/micro/micro/v2
+go get github.com/micro-community/micro/v2
 ```
 
 Release binary

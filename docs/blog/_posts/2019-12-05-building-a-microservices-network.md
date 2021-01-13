@@ -308,7 +308,7 @@ If you're interested in testing out micro and the network just do the following.
 export GO111MODULE=on
 
 # download micro
-go get github.com/micro/micro@master
+go get github.com/micro-community/micro@master
 
 # connect to the network
 micro --peer

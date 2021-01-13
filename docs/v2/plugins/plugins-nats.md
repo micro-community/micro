@@ -48,7 +48,7 @@ That briefly covers the what's and why's of NATS. So how does it fit in with Mic
 
 ### Micro on NATS
 
-[**Micro**](https://github.com/micro/micro) is a microservice toolkit built with a pluggable architecture allowing the underlying dependencies to be swapped out with 
+[**Micro**](https://github.com/micro-community/micro) is a microservice toolkit built with a pluggable architecture allowing the underlying dependencies to be swapped out with 
 minimal changes. Each interface of the [**Go-Micro**](https://github.com/micro/go-micro) framework provides a building block for microservices; 
 the [registry](https://pkg.go.dev/github.com/micro/go-micro/v2/registry#Registry) 
 for service discovery, [transport](https://pkg.go.dev/github.com/micro/go-micro/v2/transport#Transport) for synchronous communication, 

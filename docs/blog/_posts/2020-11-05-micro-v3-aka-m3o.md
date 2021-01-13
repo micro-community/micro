@@ -9,7 +9,7 @@ This is the official announcement for the release of Micro 3.0 better known as M
 Our 3.0 release is a major refactor and consolidation of the existing tooling into something that addresses the entire workflow 
 of build, run, manage and consume all from the developers perspective.
 
-Read on to learn more or go straight to the [latest release](https://github.com/micro/micro/releases/latest). 
+Read on to learn more or go straight to the [latest release](https://github.com/micro-community/micro/releases/latest). 
 Head to [m3o.com](https://m3o.com) for the hosted offering.
 
 ## Overview
@@ -39,7 +39,7 @@ the user there is nothing but cognitive overload.
 
 In 2019 we went through a [consolidation](/blog/2019/06/10/the-great-consolidation.html) of all those libraries 
 which helped tremendously but there was still always one outstanding question. What's the difference between 
-[micro](https://github.com/micro/micro) and [go-micro](https://github.com/micro/go-micro)? It's a good 
+[micro](https://github.com/micro-community/micro) and [go-micro](https://github.com/micro/go-micro)? It's a good 
 question and one we've covered before. We saw go-micro as a framework and micro as a toolkit but these 
 words were basically empty and meaningless because multiple projects working in coordination really need a 
 crisp story that makes sense and we didn't have one.
@@ -371,7 +371,7 @@ We additionally include grpc-web generated clients which enable frontend to quic
 clients to leverage the same development as the backend. We've seen grpc-web slowly gain adoption internally at various 
 companies and think this might extend to the public domain fairly rapidly as well.
 
-See the [micro/client/sdk](https://github.com/micro/micro/tree/master/client/sdk) directory for the generated clients. These will be 
+See the [micro/client/sdk](https://github.com/micro-community/micro/tree/master/client/sdk) directory for the generated clients. These will be 
 pubished to their respective package managers in the near future.
 
 ## Building API First Services

@@ -13,7 +13,7 @@ care about the underlying deployment mechanism.
 The runtime consists of two parts:
 
 - [go-micro/runtime](https://github.com/micro/go-micro/tree/master/runtime) - a language agnostic runtime interface
-- [micro/runtime](https://github.com/micro/micro/tree/master/runtime) - an rpc service which overlays the interface
+- [micro/runtime](https://github.com/micro-community/micro/tree/master/runtime) - an rpc service which overlays the interface
 
 Using this and the command line we have the ability to run services literally anywhere with the same local developer experience.
 

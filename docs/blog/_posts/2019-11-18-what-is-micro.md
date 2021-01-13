@@ -4,7 +4,7 @@ title:	What is Micro? It's just the future of microservices development.
 date:	2019-11-18 09:00:00
 ---
 
-[**Micro**](https://github.com/micro/micro) is an open source project focused on simplifying microservices development. 
+[**Micro**](https://github.com/micro-community/micro) is an open source project focused on simplifying microservices development. 
 It started life as [**go-micro**](https://github.com/micro/go-micro) - a Go framework for microservice development. But even 
 before then, go-micro, was a hacked up tiny library created to enable the development of a "kubernetes as a service" 
 project way back when in 2014 (see the first commit [here](https://gist.github.com/asim/a035820aec2d8cba5d73b5be12c6e707)).
@@ -68,7 +68,7 @@ In a lot of cases we see open source tools which try to solve one problem. State
 in the case of microservices you really needed a holistic system that would cover all the bases in a seamless way. 
 Something that would essentially form the foundations of a platform.
 
-In that [**Micro**](https://github.com/micro/micro) was born. Micro was built as a toolkit to enable the development of 
+In that [**Micro**](https://github.com/micro-community/micro) was born. Micro was built as a toolkit to enable the development of 
 a microservices platform. It contained a CLI, Web dashboard and API gateway along with a sidecar for non Go based 
 applications. That sidecar pattern has now evolved into something called "service mesh" but back then Netflix 
 had this thing called [Prana](https://github.com/Netflix/Prana) which is what the Micro sidecar was based on.
@@ -137,7 +137,7 @@ adoption globally within the next decade.
 
 ## Micro as a Runtime
 
-[Micro](https://github.com/micro/micro) has also progressed significantly as we've moved on from just a sparse set of tools to 
+[Micro](https://github.com/micro-community/micro) has also progressed significantly as we've moved on from just a sparse set of tools to 
 something we're now calling **a microservice runtime environment**.
 
 The idea behind this is to reorient the toolkit to be a full fledged 
