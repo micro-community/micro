@@ -1,4 +1,4 @@
-# Micro [![License](https://img.shields.io/badge/license-polyform:shield-blue)](https://polyformproject.org/licenses/shield/1.0.0/) [![Go Report Card](https://goreportcard.com/badge/micro/micro)](https://goreportcard.com/report/github.com/micro/micro)
+# Micro [![License](https://img.shields.io/badge/license-polyform:shield-blue)](https://polyformproject.org/licenses/shield/1.0.0/) [![Go Report Card](https://goreportcard.com/badge/micro/micro)](https://goreportcard.com/report/github.com/micro-community/micro)
 
 <kbd><img src="https://raw.githubusercontent.com/micro/micro/master/docs/images/banner.png" /></kbd>
 
@@ -237,4 +237,4 @@ For the hosted Micro Platform aka M3O see [m3o.com](https://m3o.com).
 
 ## Community
 
-Join us in GitHub [Discussions](https://github.com/micro/micro/discussions), [Slack](https://slack.micro.mu) or follow on [Twitter](https://twitter.com/microhq) for updates.
+Join us in GitHub [Discussions](https://github.com/micro-community/micro/discussions), [Slack](https://slack.micro.mu) or follow on [Twitter](https://twitter.com/microhq) for updates.

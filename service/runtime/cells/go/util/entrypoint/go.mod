@@ -1,4 +1,4 @@
-module github.com/micro/micro/service/runtime/cells/go/util/entrypoint
+module github.com/micro-community/micro/service/runtime/cells/go/util/entrypoint
 
 go 1.14
 

@@ -1,4 +1,4 @@
-module github.com/micro/micro/plugin/etcd/v3
+module github.com/micro-community/micro/plugin/etcd/v3
 
 go 1.15
 

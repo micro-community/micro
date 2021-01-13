@@ -14,7 +14,7 @@ import (
 //meta data of micro
 var (
 	// The import path we use for imports
-	Import  = "github.com/micro/micro/profile"
+	Import  = "github.com/micro-community/micro/profile"
 	Version = "v3"
 )
 

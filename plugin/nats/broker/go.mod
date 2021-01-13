@@ -1,4 +1,4 @@
-module github.com/micro/micro/plugin/nats/broker/v3
+module github.com/micro-community/micro/plugin/nats/broker/v3
 
 go 1.15
 

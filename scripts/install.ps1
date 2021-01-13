@@ -32,7 +32,7 @@ if (!(Test-Path $MicroInstallDir -PathType Container)) {
 Write-Output "Getting the latest micro release"
 $releases = Invoke-RestMethod -Headers $githubHeader -Uri "https://api.github.com/repos/${GitHubOrg}/${GitHubRepo}/releases" -Method Get
 if ($releases.Count -eq 0) {
-    throw "No releases found in github.com/micro/micro repo"
+    throw "No releases found in github.com/micro-community/micro repo"
 }
 
 # Filter windows binary and download archive

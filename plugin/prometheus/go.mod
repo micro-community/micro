@@ -1,4 +1,4 @@
-module github.com/micro/micro/plugin/prometheus/v3
+module github.com/micro-community/micro/plugin/prometheus/v3
 
 go 1.15
 
