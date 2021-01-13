@@ -65,6 +65,7 @@ type command struct {
 	service bool
 }
 
+//Default value
 var (
 	DefaultCmd Cmd = New()
 

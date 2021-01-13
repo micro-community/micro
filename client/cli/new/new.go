@@ -149,6 +149,7 @@ func addFileToTree(root treeprint.Tree, file string) {
 	}
 }
 
+//Run `new` cmd
 func Run(ctx *cli.Context) error {
 	dir := ctx.Args().First()
 	if len(dir) == 0 {

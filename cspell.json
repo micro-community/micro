@@ -22,6 +22,7 @@
         "pgrpc",
         "proto",
         "protobuf",
+        "protoc",
         "qson",
         "quic",
         "rhysd",

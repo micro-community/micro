@@ -52,7 +52,7 @@ func confirmAndSelfUpdate(ctx *cli.Context) (bool, error) {
 	}
 
 	// look for an update
-	latest, found, err := selfupdate.DetectLatest("micro/micro")
+	latest, found, err := selfupdate.DetectLatest("micro-community/micro")
 	if err != nil {
 		return false, fmt.Errorf("Error occurred while detecting version: %s", err)
 	}
