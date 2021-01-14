@@ -29,7 +29,7 @@ func (s *Source) Upload(ctx context.Context, stream pb.Source_UploadStream) erro
 	}
 	namespace := acc.Issuer
 
-	// recieve the source from the client
+	// receive the source from the client
 	buf := bytes.NewBuffer(nil)
 	var srv *pb.Service
 	for {

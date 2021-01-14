@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	runtime "github.com/micro-community/micro/v3/proto/runtime"
+	pbRuntime "github.com/micro-community/micro/v3/proto/runtime"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
@@ -15,7 +15,7 @@ import (
 func main() {
 	// setup the client
 	srv := service.New()
-	cli := runtime.NewBuildService("runtime", srv.Client())
+	cli := pbRuntime.NewBuildService("runtime", srv.Client())
 
 	// get the name and version of the service, these are injected by the runtime manager
 	name := getEnv("MICRO_SERVICE_NAME")
@@ -23,7 +23,7 @@ func main() {
 
 	// stream the binary from the runtime
 	logger.Infof("Downloading service %v:%v", name, version)
-	svc := &runtime.Service{Name: name, Version: version}
+	svc := &pbRuntime.Service{Name: name, Version: version}
 	stream, err := cli.Read(context.DefaultContext, svc, client.WithAuthToken())
 	if err != nil {
 		logger.Fatalf("Error starting stream: %v", err)
