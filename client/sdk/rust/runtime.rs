@@ -5991,7 +5991,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     rd\"\00\x012G\n\x06Source\x12=\n\x06Upload\x12\x16.runtime.UploadRequest\
     \x1a\x17.runtime.UploadResponse\"\0(\x012A\n\x05Build\x128\n\x04Read\x12\
     \x10.runtime.Service\x1a\x1a.runtime.BuildReadResponse\"\00\x01B1Z/githu\
-    b.com/micro/micro/v3/proto/runtime;runtimeJ\xd78\n\x07\x12\x05\0\0\xcf\
+    b.com/micro-community/micro/v3/proto/runtime;runtimeJ\xd78\n\x07\x12\x05\0\0\xcf\
     \x01\x01\n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x02\x08\
     \x0f\n\x08\n\x01\x08\x12\x03\x04\0F\n\t\n\x02\x08\x0b\x12\x03\x04\0F\n\n\
     \n\x02\x06\0\x12\x04\x06\0\x0c\x01\n\n\n\x03\x06\0\x01\x12\x03\x06\x08\

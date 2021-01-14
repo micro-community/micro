@@ -2692,7 +2692,7 @@ public final class BrokerOuterClass {
       "er\0222\n\007Publish\022\026.broker.PublishRequest\032\r." +
       "broker.Empty\"\000\022:\n\tSubscribe\022\030.broker.Sub" +
       "scribeRequest\032\017.broker.Message\"\0000\001B/Z-gi" +
-      "thub.com/micro/micro/v3/proto/broker;bro" +
+      "thub.com/micro-community/micro/v3/proto/broker;bro" +
       "kerb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

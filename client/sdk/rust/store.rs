@@ -4875,7 +4875,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     tore.BlobReadResponse\"\00\x01\x12>\n\x05Write\x12\x17.store.BlobWriteRe\
     quest\x1a\x18.store.BlobWriteResponse\"\0(\x01\x12?\n\x06Delete\x12\x18.\
     store.BlobDeleteRequest\x1a\x19.store.BlobDeleteResponse\"\0B-Z+github.c\
-    om/micro/micro/v3/proto/store;storeJ\xc3#\n\x07\x12\x05\0\0\x8c\x01\x1d\
+    om/micro-community/micro/v3/proto/store;storeJ\xc3#\n\x07\x12\x05\0\0\x8c\x01\x1d\
     \n\x08\n\x01\x0c\x12\x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x02\x08\r\n\x08\
     \n\x01\x08\x12\x03\x04\0B\n\t\n\x02\x08\x0b\x12\x03\x04\0B\n\n\n\x02\x06\
     \0\x12\x04\x06\0\r\x01\n\n\n\x03\x06\0\x01\x12\x03\x06\x08\r\n\x0b\n\x04\
