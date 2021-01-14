@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # GitHub Org and Repo to get archives from
-GITHUB_ORG="micro"
+GITHUB_ORG="micro-community"
 GITHUB_REPO="micro"
 
 # micro install directory
