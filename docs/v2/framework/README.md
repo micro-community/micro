@@ -1,4 +1,4 @@
-# Micro [![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GoDoc](https://godoc.org/github.com/micro-community/micro?status.svg)](https://godoc.org/github.com/micro-community/micro) [![Travis CI](https://travis-ci.org/micro/micro.svg?branch=master)](https://travis-ci.org/micro/micro) [![Go Report Card](https://goreportcard.com/badge/micro/micro)](https://goreportcard.com/report/github.com/micro-community/micro)
+# Micro [![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GoDoc](https://godoc.org/github.com/micro-community/micro?status.svg)](https://godoc.org/github.com/micro-community/micro) [![Travis CI](https://travis-ci.org/micro-community/micro.svg?branch=master)](https://travis-ci.org/micro-community/micro) [![Go Report Card](https://goreportcard.com/badge/micro-community/micro)](https://goreportcard.com/report/github.com/micro-community/micro)
 
 Micro is a framework for distributed systems development in the Cloud and beyond.
 
@@ -42,13 +42,13 @@ Latest release binaries
 
 ```
 # MacOS
-curl -fsSL https://raw.githubusercontent.com/micro/micro/master/scripts/install.sh | /bin/bash
+curl -fsSL https://raw.githubusercontent.com/micro-community/micro/master/scripts/install.sh | /bin/bash
 
 # Linux
-wget -q  https://raw.githubusercontent.com/micro/micro/master/scripts/install.sh -O - | /bin/bash
+wget -q  https://raw.githubusercontent.com/micro-community/micro/master/scripts/install.sh -O - | /bin/bash
 
 # Windows
-powershell -Command "iwr -useb https://raw.githubusercontent.com/micro/micro/master/scripts/install.ps1 | iex"
+powershell -Command "iwr -useb https://raw.githubusercontent.com/micro-community/micro/master/scripts/install.ps1 | iex"
 ```
 
 ## Getting Started
