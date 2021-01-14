@@ -9,6 +9,7 @@
         "Debugf",
         "envvars",
         "Evts",
+        "goreleaser",
         "grpcweb",
         "hashicorp",
         "Hdlr",
