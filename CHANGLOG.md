@@ -21,3 +21,5 @@
 - add default_wrapper flag to enable or disable default wrapper {auth/log/cache/trace}
 
 - move noop store to package folder
+
+- add model for db orm
