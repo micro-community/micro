@@ -2169,7 +2169,7 @@ public final class ClientOuterClass {
       "ient.Response\"\000\0221\n\006Stream\022\017.client.Reque" +
       "st\032\020.client.Response\"\000(\0010\001\022-\n\007Publish\022\017." +
       "client.Message\032\017.client.Message\"\000B/Z-git" +
-      "hub.com/micro/micro/v3/proto/client;clie" +
+      "hub.com/micro-community/micro/v3/proto/client;clie" +
       "ntb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

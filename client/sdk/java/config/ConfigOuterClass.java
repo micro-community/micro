@@ -8564,7 +8564,7 @@ public final class ConfigOuterClass {
       "9\n\006Delete\022\025.config.DeleteRequest\032\026.confi" +
       "g.DeleteResponse\"\000\0223\n\004Read\022\023.config.Read" +
       "Request\032\024.config.ReadResponse\"\000B/Z-githu" +
-      "b.com/micro/micro/v3/proto/config;config" +
+      "b.com/micro-community/micro/v3/proto/config;config" +
       "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

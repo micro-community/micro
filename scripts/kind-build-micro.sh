@@ -12,7 +12,7 @@ fi
 rsync -av --exclude=$DIR/../cmd/platform/kubernetes $DIR/../* $tmp/micro-kind/
 
 pushd $tmp/micro-kind
-go mod edit -replace google.golang.org/grpc=google.golang.org/grpc@v1.26.0
+#go mod edit -replace google.golang.org/grpc=google.golang.org/grpc@v1.26.0
 go install
 micro init --package=github.com/m3o/platform/profile/platform --output=profile.go
 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build

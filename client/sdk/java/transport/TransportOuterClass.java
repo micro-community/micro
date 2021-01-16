@@ -830,7 +830,7 @@ public final class TransportOuterClass {
       "rEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\0012C" +
       "\n\tTransport\0226\n\006Stream\022\022.transport.Messag" +
       "e\032\022.transport.Message\"\000(\0010\001B5Z3github.co" +
-      "m/micro/micro/v3/proto/transport;transpo" +
+      "m/micro-community/micro/v3/proto/transport;transpo" +
       "rtb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

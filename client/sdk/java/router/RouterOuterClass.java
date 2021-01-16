@@ -8879,7 +8879,7 @@ public final class RouterOuterClass {
       "\"\000\0221\n\006Update\022\r.router.Route\032\026.router.Upd" +
       "ateResponse\"\000\0223\n\004Read\022\023.router.ReadReque" +
       "st\032\024.router.ReadResponse\"\000B/Z-github.com" +
-      "/micro/micro/v3/proto/router;routerb\006pro" +
+      "/micro-community/micro/v3/proto/router;routerb\006pro" +
       "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
