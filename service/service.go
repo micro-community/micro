@@ -11,11 +11,13 @@ import (
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/debug"
+	"github.com/micro-community/micro/v3/service/debug/handler"
 	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/model"
 	"github.com/micro-community/micro/v3/service/server"
 
 	inSignal "github.com/micro-community/micro/v3/platform/signal"
-	mDebugHandler "github.com/micro-community/micro/v3/service/debug/handler"
+
 	"github.com/urfave/cli/v2"
 )
 
@@ -108,6 +110,10 @@ func (s *Service) Client() client.Client {
 	return client.DefaultClient
 }
 
+func (s *Service) Model() model.Model {
+	return model.DefaultModel
+}
+
 func (s *Service) Server() server.Server {
 	return server.DefaultServer
 }
@@ -168,7 +174,7 @@ func (s *Service) Run() error {
 	// register the debug handler
 	s.Server().Handle(
 		s.Server().NewHandler(
-			mDebugHandler.NewHandler(s.Client()),
+			handler.NewHandler(s.Client()),
 			server.InternalHandler(true),
 		),
 	)

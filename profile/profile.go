@@ -15,6 +15,7 @@ import (
 	"github.com/micro-community/micro/v3/service/config"
 	"github.com/micro-community/micro/v3/service/events"
 	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/model"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/router"
 	"github.com/micro-community/micro/v3/service/runtime"
@@ -100,6 +101,11 @@ var Local = &Profile{
 		SetupRegistry(mRegMdns.NewRegistry())
 		SetupJWT(ctx)
 
+		// set the store in the model
+		model.DefaultModel = model.NewModel(
+			model.WithStore(store.DefaultStore),
+		)
+
 		// use the local runtime, note: the local runtime is designed to run source code directly so
 		// the runtime builder should NOT be set when using this implementation
 		runtime.DefaultRuntime = mRuntimeLocal.NewRuntime()
@@ -146,6 +152,11 @@ var Kubernetes = &Profile{
 			logger.Fatalf("Error configuring file blob store: %v", err)
 		}
 
+		// set the store in the model
+		model.DefaultModel = model.NewModel(
+			model.WithStore(store.DefaultStore),
+		)
+
 		// the registry service uses the memory registry, the other core services will use the default
 		// rpc client and call the registry service
 		if ctx.Args().Get(1) == "registry" {
@@ -185,6 +196,10 @@ var Test = &Profile{
 		store.DefaultBlobStore, _ = mStoreFile.NewBlobStore()
 		config.DefaultConfig, _ = mConfigStore.NewConfig(store.DefaultStore, "")
 		SetupRegistry(mRegMemory.NewRegistry())
+		// set the store in the model
+		model.DefaultModel = model.NewModel(
+			model.WithStore(store.DefaultStore),
+		)
 		return nil
 	},
 }
