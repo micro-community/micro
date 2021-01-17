@@ -12,6 +12,7 @@ import (
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/urfave/cli/v2"
 
+	//init some basic ability
 	_ "github.com/micro-community/micro/v3/client/cli/auth"
 	_ "github.com/micro-community/micro/v3/client/cli/config"
 	_ "github.com/micro-community/micro/v3/client/cli/gen"
@@ -37,6 +38,7 @@ type command struct {
 	exec  util.Exec
 }
 
+//Run cmd
 func Run(c *cli.Context) error {
 	// take the first arg as the binary
 	binary := os.Args[0]
