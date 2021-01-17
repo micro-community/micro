@@ -48,10 +48,11 @@ type Server interface {
 	Env() string
 	// APIPort is the port the api is exposed on
 	APIPort() int
-	// PoxyPort is the port the proxy is exposed on
+	// ProxyPort is the port the proxy is exposed on
 	ProxyPort() int
 }
 
+//Command for test
 type Command struct {
 	Env    string
 	Config string
@@ -97,7 +98,7 @@ func (c *Command) Exec(args ...string) ([]byte, error) {
 	return com.CombinedOutput()
 }
 
-// Starts a new command
+//Start a new command
 func (c *Command) Start(args ...string) error {
 	c.Lock()
 	defer c.Unlock()
@@ -180,6 +181,7 @@ func once(blockName string, t *testing.T, f cmdFunc) {
 	}
 }
 
+//ServerBase for test
 type ServerBase struct {
 	opts Options
 	cmd  *exec.Cmd
@@ -285,7 +287,7 @@ func newLocalServer(t *T, fname string, opts ...Option) Server {
 	apiPortNum := rand.Intn(maxPort-minPort) + minPort
 
 	// kill container, ignore error because it might not exist,
-	// we dont care about this that much
+	// we don't care about this that much
 	exec.Command("docker", "kill", fname).CombinedOutput()
 	exec.Command("docker", "rm", fname).CombinedOutput()
 
@@ -584,6 +586,7 @@ func wrapF(t *T, f func(t *T)) {
 	f(t)
 }
 
+//Login Test for service
 func Login(serv Server, t *T, email, password string) error {
 	return Try("Logging in with "+email, t, func() ([]byte, error) {
 		out, err := serv.Command().Exec("login", "--email", email, "--password", password)
@@ -597,6 +600,7 @@ func Login(serv Server, t *T, email, password string) error {
 	}, 4*time.Second)
 }
 
+//ChangeNamespace for service
 func ChangeNamespace(cmd *Command, env, namespace string) error {
 	outp, err := cmd.Exec("user", "config", "get", "namespaces."+env+".all")
 	if err != nil {
@@ -612,7 +616,7 @@ func ChangeNamespace(cmd *Command, env, namespace string) error {
 	}
 	index[namespace] = struct{}{}
 	list := []string{}
-	for k, _ := range index {
+	for k := range index {
 		list = append(list, k)
 	}
 	if _, err := cmd.Exec("user", "config", "set", "namespaces."+env+".all", strings.Join(list, ",")); err != nil {
