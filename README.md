@@ -240,3 +240,14 @@ For the hosted Micro Platform aka M3O see [m3o.com](https://m3o.com).
 ## Community
 
 Join us in GitHub [Discussions](https://github.com/micro-community/micro/discussions), [Slack](https://slack.micro.mu) or follow on [Twitter](https://twitter.com/microhq) for updates.
+
+## Repo Clone for CN
+
+following cmd:
+
+```bash
+git clone https://hub.fastgit.org/micro-community/micro.git
+cd micro
+git remote remove orign
+git remote add origin https://github.com/micro-community/micro.git
+```
