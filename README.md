@@ -10,16 +10,16 @@ with the complexity of distributed systems and provides simpler programmable abs
 
 ## Contents
 
-- [Introduction](https://micro.mu/introduction) - A high level introduction to Micro
-- [Getting Started](https://micro.mu/getting-started) - The hello-world quick-start guide
-- [Upgrade Guide](https://micro.mu/upgrade-guide) - Update your go-micro project to use micro v3.
-- [Architecture](https://micro.mu/architecture) - Describes the architecture, design and tradeoffs
-- [Reference](https://micro.mu/reference) - In-depth reference for Micro CLI and services
-- [Resources](https://micro.mu/resources) - External resources and contributions
-- [Roadmap](https://micro.mu/roadmap) - Stuff on our agenda over the long haul
-- [Users](https://micro.mu/users) - Developers and companies using Micro in production
-- [FAQ](https://micro.mu/faq) - Frequently asked questions
-- [Blog](https://micro.mu/blog) - For the latest from us
+- [Introduction](https://micro-community.github.io/micro/introduction) - A high level introduction to Micro
+- [Getting Started](https://micro-community.github.io/micro/getting-started) - The hello-world quick-start guide
+- [Upgrade Guide](https://micro-community.github.io/micro/upgrade-guide) - Update your go-micro project to use micro v3.
+- [Architecture](https://micro-community.github.io/micro/architecture) - Describes the architecture, design and tradeoffs
+- [Reference](https://micro-community.github.io/micro/reference) - In-depth reference for Micro CLI and services
+- [Resources](https://micro-community.github.io/micro/resources) - External resources and contributions
+- [Roadmap](https://micro-community.github.io/micro/roadmap) - Stuff on our agenda over the long haul
+- [Users](https://micro-community.github.io/micro/users) - Developers and companies using Micro in production
+- [FAQ](https://micro-community.github.io/micro/faq) - Frequently asked questions
+- [Blog](https://micro-community.github.io/micro/blog) - For the latest from us
 
 ## Features
 
@@ -77,10 +77,10 @@ go get github.com/micro-community/micro/v3
 
 ```sh
 # install
-docker pull micro/micro
+docker pull crazybber/micro
 
 # run it
-docker run -p 8080-8081:8080-8081/tcp micro/micro server
+docker run -p 8080-8081:8080-8081/tcp crazybber/micro server
 ```
 
 **Helm Chart**
@@ -105,7 +105,7 @@ powershell -Command "iwr -useb https://raw.githubusercontent.com/micro-community
 
 ## Getting Started
 
-Run the server locally
+Run the server locally(Recommended on Linux&Mac)
 
 ```
 micro server

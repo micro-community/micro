@@ -23,6 +23,7 @@ import (
 	"github.com/micro-community/micro/v3/service/context/metadata"
 )
 
+//FromRequest decode metadata from ctx
 func FromRequest(r *http.Request) context.Context {
 	ctx := r.Context()
 	md, ok := metadata.FromContext(ctx)
