@@ -73,6 +73,8 @@ go get github.com/micro-community/micro/v3
 
 **Using Docker**
 
+*strong recommended on windows [details check](https://github.com/micro/micro/discussions/1650)*
+
 ```sh
 # install
 docker pull micro/micro
