@@ -3,7 +3,7 @@ package server
 import (
 	pb "github.com/micro-community/micro/v3/proto/store"
 	"github.com/micro-community/micro/v3/service"
-	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/urfave/cli/v2"
 )
 
@@ -39,7 +39,7 @@ func Run(ctx *cli.Context) error {
 
 	// start the service
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 	}
 	return nil
 }
