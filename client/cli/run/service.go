@@ -530,7 +530,7 @@ func getService(ctx *cli.Context) error {
 		version = ctx.Args().Get(1)
 	}
 
-	// should we list sevices
+	// should we list services
 	var list bool
 
 	// zero args so list all

@@ -44,6 +44,7 @@ func help(c *cli.Context, args []string) ([]byte, error) {
 	return nil, nil
 }
 
+//QueryStats query stats
 func QueryStats(c *cli.Context, args []string) ([]byte, error) {
 	if len(args) == 0 {
 		return nil, cli.ShowSubcommandHelp(c)
