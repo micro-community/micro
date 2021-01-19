@@ -1,5 +1,5 @@
-//Package service provides a micro service
-package cli
+// Package service provides micro service commands
+package service
 
 import (
 	"fmt"
