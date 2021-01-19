@@ -33,8 +33,8 @@ import (
 	mStoreServer "github.com/micro-community/micro/v3/service/store/server"
 
 	// misc commands
-	"github.com/micro-community/micro/v3/service/handler/exec"
-	"github.com/micro-community/micro/v3/service/handler/file"
+	"github.com/micro-community/micro/v3/cmd/service/handler/exec"
+	"github.com/micro-community/micro/v3/cmd/service/handler/file"
 )
 
 // Run starts a micro service sidecar to encapsulate any app
