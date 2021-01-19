@@ -8,9 +8,8 @@ import (
 	"github.com/micro-community/micro/v3/service/auth"
 	authHandler "github.com/micro-community/micro/v3/service/auth/server/auth"
 	rulesHandler "github.com/micro-community/micro/v3/service/auth/server/rules"
-	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/store"
-	mustore "github.com/micro-community/micro/v3/service/store"
 	"github.com/urfave/cli/v2"
 )
 
@@ -48,9 +47,9 @@ func Run(ctx *cli.Context) error {
 	)
 
 	// set the handlers store
-	mustore.DefaultStore.Init(store.Table("auth"))
-	authH.Init(auth.Store(mustore.DefaultStore))
-	ruleH.Init(auth.Store(mustore.DefaultStore))
+	store.DefaultStore.Init(store.Table("auth"))
+	authH.Init(auth.Store(store.DefaultStore))
+	ruleH.Init(auth.Store(store.DefaultStore))
 
 	// register handlers
 	pb.RegisterAuthHandler(srv.Server(), authH)
@@ -59,7 +58,7 @@ func Run(ctx *cli.Context) error {
 
 	// run service
 	if err := srv.Run(); err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 	}
 	return nil
 }
