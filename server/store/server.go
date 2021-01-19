@@ -1,4 +1,4 @@
-package server
+package store
 
 import (
 	pb "github.com/micro-community/micro/v3/proto/store"

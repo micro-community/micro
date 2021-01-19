@@ -20,17 +20,17 @@ import (
 	"github.com/micro-community/micro/v3/service/proxy/mucp"
 
 	// services: server implementation
-	mApiServer "github.com/micro-community/micro/v3/service/api/server"
-	mAuthServer "github.com/micro-community/micro/v3/service/auth/server"
-	mBrokerServer "github.com/micro-community/micro/v3/service/broker/server"
-	mConfigServer "github.com/micro-community/micro/v3/service/config/server"
-	mEventsServer "github.com/micro-community/micro/v3/service/events/server"
-	mNetworkServer "github.com/micro-community/micro/v3/service/network/server"
-	mProxyServer "github.com/micro-community/micro/v3/service/proxy/server"
-	mRegistryServer "github.com/micro-community/micro/v3/service/registry/server"
-	mRouterServer "github.com/micro-community/micro/v3/service/router/server"
-	mRuntimeServer "github.com/micro-community/micro/v3/service/runtime/server"
-	mStoreServer "github.com/micro-community/micro/v3/service/store/server"
+	mApiServer "github.com/micro-community/micro/v3/server/api"
+	mAuthServer "github.com/micro-community/micro/v3/server/auth"
+	mBrokerServer "github.com/micro-community/micro/v3/server/broker"
+	mConfigServer "github.com/micro-community/micro/v3/server/config"
+	mEventsServer "github.com/micro-community/micro/v3/server/events"
+	mNetworkServer "github.com/micro-community/micro/v3/server/network"
+	mProxyServer "github.com/micro-community/micro/v3/server/proxy"
+	mRegistryServer "github.com/micro-community/micro/v3/server/registry"
+	mRouterServer "github.com/micro-community/micro/v3/server/router"
+	mRuntimeServer "github.com/micro-community/micro/v3/server/runtime"
+	mStoreServer "github.com/micro-community/micro/v3/server/store"
 
 	// misc commands
 	"github.com/micro-community/micro/v3/cmd/service/handler/exec"

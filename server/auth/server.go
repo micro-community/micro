@@ -1,4 +1,4 @@
-package server
+package auth
 
 import (
 	"github.com/micro-community/micro/v3/platform/auth/token"
@@ -6,8 +6,8 @@ import (
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
-	authHandler "github.com/micro-community/micro/v3/service/auth/server/auth"
-	rulesHandler "github.com/micro-community/micro/v3/service/auth/server/rules"
+	authHandler "github.com/micro/micro-community/v3/server/auth/auth"
+	rulesHandler "github.com/micro/micro-community/v3/server/auth/rules"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/store"
 	"github.com/urfave/cli/v2"
