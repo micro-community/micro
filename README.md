@@ -10,16 +10,16 @@ with the complexity of distributed systems and provides simpler programmable abs
 
 ## Contents
 
-- [Introduction](https://micro-community.github.io/micro/introduction) - A high level introduction to Micro
-- [Getting Started](https://micro-community.github.io/micro/getting-started) - The hello-world quick-start guide
-- [Upgrade Guide](https://micro-community.github.io/micro/upgrade-guide) - Update your go-micro project to use micro v3.
-- [Architecture](https://micro-community.github.io/micro/architecture) - Describes the architecture, design and tradeoffs
-- [Reference](https://micro-community.github.io/micro/reference) - In-depth reference for Micro CLI and services
-- [Resources](https://micro-community.github.io/micro/resources) - External resources and contributions
-- [Roadmap](https://micro-community.github.io/micro/roadmap) - Stuff on our agenda over the long haul
-- [Users](https://micro-community.github.io/micro/users) - Developers and companies using Micro in production
-- [FAQ](https://micro-community.github.io/micro/faq) - Frequently asked questions
-- [Blog](https://micro-community.github.io/micro/blog) - For the latest from us
+- [Introduction](https://micro.arch.wiki/introduction) - A high level introduction to Micro
+- [Getting Started](https://micro.arch.wiki/getting-started) - The hello-world quick-start guide
+- [Upgrade Guide](https://micro.arch.wiki/upgrade-guide) - Update your go-micro project to use micro v3.
+- [Architecture](https://micro.arch.wiki/architecture) - Describes the architecture, design and tradeoffs
+- [Reference](https://micro.arch.wiki/reference) - In-depth reference for Micro CLI and services
+- [Resources](https://micro.arch.wiki/resources) - External resources and contributions
+- [Roadmap](https://micro.arch.wiki/roadmap) - Stuff on our agenda over the long haul
+- [Users](https://micro.arch.wiki/users) - Developers and companies using Micro in production
+- [FAQ](https://micro.arch.wiki/faq) - Frequently asked questions
+- [Blog](https://micro.arch.wiki/blog) - For the latest from us
 
 ## Features
 
@@ -73,7 +73,7 @@ go get github.com/micro-community/micro/v3
 
 **Using Docker**
 
-*strong recommended on windows [details check](https://github.com/micro/micro/discussions/1650)*
+*strong recommended on windows [details check](https://github.com/micro-community/micro/discussions/1650)*
 
 ```sh
 # install

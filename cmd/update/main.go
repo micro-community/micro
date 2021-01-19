@@ -21,6 +21,7 @@ var (
 	update = new(Update)
 )
 
+//Update binary
 type Update struct {
 	Commit  string `json:"commit"`
 	Image   string `json:"image"`
