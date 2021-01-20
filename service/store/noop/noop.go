@@ -20,7 +20,13 @@ import (
 
 type noopStore struct{}
 
-func (n *noopStore) Init(opts ...store.Option) error {
+// NewStore returns a file store
+func NewStore(opts ...store.StoreOption) store.Store {
+	s := &noopStore{}
+	return s
+}
+
+func (n *noopStore) Init(opts ...store.StoreOption) error {
 	return nil
 }
 
