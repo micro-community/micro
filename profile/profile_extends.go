@@ -20,9 +20,37 @@ import (
 	mRouterStatic "github.com/micro-community/micro/v3/service/router/static"
 	mRuntimeLocal "github.com/micro-community/micro/v3/service/runtime/local"
 	mStoreMemory "github.com/micro-community/micro/v3/service/store/memory"
+	mStoreNoop "github.com/micro-community/micro/v3/service/store/noop"
 
 	"github.com/urfave/cli/v2"
 )
+
+// Dev profile to run service in simple config
+var Dev = &Profile{
+	Name: "dev",
+	Setup: func(ctx *cli.Context) error {
+		auth.DefaultAuth = mAuthNoop.NewAuth()
+		runtime.DefaultRuntime = mRuntimeLocal.NewRuntime()
+		//store.DefaultStore = fstore.NewStore()
+		store.DefaultStore = mStoreNoop.NewStore()
+		config.DefaultConfig, _ = mConfigEnv.NewConfig()
+		var err error
+		events.DefaultStream, err = mEventStream.NewStream()
+		if err != nil {
+			logger.Fatalf("Error configuring stream for simple profile: %v", err)
+		}
+
+		SetupBroker(mBrokerMemory.NewBroker())
+		//turn off Registry
+		setupRegistry(mRegistryNoop.NewRegistry())
+		// store.DefaultBlobStore, err = fstore.NewBlobStore()
+		// if err != nil {
+		// 	logger.Fatalf("Error configuring file blob store: %v", err)
+		// }
+
+		return nil
+	},
+}
 
 // Simple profile to run service in simple config
 var Simple = &Profile{

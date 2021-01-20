@@ -53,6 +53,7 @@ var profiles = map[string]*Profile{
 	"local":      Local,
 	"kubernetes": Kubernetes,
 	"simple":     Simple,
+	"dev":        Dev,
 }
 
 // Profile configures an environment
