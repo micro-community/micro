@@ -1,7 +1,7 @@
 # Model
 
 Package model is a convenience wrapper around what the `Store` provides.
-It's main responsibility is to maintain indexes that would otherwise be maintaned by the users to enable different queries on the same data.
+It's main responsibility is to maintain indexes that would otherwise be maintained by the users to enable different queries on the same data.
 
 ## Usage
 
@@ -72,7 +72,7 @@ Readings will be unordered, ascending ordered or descending ordered depending on
 
 ## Ordering
 
-Indexes by default are ordered. If we want to turn this behaviour off:
+Indexes by default are ordered. If we want to turn this behavior off:
 
 ```go
 ageIndex.Order.Type = OrderTypeUnordered
