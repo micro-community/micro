@@ -39,6 +39,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+//Cmd for core cmd interface
 type Cmd interface {
 	// Init initializes options
 	// Note: Use Run to parse command line

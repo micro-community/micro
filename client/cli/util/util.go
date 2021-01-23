@@ -1,4 +1,4 @@
-// Package cliutil contains methods used across all cli commands
+// Package util contains methods used across all cli commands
 // @todo: get rid of os.Exits and use errors instread
 package util
 
@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strings"
 
-	merrors "github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/errors"
 
 	"github.com/micro-community/micro/v3/platform/config"
 	"github.com/urfave/cli/v2"
@@ -68,6 +68,7 @@ var defaultEnvs = map[string]Env{
 	},
 }
 
+//IsBuiltInService check service  type
 func IsBuiltInService(command string) bool {
 	for _, service := range services {
 		if command == service {
@@ -105,12 +106,14 @@ func CLIProxyAddress(ctx *cli.Context) (string, error) {
 	return addr, nil
 }
 
+//Env for cli
 type Env struct {
 	Name         string
 	ProxyAddress string
 	Description  string
 }
 
+//AddEnv for cli
 func AddEnv(env Env) error {
 	envs, err := getEnvs()
 	if err != nil {
@@ -166,6 +169,7 @@ func GetEnv(ctx *cli.Context) (Env, error) {
 	return GetEnvByName(envName)
 }
 
+//GetEnvByName for service
 func GetEnvByName(env string) (Env, error) {
 	envs, err := getEnvs()
 	if err != nil {
@@ -178,6 +182,7 @@ func GetEnvByName(env string) (Env, error) {
 	return envir, nil
 }
 
+//GetEnvs List env
 func GetEnvs() ([]Env, error) {
 	envs, err := getEnvs()
 	if err != nil {
@@ -240,8 +245,10 @@ func IsPlatform(ctx *cli.Context) bool {
 	return false
 }
 
+//Exec for ctx
 type Exec func(*cli.Context, []string) ([]byte, error)
 
+//Print for Exec
 func Print(e Exec) func(*cli.Context) error {
 	return func(c *cli.Context) error {
 		rsp, err := e(c, c.Args().Slice())
@@ -283,7 +290,7 @@ func CliError(err error) cli.ExitCoder {
 		return cli.Exit(fmt.Sprintf(`Failed to connect to micro server at %s`, address[1]), 4)
 	}
 
-	merr, ok := err.(*merrors.Error)
+	merr, ok := err.(*errors.Error)
 	if !ok {
 		return cli.Exit(err, 128)
 	}

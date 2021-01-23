@@ -43,6 +43,7 @@ type FileRestore struct {
 	path string
 }
 
+//NewFileRestore for restore by file
 func NewFileRestore(opts ...RestoreOption) Restore {
 	r := &FileRestore{}
 	for _, o := range opts {
@@ -51,6 +52,7 @@ func NewFileRestore(opts ...RestoreOption) Restore {
 	return r
 }
 
+// Init proc
 func (f *FileRestore) Init(opts ...RestoreOption) error {
 	for _, o := range opts {
 		o(&f.Options)

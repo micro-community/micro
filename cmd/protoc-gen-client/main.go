@@ -63,6 +63,7 @@ func download(path string, lang string) error {
 		} else {
 			log.Printf("%s", buf)
 		}
+
 	case "protoc":
 		if p, err := exec.LookPath(filepath.Join(toolPath, "bin", protocBin)); err == nil && len(p) > 0 {
 			log.Printf("%s tool already installed", protocBin)
@@ -407,20 +408,20 @@ func main() {
 
 		switch lang {
 		case "rust":
-			ppath, err := exec.LookPath("protoc-gen-rust-grpc")
+			fpath, err := exec.LookPath("protoc-gen-rust-grpc")
 			if err != nil {
 				log.Fatal(err)
 			}
-			if err = generate(lang, "rust", "", *srcDir, *dstDir, fmt.Sprintf("--plugin=protoc-gen-rust-grpc=%s", ppath)); err != nil {
+			if err = generate(lang, "rust", "", *srcDir, *dstDir, fmt.Sprintf("--plugin=protoc-gen-rust-grpc=%s", fpath)); err != nil {
 				log.Fatal(err)
 			}
 		case "ruby":
-			ppath, err := exec.LookPath("grpc_tools_ruby_protoc_plugin")
+			fpath, err := exec.LookPath("grpc_tools_ruby_protoc_plugin")
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			if err = generate(lang, "ruby", "", *srcDir, *dstDir, fmt.Sprintf("--plugin=protoc-gen-grpc=%s", ppath)); err != nil {
+			if err = generate(lang, "ruby", "", *srcDir, *dstDir, fmt.Sprintf("--plugin=protoc-gen-grpc=%s", fpath)); err != nil {
 				log.Fatal(err)
 			}
 		case "go":
@@ -439,12 +440,12 @@ func main() {
 				log.Fatal(err)
 			}
 		case "node":
-			ppath, err := exec.LookPath("grpc_tools_node_protoc_plugin")
+			fpath, err := exec.LookPath("grpc_tools_node_protoc_plugin")
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			if err = generate(lang, "node", "import_style=commonjs,binary", *srcDir, *dstDir, fmt.Sprintf("--plugin=protoc-gen-grpc=%s", ppath)); err != nil {
+			if err = generate(lang, "node", "import_style=commonjs,binary", *srcDir, *dstDir, fmt.Sprintf("--plugin=protoc-gen-grpc=%s", fpath)); err != nil {
 				log.Fatal(err)
 			}
 		}

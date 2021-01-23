@@ -724,7 +724,7 @@ func getLogs(ctx *cli.Context) error {
 		if status.Convert(err).Code() == codes.NotFound {
 			return cli.Exit("Service not found", 1)
 		}
-		return util.CliError(fmt.Errorf("Error reading logs: %s\n", status.Convert(err).Message()))
+		return util.CliError(fmt.Errorf("Error reading logs: %s", status.Convert(err).Message()))
 	}
 
 	return nil

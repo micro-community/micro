@@ -15,7 +15,7 @@ import (
 type Snapshot interface {
 	// Init validates the Snapshot options and returns an error if they are invalid.
 	// Init must be called before the Snapshot is used
-	Init(opts ...SnapshotOption) error
+	Init(opts ...Option) error
 	// Start opens a channel that receives *store.Record, adding any incoming records to a backup
 	// close() the channel to commit the results.
 	Start() (chan<- *store.Record, error)
@@ -23,24 +23,24 @@ type Snapshot interface {
 	Wait()
 }
 
-// SnapshotOptions configure a snapshotter
-type SnapshotOptions struct {
+// Options configure a snapshotter
+type Options struct {
 	Destination string
 }
 
-// SnapshotOption is an individual option
-type SnapshotOption func(s *SnapshotOptions)
+// Option is an individual option
+type Option func(s *Options)
 
 // Destination is the URL to snapshot to, e.g. file:///path/to/file
-func Destination(dest string) SnapshotOption {
-	return func(s *SnapshotOptions) {
+func Destination(dest string) Option {
+	return func(s *Options) {
 		s.Destination = dest
 	}
 }
 
 // FileSnapshot backs up incoming records to a File
 type FileSnapshot struct {
-	Options SnapshotOptions
+	Options Options
 
 	records chan *store.Record
 	path    string
@@ -50,7 +50,7 @@ type FileSnapshot struct {
 }
 
 // NewFileSnapshot returns a FileSnapshot
-func NewFileSnapshot(opts ...SnapshotOption) Snapshot {
+func NewFileSnapshot(opts ...Option) Snapshot {
 	f := &FileSnapshot{wg: &sync.WaitGroup{}}
 	for _, o := range opts {
 		o(&f.Options)
@@ -59,7 +59,7 @@ func NewFileSnapshot(opts ...SnapshotOption) Snapshot {
 }
 
 // Init validates the options
-func (f *FileSnapshot) Init(opts ...SnapshotOption) error {
+func (f *FileSnapshot) Init(opts ...Option) error {
 	for _, o := range opts {
 		o(&f.Options)
 	}
@@ -77,7 +77,7 @@ func (f *FileSnapshot) Init(opts ...SnapshotOption) error {
 	return nil
 }
 
-// Start opens a channel which recieves *store.Record and writes them to storage
+// Start opens a channel which receive *store.Record and writes them to storage
 func (f *FileSnapshot) Start() (chan<- *store.Record, error) {
 	if f.records != nil || f.encoder != nil || f.file != nil {
 		return nil, errors.New("Snapshot is already in use")
@@ -127,7 +127,7 @@ func (f *FileSnapshot) receiveRecords(rec <-chan *store.Record) {
 	f.wg.Done()
 }
 
-// record is a store.Record when serialised to persistent storage.
+// record is a store.Record when serialized to persistent storage.
 type record struct {
 	Key       string
 	Value     []byte
