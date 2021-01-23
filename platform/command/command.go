@@ -13,7 +13,7 @@ import (
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	cbytes "github.com/micro-community/micro/v3/platform/codec/bytes"
-	proto "github.com/micro-community/micro/v3/proto/debug"
+	pbDebug "github.com/micro-community/micro/v3/proto/debug"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/registry"
@@ -254,7 +254,9 @@ func CallService(c *cli.Context, args []string) ([]byte, error) {
 
 	var err error
 	if output := c.String("output"); output == "raw" {
-		rsp := cbytes.Frame{}
+		rsp := cbytes.Frame{
+			Data: []byte{},
+		}
 		err = client.DefaultClient.Call(ctx, creq, &rsp, opts...)
 		// set the raw output
 		response = rsp.Data
@@ -293,11 +295,11 @@ func QueryHealth(c *cli.Context, args []string) ([]byte, error) {
 		return nil, err
 	}
 
-	req := client.NewRequest(args[0], "Debug.Health", &proto.HealthRequest{})
+	req := client.NewRequest(args[0], "Debug.Health", &pbDebug.HealthRequest{})
 
 	// if the address is specified then we just call it
 	if addr := c.String("address"); len(addr) > 0 {
-		rsp := &proto.HealthResponse{}
+		rsp := &pbDebug.HealthResponse{}
 		err := client.DefaultClient.Call(
 			context.Background(),
 			req,
@@ -332,7 +334,7 @@ func QueryHealth(c *cli.Context, args []string) ([]byte, error) {
 		// query health for every node
 		for _, node := range serv.Nodes {
 			address := node.Address
-			rsp := &proto.HealthResponse{}
+			rsp := &pbDebug.HealthResponse{}
 
 			var err error
 

@@ -177,7 +177,7 @@ func GetEnvByName(env string) (Env, error) {
 	}
 	envir, ok := envs[env]
 	if !ok {
-		return Env{}, fmt.Errorf("Env \"%s\" not found. See `micro env` for available environments.", env)
+		return Env{}, fmt.Errorf("Env \"%s\" not found. See `micro env` for available environments", env)
 	}
 	return envir, nil
 }
@@ -237,6 +237,7 @@ func DelEnv(envName string) error {
 	return setEnvs(envs)
 }
 
+//IsPlatform check platform type
 func IsPlatform(ctx *cli.Context) bool {
 	env, err := GetEnv(ctx)
 	if err == nil && env.Name == EnvPlatform {
