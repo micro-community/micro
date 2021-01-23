@@ -82,7 +82,7 @@ func (a *Auth) setupDefaultAccount(ns string) error {
 
 	// check to see if we need to create the default account
 	prefix := strings.Join([]string{storePrefixAccounts, ns, ""}, joinKey)
-	recs, err := store.Read("", store.Prefix(prefix))
+	recs, err := store.Read(prefix, store.ReadPrefix())
 	if err != nil {
 		return err
 	}
@@ -136,12 +136,8 @@ func (a *Auth) Generate(ctx context.Context, req *pb.GenerateRequest, rsp *pb.Ge
 	}
 
 	// authorize the request
-	if err := authns.Authorize(ctx, req.Options.Namespace); err == authns.ErrForbidden {
-		return errors.Forbidden("auth.Auth.Generate", err.Error())
-	} else if err == authns.ErrUnauthorized {
-		return errors.Unauthorized("auth.Auth.Generate", err.Error())
-	} else if err != nil {
-		return errors.InternalServerError("auth.Auth.Generate", err.Error())
+	if err := authns.AuthorizeAdmin(ctx, req.Options.Namespace, "auth.Auth.Generate"); err != nil {
+		return err
 	}
 
 	// check the user does not already exists
@@ -349,7 +345,7 @@ func (a *Auth) setRefreshToken(ns, id, token string) error {
 // get the refresh token for an account
 func (a *Auth) refreshTokenForAccount(ns, id string) (string, error) {
 	prefix := strings.Join([]string{storePrefixRefreshTokens, ns, id, ""}, joinKey)
-	recs, err := store.Read("", store.Prefix(prefix))
+	recs, err := store.Read(prefix, store.ReadPrefix())
 	if err != nil {
 		return "", err
 	} else if len(recs) == 0 {
@@ -366,7 +362,7 @@ func (a *Auth) refreshTokenForAccount(ns, id string) (string, error) {
 // get the account ID for the given refresh token
 func (a *Auth) accountIDForRefreshToken(ns, token string) (string, error) {
 	prefix := strings.Join([]string{storePrefixRefreshTokens, ns}, joinKey)
-	keys, err := store.List(store.Prefix(prefix))
+	keys, err := store.List(store.ListPrefix(prefix))
 	if err != nil {
 		return "", err
 	}
