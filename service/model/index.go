@@ -39,6 +39,7 @@ type Order struct {
 	Type OrderType
 }
 
+//ToQuery to query clause
 func (i Index) ToQuery(value interface{}) Query {
 	return Query{
 		Index: i,

@@ -62,7 +62,7 @@ func TestEqualsByIDMap(t *testing.T) {
 		"updated": 1,
 	}
 	table := New(m, &Options{
-		Store:     fs.NewStore(),
+		Store:     file.NewStore(),
 		Namespace: uuid.Must(uuid.NewV4()).String(),
 	})
 

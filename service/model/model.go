@@ -12,14 +12,17 @@ import (
 	"github.com/micro-community/micro/v3/service/store"
 )
 
+//Error info
 var (
 	ErrorNilInterface         = errors.New("interface is nil")
 	ErrorNotFound             = errors.New("not found")
 	ErrorMultipleRecordsFound = errors.New("multiple records found")
 )
 
+//OrderType extend string
 type OrderType string
 
+//OrderType Type
 const (
 	OrderTypeUnordered = OrderType("unordered")
 	OrderTypeAsc       = OrderType("ascending")
@@ -63,6 +66,7 @@ type Model interface {
 	Delete(query Query) error
 }
 
+//Options of model
 type Options struct {
 	// Database sets the default database
 	Database string
@@ -80,6 +84,7 @@ type Options struct {
 	Context context.Context
 }
 
+//Option of model
 type Option func(*Options)
 
 // WithDatabase sets the default database for queries

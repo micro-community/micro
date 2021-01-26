@@ -1,5 +1,6 @@
 package model
 
+//Query struct
 type Query struct {
 	Index
 	Order  Order
