@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/micro-community/micro/v3/service/registry"
 )
 
@@ -405,14 +406,14 @@ func TestDynamicFlagParsing(t *testing.T) {
 		},
 		{
 			args: []string{"--user_friend_email=hi"},
-			values: &goregistry.Value{
-				Values: []*goregistry.Value{
+			values: &registry.Value{
+				Values: []*registry.Value{
 					{
 						Name: "user",
-						Values: []*goregistry.Value{
+						Values: []*registry.Value{
 							{
 								Name: "friend",
-								Values: []*goregistry.Value{
+								Values: []*registry.Value{
 									{
 										Name: "email",
 										Type: "string",
