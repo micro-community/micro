@@ -30,8 +30,10 @@ const (
 )
 
 const (
-	queryTypeEq = "eq"
-	indexTypeEq = "eq"
+	queryTypeEq  = "eq"
+	indexTypeEq  = "eq"
+	queryTypeAll = "all"
+	indexTypeAll = "all"
 )
 
 var (
@@ -70,8 +72,8 @@ type Model interface {
 type Options struct {
 	// Database sets the default database
 	Database string
-	// Set the primary key used for the default index
-	Key string
+	// Table sets the default table
+	Table string
 	// Enable debug logging
 	Debug bool
 	// The indexes to use for queries
@@ -82,6 +84,8 @@ type Options struct {
 	Store store.Store
 	// Context is the context for all model queries
 	Context context.Context
+	// Key is the fiel name of the primary key
+	Key string
 }
 
 //Option of model
@@ -94,17 +98,17 @@ func WithDatabase(db string) Option {
 	}
 }
 
+// WithTable sets the default table for queries
+func WithTable(t string) Option {
+	return func(o *Options) {
+		o.Table = t
+	}
+}
+
 // WithContext sets the context for all queries
 func WithContext(ctx context.Context) Option {
 	return func(o *Options) {
 		o.Context = ctx
-	}
-}
-
-// WithKey sets the field to use for the primary index
-func WithKey(k string) Option {
-	return func(o *Options) {
-		o.Key = k
 	}
 }
 
@@ -133,5 +137,12 @@ func WithDebug(d bool) Option {
 func WithNamespace(ns string) Option {
 	return func(o *Options) {
 		o.Namespace = ns
+	}
+}
+
+// WithKey sets the Key
+func WithKey(idField string) Option {
+	return func(o *Options) {
+		o.Key = idField
 	}
 }

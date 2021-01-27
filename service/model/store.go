@@ -19,6 +19,8 @@ import (
 type model struct {
 	// the database used for querying
 	database string
+	// the table to use for the model
+	table string
 	// the primary index using id
 	idIndex Index
 	// helps logically separate keys in a model where
@@ -58,7 +60,13 @@ func New(instance interface{}, options *Options) Model {
 		options = new(Options)
 	}
 
-	var namespace string
+	// indirect pointer types
+	// so we dont have to deal with pointers vs values down the line
+	if reflect.ValueOf(instance).Kind() == reflect.Ptr {
+		instance = reflect.Indirect(reflect.ValueOf(instance)).Interface()
+	}
+
+	var namespace, database, table string
 
 	// define namespace based on the value passed in
 	if instance != nil {
@@ -76,7 +84,15 @@ func New(instance interface{}, options *Options) Model {
 	if options.Context == nil {
 		options.Context = context.TODO()
 	}
-
+	if options.Key == "" {
+		var err error
+		options.Key, err = getKey(instance)
+		if err != nil {
+			// @todo throw panic? make new return error?
+			// CRUFT
+			options.Key = err.Error()
+		}
+	}
 	// the default index
 	idx := DefaultIndex
 
@@ -85,10 +101,22 @@ func New(instance interface{}, options *Options) Model {
 	}
 
 	// set the database
-	database := options.Database
+	database = options.Database
+	table = options.Table
+
+	// set defaults if blank
+	if len(database) == 0 && options.Store != nil {
+		database = options.Store.Options().Database
+	}
+
+	// set defaults if blank
+	if len(table) == 0 && options.Store != nil {
+		table = options.Store.Options().Table
+	}
 
 	return &model{
 		database:  database,
+		table:     table,
 		idIndex:   idx,
 		instance:  instance,
 		namespace: namespace,
@@ -96,24 +124,53 @@ func New(instance interface{}, options *Options) Model {
 	}
 }
 
+func getKey(instance interface{}) (string, error) {
+	// will be registered later probably
+	if instance == nil {
+		return "", nil
+	}
+	idFields := []string{"ID", "Id", "id"}
+
+	switch v := instance.(type) {
+	case map[string]interface{}:
+		for _, idField := range idFields {
+			if _, ok := v[idField]; ok {
+				return idField, nil
+			}
+		}
+	default:
+		val := reflect.ValueOf(instance)
+		for _, idField := range idFields {
+			if val.FieldByName(idField).IsValid() {
+				return idField, nil
+			}
+		}
+	}
+
+	return "", errors.New("ID Field not found")
+}
+
 // @todo we should correlate the field name with the model
 // instead of just blindly converting strings
-func getFieldName(field string) string {
+func (d *model) getFieldName(field string) string {
 	fieldName := ""
 	if strings.Contains(field, "_") {
 		fieldName = strcase.UpperCamelCase(field)
 	} else {
 		fieldName = strings.Title(field)
 	}
-	return strings.Replace(fieldName, "Id", "ID", -1)
+	if fieldName == "ID" {
+		return d.options.Key
+	}
+	return fieldName
 }
 
-func getFieldValue(struc interface{}, fieldName string) interface{} {
+func (d *model) getFieldValue(struc interface{}, fieldName string) interface{} {
 	switch v := struc.(type) {
 	case map[string]interface{}:
 		return v[fieldName]
 	}
-	fieldName = getFieldName(fieldName)
+	fieldName = d.getFieldName(fieldName)
 	r := reflect.ValueOf(struc)
 	f := reflect.Indirect(r).FieldByName(fieldName)
 
@@ -123,14 +180,14 @@ func getFieldValue(struc interface{}, fieldName string) interface{} {
 	return f.Interface()
 }
 
-func setFieldValue(struc interface{}, fieldName string, value interface{}) {
+func (d *model) setFieldValue(struc interface{}, fieldName string, value interface{}) {
 	switch v := struc.(type) {
 	case map[string]interface{}:
 		v[fieldName] = value
 		return
 	}
 
-	fieldName = getFieldName(fieldName)
+	fieldName = d.getFieldName(fieldName)
 	r := reflect.ValueOf(struc)
 
 	f := reflect.Indirect(r).FieldByName(fieldName)
@@ -145,12 +202,15 @@ func (d *model) Context(ctx context.Context) Model {
 	// retrieve the account from context and override the database
 	acc, ok := auth.AccountFromContext(ctx)
 	if ok {
-		// set the database to the account issuer
-		opts.Database = acc.Issuer
+		if len(acc.Issuer) > 0 {
+			// set the database to the account issuer
+			opts.Database = acc.Issuer
+		}
 	}
 
 	return &model{
 		database:  opts.Database,
+		table:     opts.Table,
 		idIndex:   d.idIndex,
 		instance:  d.instance,
 		namespace: d.namespace,
@@ -159,15 +219,25 @@ func (d *model) Context(ctx context.Context) Model {
 }
 
 // Register an instance type of a model
-func (d *model) Register(v interface{}) error {
-	if v == nil {
+func (d *model) Register(instance interface{}) error {
+	if instance == nil {
 		return ErrorNilInterface
+	}
+	if reflect.ValueOf(instance).Kind() == reflect.Ptr {
+		instance = reflect.Indirect(reflect.ValueOf(instance)).Interface()
+	}
+	if d.options.Key == "" {
+		var err error
+		d.options.Key, err = getKey(instance)
+		if err != nil {
+			return err
+		}
 	}
 
 	// set the namespace
-	d.namespace = reflect.TypeOf(v).String()
+	d.namespace = reflect.TypeOf(instance).String()
 	// TODO: add.options.Indexes?
-	d.instance = v
+	d.instance = instance
 
 	return nil
 }
@@ -182,7 +252,7 @@ func (d *model) Create(instance interface{}) error {
 	// get the old entries so we can compare values
 	// @todo consider some kind of locking (even if it's not distributed) by key here
 	// to avoid 2 read-writes happening at the same time
-	idQuery := d.idIndex.ToQuery(getFieldValue(instance, d.idIndex.FieldName))
+	idQuery := d.idIndex.ToQuery(d.getFieldValue(instance, d.idIndex.FieldName))
 
 	var oldEntry interface{}
 	switch instance.(type) {
@@ -203,7 +273,7 @@ func (d *model) Create(instance interface{}) error {
 			continue
 		}
 		potentialClash := reflect.New(reflect.ValueOf(instance).Type()).Interface()
-		err = d.Read(index.ToQuery(getFieldValue(instance, index.FieldName)), &potentialClash)
+		err = d.Read(index.ToQuery(d.getFieldValue(instance, index.FieldName)), &potentialClash)
 		if err != nil && err != ErrorNotFound {
 			return err
 		}
@@ -213,7 +283,7 @@ func (d *model) Create(instance interface{}) error {
 		}
 	}
 
-	id := getFieldValue(instance, d.idIndex.FieldName)
+	id := d.getFieldValue(instance, d.idIndex.FieldName)
 	for _, index := range append(d.options.Indexes, d.idIndex) {
 		// delete non id index keys to prevent stale index values
 		// ie.
@@ -230,10 +300,10 @@ func (d *model) Create(instance interface{}) error {
 		// types anyway
 		if !indexesMatch(d.idIndex, index) &&
 			oldEntry != nil &&
-			!reflect.DeepEqual(getFieldValue(oldEntry, index.FieldName), getFieldValue(instance, index.FieldName)) {
+			!reflect.DeepEqual(d.getFieldValue(oldEntry, index.FieldName), d.getFieldValue(instance, index.FieldName)) {
 			k := d.indexToKey(index, id, oldEntry, true)
 			// TODO: set the table name in the query
-			err = d.options.Store.Delete(k, store.DeleteFrom(d.database, ""))
+			err = d.options.Store.Delete(k, store.DeleteFrom(d.database, d.table))
 			if err != nil {
 				return err
 			}
@@ -246,7 +316,7 @@ func (d *model) Create(instance interface{}) error {
 		err = d.options.Store.Write(&store.Record{
 			Key:   k,
 			Value: js,
-		}, store.WriteTo(d.database, ""))
+		}, store.WriteTo(d.database, d.table))
 		if err != nil {
 			return err
 		}
@@ -272,16 +342,17 @@ func (d *model) Read(query Query, resultPointer interface{}) error {
 
 	// if its a slice then use the list query method
 	if t.Kind() == reflect.Slice {
-		return d.list(query, resultPointer, true)
+		return d.list(query, resultPointer)
 	}
 
+	// otherwise continue on as normal
 	read := func(index Index) error {
 		k := d.queryToListKey(index, query)
 		if d.options.Debug {
 			fmt.Printf("Listing key '%v'\n", k)
 		}
 		// TODO: set the table name in the query
-		recs, err := d.options.Store.Read(k, store.ReadPrefix(), store.ReadFrom(d.database, ""))
+		recs, err := d.options.Store.Read(k, store.ReadPrefix(), store.ReadFrom(d.database, d.table))
 		if err != nil {
 			return err
 		}
@@ -296,7 +367,12 @@ func (d *model) Read(query Query, resultPointer interface{}) error {
 		}
 		return json.Unmarshal(recs[0].Value, resultPointer)
 	}
-	// otherwise continue on as normal
+	if query.Type == queryTypeAll {
+		read(Index{
+			Type:      indexTypeAll,
+			FieldName: d.options.Key,
+		})
+	}
 	for _, index := range append(d.options.Indexes, d.idIndex) {
 		if indexMatchesQuery(index, query) {
 			return read(index)
@@ -315,18 +391,14 @@ func (d *model) Read(query Query, resultPointer interface{}) error {
 	return fmt.Errorf("Read: for query type '%v', field '%v' does not match any indexes", query.Type, query.FieldName)
 }
 
-func (d *model) List(query Query, resultSlicePointer interface{}) error {
-	return d.list(query, resultSlicePointer, false)
-}
-
-func (d *model) list(query Query, resultSlicePointer interface{}, isRead bool) error {
+func (d *model) list(query Query, resultSlicePointer interface{}) error {
 	list := func(index Index) error {
 		k := d.queryToListKey(index, query)
 		if d.options.Debug {
 			fmt.Printf("Listing key '%v'\n", k)
 		}
 		// TODO: set the table name in the query
-		recs, err := d.options.Store.Read(k, store.ReadPrefix(), store.ReadFrom(d.database, ""))
+		recs, err := d.options.Store.Read(k, store.ReadPrefix(), store.ReadFrom(d.database, d.table))
 		if err != nil {
 			return err
 		}
@@ -344,24 +416,27 @@ func (d *model) list(query Query, resultSlicePointer interface{}, isRead bool) e
 		}
 		return json.Unmarshal(jsBuffer, resultSlicePointer)
 	}
+	if query.Type == queryTypeAll {
+		list(Index{
+			Type:      indexTypeAll,
+			FieldName: d.options.Key,
+		})
+	}
 	for _, index := range append(d.options.Indexes, d.idIndex) {
 		if indexMatchesQuery(index, query) {
 			return list(index)
 		}
 	}
 
-	if isRead {
-		// find a maching query if non exists, take the first one
-		// which applies to the same field regardless of ordering
-		// or padding etc.
-		//
-		// only do this for reads because ordering doesnt matter with single reads
-		for _, index := range append(d.options.Indexes, d.idIndex) {
-			if index.FieldName == query.FieldName {
-				return list(index)
-			}
+	// find a maching query if non exists, take the first one
+	// which applies to the same field regardless of ordering
+	// or padding etc.
+	for _, index := range append(d.options.Indexes, d.idIndex) {
+		if index.FieldName == query.FieldName {
+			return list(index)
 		}
 	}
+
 	return fmt.Errorf("List: for query type '%v', field '%v' does not match any indexes", query.Type, query.FieldName)
 }
 
@@ -382,7 +457,7 @@ func (d *model) queryToListKey(i Index, q Query) string {
 	}
 
 	if q.Value != nil {
-		setFieldValue(val, i.FieldName, q.Value)
+		d.setFieldValue(val, i.FieldName, q.Value)
 	}
 	return d.indexToKey(i, "", val, false)
 }
@@ -396,14 +471,21 @@ func (d *model) queryToListKey(i Index, q Query) string {
 // users/30/2
 // without ids we could only have one 30 year old user in the index
 func (d *model) indexToKey(i Index, id interface{}, entry interface{}, appendID bool) string {
+	if i.Type == indexTypeAll {
+		return fmt.Sprintf("%v:%v", d.namespace, indexPrefix(i))
+	}
+	if i.FieldName == "ID" {
+		i.FieldName = d.options.Key
+	}
+
 	format := "%v:%v"
 	values := []interface{}{d.namespace, indexPrefix(i)}
-	filterFieldValue := getFieldValue(entry, i.FieldName)
-	orderFieldValue := getFieldValue(entry, i.FieldName)
+	filterFieldValue := d.getFieldValue(entry, i.FieldName)
+	orderFieldValue := d.getFieldValue(entry, i.FieldName)
 	orderFieldKey := i.FieldName
 
 	if i.FieldName != i.Order.FieldName && i.Order.FieldName != "" {
-		orderFieldValue = getFieldValue(entry, i.Order.FieldName)
+		orderFieldValue = d.getFieldValue(entry, i.Order.FieldName)
 		orderFieldKey = i.Order.FieldName
 	}
 
@@ -557,12 +639,12 @@ func (d *model) Delete(query Query) error {
 	// be deletable by id again but the maintained.options.Indexes
 	// will be stuck in limbo
 	for _, index := range append(d.options.Indexes, d.idIndex) {
-		key := d.indexToKey(index, getFieldValue(oldEntry, d.idIndex.FieldName), oldEntry, true)
+		key := d.indexToKey(index, d.getFieldValue(oldEntry, d.idIndex.FieldName), oldEntry, true)
 		if d.options.Debug {
 			fmt.Printf("Deleting key '%v'\n", key)
 		}
 		// TODO: set the table to delete from
-		err = d.options.Store.Delete(key, store.DeleteFrom(d.database, ""))
+		err = d.options.Store.Delete(key, store.DeleteFrom(d.database, d.table))
 		if err != nil {
 			return err
 		}

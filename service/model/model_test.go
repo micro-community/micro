@@ -20,7 +20,7 @@ type User struct {
 	Updated int64  `json:"updated"`
 }
 
-func TestEqualsByID(t *testing.T) {
+func TestQueryEqualsByID(t *testing.T) {
 	table := New(User{}, &Options{
 		Store:     file.NewStore(),
 		Namespace: uuid.Must(uuid.NewV4()).String(),
@@ -41,7 +41,7 @@ func TestEqualsByID(t *testing.T) {
 		t.Fatal(err)
 	}
 	users := []User{}
-	q := Equals("ID", "1")
+	q := QueryEquals("ID", "1")
 	q.Order.Type = OrderTypeUnordered
 	err = table.Read(q, &users)
 	if err != nil {
@@ -52,7 +52,49 @@ func TestEqualsByID(t *testing.T) {
 	}
 }
 
-func TestEqualsByIDMap(t *testing.T) {
+type User1 struct {
+	Id      string `json:"id"`
+	Age     int    `json:"age"`
+	HasPet  bool   `json:"hasPet"`
+	Created int64  `json:"created"`
+	Tag     string `json:"tag"`
+	Updated int64  `json:"updated"`
+}
+
+func TestQueryEqualsLowerCaseID(t *testing.T) {
+	table := New(&User1{}, &Options{
+		Store:     fs.NewStore(),
+		Namespace: uuid.Must(uuid.NewV4()).String(),
+	})
+
+	// pointer insert
+	err := table.Create(&User1{
+		Id:  "1",
+		Age: 12,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = table.Create(User1{
+		Id:  "2",
+		Age: 25,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	users := []User1{}
+	q := QueryEquals("Id", "1")
+	q.Order.Type = OrderTypeUnordered
+	err = table.Read(q, &users)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(users) != 1 {
+		t.Fatal(users)
+	}
+}
+
+func TestQueryEqualsByIDMap(t *testing.T) {
 	m := map[string]interface{}{
 		"ID":      "id",
 		"age":     1,
@@ -81,13 +123,52 @@ func TestEqualsByIDMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	users := []map[string]interface{}{}
-	q := Equals("ID", "1")
+	q := QueryEquals("ID", "1")
 	q.Order.Type = OrderTypeUnordered
 	err = table.Read(q, &users)
 	if err != nil {
 		t.Fatal(err)
 	}
 	if len(users) != 1 {
+		t.Fatal(users)
+	}
+}
+
+func TestListAllMap(t *testing.T) {
+	m := map[string]interface{}{
+		"ID":      "id",
+		"age":     1,
+		"hasPet":  true,
+		"created": 1,
+		"tag":     "tag",
+		"updated": 1,
+	}
+	table := New(m, &Options{
+		Store:     fs.NewStore(),
+		Namespace: uuid.Must(uuid.NewV4()).String(),
+	})
+
+	err := table.Create(map[string]interface{}{
+		"ID":  "1",
+		"Age": 12,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = table.Create(map[string]interface{}{
+		"ID":  "2",
+		"Age": 25,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	users := []map[string]interface{}{}
+	q := QueryAll()
+	err = table.Read(q, &users)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(users) != 2 {
 		t.Fatal(users)
 	}
 }
@@ -118,7 +199,7 @@ func TestNewModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	users := []User{}
-	q := Equals("ID", "1")
+	q := QueryEquals("ID", "1")
 	q.Order.Type = OrderTypeUnordered
 	err = table.Read(q, &users)
 	if err != nil {
@@ -136,7 +217,7 @@ func TestRead(t *testing.T) {
 		Namespace: uuid.Must(uuid.NewV4()).String(),
 	})
 	user := User{}
-	err := table.Read(Equals("age", 25), &user)
+	err := table.Read(QueryEquals("age", 25), &user)
 	if err != ErrorNotFound {
 		t.Fatal(err)
 	}
@@ -149,7 +230,7 @@ func TestRead(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = table.Read(Equals("age", 25), &user)
+	err = table.Read(QueryEquals("age", 25), &user)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,13 +246,13 @@ func TestRead(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = table.Read(Equals("age", 25), &user)
+	err = table.Read(QueryEquals("age", 25), &user)
 	if err != ErrorMultipleRecordsFound {
 		t.Fatal(err)
 	}
 }
 
-func TestEquals(t *testing.T) {
+func TestQueryEquals(t *testing.T) {
 	table := New(User{}, &Options{
 		Store:     file.NewStore(),
 		Indexes:   []Index{ByEquality("age")},
@@ -200,7 +281,7 @@ func TestEquals(t *testing.T) {
 		t.Fatal(err)
 	}
 	users := []User{}
-	err = table.Read(Equals("age", 12), &users)
+	err = table.Read(QueryEquals("age", 12), &users)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +350,7 @@ func TestOrderingStrings(t *testing.T) {
 			}
 		}
 		users := []User{}
-		q := Equals("tag", nil)
+		q := QueryEquals("tag", nil)
 		if c.reverse {
 			q.Order.Type = OrderTypeDesc
 		}
@@ -341,7 +422,7 @@ func TestOrderingNumbers(t *testing.T) {
 			}
 		}
 		users := []User{}
-		q := Equals("created", nil)
+		q := QueryEquals("created", nil)
 		if c.reverse {
 			q.Order.Type = OrderTypeDesc
 		}
@@ -393,7 +474,7 @@ func TestStaleIndexRemoval(t *testing.T) {
 		t.Fatal(err)
 	}
 	res := []User{}
-	err = table.Read(Equals("tag", nil), &res)
+	err = table.Read(QueryEquals("tag", nil), &res)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -461,7 +542,7 @@ func TestNonIDKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	users := []User{}
-	q := Equals("slug", "1")
+	q := QueryEquals("slug", "1")
 	q.Order.Type = OrderTypeUnordered
 	err = table.Read(q, &users)
 	if err != nil {
@@ -500,7 +581,7 @@ func TestReadByString(t *testing.T) {
 		t.Fatal(err)
 	}
 	tags := []Tag{}
-	q := Equals("type", "post-tag")
+	q := QueryEquals("type", "post-tag")
 	err = table.Read(q, &tags)
 	if err != nil {
 		t.Fatal(err)
@@ -602,7 +683,7 @@ func TestDeleteIndexCleanup(t *testing.T) {
 		t.Fatal(err)
 	}
 	tags := []Tag{}
-	q := Equals("type", "post-tag")
+	q := QueryEquals("type", "post-tag")
 	err = table.Read(q, &tags)
 	if err != nil {
 		t.Fatal(err)
@@ -616,7 +697,7 @@ func TestDeleteIndexCleanup(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	q = Equals("type", "post-tag")
+	q = QueryEquals("type", "post-tag")
 	err = table.Read(q, &tags)
 	if err != nil {
 		t.Fatal(err)
@@ -648,20 +729,20 @@ func TestDeleteByUnmatchingIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = table.Delete(Equals("ID", "1"))
+	err = table.Delete(QueryEquals("ID", "1"))
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Run("Test read by unspecified index", func(t *testing.T) {
 		users := []User{}
-		err = table.Read(Equals("ID", "1"), &users)
+		err = table.Read(QueryEquals("ID", "1"), &users)
 		if err != nil {
 			t.Fatal(err)
 		}
 		if len(users) != 0 {
 			t.Fatal(users)
 		}
-		err = table.Read(Equals("ID", "2"), &users)
+		err = table.Read(QueryEquals("ID", "2"), &users)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -779,14 +860,14 @@ func TestAllCombos(t *testing.T) {
 				small := TypeTest{
 					ID: "1",
 				}
-				v1 := getExampleValue(getFieldValue(small, orderFieldName), 1)
-				setFieldValue(&small, orderFieldName, v1)
+				v1 := getExampleValue(table.(*model).getFieldValue(small, orderFieldName), 1)
+				table.(*model).setFieldValue(&small, orderFieldName, v1)
 
 				large := TypeTest{
 					ID: "2",
 				}
-				v2 := getExampleValue(getFieldValue(large, orderFieldName), 2)
-				setFieldValue(&large, orderFieldName, v2)
+				v2 := getExampleValue(table.(*model).getFieldValue(large, orderFieldName), 2)
+				table.(*model).setFieldValue(&large, orderFieldName, v2)
 
 				err := table.Create(small)
 				if err != nil {
@@ -797,7 +878,7 @@ func TestAllCombos(t *testing.T) {
 					t.Fatal(err)
 				}
 				results := []TypeTest{}
-				err = table.Read(Equals(filterFieldName, nil), &results)
+				err = table.Read(QueryEquals(filterFieldName, nil), &results)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -823,14 +904,14 @@ func TestAllCombos(t *testing.T) {
 				small := TypeTest{
 					ID: "1",
 				}
-				v1 := getExampleValue(getFieldValue(small, orderFieldName), 1)
-				setFieldValue(&small, orderFieldName, v1)
+				v1 := getExampleValue(table.(*model).getFieldValue(small, orderFieldName), 1)
+				table.(*model).setFieldValue(&small, orderFieldName, v1)
 
 				large := TypeTest{
 					ID: "2",
 				}
-				v2 := getExampleValue(getFieldValue(large, orderFieldName), 2)
-				setFieldValue(&large, orderFieldName, v2)
+				v2 := getExampleValue(table.(*model).getFieldValue(large, orderFieldName), 2)
+				table.(*model).setFieldValue(&large, orderFieldName, v2)
 
 				err := table.Create(small)
 				if err != nil {
