@@ -96,7 +96,7 @@ func TestQueryEqualsLowerCaseID(t *testing.T) {
 
 func TestQueryEqualsMismatchIDCapitalization(t *testing.T) {
 	table := New(&User1{}, &Options{
-		Store:     fs.NewStore(),
+		Store:     file.NewStore(),
 		Namespace: uuid.Must(uuid.NewV4()).String(),
 	})
 
