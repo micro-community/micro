@@ -66,7 +66,7 @@ func ByEquality(fieldName string) Index {
 }
 
 func indexMatchesQuery(i Index, q Query) bool {
-	if i.FieldName == q.FieldName &&
+	if strings.ToLower(i.FieldName) == strings.ToLower(q.FieldName) &&
 		i.Type == q.Type &&
 		i.Order.Type == q.Order.Type {
 		return true
