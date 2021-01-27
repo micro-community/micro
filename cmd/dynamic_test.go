@@ -403,6 +403,34 @@ func TestDynamicFlagParsing(t *testing.T) {
 				"b": true,
 			},
 		},
+		{
+			args: []string{"--user_friend_email=hi"},
+			values: &goregistry.Value{
+				Values: []*goregistry.Value{
+					{
+						Name: "user",
+						Values: []*goregistry.Value{
+							{
+								Name: "friend",
+								Values: []*goregistry.Value{
+									{
+										Name: "email",
+										Type: "string",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			expected: map[string]interface{}{
+				"user": map[string]interface{}{
+					"friend": map[string]interface{}{
+						"email": "hi",
+					},
+				},
+			},
+		},
 	}
 	for _, c := range cases {
 		_, flags, err := splitCmdArgs(c.args)
@@ -414,6 +442,7 @@ func TestDynamicFlagParsing(t *testing.T) {
 			t.Fatal(err)
 		}
 		if !reflect.DeepEqual(c.expected, req) {
+			spew.Dump("Expected:", c.expected, "got: ", req)
 			t.Fatalf("Expected %v, got %v", c.expected, req)
 		}
 	}
