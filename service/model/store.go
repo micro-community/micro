@@ -138,6 +138,9 @@ func getKey(instance interface{}) (string, error) {
 				return idField, nil
 			}
 		}
+		// To support empty map schema
+		// db initializations, we return the default ID field
+		return "ID", nil
 	default:
 		val := reflect.ValueOf(instance)
 		for _, idField := range idFields {
@@ -170,6 +173,7 @@ func (d *model) getFieldValue(struc interface{}, fieldName string) interface{} {
 	case map[string]interface{}:
 		return v[fieldName]
 	}
+
 	fieldName = d.getFieldName(fieldName)
 	r := reflect.ValueOf(struc)
 	f := reflect.Indirect(r).FieldByName(fieldName)
@@ -270,6 +274,20 @@ func (d *model) Create(instance interface{}) error {
 		return err
 	}
 
+	oldEntryFound := false
+	// map in interface can be non nil but empty
+	// so test for that
+	switch v := oldEntry.(type) {
+	case map[string]interface{}:
+		if len(v) > 0 {
+			oldEntryFound = true
+		}
+	default:
+		if oldEntry != nil {
+			oldEntryFound = true
+		}
+	}
+
 	// Do uniqueness checks before saving any data
 	for _, index := range d.options.Indexes {
 		if !index.Unique {
@@ -302,8 +320,9 @@ func (d *model) Create(instance interface{}) error {
 		// but it's not an issue as right now indexes are only supported on POD
 		// types anyway
 		if !indexesMatch(d.idIndex, index) &&
-			oldEntry != nil &&
+			oldEntryFound &&
 			!reflect.DeepEqual(d.getFieldValue(oldEntry, index.FieldName), d.getFieldValue(instance, index.FieldName)) {
+
 			k := d.indexToKey(index, id, oldEntry, true)
 			// TODO: set the table name in the query
 			err = d.options.Store.Delete(k, store.DeleteFrom(d.database, d.table))
@@ -632,6 +651,10 @@ func (d *model) getOrderedStringFieldKey(i Index, fieldValue string) string {
 
 func (d *model) Delete(query Query) error {
 	oldEntry := reflect.New(reflect.ValueOf(d.instance).Type()).Interface()
+	switch oldEntry.(type) {
+	case *map[string]interface{}:
+		oldEntry = reflect.Indirect(reflect.ValueOf(oldEntry)).Interface()
+	}
 	err := d.Read(d.idIndex.ToQuery(query.Value), &oldEntry)
 	if err != nil {
 		return err
