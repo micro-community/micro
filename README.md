@@ -4,7 +4,7 @@
 
 ## Overview
 
-A community fork and extesion of [micro](https://github.com/micro/micro)
+A community fork and extesion of [micro](https://github.com/micro/micro) with great hornor.
 
 Micro addresses the key requirements for building services in the cloud. It leverages the microservices
 architecture pattern and provides a set of services which act as the building blocks of a platform. Micro deals
