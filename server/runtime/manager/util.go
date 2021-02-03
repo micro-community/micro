@@ -13,7 +13,7 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
-	"github.com/micro-community/micro/v3/service/runtime/source/git"
+	"github.com/micro-community/micro/v3/platform/runtime/source/git"
 	"github.com/micro-community/micro/v3/service/store"
 )
 

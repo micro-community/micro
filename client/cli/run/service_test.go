@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro-community/micro/v3/service/runtime/source/git"
+	"github.com/micro-community/micro/v3/platform/runtime/source/git"
 	"github.com/onsi/gomega/types"
 
 	. "github.com/onsi/gomega"
