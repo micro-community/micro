@@ -256,7 +256,7 @@ func TestListLimitMap(t *testing.T) {
 		"updated": 1,
 	}
 	table := New(m, &Options{
-		Store:     fs.NewStore(),
+		Store:     file.NewStore(),
 		Indexes:   []Index{ageAsc, ageDesc},
 		Namespace: uuid.Must(uuid.NewV4()).String(),
 	})
