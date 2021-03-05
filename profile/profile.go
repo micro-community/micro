@@ -176,7 +176,8 @@ var Kubernetes = &Profile{
 		}
 		SetupConfigSecretKey(ctx)
 
-		router.DefaultRouter = mRouterK8s.NewRouter()
+		// Use k8s routing which is DNS based
+		router.DefaultRouter = k8sRouter.NewRouter()
 		client.DefaultClient.Init(client.Router(router.DefaultRouter))
 		return nil
 	},
@@ -209,7 +210,7 @@ var Test = &Profile{
 func SetupRegistry(reg registry.Registry) {
 	registry.DefaultRegistry = reg
 	router.DefaultRouter = mRouterReg.NewRouter(router.Registry(reg))
-	client.DefaultClient.Init(client.Registry(reg))
+	client.DefaultClient.Init(client.Registry(reg), client.Router(router.DefaultRouter))
 	server.DefaultServer.Init(server.Registry(reg))
 }
 

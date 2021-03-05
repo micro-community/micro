@@ -106,6 +106,9 @@ func Run(context *cli.Context) error {
 		envvars = append(envvars, val)
 	}
 
+	// save the runtime
+	runtimeServer := runtime.DefaultRuntime
+
 	// start the services
 	for _, service := range services {
 		logger.Infof("Registering %s", service)
@@ -184,25 +187,26 @@ func Run(context *cli.Context) error {
 
 		// NOTE: we use Version right now to check for the latest release
 		muService := &runtime.Service{Name: service, Version: "latest"}
-		if err := runtime.Create(muService, args...); err != nil {
+		if err := runtimeServer.Create(muService, args...); err != nil {
 			logger.Errorf("Failed to create runtime environment: %v", err)
 			return err
 		}
 	}
 
 	// server is deployed as a pod in k8s, meaning it should exit once the services have been created.
-	if runtime.DefaultRuntime.String() == "kubernetes" {
+	if runtimeServer.String() == "kubernetes" {
 		return nil
 	}
 
 	logger.Info("Starting server runtime")
 
+
+
 	// start the runtime
-	if err := runtime.DefaultRuntime.Start(); err != nil {
+	if err := runtimeServer.Start(); err != nil {
 		logger.Fatal(err)
 		return err
 	}
-	defer runtime.DefaultRuntime.Stop()
 
 	// internal server
 	srv := service.New(
@@ -215,6 +219,7 @@ func Run(context *cli.Context) error {
 		logger.Fatalf("Error running server: %v", err)
 	}
 
+	runtimeServer.Stop()
 	logger.Info("Stopped server")
 	return nil
 }
