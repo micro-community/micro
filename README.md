@@ -247,7 +247,7 @@ For the hosted Micro Platform aka M3O see [m3o.com](https://m3o.com).
 
 ## Community
 
-Join us in GitHub [Discussions](https://github.com/micro-community/micro/discussions).
+Join us on GitHub [Discussions](https://github.com/micro-community/micro/discussions).
 
 ## Repo Clone for CN
 
