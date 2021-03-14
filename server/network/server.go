@@ -20,7 +20,6 @@ import (
 	"github.com/micro-community/micro/v3/service/proxy"
 	grpcProxy "github.com/micro-community/micro/v3/service/proxy/grpc"
 	mucpProxy "github.com/micro-community/micro/v3/service/proxy/mucp"
-	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/router"
 	"github.com/micro-community/micro/v3/service/server"
 	mucpServer "github.com/micro-community/micro/v3/service/server/mucp"

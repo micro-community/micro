@@ -21,7 +21,6 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/stretchr/testify/assert"
 )
 
