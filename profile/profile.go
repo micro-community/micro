@@ -177,7 +177,7 @@ var Kubernetes = &Profile{
 		SetupConfigSecretKey(ctx)
 
 		// Use k8s routing which is DNS based
-		router.DefaultRouter = k8sRouter.NewRouter()
+		router.DefaultRouter = mRouterK8s.NewRouter()
 		client.DefaultClient.Init(client.Router(router.DefaultRouter))
 		return nil
 	},

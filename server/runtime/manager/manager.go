@@ -11,11 +11,13 @@ import (
 
 	kclient "github.com/micro-community/micro/v3/platform/kubernetes/client"
 	"github.com/micro-community/micro/v3/platform/namespace"
+	"github.com/micro-community/micro/v3/platform/runtime/source/git"
+	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/build"
-	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/build/util/tar"
 	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/store"
 )
 
