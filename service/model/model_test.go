@@ -250,7 +250,7 @@ func TestListAllMapCutomID(t *testing.T) {
 		"updated": 1,
 	}
 	table := New(m, &Options{
-		Store:     fs.NewStore(),
+		Store:     file.NewStore(),
 		Key:       "name",
 		Namespace: uuid.Must(uuid.NewV4()).String(),
 	})

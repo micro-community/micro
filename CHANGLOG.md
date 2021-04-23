@@ -23,3 +23,5 @@
 - move noop store to package folder
 
 - add model for db orm
+
+- fix lock on win10 with nightyone/lockfile
