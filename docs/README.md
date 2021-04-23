@@ -47,7 +47,7 @@ Join us in GitHub [Discussions](https://github.com/micro-community/micro/discuss
 
 ## Hosting
 
-For a hosted Micro Platform aka M3O see [m3o.com](https://m3o.com).
+For cloud hosting see [m3o.com](https://m3o.com).
 
 ## License
 
