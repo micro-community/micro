@@ -6,7 +6,7 @@ var (
 go 1.15
 
 require (
-	github.com/micro-community/micro/v3 v3.0.4
+	github.com/micro-community/micro/v3 v3.2.0
 )
 
 // This can be removed once etcd becomes go gettable, version 3.4 and 3.5 is not,
