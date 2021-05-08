@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package go.micro.service.signup;
+package go.micro.generator.test;
 
 service Signup {
 	// Sends the verification email to the user
@@ -27,14 +27,14 @@ message VerifyRequest {
 }
 
 message VerifyResponse {
-	// Auth token to be saved into `~/.micro`
+	// Auth token to be saved into '~/.micro'
 	// For users who are already registered and paid,
 	// the flow stops here.
 	// For users who are yet to be registered
-	// the token will be acquired in the `FinishSignup` step.
+	// the token will be acquired in the 'FinishSignup' step.
 	AuthToken authToken = 1;
 	// Payment provider custommer id that can be used to
-	// acquire a payment method, see `micro login` flow for more.
+	// acquire a payment method, see 'micro login' flow for more.
 	// @todo this is likely not needed
 	string customerID = 2;
 	// Namespace to use
@@ -73,7 +73,7 @@ message CompleteSignupRequest {
 	string email = 1;
 	// The token has to be passed here too for identification purposes.
 	string token = 2;
-	// This payment method ID is the one we got back from Stripe on the frontend (ie. `m3o.com/subscribe.html`)
+	// This payment method ID is the one we got back from Stripe on the frontend (ie. 'm3o.com/subscribe.html')
 	// deprecated: signup service now knows the payment method due to the
 	// SetPaymentMethod call issued by the frontend.
 	string paymentMethodID = 3;

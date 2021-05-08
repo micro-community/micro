@@ -1,0 +1,73 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "go.useCodeSnippetsOnFunctionSuggest": false,
+  "go.testTimeout": "10s",
+  "go.testFlags": [
+    "-v",
+    "-count=1"
+  ],
+  "go.useLanguageServer": true,
+  "go.lintTool": "golangci-lint",
+  "go.lintOnSave": "package",
+  "go.lintFlags": [
+    "--fast"
+  ],
+  "go.vetOnSave": "package",
+  "go.formatTool": "goimports",
+  "go.delveConfig": {
+    "dlvLoadConfig": {
+      "followPointers": true,
+      "maxVariableRecurse": 1,
+      "maxStringLen": 64,
+      "maxArrayValues": 64,
+      "maxStructFields": -1
+    },
+    "apiVersion": 2,
+    "showGlobalVariables": true
+  },
+  "go.editorContextMenuCommands": {
+    "toggleTestFile": true,
+    "addTags": true,
+    "removeTags": true,
+    "testAtCursor": true,
+    "testFile": true,
+    "testPackage": true,
+    "generateTestForFunction": true,
+    "generateTestForFile": true,
+    "generateTestForPackage": true,
+    "addImport": true,
+    "testCoverage": true,
+    "playground": true,
+    "debugTestAtCursor": true
+  },
+  "go.playground": {
+    "openbrowser": false,
+    "share": false,
+    "run": false
+  },
+  "go.addTags": {
+    "tags": "json",
+    "options": "json=omitempty",
+    "promptForTags": true,
+    "transform": "snakecase"
+  },
+  "go.removeTags": {
+    "tags": "",
+    "options": "",
+    "promptForTags": false
+  },
+  "cSpell.allowCompoundWords": true,
+  // Proto
+  "clang-format.style": "google",
+  "clang-format.executable": "C:/Program Files/LLVM/bin/clang-format.exe",
+  "protoc": {
+    "options": [
+      "--proto_path=${workspaceRoot}",
+      "--proto_path=${env.GOPATH}/src",
+    ]
+  },
+  "fileheader.Author": "Edward",
+  "fileheader.tpl": "/*\r\n * @Author: {author} https://github.com/crazybber\r\n * @Date: {createTime}\r\n * @Last Modified by: {lastModifiedBy}\r\n * @Last Modified time: {updateTime}\r\n * @Description:   \r\n */\r\n\r\n",
+  "fileheader.LastModifiedBy": "Eamon",
+}
