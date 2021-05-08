@@ -46,10 +46,15 @@ var (
 var (
 	re = regexp.MustCompile("[^a-zA-Z0-9]+")
 
+	// alternative ordering
+	orderAsc  = "ORDER BY key ASC"
+	orderDesc = "ORDER BY key DESC"
+
+	// the sql statements we prepare and use
 	statements = map[string]string{
 		"list":       "SELECT key, value, metadata, expiry FROM %s.%s WHERE key LIKE $1 ORDER BY key ASC LIMIT $2 OFFSET $3;",
 		"read":       "SELECT key, value, metadata, expiry FROM %s.%s WHERE key = $1;",
-		"readMany":   "SELECT key, value, metadata, expiry FROM %s.%s WHERE key LIKE $1;",
+		"readMany":   "SELECT key, value, metadata, expiry FROM %s.%s WHERE key LIKE $1 ORDER BY key ASC;",
 		"readOffset": "SELECT key, value, metadata, expiry FROM %s.%s WHERE key LIKE $1 ORDER BY key ASC LIMIT $2 OFFSET $3;",
 		"write":      "INSERT INTO %s.%s(key, value, metadata, expiry) VALUES ($1, $2::bytea, $3, $4) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, metadata = EXCLUDED.metadata, expiry = EXCLUDED.expiry;",
 		"delete":     "DELETE FROM %s.%s WHERE key = $1;",
@@ -92,7 +97,6 @@ func (s *sqlStore) getDB(database, table string) (string, string) {
 // createDB ensures that the DB and table have been created. It's used for lazy initialisation
 // and will record which tables have been created to reduce calls to the DB
 func (s *sqlStore) createDB(database, table string) error {
-
 	database, table = s.getDB(database, table)
 
 	s.Lock()
@@ -115,6 +119,7 @@ func (s *sqlStore) db() (*sql.DB, error) {
 	if s.dbConn == nil {
 		return nil, ErrNoConnection
 	}
+
 	if err := s.dbConn.Ping(); err != nil {
 		if !isBadConnError(err) {
 			return nil, err
@@ -125,6 +130,7 @@ func (s *sqlStore) db() (*sql.DB, error) {
 			return nil, err
 		}
 	}
+
 	return s.dbConn, nil
 }
 
@@ -136,6 +142,13 @@ func isBadConnError(err error) bool {
 	if err == driver.ErrBadConn {
 		return true
 	}
+
+	// heavy handed crude check for "connection reset by peer"
+	if strings.Contains(err.Error(), syscall.ECONNRESET.Error()) {
+		return true
+	}
+
+	// otherwise iterate through the error types
 	switch t := err.(type) {
 	case syscall.Errno:
 		return t == syscall.ECONNRESET || t == syscall.ECONNABORTED || t == syscall.ECONNREFUSED
@@ -144,6 +157,7 @@ func isBadConnError(err error) bool {
 	case net.Error:
 		return !t.Temporary()
 	}
+
 	return false
 }
 
@@ -225,16 +239,23 @@ func (s *sqlStore) configure() error {
 	return s.initDB(database, table)
 }
 
-func (s *sqlStore) prepare(database, table, query string) (*sql.Stmt, error) {
+func (s *sqlStore) prepare(database, table, query string, order store.Order) (*sql.Stmt, error) {
 	st, ok := statements[query]
 	if !ok {
 		return nil, errors.New("unsupported statement")
+	}
+
+	// set the order in the statement
+	// TODO: replace with better sql compositon
+	if order == store.OrderDesc {
+		st = strings.Replace(st, orderAsc, orderDesc, 1)
 	}
 
 	// get DB
 	database, table = s.getDB(database, table)
 
 	q := fmt.Sprintf(st, database, table)
+
 	db, err := s.db()
 	if err != nil {
 		return nil, err
@@ -263,7 +284,10 @@ func (s *sqlStore) Init(opts ...store.Option) error {
 
 // List all the known records
 func (s *sqlStore) List(opts ...store.ListOption) ([]string, error) {
-	var options store.ListOptions
+	options := store.ListOptions{
+		Order: store.OrderAsc,
+	}
+
 	for _, o := range opts {
 		o(&options)
 	}
@@ -290,7 +314,7 @@ func (s *sqlStore) List(opts ...store.ListOption) ([]string, error) {
 		limit = sql.NullInt32{Int32: int32(options.Limit), Valid: true}
 	}
 
-	st, err := s.prepare(options.Database, options.Table, "list")
+	st, err := s.prepare(options.Database, options.Table, "list", options.Order)
 	if err != nil {
 		return nil, err
 	}
@@ -384,7 +408,9 @@ func (s *sqlStore) rowsToRecords(rows *sql.Rows) ([]*store.Record, error) {
 
 // Read a single key
 func (s *sqlStore) Read(key string, opts ...store.ReadOption) ([]*store.Record, error) {
-	var options store.ReadOptions
+	options := store.ReadOptions{
+		Order: store.OrderAsc,
+	}
 	for _, o := range opts {
 		o(&options)
 	}
@@ -398,7 +424,7 @@ func (s *sqlStore) Read(key string, opts ...store.ReadOption) ([]*store.Record, 
 		return s.read(key, options)
 	}
 
-	st, err := s.prepare(options.Database, options.Table, "read")
+	st, err := s.prepare(options.Database, options.Table, "read", options.Order)
 	if err != nil {
 		return nil, err
 	}
@@ -428,7 +454,7 @@ func (s *sqlStore) read(key string, options store.ReadOptions) ([]*store.Record,
 	var err error
 
 	if options.Limit != 0 {
-		st, err = s.prepare(options.Database, options.Table, "readOffset")
+		st, err = s.prepare(options.Database, options.Table, "readOffset", options.Order)
 		if err != nil {
 			return nil, err
 		}
@@ -436,7 +462,7 @@ func (s *sqlStore) read(key string, options store.ReadOptions) ([]*store.Record,
 
 		rows, err = st.Query(pattern, options.Limit, options.Offset)
 	} else {
-		st, err = s.prepare(options.Database, options.Table, "readMany")
+		st, err = s.prepare(options.Database, options.Table, "readMany", options.Order)
 		if err != nil {
 			return nil, err
 		}
@@ -481,7 +507,7 @@ func (s *sqlStore) Write(r *store.Record, opts ...store.WriteOption) error {
 		return err
 	}
 
-	st, err := s.prepare(options.Database, options.Table, "write")
+	st, err := s.prepare(options.Database, options.Table, "write", store.OrderAsc)
 	if err != nil {
 		return err
 	}
@@ -522,7 +548,7 @@ func (s *sqlStore) Delete(key string, opts ...store.DeleteOption) error {
 		return err
 	}
 
-	st, err := s.prepare(options.Database, options.Table, "delete")
+	st, err := s.prepare(options.Database, options.Table, "delete", store.OrderAsc)
 	if err != nil {
 		return err
 	}

@@ -57,11 +57,21 @@ func (h *handler) List(ctx context.Context, req *pb.ListRequest, stream pb.Store
 	if len(req.Options.Prefix) > 0 {
 		opts = append(opts, store.ListPrefix(req.Options.Prefix))
 	}
+	if len(req.Options.Suffix) > 0 {
+		opts = append(opts, store.ListSuffix(req.Options.Suffix))
+	}
 	if req.Options.Offset > 0 {
 		opts = append(opts, store.ListOffset(uint(req.Options.Offset)))
 	}
 	if req.Options.Limit > 0 {
 		opts = append(opts, store.ListLimit(uint(req.Options.Limit)))
+	}
+	if len(req.Options.Order) > 0 {
+		order := store.OrderAsc
+		if req.Options.Order == string(store.OrderDesc) {
+			order = store.OrderDesc
+		}
+		opts = append(opts, store.ListOrder(order))
 	}
 
 	// list from the store
@@ -119,11 +129,21 @@ func (h *handler) Read(ctx context.Context, req *pb.ReadRequest, rsp *pb.ReadRes
 	if req.Options.Prefix {
 		opts = append(opts, store.ReadPrefix())
 	}
+	if req.Options.Suffix {
+		opts = append(opts, store.ReadSuffix())
+	}
 	if req.Options.Limit > 0 {
 		opts = append(opts, store.ReadLimit(uint(req.Options.Limit)))
 	}
 	if req.Options.Offset > 0 {
 		opts = append(opts, store.ReadOffset(uint(req.Options.Offset)))
+	}
+	if len(req.Options.Order) > 0 {
+		order := store.OrderAsc
+		if req.Options.Order == string(store.OrderDesc) {
+			order = store.OrderDesc
+		}
+		opts = append(opts, store.ReadOrder(order))
 	}
 
 	// read from the database

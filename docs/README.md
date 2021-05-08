@@ -3,10 +3,8 @@
   <a href="https://github.com/micro-community/micro/network/members"><img src="https://img.shields.io/github/forks/micro-community/micro?style=social" /></a>
   <a href="https://github.com/micro-community/micro/stargazers"><img src="https://img.shields.io/github/stars/micro-community/micro?style=social" /></a>
 </div>
-
-<div style="border: 1px solid #333333">
-  <img src="{{ site.baseurl }}/images/banner.png" />
-</div>
+<br>
+Micro is a Distributed OS built for the Cloud.
 
 ## Overview
 
@@ -44,10 +42,6 @@ See the [TODO](/todo) list, open a PR and start hacking away at the docs.
 ## Community
 
 Join us in GitHub [Discussions](https://github.com/micro-community/micro/discussions) or [Slack](https://slack.m3o.com).
-
-## Hosting
-
-For cloud hosting see [m3o.com](https://m3o.com).
 
 ## License
 
