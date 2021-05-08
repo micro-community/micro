@@ -38,12 +38,12 @@ message Event {
   map<string, string> metadata = 3;
   bytes payload = 4;
   int64 timestamp = 5;
-} 
+}
 
 message ReadRequest {
   string topic = 1;
   uint64 limit = 2;
-	uint64 offset = 3;
+  uint64 offset = 3;
 }
 
 message ReadResponse {

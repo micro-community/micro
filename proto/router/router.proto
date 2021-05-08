@@ -19,12 +19,12 @@ service Table {
 
 // Empty request
 message ReadRequest {
-	string service = 1;
+  string service = 1;
 }
 
 // Empty response
 message ReadResponse {
-	repeated Route routes = 1;
+  repeated Route routes = 1;
 }
 
 // LookupRequest is made to Lookup
@@ -95,5 +95,5 @@ message Route {
   // the metric / score of this route
   int64 metric = 7;
   // metadata for the route
-  map<string,string> metadata = 8;
+  map<string, string> metadata = 8;
 }
