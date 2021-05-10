@@ -37,7 +37,7 @@ type protoCodec struct{}
 type wrapCodec struct{ encoding.Codec }
 
 var jsonpbMarshaler = &jsonpb.Marshaler{
-	EnumsAsInts:  true,
+	EnumsAsInts:  false,
 	EmitDefaults: true,
 	OrigName:     true,
 }
