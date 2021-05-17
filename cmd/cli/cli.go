@@ -10,6 +10,7 @@ import (
 	"github.com/chzyer/readline"
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	"github.com/micro-community/micro/v3/cmd"
+	"github.com/micro-community/micro/v3/cmd/cli/util"
 	"github.com/urfave/cli/v2"
 
 	//init some basic ability
