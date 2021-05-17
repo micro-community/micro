@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/micro-community/micro/v3/client/cli/namespace"
-	"github.com/micro-community/micro/v3/client/cli/util"
+	"github.com/micro-community/micro/v3/cmd/cli/namespace"
+	"github.com/micro-community/micro/v3/cmd/cli/util"
 	cbytes "github.com/micro-community/micro/v3/platform/codec/bytes"
 	pbDebug "github.com/micro-community/micro/v3/proto/debug"
 	"github.com/micro-community/micro/v3/service/client"

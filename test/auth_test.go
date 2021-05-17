@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/cmd/cli/namespace"
 	"github.com/micro-community/micro/v3/platform/config"
 )
 

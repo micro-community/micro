@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-
+        "github.com/micro-community/micro/v3/server"
 	"github.com/micro-community/micro/v3/client"
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/service"
@@ -62,7 +62,7 @@ var (
 )
 
 var (
-	Flags = append(client.Flags,
+	Flags = append(server.Flags,
 		&cli.StringFlag{
 			Name:    "address",
 			Usage:   "Set the api address e.g 0.0.0.0:8080",
