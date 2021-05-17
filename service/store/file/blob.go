@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/micro-community/micro/v3/service/store"	
+	"github.com/micro-community/micro/v3/service/store"
 	"github.com/micro-community/micro/v3/service/errors"
 	bolt "go.etcd.io/bbolt"
 )
@@ -184,8 +184,4 @@ func (b *blobStore) Delete(key string, opts ...store.BlobOption) error {
 
 		return bucket.Delete([]byte(key))
 	})
-}
-
-func (b *blobStore) SetPolicy(key string, opts ...store.PolicyOption) error {
-	return errors.NotImplemented("SetPolicy", "set policy not implemented")
 }

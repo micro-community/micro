@@ -5,11 +5,9 @@ go 1.15
 require (
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/caddyserver/certmagic v0.10.6
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e
 	github.com/davecgh/go-spew v1.1.1
-	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
 	github.com/evanphx/json-patch/v5 v5.1.0
@@ -26,6 +24,7 @@ require (
 	github.com/improbable-eng/grpc-web v0.13.0
 	github.com/kr/pretty v0.2.1
 	github.com/miekg/dns v1.1.35
+
 	github.com/nightlyone/lockfile v1.0.0
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/onsi/gomega v1.7.1
@@ -33,11 +32,10 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.9.1
 	github.com/rhysd/go-github-selfupdate v1.2.2
-	github.com/rs/cors v1.7.0 // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e
 	github.com/stoewer/go-strcase v1.2.0
 	github.com/stretchr/objx v0.1.1
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.0
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/urfave/cli/v2 v2.3.0
 	github.com/xanzy/go-gitlab v0.39.0
@@ -47,8 +45,7 @@ require (
 	golang.org/x/net v0.0.0-20201031054903-ff519b6c9102
 	google.golang.org/genproto v0.0.0-20201106154455-f9bfe239b0ba
 	google.golang.org/grpc v1.34.0
-	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
-	golang.org/x/text v0.3.3 // indirect
 	google.golang.org/grpc/examples v0.0.0-20201106075115-5d7f8c9ae422
 	google.golang.org/protobuf v1.25.0
 )
+
