@@ -3,16 +3,16 @@ package api
 
 import (
 	"fmt"
-	"net/http"
-	"os"
-        "github.com/micro-community/micro/v3/server"
 	"github.com/micro-community/micro/v3/client"
 	"github.com/micro-community/micro/v3/plugin"
+	"github.com/micro-community/micro/v3/server"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/api/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/store"
+	"net/http"
+	"os"
 
 	inApiHandler "github.com/micro-community/micro/v3/platform/api/handler"
 	inApiResolver "github.com/micro-community/micro/v3/platform/api/resolver"
