@@ -21,9 +21,9 @@ import (
 	"net"
 
 	pb "github.com/micro-community/micro/v3/proto/transport"
+	"github.com/micro-community/micro/v3/service/network/transport"
 	maddr "github.com/micro-community/micro/v3/util/addr"
 	mnet "github.com/micro-community/micro/v3/util/net"
-	"github.com/micro-community/micro/v3/util/network/transport"
 	mls "github.com/micro-community/micro/v3/util/tls"
 
 	"google.golang.org/grpc"

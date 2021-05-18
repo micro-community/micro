@@ -28,12 +28,11 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/network/transport"
 	"github.com/micro-community/micro/v3/util/buf"
-	"github.com/micro-community/micro/v3/util/pool"
 	"github.com/micro-community/micro/v3/util/codec"
 	raw "github.com/micro-community/micro/v3/util/codec/bytes"
-	"github.com/micro-community/micro/v3/util/network/transport"
-
+	"github.com/micro-community/micro/v3/util/pool"
 )
 
 type rpcClient struct {

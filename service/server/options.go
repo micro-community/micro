@@ -25,12 +25,12 @@ import (
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/broker/memory"
+	"github.com/micro-community/micro/v3/service/network/transport"
+	thttp "github.com/micro-community/micro/v3/service/network/transport/http"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/registry/mdns"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/debug/trace"
-	"github.com/micro-community/micro/v3/util/network/transport"
-	thttp "github.com/micro-community/micro/v3/util/network/transport/http"
 )
 
 type Options struct {

@@ -14,7 +14,7 @@
 //
 // Original source: github.com/micro/go-micro/v3/server/grpc/grpc_test.go
 
-package grpc_test
+package grpc
 
 import (
 	"context"
@@ -26,13 +26,13 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	gcli "github.com/micro-community/micro/v3/service/client/grpc"
 	"github.com/micro-community/micro/v3/service/errors"
+	tgrpc "github.com/micro-community/micro/v3/service/network/transport/grpc"
 	rmemory "github.com/micro-community/micro/v3/service/registry/memory"
 	"github.com/micro-community/micro/v3/service/router"
 	rtreg "github.com/micro-community/micro/v3/service/router/registry"
 	"github.com/micro-community/micro/v3/service/server"
 	gsrv "github.com/micro-community/micro/v3/service/server/grpc"
 	pb "github.com/micro-community/micro/v3/service/server/grpc/proto"
-	tgrpc "github.com/micro-community/micro/v3/util/network/transport/grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 )

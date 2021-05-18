@@ -16,7 +16,7 @@
 package noop
 
 import (
-	"github.com/micro-community/micro/v3/util/network/resolver"
+	"github.com/micro-community/micro/v3/service/network/resolver"
 )
 
 type Resolver struct{}

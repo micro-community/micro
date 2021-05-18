@@ -20,7 +20,7 @@ import (
 	"crypto/rand"
 	"crypto/sha256"
 
-	"github.com/micro-community/micro/v3/util/network/tunnel"
+	"github.com/micro-community/micro/v3/service/network/tunnel"
 	"github.com/oxtoacart/bpool"
 )
 

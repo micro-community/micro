@@ -21,9 +21,9 @@ import (
 	"reflect"
 
 	"github.com/micro-community/micro/v3/service/broker"
+	"github.com/micro-community/micro/v3/service/network/transport"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/server"
-	"github.com/micro-community/micro/v3/util/network/transport"
 )
 
 const (

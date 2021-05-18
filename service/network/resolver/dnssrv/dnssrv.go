@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/micro-community/micro/v3/util/network/resolver"
+	"github.com/micro-community/micro/v3/service/network/resolver"
 )
 
 // Resolver is a DNS network resolve

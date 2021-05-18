@@ -16,7 +16,7 @@
 package static
 
 import (
-	"github.com/micro-community/micro/v3/util/network/resolver"
+	"github.com/micro-community/micro/v3/service/network/resolver"
 )
 
 // Resolver returns a static list of nodes. In the event the node list

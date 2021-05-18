@@ -27,10 +27,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/micro-community/micro/v3/service/network/transport"
 	maddr "github.com/micro-community/micro/v3/util/addr"
 	"github.com/micro-community/micro/v3/util/buf"
 	mnet "github.com/micro-community/micro/v3/util/net"
-	"github.com/micro-community/micro/v3/util/network/transport"
 	mls "github.com/micro-community/micro/v3/util/tls"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"

@@ -9,9 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/micro-community/micro/v3/cmd/cli/util"
 	"github.com/micro-community/micro/v3/cmd"
-	clic "github.com/micro-community/micro/v3/util/command"
+	"github.com/micro-community/micro/v3/cmd/cli/util"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/olekukonko/tablewriter"
@@ -262,7 +261,7 @@ func networkRoutes(c *cli.Context, args []string) ([]byte, error) {
 
 		// set max int64 metric to infinity
 		if metInt == math.MaxInt64 {
-			metric = "âˆ
+			metric = "âˆž"
 		} else {
 			metric = fmt.Sprintf("%d", metInt)
 		}

@@ -20,7 +20,7 @@ import (
 	pb "github.com/micro-community/micro/v3/proto/transport"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/util/network/transport"
+	"github.com/micro-community/micro/v3/service/network/transport"
 	"google.golang.org/grpc/peer"
 )
 

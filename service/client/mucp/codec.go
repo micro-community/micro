@@ -21,6 +21,7 @@ import (
 	errs "errors"
 
 	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/network/transport"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/util/codec"
 	raw "github.com/micro-community/micro/v3/util/codec/bytes"
@@ -29,7 +30,6 @@ import (
 	"github.com/micro-community/micro/v3/util/codec/jsonrpc"
 	"github.com/micro-community/micro/v3/util/codec/proto"
 	"github.com/micro-community/micro/v3/util/codec/protorpc"
-	"github.com/micro-community/micro/v3/util/network/transport"
 )
 
 const (

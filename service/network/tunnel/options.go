@@ -18,8 +18,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/micro-community/micro/v3/util/network/transport"
-	"github.com/micro-community/micro/v3/util/network/transport/grpc"
+	"github.com/micro-community/micro/v3/service/network/transport"
+	"github.com/micro-community/micro/v3/service/network/transport/grpc"
 )
 
 var (
