@@ -25,13 +25,13 @@ import (
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
 	"github.com/micro-community/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/service/network"
 
 	mConfigCli "github.com/micro-community/micro/v3/service/config/client"
 	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
 
 	inConfig "github.com/micro-community/micro/v3/util/config"
 	"github.com/micro-community/micro/v3/util/helper"
-	"github.com/micro-community/micro/v3/util/network"
 	"github.com/micro-community/micro/v3/util/report"
 	"github.com/micro-community/micro/v3/util/user"
 	"github.com/micro-community/micro/v3/util/wrapper"

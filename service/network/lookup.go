@@ -1,4 +1,3 @@
-// Package network provides internal namespaced networking
 package network
 
 import (

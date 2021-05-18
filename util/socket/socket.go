@@ -20,7 +20,7 @@ package socket
 import (
 	"io"
 
-	"github.com/micro-community/micro/v3/util/network/transport"
+	"github.com/micro-community/micro/v3/service/network/transport"
 )
 
 // Socket is our pseudo socket for transport.Socket

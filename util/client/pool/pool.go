@@ -20,7 +20,7 @@ package pool
 import (
 	"time"
 
-	"github.com/micro-community/micro/v3/util/network/transport"
+	"github.com/micro-community/micro/v3/service/network/transport"
 )
 
 // Pool is an interface for connection pooling

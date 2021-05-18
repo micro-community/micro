@@ -19,10 +19,10 @@ import (
 	mucpServer "github.com/micro-community/micro/v3/service/server/mucp"
 	"github.com/micro-community/micro/v3/util/helper"
 	"github.com/micro-community/micro/v3/util/muxer"
-	"github.com/micro-community/micro/v3/util/network/transport"
-	"github.com/micro-community/micro/v3/util/network/transport/grpc"
-	"github.com/micro-community/micro/v3/util/network/tunnel"
-	tmucp "github.com/micro-community/micro/v3/util/network/tunnel/mucp"
+	"github.com/micro-community/micro/v3/service/network/transport"
+	"github.com/micro-community/micro/v3/service/network/transport/grpc"
+	"github.com/micro-community/micro/v3/service/network/tunnel"
+	tmucp "github.com/micro-community/micro/v3/service/network/tunnel/mucp"
 	"github.com/urfave/cli/v2"
 )
 
