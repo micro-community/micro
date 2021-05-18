@@ -23,18 +23,18 @@ var (
 	// usage agent
 	a = "micro/usage"
 	// usage version
-	v = version.V
+	v = "1549376196832741000"
 	// 24 hour window
 	w = 8.64e13
 )
 
 // New generates a new usage report to be filled in
 func New(service string) *pb.Usage {
-	id := fmt.Sprintf("micro.%s.%s.%s", service, version.V, uuid.New().String())
+	id := fmt.Sprintf("micro.%s.%s.%s", service, v, uuid.New().String())
 	srv := "micro." + service
 
 	if len(service) == 0 {
-		id = fmt.Sprintf("micro.%s.%s", version.V, uuid.New().String())
+		id = fmt.Sprintf("micro.%s.%s", v, uuid.New().String())
 		srv = "micro"
 	}
 
