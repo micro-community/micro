@@ -5,13 +5,12 @@ package main
 import (
 	"github.com/micro-community/micro/v3/cmd"
 
-	// internal packages
-	_ "github.com/micro-community/micro/v3/util/usage"
-
+	_ "github.com/micro-community/micro/v3/cmd/usage"
 	// load packages so they can register commands
 	_ "github.com/micro-community/micro/v3/cmd/cli"
 	_ "github.com/micro-community/micro/v3/cmd/server"
 	_ "github.com/micro-community/micro/v3/cmd/service"
+	_ "github.com/micro/micro/v3/cmd/usage"
 )
 
 func main() {

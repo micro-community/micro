@@ -15,6 +15,7 @@ import (
 
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	"github.com/micro-community/micro/v3/plugin"
+	_ "github.com/micro-community/micro/v3/cmd/usage"
 	"github.com/micro-community/micro/v3/profile"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/broker"
