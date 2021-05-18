@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/micro-community/micro/v3/cmd"
-	tmpl "github.com/micro-community/micro/v3/platform/template"
+	tmpl "github.com/micro-community/micro/v3/cmd/cli/new/template"
 	"github.com/micro-community/micro/v3/platform/usage"
 	"github.com/urfave/cli/v2"
 	"github.com/xlab/treeprint"
