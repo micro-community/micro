@@ -8,7 +8,6 @@ import (
 
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/client"
-	"github.com/micro-community/micro/v3/service/client/cache"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/debug"
 	"github.com/micro-community/micro/v3/service/errors"
@@ -17,6 +16,7 @@ import (
 	"github.com/micro-community/micro/v3/service/server"
 	inauth "github.com/micro-community/micro/v3/util/auth"
 	"github.com/micro-community/micro/v3/util/debug/trace"
+	"github.com/micro/micro/v3/util/cache"
 )
 
 var (

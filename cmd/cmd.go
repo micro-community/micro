@@ -416,7 +416,7 @@ func (c *command) Before(ctx *cli.Context) error {
 	if ctx.Bool("default_wrapper") {
 		// wrap the client
 		client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
-		client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
+		// client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
 		client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
 		//	client.DefaultClient = wrapper.FromService(client.DefaultClient)
 		client.DefaultClient = wrapper.LogClient(client.DefaultClient)
