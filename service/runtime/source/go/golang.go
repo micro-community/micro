@@ -21,7 +21,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/micro-community/micro/v3/util/runtime/source"
+	"github.com/micro-community/micro/v3/service/runtime/source"
 )
 
 type Source struct {
