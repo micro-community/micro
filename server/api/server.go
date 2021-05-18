@@ -44,7 +44,7 @@ import (
 
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
 	"github.com/gorilla/mux"
-	"github.com/micro/micro/v3/server"
+	"github.com/micro-community/micro/v3/server"
 	"github.com/urfave/cli/v2"
 )
 

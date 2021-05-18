@@ -34,7 +34,7 @@ import (
 
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	microServer "github.com/micro/micro/v3/server"
+	microServer "github.com/micro-community/micro/v3/server"
 )
 
 //service for proxy

@@ -21,12 +21,12 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/micro-community/micro/v3/service/store"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	sthree "github.com/aws/aws-sdk-go/service/s3"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/store"
 )
 
 var doubleSlash = regexp.MustCompile("/+")
