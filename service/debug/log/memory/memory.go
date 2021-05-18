@@ -18,7 +18,7 @@ package memory
 import (
 	"fmt"
 
-	"github.com/micro-community/micro/v3/util/debug/log"
+	"github.com/micro-community/micro/v3/service/debug/log"
 	"github.com/micro-community/micro/v3/util/ring"
 )
 
