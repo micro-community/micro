@@ -67,7 +67,7 @@ func newService(s *runtime.Service, c runtime.CreateOptions) *service {
 		Service: s,
 		Process: new(proc.Process),
 		Exec: &process.Binary{
-			Package: &build.Package{
+			Package: &process.Package{
 				Name: s.Name,
 				Path: exec,
 			},
