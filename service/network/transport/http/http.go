@@ -28,7 +28,7 @@ import (
 	"time"
 
 	maddr "github.com/micro-community/micro/v3/util/addr"
-	"github.com/micro-community/micro/v3/util/client/buf"
+	"github.com/micro-community/micro/v3/util/buf"
 	mnet "github.com/micro-community/micro/v3/util/net"
 	"github.com/micro-community/micro/v3/util/network/transport"
 	mls "github.com/micro-community/micro/v3/util/tls"

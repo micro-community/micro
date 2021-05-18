@@ -19,7 +19,7 @@ package mucp
 import (
 	"bytes"
 
-	"github.com/micro-community/micro/v3/util/client/buf"
+	"github.com/micro-community/micro/v3/util/buf"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/network/transport"
 )
