@@ -3,8 +3,8 @@ package api
 import (
 	"net/http"
 
+	"github.com/micro-community/micro/v3/server/api/resolver"
 	"github.com/micro-community/micro/v3/service/registry"
-	"github.com/micro-community/micro/v3/util/api/resolver"
 )
 
 // default resolver for legacy purposes

@@ -25,9 +25,9 @@ import (
 	"sync"
 
 	"github.com/gorilla/handlers"
+	"github.com/micro-community/micro/v3/server/api/server"
+	"github.com/micro-community/micro/v3/server/api/server/cors"
 	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/util/api/server"
-	"github.com/micro-community/micro/v3/util/api/server/cors"
 )
 
 type httpServer struct {

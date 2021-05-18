@@ -17,9 +17,9 @@
 package handler
 
 import (
+	"github.com/micro-community/micro/v3/server/api/router"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/client/grpc"
-	"github.com/micro-community/micro/v3/util/api/router"
 )
 
 var (

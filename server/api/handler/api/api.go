@@ -21,10 +21,10 @@ import (
 	"net/http"
 
 	api "github.com/micro-community/micro/v3/proto/api"
+	"github.com/micro-community/micro/v3/server/api/handler"
 	goapi "github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/errors"
-	"github.com/micro-community/micro/v3/util/api/handler"
 	"github.com/micro-community/micro/v3/util/ctx"
 	"github.com/micro-community/micro/v3/util/router"
 )

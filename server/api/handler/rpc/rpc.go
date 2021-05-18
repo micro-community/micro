@@ -25,12 +25,12 @@ import (
 	"strings"
 
 	jsonpatch "github.com/evanphx/json-patch/v5"
+	"github.com/micro-community/micro/v3/server/api/handler"
 	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/util/api/handler"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
 	"github.com/micro-community/micro/v3/util/codec/jsonrpc"

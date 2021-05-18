@@ -22,13 +22,13 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/micro-community/micro/v3/server/api/handler"
+	"github.com/micro-community/micro/v3/server/api/resolver"
+	"github.com/micro-community/micro/v3/server/api/resolver/vpath"
+	"github.com/micro-community/micro/v3/server/api/router"
+	regRouter "github.com/micro-community/micro/v3/server/api/router/registry"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/registry/memory"
-	"github.com/micro-community/micro/v3/util/api/handler"
-	"github.com/micro-community/micro/v3/util/api/resolver"
-	"github.com/micro-community/micro/v3/util/api/resolver/vpath"
-	"github.com/micro-community/micro/v3/util/api/router"
-	regRouter "github.com/micro-community/micro/v3/util/api/router/registry"
 )
 
 func testHttp(t *testing.T, path, service, ns string) {

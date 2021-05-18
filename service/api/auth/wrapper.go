@@ -10,9 +10,9 @@ import (
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 
-	"github.com/micro-community/micro/v3/util/api/resolver"
-	"github.com/micro-community/micro/v3/util/api/resolver/subdomain"
-	"github.com/micro-community/micro/v3/util/api/server"
+	"github.com/micro-community/micro/v3/server/api/resolver"
+	"github.com/micro-community/micro/v3/server/api/resolver/subdomain"
+	"github.com/micro-community/micro/v3/server/api/server"
 	inAuth "github.com/micro-community/micro/v3/util/auth"
 	"github.com/micro-community/micro/v3/util/ctx"
 	"github.com/micro-community/micro/v3/util/namespace"

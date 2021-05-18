@@ -17,7 +17,6 @@ package process
 
 import (
 	"io"
-	"github.com/micro-community/micro/v3/util/build"
 )
 
 // Process manages a running process

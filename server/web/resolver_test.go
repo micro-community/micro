@@ -11,9 +11,9 @@ import (
 	_ "github.com/micro-community/micro/v3/cmd"
 
 	"github.com/micro-community/micro/v3/profile"
+	"github.com/micro-community/micro/v3/server/api/resolver"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/router"
-	"github.com/micro-community/micro/v3/util/api/resolver"
 )
 
 type testCase struct {

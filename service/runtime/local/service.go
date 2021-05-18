@@ -26,7 +26,6 @@ import (
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/runtime/local/process"
 	proc "github.com/micro-community/micro/v3/service/runtime/local/process/os"
-	"github.com/micro-community/micro/v3/util/build"
 )
 
 type service struct {

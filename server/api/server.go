@@ -3,7 +3,7 @@ package api
 
 import (
 	"fmt"
-	"github.com/micro-community/micro/v3/client"
+
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/server"
 	"github.com/micro-community/micro/v3/service"
@@ -14,32 +14,31 @@ import (
 	"net/http"
 	"os"
 
-	inApiHandler "github.com/micro-community/micro/v3/util/api/handler"
-	inApiResolver "github.com/micro-community/micro/v3/util/api/resolver"
-	inApiRouter "github.com/micro-community/micro/v3/util/api/router"
-	inApiServer "github.com/micro-community/micro/v3/util/api/server"
+	inApiHandler "github.com/micro-community/micro/v3/server/api/handler"
+	inApiResolver "github.com/micro-community/micro/v3/server/api/resolver"
+	inApiRouter "github.com/micro-community/micro/v3/server/api/router"
+	inApiServer "github.com/micro-community/micro/v3/server/api/server"
 
-	inApiHandlerApi "github.com/micro-community/micro/v3/util/api/handler/api"
-	inApiHandlerEvent "github.com/micro-community/micro/v3/util/api/handler/event"
-	inApiHandlerHttp "github.com/micro-community/micro/v3/util/api/handler/http"
-	inApiHandlerRpc "github.com/micro-community/micro/v3/util/api/handler/rpc"
-	inApiHandlerWeb "github.com/micro-community/micro/v3/util/api/handler/web"
+	inApiHandlerApi "github.com/micro-community/micro/v3/server/api/handler/api"
+	inApiHandlerEvent "github.com/micro-community/micro/v3/server/api/handler/event"
+	inApiHandlerHttp "github.com/micro-community/micro/v3/server/api/handler/http"
+	inApiHandlerRpc "github.com/micro-community/micro/v3/server/api/handler/rpc"
+	inApiHandlerWeb "github.com/micro-community/micro/v3/server/api/handler/web"
 
-	inApiResolverGrpc "github.com/micro-community/micro/v3/util/api/resolver/grpc"
-	inApiResolverHost "github.com/micro-community/micro/v3/util/api/resolver/host"
-	inApiResolverPath "github.com/micro-community/micro/v3/util/api/resolver/path"
-	inApiResolverSubDomain "github.com/micro-community/micro/v3/util/api/resolver/subdomain"
+	inApiResolverGrpc "github.com/micro-community/micro/v3/server/api/resolver/grpc"
+	inApiResolverHost "github.com/micro-community/micro/v3/server/api/resolver/host"
+	inApiResolverPath "github.com/micro-community/micro/v3/server/api/resolver/path"
+	inApiResolverSubDomain "github.com/micro-community/micro/v3/server/api/resolver/subdomain"
 
-	inApiRouterReg "github.com/micro-community/micro/v3/util/api/router/registry"
-	inApiServerHttp "github.com/micro-community/micro/v3/util/api/server/http"
+	inApiRouterReg "github.com/micro-community/micro/v3/server/api/router/registry"
+	inApiServerHttp "github.com/micro-community/micro/v3/server/api/server/http"
 
-	"github.com/micro-community/micro/v3/util/api/server/acme"
-	"github.com/micro-community/micro/v3/util/api/server/acme/autocert"
-	"github.com/micro-community/micro/v3/util/api/server/acme/certmagic"
+	"github.com/micro-community/micro/v3/util/acme"
+	"github.com/micro-community/micro/v3/util/acme/autocert"
+	"github.com/micro-community/micro/v3/util/acme/certmagic"
 
 	inHandler "github.com/micro-community/micro/v3/util/handler"
 	inHelper "github.com/micro-community/micro/v3/util/helper"
-	inResolverApi "github.com/micro-community/micro/v3/util/resolver/api"
 	inSyncMemory "github.com/micro-community/micro/v3/util/sync/memory"
 
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
@@ -208,7 +207,7 @@ func Run(ctx *cli.Context) error {
 	}
 
 	// default resolver
-	rr := inResolverApi.NewResolver(resolverOpts...)
+	rr := NewResolver(resolverOpts...)
 
 	switch Resolver {
 	case "subdomain":

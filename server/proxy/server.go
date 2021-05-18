@@ -5,7 +5,6 @@ import (
 	"os"
 	"strings"
 
-	mCli "github.com/micro-community/micro/v3/client"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -15,9 +14,9 @@ import (
 	"github.com/micro-community/micro/v3/service/store"
 
 	//Platform support
-	"github.com/micro-community/micro/v3/util/api/server/acme"
-	"github.com/micro-community/micro/v3/util/api/server/acme/autocert"
-	"github.com/micro-community/micro/v3/util/api/server/acme/certmagic"
+	"github.com/micro-community/micro/v3/util/acme"
+	"github.com/micro-community/micro/v3/util/acme/autocert"
+	"github.com/micro-community/micro/v3/util/acme/certmagic"
 	"github.com/micro-community/micro/v3/util/helper"
 	"github.com/micro-community/micro/v3/util/muxer"
 	"github.com/micro-community/micro/v3/util/sync/memory"
@@ -34,7 +33,8 @@ import (
 
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	microServer "github.com/micro-community/micro/v3/server"
+
+	mServer "github.com/micro-community/micro/v3/server"
 )
 
 //service for proxy
@@ -56,7 +56,7 @@ var (
 	ACMEChallengeProvider = "cloudflare"
 	ACMECA                = acme.LetsEncryptProductionCA
 
-	Flags = append(mCli.Flags,
+	Flags = append(mServer.Flags,
 		&cli.StringFlag{
 			Name:    "address",
 			Usage:   "Set the proxy http address e.g 0.0.0.0:8081",

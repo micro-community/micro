@@ -7,13 +7,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/micro-community/micro/v3/server/api/handler"
+	"github.com/micro-community/micro/v3/server/api/resolver"
+	"github.com/micro-community/micro/v3/server/api/resolver/subdomain"
+	"github.com/micro-community/micro/v3/server/api/server/cors"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/errors"
 	goerrors "github.com/micro-community/micro/v3/service/errors"
-	"github.com/micro-community/micro/v3/util/api/handler"
-	"github.com/micro-community/micro/v3/util/api/resolver"
-	"github.com/micro-community/micro/v3/util/api/resolver/subdomain"
-	"github.com/micro-community/micro/v3/util/api/server/cors"
 	"github.com/micro-community/micro/v3/util/helper"
 )
 

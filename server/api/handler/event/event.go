@@ -28,7 +28,7 @@ import (
 
 	"github.com/google/uuid"
 	proto "github.com/micro-community/micro/v3/proto/api"
-	"github.com/micro-community/micro/v3/util/api/handler"
+	"github.com/micro-community/micro/v3/server/api/handler"
 	"github.com/micro-community/micro/v3/util/ctx"
 	"github.com/oxtoacart/bpool"
 )
