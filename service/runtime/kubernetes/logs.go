@@ -23,7 +23,7 @@ import (
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
-	"github.com/micro-community/micro/v3/service/kubernetes/client"
+	"github.com/micro-community/micro/v3/service/runtime/kubernetes/client"
 )
 
 type klog struct {

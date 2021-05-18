@@ -16,9 +16,9 @@ import (
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	proto "github.com/micro-community/micro/v3/proto/debug"
 	"github.com/micro-community/micro/v3/service/client"
-	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/context/metadata"
-	cbytes "github.com/micro/micro/v3/util/codec/bytes"
+	"github.com/micro-community/micro/v3/service/registry"
+	cbytes "github.com/micro-community/micro/v3/util/codec/bytes"
 	"github.com/serenize/snaker"
 	"github.com/urfave/cli/v2"
 )

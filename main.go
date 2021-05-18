@@ -10,7 +10,7 @@ import (
 	_ "github.com/micro-community/micro/v3/cmd/cli"
 	_ "github.com/micro-community/micro/v3/cmd/server"
 	_ "github.com/micro-community/micro/v3/cmd/service"
-	_ "github.com/micro/micro/v3/cmd/usage"
+	_ "github.com/micro-community/micro/v3/cmd/usage"
 )
 
 func main() {
