@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
+	"syscall"
 
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/service/client"
@@ -203,7 +204,7 @@ func (s *Service) Run() error {
 
 	ch := make(chan os.Signal, 1)
 	if s.opts.Signal {
-		signal.Notify(ch, inSignal.Shutdown()...)
+		signal.Notify(ch, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL)
 	}
 
 	// wait on kill signal

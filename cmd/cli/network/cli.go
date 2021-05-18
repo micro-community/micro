@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"math"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -75,29 +74,6 @@ func init() {
 				Name:   "services",
 				Usage:  "Get the network services",
 				Action: util.Print(networkServices),
-			},
-			// TODO: duplicates call. Move so we reuse same stuff.
-			{
-				Name:   "call",
-				Usage:  "Call a service e.g micro call greeter Say.Hello '{\"name\": \"John\"}",
-				Action: util.Print(netCall),
-				Flags: []cli.Flag{
-					&cli.StringFlag{
-						Name:    "address",
-						Usage:   "Set the address of the service instance to call",
-						EnvVars: []string{"MICRO_ADDRESS"},
-					},
-					&cli.StringFlag{
-						Name:    "output, o",
-						Usage:   "Set the output format; json (default), raw",
-						EnvVars: []string{"MICRO_OUTPUT"},
-					},
-					&cli.StringSliceFlag{
-						Name:    "metadata",
-						Usage:   "A list of key-value pairs to be forwarded as metadata",
-						EnvVars: []string{"MICRO_METADATA"},
-					},
-				},
 			},
 		},
 	})
@@ -337,10 +313,4 @@ func networkServices(c *cli.Context, args []string) ([]byte, error) {
 	sort.Strings(services)
 
 	return []byte(strings.Join(services, "\n")), nil
-}
-
-// netCall calls services through the network
-func netCall(c *cli.Context, args []string) ([]byte, error) {
-	os.Setenv("MICRO_PROXY", "network")
-	return clic.CallService(c, args)
 }
