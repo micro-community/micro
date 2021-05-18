@@ -1,11 +1,10 @@
-package auth
+package server
 
 import (
 	pb "github.com/micro-community/micro/v3/proto/auth"
-	authHandler "github.com/micro-community/micro/v3/server/auth/auth"
-	rulesHandler "github.com/micro-community/micro/v3/server/auth/rules"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/auth/handler"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/store"
 	"github.com/micro-community/micro/v3/util/auth/token"
@@ -35,8 +34,8 @@ func Run(ctx *cli.Context) error {
 	)
 
 	// setup the handlers
-	ruleH := &rulesHandler.Rules{}
-	authH := &authHandler.Auth{
+	ruleH := &handler.Rules{}
+	authH := &handler.Auth{
 		DisableAdmin: ctx.Bool("disable_admin"),
 	}
 

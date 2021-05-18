@@ -17,8 +17,8 @@
 package router
 
 import (
-	"github.com/micro-community/micro/v3/server/api/resolver"
-	"github.com/micro-community/micro/v3/server/api/resolver/vpath"
+	"github.com/micro-community/micro/v3/service/api/server/resolver"
+	"github.com/micro-community/micro/v3/service/api/server/resolver/vpath"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/registry/mdns"
 )

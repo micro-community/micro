@@ -25,8 +25,8 @@ import (
 	"strings"
 
 	jsonpatch "github.com/evanphx/json-patch/v5"
-	"github.com/micro-community/micro/v3/server/api/handler"
 	"github.com/micro-community/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/api/server/handler"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"

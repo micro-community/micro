@@ -24,12 +24,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro-community/micro/v3/server/api/handler"
-	"github.com/micro-community/micro/v3/server/api/handler/rpc"
-	"github.com/micro-community/micro/v3/server/api/router"
-	rregistry "github.com/micro-community/micro/v3/server/api/router/registry"
-//	rstatic "github.com/micro-community/micro/v3/server/api/router/static"
-	"github.com/micro-community/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/api/server/handler"
+	"github.com/micro-community/micro/v3/service/api/server/handler/rpc"
+	"github.com/micro-community/micro/v3/service/api/server/router"
+	rregistry "github.com/micro-community/micro/v3/service/api/server/router/registry"
+
+	//	rstatic "github.com/micro-community/micro/v3/server/api/router/static"
+
 	"github.com/micro-community/micro/v3/service/client"
 	gcli "github.com/micro-community/micro/v3/service/client/grpc"
 	rmemory "github.com/micro-community/micro/v3/service/registry/memory"

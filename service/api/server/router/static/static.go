@@ -24,12 +24,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/micro-community/micro/v3/server/api/router"
 	"github.com/micro-community/micro/v3/service/api"
+	"github.com/micro-community/micro/v3/service/api/server/router"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
-	rutil "github.com/micro-community/micro/v3/util/registry"
 	util "github.com/micro-community/micro/v3/util/router"
 )
 
@@ -200,7 +199,7 @@ func (r *staticRouter) Endpoint(req *http.Request) (*api.Service, error) {
 
 	// hack for stream endpoint
 	if ep.apiep.Stream {
-		svcs := rutil.Copy(services)
+		svcs := registry.Copy(services)
 		for _, svc := range svcs {
 			if len(svc.Endpoints) == 0 {
 				e := &registry.Endpoint{}
