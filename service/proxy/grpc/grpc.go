@@ -22,14 +22,14 @@ import (
 	"io"
 	"strings"
 
-	"github.com/micro-community/micro/v3/platform/codec"
-	"github.com/micro-community/micro/v3/platform/codec/bytes"
 	"github.com/micro-community/micro/v3/service/client"
 	gClient "github.com/micro-community/micro/v3/service/client/grpc"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/proxy"
 	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/util/codec"
+	"github.com/micro-community/micro/v3/util/codec/bytes"
 
 	"google.golang.org/grpc"
 )

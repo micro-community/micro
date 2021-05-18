@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"testing"
 
-	tgrpc "github.com/micro-community/micro/v3/platform/network/transport/grpc"
 	pberr "github.com/micro-community/micro/v3/proto/errors"
 	bmemory "github.com/micro-community/micro/v3/service/broker/memory"
 	"github.com/micro-community/micro/v3/service/client"
@@ -33,6 +32,7 @@ import (
 	"github.com/micro-community/micro/v3/service/server"
 	gsrv "github.com/micro-community/micro/v3/service/server/grpc"
 	pb "github.com/micro-community/micro/v3/service/server/grpc/proto"
+	tgrpc "github.com/micro-community/micro/v3/util/network/transport/grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 )

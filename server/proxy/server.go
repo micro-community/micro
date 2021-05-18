@@ -15,12 +15,12 @@ import (
 	"github.com/micro-community/micro/v3/service/store"
 
 	//Platform support
-	"github.com/micro-community/micro/v3/platform/api/server/acme"
-	"github.com/micro-community/micro/v3/platform/api/server/acme/autocert"
-	"github.com/micro-community/micro/v3/platform/api/server/acme/certmagic"
-	"github.com/micro-community/micro/v3/platform/helper"
-	"github.com/micro-community/micro/v3/platform/muxer"
-	"github.com/micro-community/micro/v3/platform/sync/memory"
+	"github.com/micro-community/micro/v3/util/api/server/acme"
+	"github.com/micro-community/micro/v3/util/api/server/acme/autocert"
+	"github.com/micro-community/micro/v3/util/api/server/acme/certmagic"
+	"github.com/micro-community/micro/v3/util/helper"
+	"github.com/micro-community/micro/v3/util/muxer"
+	"github.com/micro-community/micro/v3/util/sync/memory"
 
 	mProxyGrpc "github.com/micro-community/micro/v3/service/proxy/grpc"
 	mProxyHttp "github.com/micro-community/micro/v3/service/proxy/http"

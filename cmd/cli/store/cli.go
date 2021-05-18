@@ -7,7 +7,7 @@ package cli
 
 import (
 	"github.com/micro-community/micro/v3/cmd"
-	"github.com/micro-community/micro/v3/platform/helper"
+	"github.com/micro-community/micro/v3/util/helper"
 	"github.com/urfave/cli/v2"
 )
 

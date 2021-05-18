@@ -17,7 +17,7 @@
 package grpc
 
 import (
-	"github.com/micro-community/micro/v3/platform/codec"
+	"github.com/micro-community/micro/v3/util/codec"
 )
 
 type rpcResponse struct {

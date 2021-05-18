@@ -20,10 +20,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/kubernetes/client"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/util/kubernetes/client"
 )
 
 type klog struct {

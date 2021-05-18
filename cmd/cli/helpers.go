@@ -11,9 +11,9 @@ import (
 
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	cliutil "github.com/micro-community/micro/v3/cmd/cli/util"
-	cbytes "github.com/micro-community/micro/v3/platform/codec/bytes"
-	clic "github.com/micro-community/micro/v3/platform/command"
 	"github.com/micro-community/micro/v3/service/client"
+	cbytes "github.com/micro-community/micro/v3/util/codec/bytes"
+	clic "github.com/micro-community/micro/v3/util/command"
 	"github.com/urfave/cli/v2"
 )
 

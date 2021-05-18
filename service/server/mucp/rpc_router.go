@@ -34,9 +34,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/micro-community/micro/v3/platform/codec"
 	merrors "github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/util/codec"
 )
 
 var (

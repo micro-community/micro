@@ -10,7 +10,7 @@ import (
 
 	"github.com/micro-community/micro/v3/service/errors"
 
-	"github.com/micro-community/micro/v3/platform/config"
+	"github.com/micro-community/micro/v3/util/config"
 	"github.com/urfave/cli/v2"
 )
 

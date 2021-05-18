@@ -28,18 +28,18 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/addr"
-	"github.com/micro-community/micro/v3/platform/backoff"
-	"github.com/micro-community/micro/v3/platform/codec"
-	raw "github.com/micro-community/micro/v3/platform/codec/bytes"
-	mnet "github.com/micro-community/micro/v3/platform/net"
-	"github.com/micro-community/micro/v3/platform/network/transport"
-	"github.com/micro-community/micro/v3/platform/socket"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/util/addr"
+	"github.com/micro-community/micro/v3/util/backoff"
+	"github.com/micro-community/micro/v3/util/codec"
+	raw "github.com/micro-community/micro/v3/util/codec/bytes"
+	mnet "github.com/micro-community/micro/v3/util/net"
+	"github.com/micro-community/micro/v3/util/network/transport"
+	"github.com/micro-community/micro/v3/util/socket"
 )
 
 type rpcServer struct {

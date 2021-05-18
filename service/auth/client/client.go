@@ -4,15 +4,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/auth/rules"
-	"github.com/micro-community/micro/v3/platform/auth/token"
-	"github.com/micro-community/micro/v3/platform/auth/token/jwt"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/client/cache"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/util/auth/rules"
+	"github.com/micro-community/micro/v3/util/auth/token"
+	"github.com/micro-community/micro/v3/util/auth/token/jwt"
 )
 
 // srv is the service implementation of the Auth interface

@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	inAuth "github.com/micro-community/micro/v3/platform/auth"
-	inAuthNamespace "github.com/micro-community/micro/v3/platform/auth/namespace"
+	inAuth "github.com/micro-community/micro/v3/util/auth"
+	inAuthNamespace "github.com/micro-community/micro/v3/util/auth/namespace"
 
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/context/metadata"

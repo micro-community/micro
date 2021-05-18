@@ -4,13 +4,13 @@ import (
 	"context"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/auth/namespace"
 	pb "github.com/micro-community/micro/v3/proto/registry"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/errors"
 	log "github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/registry/util"
+	"github.com/micro-community/micro/v3/util/auth/namespace"
 )
 
 //Registry server

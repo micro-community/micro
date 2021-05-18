@@ -38,8 +38,8 @@ import (
 	mStoreFile "github.com/micro-community/micro/v3/service/store/file"
 	mStoreMemory "github.com/micro-community/micro/v3/service/store/memory"
 
-	inAuth "github.com/micro-community/micro/v3/platform/auth"
-	inUser "github.com/micro-community/micro/v3/platform/user"
+	inAuth "github.com/micro-community/micro/v3/util/auth"
+	inUser "github.com/micro-community/micro/v3/util/user"
 
 	"github.com/urfave/cli/v2"
 )

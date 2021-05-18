@@ -20,7 +20,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/backoff"
+	"github.com/micro-community/micro/v3/util/backoff"
 )
 
 //BackoffFunc for retry delay

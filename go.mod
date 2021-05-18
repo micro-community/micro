@@ -24,7 +24,6 @@ require (
 	github.com/improbable-eng/grpc-web v0.13.0
 	github.com/kr/pretty v0.2.1
 	github.com/miekg/dns v1.1.35
-
 	github.com/nightlyone/lockfile v1.0.0
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/onsi/gomega v1.7.1
@@ -48,4 +47,3 @@ require (
 	google.golang.org/grpc/examples v0.0.0-20201106075115-5d7f8c9ae422
 	google.golang.org/protobuf v1.25.0
 )
-

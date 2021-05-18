@@ -21,8 +21,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/mdns"
 	"github.com/micro-community/micro/v3/service/router"
+	"github.com/micro-community/micro/v3/util/mdns"
 )
 
 // NewRouter returns an initialized dns router

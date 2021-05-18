@@ -29,12 +29,12 @@ import (
 	mConfigCli "github.com/micro-community/micro/v3/service/config/client"
 	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
 
-	inConfig "github.com/micro-community/micro/v3/platform/config"
-	"github.com/micro-community/micro/v3/platform/helper"
-	"github.com/micro-community/micro/v3/platform/network"
-	"github.com/micro-community/micro/v3/platform/report"
-	"github.com/micro-community/micro/v3/platform/user"
-	"github.com/micro-community/micro/v3/platform/wrapper"
+	inConfig "github.com/micro-community/micro/v3/util/config"
+	"github.com/micro-community/micro/v3/util/helper"
+	"github.com/micro-community/micro/v3/util/network"
+	"github.com/micro-community/micro/v3/util/report"
+	"github.com/micro-community/micro/v3/util/user"
+	"github.com/micro-community/micro/v3/util/wrapper"
 
 	"github.com/urfave/cli/v2"
 )
@@ -418,7 +418,7 @@ func (c *command) Before(ctx *cli.Context) error {
 		client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
 		client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
 		client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
-	//	client.DefaultClient = wrapper.FromService(client.DefaultClient)
+		//	client.DefaultClient = wrapper.FromService(client.DefaultClient)
 		client.DefaultClient = wrapper.LogClient(client.DefaultClient)
 
 		// wrap the server

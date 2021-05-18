@@ -4,13 +4,13 @@ import (
 	"context"
 	"time"
 
-	"github.com/micro-community/micro/v3/platform/auth/namespace"
 	pb "github.com/micro-community/micro/v3/proto/runtime"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/events"
 	log "github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/util/auth/namespace"
 )
 
 type Runtime struct {

@@ -29,9 +29,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/micro-community/micro/v3/platform/mdns"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/util/mdns"
 )
 
 const (

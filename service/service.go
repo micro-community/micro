@@ -16,7 +16,7 @@ import (
 	"github.com/micro-community/micro/v3/service/model"
 	"github.com/micro-community/micro/v3/service/server"
 
-	inSignal "github.com/micro-community/micro/v3/platform/signal"
+	inSignal "github.com/micro-community/micro/v3/util/signal"
 
 	"github.com/urfave/cli/v2"
 )

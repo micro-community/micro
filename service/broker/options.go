@@ -20,8 +20,8 @@ import (
 	"context"
 	"crypto/tls"
 
-	"github.com/micro-community/micro/v3/platform/codec"
 	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/util/codec"
 )
 
 type Options struct {

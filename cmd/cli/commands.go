@@ -16,7 +16,7 @@ import (
 	"github.com/micro-community/micro/v3/cmd/cli/namespace"
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	proto "github.com/micro-community/micro/v3/proto/debug"
-	clic "github.com/micro-community/micro/v3/platform/command"
+	clic "github.com/micro-community/micro/v3/util/command"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/registry"
 )

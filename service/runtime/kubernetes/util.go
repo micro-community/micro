@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/micro-community/micro/v3/platform/kubernetes/api"
-	"github.com/micro-community/micro/v3/platform/kubernetes/client"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/util/kubernetes/api"
+	"github.com/micro-community/micro/v3/util/kubernetes/client"
 )
 
 // getServices queries kubernetes for services. It gets information from both the pods and the

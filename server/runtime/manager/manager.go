@@ -9,9 +9,6 @@ import (
 	"strings"
 	"time"
 
-	kclient "github.com/micro-community/micro/v3/platform/kubernetes/client"
-	"github.com/micro-community/micro/v3/platform/namespace"
-	"github.com/micro-community/micro/v3/platform/runtime/source/git"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/build"
 	"github.com/micro-community/micro/v3/service/build/util/tar"
@@ -19,6 +16,9 @@ import (
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/store"
+	kclient "github.com/micro-community/micro/v3/util/kubernetes/client"
+	"github.com/micro-community/micro/v3/util/namespace"
+	"github.com/micro-community/micro/v3/util/runtime/source/git"
 )
 
 const (

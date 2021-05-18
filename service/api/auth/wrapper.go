@@ -10,12 +10,12 @@ import (
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 
-	"github.com/micro-community/micro/v3/platform/api/resolver"
-	"github.com/micro-community/micro/v3/platform/api/resolver/subdomain"
-	"github.com/micro-community/micro/v3/platform/api/server"
-	inAuth "github.com/micro-community/micro/v3/platform/auth"
-	"github.com/micro-community/micro/v3/platform/ctx"
-	"github.com/micro-community/micro/v3/platform/namespace"
+	"github.com/micro-community/micro/v3/util/api/resolver"
+	"github.com/micro-community/micro/v3/util/api/resolver/subdomain"
+	"github.com/micro-community/micro/v3/util/api/server"
+	inAuth "github.com/micro-community/micro/v3/util/auth"
+	"github.com/micro-community/micro/v3/util/ctx"
+	"github.com/micro-community/micro/v3/util/namespace"
 )
 
 // Wrapper wraps a handler and authenticates requests

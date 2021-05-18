@@ -9,15 +9,15 @@ import (
 
 	"github.com/google/uuid"
 
-	authns "github.com/micro-community/micro/v3/platform/auth/namespace"
-	"github.com/micro-community/micro/v3/platform/auth/token"
-	"github.com/micro-community/micro/v3/platform/auth/token/basic"
-	"github.com/micro-community/micro/v3/platform/namespace"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/store"
+	authns "github.com/micro-community/micro/v3/util/auth/namespace"
+	"github.com/micro-community/micro/v3/util/auth/token"
+	"github.com/micro-community/micro/v3/util/auth/token/basic"
+	"github.com/micro-community/micro/v3/util/namespace"
 	"golang.org/x/crypto/bcrypt"
 )
 

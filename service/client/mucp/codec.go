@@ -20,16 +20,16 @@ import (
 	"bytes"
 	errs "errors"
 
-	"github.com/micro-community/micro/v3/platform/codec"
-	raw "github.com/micro-community/micro/v3/platform/codec/bytes"
-	"github.com/micro-community/micro/v3/platform/codec/grpc"
-	"github.com/micro-community/micro/v3/platform/codec/json"
-	"github.com/micro-community/micro/v3/platform/codec/jsonrpc"
-	"github.com/micro-community/micro/v3/platform/codec/proto"
-	"github.com/micro-community/micro/v3/platform/codec/protorpc"
-	"github.com/micro-community/micro/v3/platform/network/transport"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/util/codec"
+	raw "github.com/micro-community/micro/v3/util/codec/bytes"
+	"github.com/micro-community/micro/v3/util/codec/grpc"
+	"github.com/micro-community/micro/v3/util/codec/json"
+	"github.com/micro-community/micro/v3/util/codec/jsonrpc"
+	"github.com/micro-community/micro/v3/util/codec/proto"
+	"github.com/micro-community/micro/v3/util/codec/protorpc"
+	"github.com/micro-community/micro/v3/util/network/transport"
 )
 
 const (

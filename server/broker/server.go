@@ -4,7 +4,6 @@ import (
 	"context"
 	"time"
 
-	inAuthNamespace "github.com/micro-community/micro/v3/platform/auth/namespace"
 	pbBroker "github.com/micro-community/micro/v3/proto/broker"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
@@ -12,6 +11,7 @@ import (
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
+	inAuthNamespace "github.com/micro-community/micro/v3/util/auth/namespace"
 	"github.com/urfave/cli/v2"
 )
 

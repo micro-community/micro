@@ -21,8 +21,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/micro-community/micro/v3/platform/codec"
 	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/util/codec"
 )
 
 // DefaultServer for the service

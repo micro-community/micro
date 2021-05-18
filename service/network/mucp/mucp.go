@@ -25,12 +25,6 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/micro-community/micro/v3/platform/backoff"
-	"github.com/micro-community/micro/v3/platform/network/resolver/dns"
-	"github.com/micro-community/micro/v3/platform/network/transport"
-	"github.com/micro-community/micro/v3/platform/network/tunnel"
-	bun "github.com/micro-community/micro/v3/platform/network/tunnel/broker"
-	tun "github.com/micro-community/micro/v3/platform/network/tunnel/transport"
 	"github.com/micro-community/micro/v3/service/client"
 	cmucp "github.com/micro-community/micro/v3/service/client/mucp"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -41,6 +35,12 @@ import (
 	"github.com/micro-community/micro/v3/service/router"
 	"github.com/micro-community/micro/v3/service/server"
 	smucp "github.com/micro-community/micro/v3/service/server/mucp"
+	"github.com/micro-community/micro/v3/util/backoff"
+	"github.com/micro-community/micro/v3/util/network/resolver/dns"
+	"github.com/micro-community/micro/v3/util/network/transport"
+	"github.com/micro-community/micro/v3/util/network/tunnel"
+	bun "github.com/micro-community/micro/v3/util/network/tunnel/broker"
+	tun "github.com/micro-community/micro/v3/util/network/tunnel/transport"
 )
 
 var (

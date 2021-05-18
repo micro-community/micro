@@ -20,9 +20,9 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/micro-community/micro/v3/platform/codec"
-	"github.com/micro-community/micro/v3/platform/codec/bytes"
 	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/util/codec"
+	"github.com/micro-community/micro/v3/util/codec/bytes"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/status"
