@@ -10,6 +10,7 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/micro-community/micro/v3/service/errors"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/util/auth/rules"
 	"github.com/micro-community/micro/v3/util/auth/token"
 	"github.com/micro-community/micro/v3/util/auth/token/jwt"

@@ -23,7 +23,6 @@ import (
 	"time"
 
 	"github.com/micro-community/micro/v3/service/store"
-	"github.com/micro-community/micro/v3/service/errors"
 	bolt "go.etcd.io/bbolt"
 )
 
