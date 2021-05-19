@@ -22,8 +22,8 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	go_api "github.com/micro/micro/v3/proto/api"
-	"github.com/micro/micro/v3/service/api"
+	go_api "github.com/micro-community/micro/v3/proto/api"
+	"github.com/micro-community/micro/v3/service/api"
 )
 
 func TestEncoding(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/micro-community/micro/v3/service/api/server/resolver"
+	"github.com/micro-community/micro/v3/service/api/resolver"
 	"github.com/micro-community/micro/v3/service/router"
 )
 

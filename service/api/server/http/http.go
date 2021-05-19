@@ -25,8 +25,7 @@ import (
 	"sync"
 
 	"github.com/gorilla/handlers"
-	"github.com/micro-community/micro/v3/service/api/server"
-	"github.com/micro-community/micro/v3/service/api/server/cors"
+	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/logger"
 )
 
