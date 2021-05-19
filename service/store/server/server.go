@@ -1,9 +1,11 @@
 package server
 
 import (
+	"log"
+
 	pb "github.com/micro-community/micro/v3/proto/store"
 	"github.com/micro-community/micro/v3/service"
-	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/store/handler"
 	"github.com/urfave/cli/v2"
 )
 
@@ -30,16 +32,16 @@ func Run(ctx *cli.Context) error {
 	)
 
 	// the store handler
-	pb.RegisterStoreHandler(service.Server(), &handler{
-		stores: make(map[string]bool),
+	pb.RegisterStoreHandler(service.Server(), &handler.Store{
+		Stores: make(map[string]bool),
 	})
 
 	// the blob store handler
-	pb.RegisterBlobStoreHandler(service.Server(), new(blobHandler))
+	pb.RegisterBlobStoreHandler(service.Server(), new(handler.BlobStore))
 
 	// start the service
 	if err := service.Run(); err != nil {
-		logger.Fatal(err)
+		log.Fatal(err)
 	}
 	return nil
 }

@@ -1,58 +1,20 @@
-package broker
+package handler
 
 import (
 	"context"
-	"time"
 
 	pbBroker "github.com/micro-community/micro/v3/proto/broker"
-	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
 	inAuthNamespace "github.com/micro-community/micro/v3/util/auth/namespace"
-	"github.com/urfave/cli/v2"
 )
 
-var (
-	name    = "broker"
-	address = ":8003"
-)
+type Broker struct{}
 
-// Run the micro broker
-func Run(ctx *cli.Context) error {
-	srvOpts := []service.Option{
-		service.Name(name),
-		service.Address(address),
-	}
-
-	if i := time.Duration(ctx.Int("register_ttl")); i > 0 {
-		srvOpts = append(srvOpts, service.RegisterTTL(i*time.Second))
-	}
-	if i := time.Duration(ctx.Int("register_interval")); i > 0 {
-		srvOpts = append(srvOpts, service.RegisterInterval(i*time.Second))
-	}
-
-	// new service
-	srv := service.New(srvOpts...)
-
-	// connect to the broker
-	broker.DefaultBroker.Connect()
-
-	// register the broker handler
-	pbBroker.RegisterBrokerHandler(srv.Server(), new(handler))
-
-	// run the service
-	if err := srv.Run(); err != nil {
-		logger.Fatal(err)
-	}
-	return nil
-}
-
-type handler struct{}
-
-func (h *handler) Publish(ctx context.Context, req *pbBroker.PublishRequest, rsp *pbBroker.Empty) error {
+func (h *Broker) Publish(ctx context.Context, req *pbBroker.PublishRequest, rsp *pbBroker.Empty) error {
 	// authorize the request
 	acc, ok := auth.AccountFromContext(ctx)
 	if !ok {
@@ -90,7 +52,7 @@ func (h *handler) Publish(ctx context.Context, req *pbBroker.PublishRequest, rsp
 	return nil
 }
 
-func (h *handler) Subscribe(ctx context.Context, req *pbBroker.SubscribeRequest, stream pbBroker.Broker_SubscribeStream) error {
+func (h *Broker) Subscribe(ctx context.Context, req *pbBroker.SubscribeRequest, stream pbBroker.Broker_SubscribeStream) error {
 	// authorize the request
 	acc, ok := auth.AccountFromContext(ctx)
 	if !ok {

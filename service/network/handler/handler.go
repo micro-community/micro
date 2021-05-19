@@ -6,7 +6,7 @@ import (
 	pb "github.com/micro-community/micro/v3/proto/network"
 	pbRtr "github.com/micro-community/micro/v3/proto/router"
 	"github.com/micro-community/micro/v3/service/errors"
-	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/network"
 	"github.com/micro-community/micro/v3/service/network/mucp"
 	"github.com/micro-community/micro/v3/service/network/util"
@@ -83,7 +83,7 @@ func (n *Network) Connect(ctx context.Context, req *pb.ConnectRequest, resp *pb.
 		nodes = append(nodes, node.Address)
 	}
 
-	log.Infof("Network.Connect setting peers: %v", nodes)
+	logger.Infof("Network.Connect setting peers: %v", nodes)
 
 	// reinitialize the peers
 	n.Network.Init(

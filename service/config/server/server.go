@@ -1,8 +1,9 @@
-package config
+package server
 
 import (
 	pb "github.com/micro-community/micro/v3/proto/config"
 	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/config/handler"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/store"
 	"github.com/urfave/cli/v2"
@@ -34,7 +35,7 @@ func Run(c *cli.Context) error {
 	store.DefaultStore.Init(store.Table("config"))
 
 	// register the handler
-	pb.RegisterConfigHandler(srv.Server(), NewConfig(c.String("config_secret_key")))
+	pb.RegisterConfigHandler(srv.Server(), handler.NewConfig(c.String("config_secret_key")))
 	// register the subscriber
 	//srv.Subscribe(watchTopic, new(watcher))
 

@@ -1,4 +1,4 @@
-package network
+package server
 
 import (
 	"errors"
@@ -10,7 +10,12 @@ import (
 	"github.com/micro-community/micro/v3/service"
 	log "github.com/micro-community/micro/v3/service/logger"
 	net "github.com/micro-community/micro/v3/service/network"
+	"github.com/micro-community/micro/v3/service/network/handler"
 	"github.com/micro-community/micro/v3/service/network/mucp"
+	"github.com/micro-community/micro/v3/service/network/transport"
+	"github.com/micro-community/micro/v3/service/network/transport/grpc"
+	"github.com/micro-community/micro/v3/service/network/tunnel"
+	tmucp "github.com/micro-community/micro/v3/service/network/tunnel/mucp"
 	"github.com/micro-community/micro/v3/service/proxy"
 	grpcProxy "github.com/micro-community/micro/v3/service/proxy/grpc"
 	mucpProxy "github.com/micro-community/micro/v3/service/proxy/mucp"
@@ -19,10 +24,6 @@ import (
 	mucpServer "github.com/micro-community/micro/v3/service/server/mucp"
 	"github.com/micro-community/micro/v3/util/helper"
 	"github.com/micro-community/micro/v3/util/muxer"
-	"github.com/micro-community/micro/v3/service/network/transport"
-	"github.com/micro-community/micro/v3/service/network/transport/grpc"
-	"github.com/micro-community/micro/v3/service/network/tunnel"
-	tmucp "github.com/micro-community/micro/v3/service/network/tunnel/mucp"
 	"github.com/urfave/cli/v2"
 )
 
@@ -169,7 +170,7 @@ func Run(ctx *cli.Context) error {
 
 	// create a handler
 	h := mucpServer.DefaultRouter.NewHandler(
-		&Network{Network: netService},
+		&handler.Network{Network: netService},
 	)
 
 	// register the handler
