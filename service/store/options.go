@@ -26,6 +26,8 @@ type Options struct {
 	Database string
 	// Table is analogous to a table in database backends or a key prefix in KV backends
 	Table string
+	//Namespace to isolate logic tarent
+	Namespace string
 	// Context should contain all implementation specific options, using context.WithValue.
 	Context context.Context
 }

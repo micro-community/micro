@@ -216,7 +216,7 @@ func (s *s3) Delete(key string, opts ...store.BlobOption) error {
 	)
 }
 
-func (s *s3) SetPolicy(key string, opts ...store.PolicyOption) error {
+func (s *s3) SetPolicy(key string, opts ...store.Option) error {
 	// validate the key
 	if len(key) == 0 {
 		return store.ErrMissingKey
@@ -226,7 +226,7 @@ func (s *s3) SetPolicy(key string, opts ...store.PolicyOption) error {
 	key = keyRegex.ReplaceAllString(key, "-")
 
 	// parse the options
-	var options store.PolicyOptions
+	var options store.Options
 	for _, o := range opts {
 		o(&options)
 	}
