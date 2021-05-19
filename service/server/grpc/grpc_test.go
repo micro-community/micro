@@ -31,7 +31,6 @@ import (
 	"github.com/micro-community/micro/v3/service/router"
 	rtreg "github.com/micro-community/micro/v3/service/router/registry"
 	"github.com/micro-community/micro/v3/service/server"
-	gsrv "github.com/micro-community/micro/v3/service/server/grpc"
 	pb "github.com/micro-community/micro/v3/service/server/grpc/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
@@ -134,7 +133,7 @@ func TestGRPCServer(t *testing.T) {
 	tr := tgrpc.NewTransport()
 	rtr := rtreg.NewRouter(router.Registry(r))
 
-	s := gsrv.NewServer(
+	s := NewServer(
 		server.Broker(b),
 		server.Name("foo"),
 		server.Registry(r),
@@ -226,7 +225,7 @@ func TestGRPCServerWithPanicWrapper(t *testing.T) {
 	r := rmemory.NewRegistry()
 	b := bmemory.NewBroker()
 	tr := tgrpc.NewTransport()
-	s := gsrv.NewServer(
+	s := NewServer(
 		server.Broker(b),
 		server.Name("foo"),
 		server.Registry(r),
@@ -281,7 +280,7 @@ func TestGRPCServerWithPanicHandler(t *testing.T) {
 	r := rmemory.NewRegistry()
 	b := bmemory.NewBroker()
 	tr := tgrpc.NewTransport()
-	s := gsrv.NewServer(
+	s := NewServer(
 		server.Broker(b),
 		server.Name("foo"),
 		server.Registry(r),
