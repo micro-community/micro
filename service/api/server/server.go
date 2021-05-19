@@ -9,6 +9,7 @@ import (
 
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/service"
+	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/api/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
@@ -17,7 +18,6 @@ import (
 	inApiHandler "github.com/micro-community/micro/v3/service/api/handler"
 	inApiResolver "github.com/micro-community/micro/v3/service/api/resolver"
 	inApiRouter "github.com/micro-community/micro/v3/service/api/router"
-	inApiServer "github.com/micro-community/micro/v3/service/api/server/server"
 
 	inApiHandlerApi "github.com/micro-community/micro/v3/service/api/handler/api"
 	inApiHandlerEvent "github.com/micro-community/micro/v3/service/api/handler/event"
@@ -154,15 +154,15 @@ func Run(ctx *cli.Context) error {
 	inSrv := service.New(service.Name(Name))
 
 	// Init API
-	var opts []inApiServer.Option
+	var opts []api.Option
 
 	if ctx.Bool("enable_acme") {
 		hosts := inHelper.ACMEHosts(ctx)
-		opts = append(opts, inApiServer.EnableACME(true))
-		opts = append(opts, inApiServer.ACMEHosts(hosts...))
+		opts = append(opts, api.EnableACME(true))
+		opts = append(opts, api.ACMEHosts(hosts...))
 		switch ACMEProvider {
 		case "autocert":
-			opts = append(opts, inApiServer.ACMEProvider(autocert.NewProvider()))
+			opts = append(opts, api.ACMEProvider(autocert.NewProvider()))
 		case "certmagic":
 			if ACMEChallengeProvider != "cloudflare" {
 				logger.Fatal("The only implemented DNS challenge provider is cloudflare")
@@ -187,7 +187,7 @@ func Run(ctx *cli.Context) error {
 			}
 
 			opts = append(opts,
-				inApiServer.ACMEProvider(
+				api.ACMEProvider(
 					certmagic.NewProvider(
 						acme.AcceptToS(true),
 						acme.CA(ACMECA),
@@ -207,12 +207,12 @@ func Run(ctx *cli.Context) error {
 			return err
 		}
 
-		opts = append(opts, inApiServer.EnableTLS(true))
-		opts = append(opts, inApiServer.TLSConfig(config))
+		opts = append(opts, api.EnableTLS(true))
+		opts = append(opts, api.TLSConfig(config))
 	}
 
 	if ctx.Bool("enable_cors") {
-		opts = append(opts, inApiServer.EnableCORS(true))
+		opts = append(opts, api.EnableCORS(true))
 	}
 
 	// create the router
