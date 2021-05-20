@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro/micro/v3/service/broker"
+	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 )
