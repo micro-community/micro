@@ -10,6 +10,7 @@ import (
 
 	"github.com/micro-community/micro/v3/test/fakes"
 	"github.com/micro-community/micro/v3/service/runtime/kubernetes/api"
+	"github.com/micro-community/micro/v3/test/fakes"
 
 	. "github.com/onsi/gomega"
 )
