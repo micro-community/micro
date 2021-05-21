@@ -12,7 +12,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dustin/go-humanize v1.0.0
 	github.com/evanphx/json-patch/v5 v5.3.0
-	github.com/getkin/kin-openapi v0.61.0
+	github.com/getkin/kin-openapi v0.26.0
 	github.com/go-acme/lego/v3 v3.9.0
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/golang/protobuf v1.5.2
