@@ -4,7 +4,7 @@
   <a href="https://github.com/micro-community/micro/stargazers"><img src="https://img.shields.io/github/stars/micro-community/micro?style=social" /></a>
 </div>
 
-Micro is a Distributed OS built for the Cloud.
+Micro is a distributed OS built for the Cloud.
 
 ## Overview
 
