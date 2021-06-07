@@ -16,6 +16,12 @@ import (
 	"github.com/pkg/errors"
 )
 
+var (
+	consumerTimeout  = 10 * time.Second // how long to wait trying to send event to a consumer's channel until we consider it has timed out
+	readGroupTimeout = 60 * time.Second // how long to block on call to redis
+	pendingIdleTime  = 60 * time.Second // how long in pending before we claim a message from a different consumer
+)
+
 type redisStream struct {
 	sync.RWMutex
 	redisClient *redis.Client
@@ -37,6 +43,7 @@ func NewStream(opts ...Option) (events.Stream, error) {
 		redisClient: rc,
 		attempts:    map[string]int{},
 	}
+	rs.runJanitor()
 	return rs, nil
 }
 
@@ -117,8 +124,11 @@ func (r *redisStream) consumeWithGroup(topic, group string, options events.Consu
 	ch := make(chan events.Event)
 	go func() {
 		defer func() {
+			logger.Infof("Deleting consumer %s %s %s", topic, group, consumerName)
 			// try to clean up the consumer
-			r.redisClient.XGroupDelConsumer(context.Background(), topic, group, consumerName)
+			if err := r.redisClient.XGroupDelConsumer(context.Background(), topic, group, consumerName).Err(); err != nil {
+				logger.Errorf("Error deleting consumer %s", err)
+			}
 			close(ch)
 
 		}()
@@ -150,7 +160,7 @@ func (r *redisStream) consumeWithGroup(topic, group string, options events.Consu
 				Stream:   topic,
 				Group:    group,
 				Consumer: consumerName,
-				MinIdle:  60 * time.Second,
+				MinIdle:  pendingIdleTime,
 				Messages: pendingIDs,
 			}).Result()
 			if err != nil {
@@ -172,7 +182,7 @@ func (r *redisStream) consumeWithGroup(topic, group string, options events.Consu
 				Group:    group,
 				Consumer: consumerName,
 				Streams:  []string{topic, ">"},
-				Block:    0,
+				Block:    readGroupTimeout,
 			})
 			sl, err := res.Result()
 			if err != nil && err != redis.Nil {
@@ -180,8 +190,14 @@ func (r *redisStream) consumeWithGroup(topic, group string, options events.Consu
 				return
 			}
 			if sl == nil || len(sl) == 0 || len(sl[0].Messages) == 0 {
-				logger.Errorf("No data received from stream")
-				return
+				// test the channel is still being read from
+				select {
+				case ch <- events.Event{}:
+				case <-time.After(consumerTimeout):
+					logger.Errorf("Timed out waiting for consumer")
+					return
+				}
+				continue
 			}
 
 			if err := r.processMessages(sl[0].Messages, ch, topic, group, options.AutoAck, options.RetryLimit); err != nil {
@@ -247,7 +263,14 @@ func (r *redisStream) processMessages(msgs []redis.XMessage, ch chan events.Even
 				}).Err()
 			})
 		}
-		ch <- ev
+		select {
+		case ch <- ev:
+		case <-time.After(consumerTimeout):
+			// If event is not consumed from channel after 10 secs we assume that something is
+			// wrong with the consumer so we bomb out
+			return errors.Errorf("timed out waiting for consumer")
+		}
+
 		if !autoAck {
 			continue
 		}
