@@ -19,8 +19,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/micro-community/micro/v3/service/registry"
-	"github.com/micro-community/micro/v3/service/registry/noop"
-	//"github.com/micro-community/micro/v3/service/registry/mdns"
+	"github.com/micro-community/micro/v3/service/registry/memory"
 )
 
 // Options are router options
@@ -88,7 +87,7 @@ func DefaultOptions() Options {
 	return Options{
 		Id:       uuid.New().String(),
 		Network:  DefaultNetwork,
-		Registry: noop.NewRegistry(), //default no reg
+		Registry: memory.NewRegistry(),
 		Context:  context.Background(),
 	}
 }
