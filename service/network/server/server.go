@@ -8,7 +8,8 @@ import (
 	"time"
 
 	"github.com/micro-community/micro/v3/service"
-	log "github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/logger"
 	net "github.com/micro-community/micro/v3/service/network"
 	"github.com/micro-community/micro/v3/service/network/handler"
 	"github.com/micro-community/micro/v3/service/network/mucp"
@@ -131,6 +132,11 @@ func Run(ctx *cli.Context) error {
 	tun := tmucp.NewTunnel(tunOpts...)
 	id := service.Server().Options().Id
 
+	// increase the client retries
+	client.DefaultClient.Init(
+		client.Retries(3),
+	)
+
 	// local tunnel router
 	rtr := router.DefaultRouter
 
@@ -138,6 +144,7 @@ func Run(ctx *cli.Context) error {
 		router.Network(networkName),
 		router.Id(id),
 		router.Gateway(gateway),
+		router.Cache(),
 	)
 
 	// create new network
@@ -194,7 +201,7 @@ func Run(ctx *cli.Context) error {
 
 	// connect network
 	if err := netService.Connect(); err != nil {
-		log.Fatalf("Network failed to connect: %v", err)
+		logger.Fatalf("Network failed to connect: %v", err)
 	}
 
 	// netClose hard exits if we have problems
@@ -213,10 +220,10 @@ func Run(ctx *cli.Context) error {
 		}
 	}
 
-	log.Infof("Network [%s] listening on %s", networkName, peerAddress)
+	logger.Infof("Network [%s] listening on %s", networkName, peerAddress)
 
 	if err := service.Run(); err != nil {
-		log.Errorf("Network %s failed: %v", networkName, err)
+		logger.Errorf("Network %s failed: %v", networkName, err)
 		netClose(netService)
 		os.Exit(1)
 	}
