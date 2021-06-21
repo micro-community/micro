@@ -25,7 +25,6 @@ import (
 
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/service/registry/mdns"
 	nats "github.com/nats-io/nats.go"
 )
 
@@ -295,9 +294,8 @@ func (n *natsBroker) onDisconnectedError(conn *nats.Conn, err error) {
 func NewBroker(opts ...broker.Option) broker.Broker {
 	options := broker.Options{
 		// Default codec
-		Codec:    Marshaler{},
-		Context:  context.Background(),
-		Registry: mdns.NewRegistry(),
+		Codec:   Marshaler{},
+		Context: context.Background(),
 	}
 
 	n := &natsBroker{
