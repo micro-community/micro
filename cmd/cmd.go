@@ -11,6 +11,7 @@ import (
 	"runtime/debug"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/micro-community/micro/v3/cmd/cli/util"
@@ -70,6 +71,8 @@ type command struct {
 //Default value
 var (
 	DefaultCmd Cmd = New()
+
+	onceBefore sync.Once
 
 	// name of the binary
 	name = "micro"
@@ -215,6 +218,11 @@ var (
 			Usage:   "Key to use when encoding/decoding secret config values. Will be generated and saved to file if not provided.",
 			Value:   "",
 			EnvVars: []string{"MICRO_CONFIG_SECRET_KEY"},
+		},
+		&cli.StringFlag{
+			Name:    "tracing_reporter_address",
+			Usage:   "The host:port of the opentracing agent e.g. localhost:6831",
+			EnvVars: []string{"MICRO_TRACING_REPORTER_ADDRESS"},
 		},
 		&cli.BoolFlag{
 			Name:    "default_wrapper",
@@ -385,12 +393,14 @@ func (c *command) Before(ctx *cli.Context) error {
 	)
 	// default wrapper
 	if ctx.Bool("default_wrapper") {
+	onceBefore.Do(func() {
 		// wrap the client
 		client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
 		// client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
 		client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
 		//	client.DefaultClient = wrapper.FromService(client.DefaultClient)
 		client.DefaultClient = wrapper.LogClient(client.DefaultClient)
+		client.DefaultClient = wrapper.OpentraceClient(client.DefaultClient)
 
 		// wrap the server
 		server.DefaultServer.Init(
@@ -399,7 +409,9 @@ func (c *command) Before(ctx *cli.Context) error {
 			server.WrapHandler(wrapper.HandlerStats()),
 			server.WrapHandler(wrapper.LogHandler()),
 			server.WrapHandler(wrapper.MetricsHandler()),
+			server.WrapHandler(wrapper.OpenTraceHandler()),
 		)
+	})
 
 	}
 

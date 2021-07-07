@@ -33,6 +33,10 @@ import (
 
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
+	"github.com/micro/micro/v3/util/opentelemetry"
+	"github.com/micro/micro/v3/util/opentelemetry/jaeger"
+	"github.com/micro/micro/v3/util/wrapper"
+	"github.com/opentracing/opentracing-go"
 )
 
 //service for proxy
@@ -231,6 +235,26 @@ func Run(ctx *cli.Context) error {
 		serverOpts = append(serverOpts, server.TLSConfig(config))
 	}
 
+	reporterAddress := ctx.String("tracing_reporter_address")
+	if len(reporterAddress) == 0 {
+		reporterAddress = jaeger.DefaultReporterAddress
+	}
+
+	// Create a new Jaeger opentracer:
+	openTracer, traceCloser, err := jaeger.New(
+		opentelemetry.WithServiceName("proxy"),
+		opentelemetry.WithTraceReporterAddress(reporterAddress),
+	)
+	log.Infof("Setting jaeger global tracer to %s", reporterAddress)
+	defer traceCloser.Close() // Make sure we flush any pending traces before shutdown:
+	if err != nil {
+		log.Warnf("Unable to prepare a Jaeger tracer: %s", err)
+	} else {
+		// Set the global default opentracing tracer:
+		opentracing.SetGlobalTracer(openTracer)
+	}
+	opentelemetry.DefaultOpenTracer = openTracer
+
 	// new proxy
 	var p proxy.Proxy
 
@@ -250,6 +274,7 @@ func Run(ctx *cli.Context) error {
 	authOpt := server.WrapHandler(authHandler())
 	serverOpts = append(serverOpts, authOpt)
 	serverOpts = append(serverOpts, server.WithRouter(p))
+	serverOpts = append(serverOpts, server.WrapHandler(wrapper.OpenTraceHandler()))
 
 	if len(Endpoint) > 0 {
 		logger.Infof("Proxy [%s] serving endpoint: %s", p.String(), Endpoint)

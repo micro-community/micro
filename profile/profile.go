@@ -21,6 +21,8 @@ import (
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
 	"github.com/micro-community/micro/v3/service/store"
+	"github.com/micro/micro/v3/util/opentelemetry"
+	"github.com/micro/micro/v3/util/opentelemetry/jaeger"
 
 	mAuthJwt "github.com/micro-community/micro/v3/service/auth/jwt"
 	mAuthNoop "github.com/micro-community/micro/v3/service/auth/noop"
@@ -148,6 +150,20 @@ var Local = &Profile{
 			logger.Fatalf("Error configuring file blob store: %v", err)
 		}
 
+		// Configure tracing with Jaeger (forced tracing):
+		tracingServiceName := ctx.Args().Get(1)
+		if len(tracingServiceName) == 0 {
+			tracingServiceName = "Micro"
+		}
+		openTracer, _, err := jaeger.New(
+			opentelemetry.WithServiceName(tracingServiceName),
+			opentelemetry.WithSamplingRate(1),
+		)
+		if err != nil {
+			logger.Fatalf("Error configuring opentracing: %v", err)
+		}
+		opentelemetry.DefaultOpenTracer = openTracer
+
 		return nil
 	},
 }
@@ -202,6 +218,21 @@ var Kubernetes = &Profile{
 		// Use k8s routing which is DNS based
 		router.DefaultRouter = mRouterK8s.NewRouter()
 		client.DefaultClient.Init(client.Router(router.DefaultRouter))
+
+		// Configure tracing with Jaeger:
+		tracingServiceName := ctx.Args().Get(1)
+		if len(tracingServiceName) == 0 {
+			tracingServiceName = "Micro"
+		}
+		openTracer, _, err := jaeger.New(
+			opentelemetry.WithServiceName(tracingServiceName),
+			opentelemetry.WithTraceReporterAddress("localhost:6831"),
+		)
+		if err != nil {
+			logger.Fatalf("Error configuring opentracing: %v", err)
+		}
+		opentelemetry.DefaultOpenTracer = openTracer
+
 		return nil
 	},
 }
