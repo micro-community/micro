@@ -8,11 +8,11 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/micro/micro/v3/service/client"
-	mmd "github.com/micro/micro/v3/service/context/metadata"
-	"github.com/micro/micro/v3/service/logger"
-	"github.com/micro/micro/v3/service/server"
-	"github.com/micro/micro/v3/util/opentelemetry"
+	"github.com/micro-community/micro/v3/service/client"
+	mmd "github.com/micro-community/micro/v3/service/context/metadata"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/util/opentelemetry"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 )

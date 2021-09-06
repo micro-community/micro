@@ -31,11 +31,12 @@ import (
 
 	"github.com/urfave/cli/v2"
 
+	"github.com/go-acme/lego/log"
 	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	"github.com/micro/micro/v3/util/opentelemetry"
-	"github.com/micro/micro/v3/util/opentelemetry/jaeger"
-	"github.com/micro/micro/v3/util/wrapper"
+	"github.com/micro-community/micro/v3/util/opentelemetry"
+	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"
+	"github.com/micro-community/micro/v3/util/wrapper"
 	"github.com/opentracing/opentracing-go"
 )
 

@@ -3,7 +3,7 @@ package opentelemetry
 import (
 	"strings"
 
-	mmd "github.com/micro/micro/v3/service/context/metadata"
+	mmd "github.com/micro-community/micro/v3/service/context/metadata"
 	"github.com/opentracing/opentracing-go"
 )
 

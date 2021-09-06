@@ -21,8 +21,8 @@ import (
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
 	"github.com/micro-community/micro/v3/service/store"
-	"github.com/micro/micro/v3/util/opentelemetry"
-	"github.com/micro/micro/v3/util/opentelemetry/jaeger"
+	"github.com/micro-community/micro/v3/util/opentelemetry"
+	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"
 
 	mAuthJwt "github.com/micro-community/micro/v3/service/auth/jwt"
 	mAuthNoop "github.com/micro-community/micro/v3/service/auth/noop"
