@@ -3,6 +3,7 @@ module github.com/micro-community/micro/v3
 go 1.15
 
 require (
+	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/caddyserver/certmagic v0.10.6
@@ -13,6 +14,7 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/evanphx/json-patch/v5 v5.3.0
 	github.com/getkin/kin-openapi v0.26.0
+	github.com/go-acme/lego v2.7.2+incompatible
 	github.com/go-acme/lego/v3 v3.9.0
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/golang/protobuf v1.5.2
@@ -28,6 +30,7 @@ require (
 	github.com/nightlyone/lockfile v1.0.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/onsi/gomega v1.12.0
+	github.com/opentracing/opentracing-go v1.2.0
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.9.1
@@ -37,6 +40,8 @@ require (
 	github.com/stretchr/objx v0.3.0
 	github.com/stretchr/testify v1.7.0
 	github.com/teris-io/shortid v0.0.0-20201117134242-e59966efd125
+	github.com/uber/jaeger-client-go v2.29.1+incompatible
+	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
 	github.com/urfave/cli/v2 v2.3.0
 	github.com/xanzy/go-gitlab v0.50.0
 	github.com/xlab/treeprint v1.1.0
