@@ -5,7 +5,7 @@
   <a href="https://m3o.com"><img src="https://img.shields.io/badge/micro-cloud-orange" /></a>
 </div>
 
-Micro is a distributed OS built for the Cloud.
+Micro is a cloud platform for API development.
 
 ## Overview
 
@@ -32,9 +32,11 @@ Documentation, guides and quick starts for Micro
 - [Reference](reference) - In-depth reference for Micro CLI and services
 - [Resources](resources) - External resources and contributions
 - [Roadmap](roadmap) - Stuff on our agenda over the long haul
-- [Users](users) - Developers and companies using Micro in production
 - [FAQ](faq) - Frequently asked questions
-- [Blog](blog) - For the latest from us
+
+## Cloud
+
+Find the cloud hosted version at [m3o.com](https://m3o.com)
 
 Join us in GitHub [Discussions](https://github.com/micro-community/micro/discussions) or [Slack](https://slack.m3o.com).
 ## License

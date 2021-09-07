@@ -1,6 +1,7 @@
 # Micro [![License](https://img.shields.io/badge/license-polyform:shield-blue)](https://polyformproject.org/licenses/shield/1.0.0/) [![Go Report Card](https://goreportcard.com/badge/micro-community/micro)](https://goreportcard.com/report/github.com/micro-community/micro)
 
 <kbd><img src="https://raw.githubusercontent.com/micro-community/micro/master/docs/images/banner.png" /></kbd>
+Micro is a cloud platform for API development.
 
 ## Overview
 
@@ -21,10 +22,10 @@ with the complexity of distributed systems and provides simpler programmable abs
 - [Roadmap](https://micro.arch.wiki/roadmap) - Stuff on our agenda over the long haul
 - [Users](https://micro.arch.wiki/users) - Developers and companies using Micro in production
 - [FAQ](https://micro.arch.wiki/faq) - Frequently asked questions
-- [Blog](https://micro.arch.wiki/blog) - For the latest from us
 
-## Features
+## Cloud
 
+Find the cloud hosted version at [m3o.com](https://m3o.com)
 Below are the core components that make up Micro.
 
 **Server**
@@ -242,9 +243,7 @@ See the [docs](https://micro.mu) for detailed information on the architecture, i
 See [LICENSE](LICENSE) which makes use of [Polyform Shield](https://polyformproject.org/licenses/shield/1.0.0/).
 
 Join us on GitHub [Discussions](https://github.com/micro-community/micro/discussions).
-
 ## Repo Clone for CN
-
 following cmd:
 
 ```bash
