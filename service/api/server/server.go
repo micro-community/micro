@@ -377,6 +377,8 @@ func Run(ctx *cli.Context) error {
 		logger.Fatal(err)
 	}
 
+	pb.RegisterApiHandler(srv.Server(), &ahandler.APIHandler{})
+
 	// Run internal server
 	if err := inSrv.Run(); err != nil {
 		logger.Fatal(err)

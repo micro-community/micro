@@ -92,6 +92,14 @@ func (a authWrapper) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		req.Header.Set(namespace.NamespaceKey, ns)
 	}
 
+	// Is this account on the blocklist?
+	if acc != nil {
+		if blocked, _ := DefaultBlockList.IsBlocked(req.Context(), acc.ID, acc.Issuer); blocked {
+			http.Error(w, "unauthorized request", http.StatusUnauthorized)
+			return
+		}
+	}
+
 	// Ensure accounts only issued by the namespace are valid.
 	if acc != nil && acc.Issuer != ns {
 		acc = nil
