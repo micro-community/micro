@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/micro-community/micro/v3/plugin"
+	pbAPI "github.com/micro-community/micro/v3/proto/api"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/api/auth"
@@ -377,7 +378,7 @@ func Run(ctx *cli.Context) error {
 		logger.Fatal(err)
 	}
 
-	pb.RegisterApiHandler(srv.Server(), &ahandler.APIHandler{})
+	pbAPI.RegisterApiHandler(inSrv.Server(), &inApiHandler.APIHandler{})
 
 	// Run internal server
 	if err := inSrv.Run(); err != nil {
