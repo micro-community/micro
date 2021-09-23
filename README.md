@@ -25,7 +25,7 @@ with the complexity of distributed systems and provides simpler programmable abs
 
 ## Cloud
 
-Find the cloud hosted version at [m3o.com](https://m3o.com)
+Find the cloud hosted services at [m3o.com](https://m3o.com)
 Below are the core components that make up Micro.
 
 **Server**
@@ -236,7 +236,7 @@ curl http://localhost:8080/helloworld?name=Alice
 
 ## Usage
 
-See the [docs](https://micro.mu) for detailed information on the architecture, installation and use of the platform.
+See the [docs](https://micro.mu/docs) for detailed information on the architecture, installation and use of the platform.
 
 ## License
 

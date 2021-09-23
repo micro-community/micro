@@ -1,5 +1,5 @@
 <div>
-  <a href="https://twitter.com/microhq"><img src="https://img.shields.io/github/last-commit/micro-community/micro" /></a>
+  <a href="https://github.com/micro-community/micro/stargazers"><img src="https://img.shields.io/github/last-commit/micro-community/micro" /></a>
   <a href="https://github.com/micro-community/micro/network/members"><img src="https://img.shields.io/github/forks/micro-community/micro?style=social" /></a>
   <a href="https://github.com/micro-community/micro/stargazers"><img src="https://img.shields.io/github/stars/micro-community/micro?style=social" /></a>
   <a href="https://m3o.com"><img src="https://img.shields.io/badge/micro-cloud-orange" /></a>
