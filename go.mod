@@ -16,6 +16,7 @@ require (
 	github.com/go-acme/lego v2.7.2+incompatible
 	github.com/go-acme/lego/v3 v3.9.0
 	github.com/gofrs/uuid v4.0.0+incompatible
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.2.0
 	github.com/gorilla/handlers v1.5.1

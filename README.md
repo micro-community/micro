@@ -1,4 +1,4 @@
-# Micro [![License](https://img.shields.io/badge/license-polyform:shield-blue)](https://polyformproject.org/licenses/shield/1.0.0/) [![Go Report Card](https://goreportcard.com/badge/micro-community/micro)](https://goreportcard.com/report/github.com/micro-community/micro)
+# Micro [![License](https://img.shields.io/badge/license-apache-blue)](https://opensource.org/licenses/Apache-2.0) [![Go Report Card](https://goreportcard.com/badge/micro-community/micro)](https://goreportcard.com/report/github.com/micro-community/micro)
 
 <kbd><img src="https://raw.githubusercontent.com/micro-community/micro/master/docs/images/banner.png" /></kbd>
 Micro is a cloud platform for API development.
@@ -240,7 +240,7 @@ See the [docs](https://micro.mu/docs) for detailed information on the architectu
 
 ## License
 
-See [LICENSE](LICENSE) which makes use of [Polyform Shield](https://polyformproject.org/licenses/shield/1.0.0/)
+See [LICENSE](LICENSE) which makes use of [Apache 2.0](https://opensource.org/licenses/Apache-2.0)
 
 Join us on GitHub [Discussions](https://github.com/micro-community/micro/discussions).
 ## Repo Clone for CN

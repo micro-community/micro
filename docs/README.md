@@ -41,4 +41,4 @@ Find the cloud hosted version at [m3o.com](https://m3o.com)
 Join us in GitHub [Discussions](https://github.com/micro-community/micro/discussions) or [Slack](https://slack.m3o.com).
 ## License
 
-[Polyform Shield](https://polyformproject.org/licenses/shield/1.0.0/)
+[Apache 2.0](https://opensource.org/licenses/Apache-2.0)
