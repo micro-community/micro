@@ -34,7 +34,7 @@ package generator
 import (
 	"testing"
 
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+	"google.golang.org/protobuf/types/descriptorpb"
 )
 
 func TestCamelCase(t *testing.T) {
@@ -72,8 +72,8 @@ func TestGoPackageOption(t *testing.T) {
 	}
 	for _, tc := range tests {
 		d := &FileDescriptor{
-			FileDescriptorProto: &descriptor.FileDescriptorProto{
-				Options: &descriptor.FileOptions{
+			FileDescriptorProto: &descriptorpb.FileDescriptorProto{
+				Options: &descriptorpb.FileOptions{
 					GoPackage: &tc.in,
 				},
 			},
