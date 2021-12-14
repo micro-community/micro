@@ -4,17 +4,16 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"math"
-	"sort"
-	"strconv"
-	"strings"
-
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli/v2"
+	"math"
+	"sort"
+	"strconv"
+	"strings"
 )
 
 func init() {

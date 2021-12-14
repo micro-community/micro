@@ -178,6 +178,10 @@ var srvCommands = []srvCommand{
 		Name:    "store",
 		Command: mStoreServer.Run,
 	},
+	{
+		Name:    "web",
+		Command: web.Run,
+	},
 }
 
 func init() {

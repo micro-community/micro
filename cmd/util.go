@@ -11,6 +11,7 @@ import (
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/service/logger"
+
 	"github.com/urfave/cli/v2"
 )
 

@@ -4,6 +4,20 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"github.com/micro-community/micro/v3/cmd/cli/util"
+	_ "github.com/micro-community/micro/v3/cmd/usage"
+	"github.com/micro-community/micro/v3/plugin"
+	"github.com/micro-community/micro/v3/profile"
+	"github.com/micro-community/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/broker"
+	"github.com/micro-community/micro/v3/service/client"
+	"github.com/micro-community/micro/v3/service/config"
+	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/network"
+	"github.com/micro-community/micro/v3/service/registry"
+	"github.com/micro-community/micro/v3/service/runtime"
+	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/service/store"
 	"io/ioutil"
 	"math/rand"
 	"os"
@@ -13,21 +27,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/micro-community/micro/v3/cmd/cli/util"
-	"github.com/micro-community/micro/v3/plugin"
-	_ "github.com/micro-community/micro/v3/cmd/usage"
-	"github.com/micro-community/micro/v3/profile"
-	"github.com/micro-community/micro/v3/service/auth"
-	"github.com/micro-community/micro/v3/service/broker"
-	"github.com/micro-community/micro/v3/service/client"
-	"github.com/micro-community/micro/v3/service/config"
-	"github.com/micro-community/micro/v3/service/logger"
-	"github.com/micro-community/micro/v3/service/registry"
-	"github.com/micro-community/micro/v3/service/runtime"
-	"github.com/micro-community/micro/v3/service/server"
-	"github.com/micro-community/micro/v3/service/store"
-	"github.com/micro-community/micro/v3/service/network"
 
 	mConfigCli "github.com/micro-community/micro/v3/service/config/client"
 	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
@@ -329,7 +328,7 @@ func (c *command) Options() Options {
 
 // Before is executed before any subcommand
 func (c *command) Before(ctx *cli.Context) error {
-		//micro server or micro service ..
+	//micro server or micro service ..
 	// set the config file if specified
 	if cf := ctx.String("c"); len(cf) > 0 {
 		inConfig.SetConfig(cf)
@@ -393,25 +392,25 @@ func (c *command) Before(ctx *cli.Context) error {
 	)
 	// default wrapper
 	if ctx.Bool("default_wrapper") {
-	onceBefore.Do(func() {
-		// wrap the client
-		client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
-		// client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
-		client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
-		//	client.DefaultClient = wrapper.FromService(client.DefaultClient)
-		client.DefaultClient = wrapper.LogClient(client.DefaultClient)
-		client.DefaultClient = wrapper.OpentraceClient(client.DefaultClient)
+		onceBefore.Do(func() {
+			// wrap the client
+			client.DefaultClient = wrapper.AuthClient(client.DefaultClient)
+			// client.DefaultClient = wrapper.CacheClient(client.DefaultClient)
+			client.DefaultClient = wrapper.TraceCall(client.DefaultClient)
+			//	client.DefaultClient = wrapper.FromService(client.DefaultClient)
+			client.DefaultClient = wrapper.LogClient(client.DefaultClient)
+			client.DefaultClient = wrapper.OpentraceClient(client.DefaultClient)
 
-		// wrap the server
-		server.DefaultServer.Init(
-			server.WrapHandler(wrapper.AuthHandler()),
-			server.WrapHandler(wrapper.TraceHandler()),
-			server.WrapHandler(wrapper.HandlerStats()),
-			server.WrapHandler(wrapper.LogHandler()),
-			server.WrapHandler(wrapper.MetricsHandler()),
-			server.WrapHandler(wrapper.OpenTraceHandler()),
-		)
-	})
+			// wrap the server
+			server.DefaultServer.Init(
+				server.WrapHandler(wrapper.AuthHandler()),
+				server.WrapHandler(wrapper.TraceHandler()),
+				server.WrapHandler(wrapper.HandlerStats()),
+				server.WrapHandler(wrapper.LogHandler()),
+				server.WrapHandler(wrapper.MetricsHandler()),
+				server.WrapHandler(wrapper.OpenTraceHandler()),
+			)
+		})
 
 	}
 

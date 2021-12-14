@@ -3,13 +3,16 @@ package server
 
 import (
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
+
 	"github.com/urfave/cli/v2"
 )
 
@@ -26,6 +29,7 @@ var (
 		"auth",     // :8010
 		"proxy",    // :8081
 		"api",      // :8080
+		"web",      // :8082
 	}
 )
 
@@ -116,8 +120,16 @@ func Run(context *cli.Context) error {
 		// all things run by the server are `micro service [name]`
 		cmdArgs := []string{"service"}
 
+		// TODO: remove hacks
+		profile := context.String("profile")
+
+		// web has to behave like a client
+		if service == "web" {
+			profile = "client"
+		}
+
 		env := envvars
-		env = append(env, "MICRO_PROFILE="+context.String("profile"))
+		env = append(env, "MICRO_PROFILE="+profile)
 
 		// set the proxy address, default to the network running locally
 		if service != "network" {
@@ -201,16 +213,9 @@ func Run(context *cli.Context) error {
 		return err
 	}
 
-	// internal server
-	srv := service.New(
-		service.Name(Name),
-		service.Address(Address),
-	)
-
-	// start the server
-	if err := srv.Run(); err != nil {
-		logger.Fatalf("Error running server: %v", err)
-	}
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL)
+	<-ch
 
 	runtimeServer.Stop()
 	logger.Info("Stopped server")

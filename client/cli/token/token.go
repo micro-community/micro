@@ -20,9 +20,10 @@ import (
 
 	"github.com/micro-community/micro/v3/cmd/cli/namespace"
 	"github.com/micro-community/micro/v3/cmd/cli/util"
+	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/util/config"
 	"github.com/micro-community/micro/v3/util/user"
-	"github.com/micro-community/micro/v3/service/auth"
+
 	"github.com/urfave/cli/v2"
 )
 

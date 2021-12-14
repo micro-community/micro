@@ -8,12 +8,13 @@ import (
 	"strings"
 
 	"github.com/micro-community/micro/v3/service/api/resolver"
+	res "github.com/micro-community/micro/v3/service/api/resolver"
 	"github.com/micro-community/micro/v3/service/router"
 )
 
 var re = regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-]*[a-zA-Z0-9]*)?$")
 
-type Resolver struct {
+type WebResolver struct {
 	// Options
 	Options resolver.Options
 	// selector to choose from a pool of nodes
@@ -22,13 +23,14 @@ type Resolver struct {
 	Router router.Router
 }
 
-func (r *Resolver) String() string {
+func (r *WebResolver) String() string {
 	return "web/resolver"
 }
 
 // Resolve replaces the values of Host, Path, Scheme to calla backend service
 // It accounts for subdomains for service names based on namespace
-func (r *Resolver) Resolve(req *http.Request, opts ...resolver.ResolveOption) (*resolver.Endpoint, error) {
+func (r *WebResolver) Resolve(req *http.Request, opts ...res.ResolveOption) (*res.Endpoint, error) {
+
 	// parse the options
 	options := resolver.NewResolveOptions(opts...)
 
@@ -38,12 +40,7 @@ func (r *Resolver) Resolve(req *http.Request, opts ...resolver.ResolveOption) (*
 	}
 
 	if !re.MatchString(parts[1]) {
-		return nil, resolver.ErrInvalidPath
-	}
-
-	name := parts[1]
-	if len(r.Options.ServicePrefix) > 0 {
-		name = r.Options.ServicePrefix + "." + name
+		return nil, res.ErrInvalidPath
 	}
 
 	// lookup the routes for the service
@@ -51,13 +48,13 @@ func (r *Resolver) Resolve(req *http.Request, opts ...resolver.ResolveOption) (*
 		router.LookupNetwork(options.Domain),
 	}
 
-	routes, err := r.Router.Lookup(name, query...)
+	routes, err := r.Router.Lookup(parts[1], query...)
 	if err == router.ErrRouteNotFound {
-		return nil, resolver.ErrNotFound
+		return nil, res.ErrNotFound
 	} else if err != nil {
 		return nil, err
 	} else if len(routes) == 0 {
-		return nil, resolver.ErrNotFound
+		return nil, res.ErrNotFound
 	}
 
 	// select a random route to use
@@ -69,8 +66,9 @@ func (r *Resolver) Resolve(req *http.Request, opts ...resolver.ResolveOption) (*
 	route := routes[rand.Intn(len(routes))]
 
 	// we're done
-	return &resolver.Endpoint{
-		Name:   name,
+
+	return &res.Endpoint{
+		Name:   parts[1],
 		Method: req.Method,
 		Host:   route.Address,
 		Path:   "/" + strings.Join(parts[2:], "/"),

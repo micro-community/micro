@@ -119,7 +119,7 @@ var (
 	// DefaultRetries is the default number of times a request is tried
 	DefaultRetries = 1
 	// DefaultRequestTimeout is the default request timeout
-	DefaultRequestTimeout = time.Second * 5
+	DefaultRequestTimeout = time.Second * 10
 	// DefaultPoolSize sets the connection pool size
 	DefaultPoolSize = 100
 	// DefaultPoolTTL sets the connection pool ttl
@@ -132,13 +132,13 @@ func NewMessage(topic string, msg interface{}) Message {
 }
 
 // NewRequest returns a request can which be executed using Call or Stream
-func NewRequest(service, endpoint string, req interface{}) Request {
-	return DefaultClient.NewRequest(service, endpoint, req)
+func NewRequest(service, endpoint string, req interface{}, opts ...RequestOption) Request {
+	return DefaultClient.NewRequest(service, endpoint, req, opts...)
 }
 
 // Call performs a request
-func Call(ctx context.Context, req Request, rsp interface{}) error {
-	return DefaultClient.Call(ctx, req, rsp)
+func Call(ctx context.Context, req Request, rsp interface{}, opts ...CallOption) error {
+	return DefaultClient.Call(ctx, req, rsp, opts...)
 }
 
 // Publish a message

@@ -3,10 +3,6 @@ package cli
 import (
 	"encoding/json"
 	"fmt"
-	"os"
-	"strings"
-	"text/tabwriter"
-
 	"github.com/micro-community/micro/v3/cmd/cli/namespace"
 	"github.com/micro-community/micro/v3/cmd/cli/util"
 	pb "github.com/micro-community/micro/v3/proto/auth"
@@ -14,6 +10,9 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/urfave/cli/v2"
+	"os"
+	"strings"
+	"text/tabwriter"
 )
 
 func listAccounts(ctx *cli.Context) error {
@@ -116,5 +115,39 @@ func deleteAccount(ctx *cli.Context) error {
 		return fmt.Errorf("Error deleting account: %v", err)
 	}
 
+	return nil
+}
+
+func updateAccount(ctx *cli.Context) error {
+	if ctx.Args().Len() == 0 {
+		return fmt.Errorf("Missing argument: ID")
+	}
+
+	env, err := util.GetEnv(ctx)
+	if err != nil {
+		return err
+	}
+	ns, err := namespace.Get(env.Name)
+	if err != nil {
+		return fmt.Errorf("Error getting namespace: %v", err)
+	}
+	if len(ctx.String("namespace")) > 0 {
+		ns = ctx.String("namespace")
+	}
+
+	cli := pb.NewAccountsService("auth", client.DefaultClient)
+
+	_, err = cli.ChangeSecret(context.DefaultContext, &pb.ChangeSecretRequest{
+		Id:        ctx.Args().First(),
+		OldSecret: ctx.String("old_secret"),
+		NewSecret: ctx.String("new_secret"),
+		Options:   &pb.Options{Namespace: ns},
+	}, client.WithAuthToken())
+
+	if err != nil {
+		return fmt.Errorf("Error updating accounts: %v", err)
+	}
+
+	fmt.Printf("Account updated\n")
 	return nil
 }

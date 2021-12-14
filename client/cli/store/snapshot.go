@@ -5,6 +5,7 @@ import (
 
 	snap "github.com/micro-community/micro/v3/cmd/cli/store/snapshot"
 	"github.com/micro-community/micro/v3/service/logger"
+
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"
 )

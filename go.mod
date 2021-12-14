@@ -12,6 +12,7 @@ require (
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/dustin/go-humanize v1.0.0
 	github.com/evanphx/json-patch/v5 v5.3.0
+	github.com/fatih/camelcase v1.0.0
 	github.com/getkin/kin-openapi v0.26.0
 	github.com/go-acme/lego v2.7.2+incompatible
 	github.com/go-acme/lego/v3 v3.9.0
@@ -46,11 +47,13 @@ require (
 	github.com/xanzy/go-gitlab v0.50.0
 	github.com/xlab/treeprint v1.1.0
 	go.etcd.io/bbolt v1.3.5
-	golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
-	golang.org/x/net v0.0.0-20210510120150-4163338589ed
-	google.golang.org/genproto v0.0.0-20210518161634-ec7691c0a37d
-	google.golang.org/grpc v1.37.1
-	google.golang.org/grpc/examples v0.0.0-20210518222651-23a83dd097ec
 	google.golang.org/protobuf v1.26.0
 	nhooyr.io/websocket v1.8.7 // indirect
+	go.uber.org/atomic v1.6.0 // indirect
+	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897
+	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb
+	google.golang.org/genproto v0.0.0-20200806141610-86f49bd18e98
+	google.golang.org/grpc v1.40.0
+	google.golang.org/grpc/examples v0.0.0-20211015201449-4757d0249e2d
+	gopkg.in/square/go-jose.v2 v2.4.1 // indirect
 )

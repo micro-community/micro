@@ -15,6 +15,7 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/micro-community/micro/v3/service/registry"
+
 	"github.com/stretchr/objx"
 	"github.com/urfave/cli/v2"
 )
