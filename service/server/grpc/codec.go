@@ -114,7 +114,8 @@ func (jsonCodec) Unmarshal(data []byte, v interface{}) error {
 		return nil
 	}
 	if pb, ok := v.(proto.Message); ok {
-		return jsonpb.Unmarshal(b.NewReader(data), pb)
+		unmarshaler := jsonpb.Unmarshaler{AllowUnknownFields: true}
+		return unmarshaler.Unmarshal(b.NewReader(data), pb)
 	}
 	return json.Unmarshal(data, v)
 }
