@@ -37,3 +37,6 @@ dist
 
 test/services
 *.orig
+
+.air.toml
+tmp

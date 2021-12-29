@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -15,10 +16,10 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
-	"github.com/micro-community/micro/v3/service/store"
 	kclient "github.com/micro-community/micro/v3/service/runtime/kubernetes/client"
-	"github.com/micro-community/micro/v3/util/namespace"
 	"github.com/micro-community/micro/v3/service/runtime/source/git"
+	"github.com/micro-community/micro/v3/service/store"
+	"github.com/micro-community/micro/v3/util/namespace"
 )
 
 const (
@@ -92,6 +93,9 @@ func (m *manager) checkServices() {
 				continue
 			}
 
+			srv.Service.Source = filepath.Dir(srv.Service.Source)
+
+			logger.Infof("Watching process: service `%v` status is %v, restarting...", srv.Service, srv.Status)
 			// create the service
 			if err := m.createServiceInRuntime(srv); err != nil {
 				if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
