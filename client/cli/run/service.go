@@ -520,10 +520,6 @@ func updateService(ctx *cli.Context) error {
 
 	name := ctx.String("name")
 
-	if v := ctx.Args().Get(0); len(v) > 0 {
-		name = v
-	}
-
 	if len(name) == 0 {
 		name = source.RuntimeName()
 	}
