@@ -11,10 +11,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/google/uuid"
 	pb "github.com/micro-community/micro/v3/cmd/usage/proto"
 	"github.com/micro-community/micro/v3/util/version"
+	"google.golang.org/protobuf/proto"
 )
 
 var (

@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/micro-community/micro/v3 v3.2.1
-	github.com/prometheus/client_golang v1.7.1
+	github.com/prometheus/client_golang v1.12.1
 	github.com/stretchr/testify v1.7.0
 )
 

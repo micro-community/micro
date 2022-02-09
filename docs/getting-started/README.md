@@ -22,14 +22,14 @@ This is a getting started guide for Micro which teaches you how to go from insta
 
 You will need protoc-gen-micro for code generation
 
-- [protobuf](https://github.com/golang/protobuf)
-- [protoc-gen-go](https://github.com/golang/protobuf/tree/master/protoc-gen-go)
+- [protobuf](https://google.golang.org/protobuf)
+- [protoc-gen-go](https://google.golang.org/protobuf/tree/master/protoc-gen-go)
 - [protoc-gen-micro](https://github.com/micro-community/micro/tree/master/cmd/protoc-gen-micro)
 
 ```
 # Download latest proto releaes
 # https://github.com/protocolbuffers/protobuf/releases
-go get github.com/golang/protobuf/protoc-gen-go
+go get google.golang.org/protobuf/protoc-gen-go
 go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 ```
 
@@ -293,8 +293,8 @@ visit https://github.com/protocolbuffers/protobuf/releases
 
 download protobuf for micro:
 
-go get -u github.com/golang/protobuf/proto
-go get -u github.com/golang/protobuf/protoc-gen-go
+go get -u google.golang.org/protobuf/proto
+go get -u google.golang.org/protobuf/protoc-gen-go
 go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 
 compile the proto file helloworld.proto:
@@ -305,8 +305,8 @@ make proto
 
 As can be seen from the output above, before building the first service, the following tools must be installed:
 * [protoc](http://google.github.io/proto-lens/installing-protoc.html)
-* [protobuf/proto](github.com/golang/protobuf/protoc-gen-go)
-* [protoc-gen-micro](github.com/golang/protobuf/protoc-gen-go)
+* [protobuf/proto](google.golang.org/protobuf/protoc-gen-go)
+* [protoc-gen-micro](google.golang.org/protobuf/protoc-gen-go)
 
 They are all needed to translate proto files to actual Go code.
 Protos exist to provide a language agnostic way to describe service endpoints, their input and output types, and to have an efficient serialization format at hand.

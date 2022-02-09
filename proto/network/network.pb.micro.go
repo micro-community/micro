@@ -5,7 +5,7 @@ package network
 
 import (
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
+	proto "google.golang.org/protobuf/proto"
 	_ "github.com/micro-community/micro/v3/proto/router"
 	math "math"
 )

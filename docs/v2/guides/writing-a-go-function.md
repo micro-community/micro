@@ -117,7 +117,7 @@ Here we're defining a function handler called Greeter with the method Hello whic
 We use protoc and protoc-gen-go to generate the concrete go implementation for this definition.
 
 Go-micro uses code generation to provide client stub methods to reduce boiler plate code much like gRPC. It's done via a protobuf plugin 
-which requires a fork of [golang/protobuf](https://github.com/golang/protobuf) that can be found at 
+which requires a fork of [golang/protobuf](https://google.golang.org/protobuf) that can be found at 
 [github.com/micro/protobuf](https://github.com/micro/protobuf).
 
 ```shell

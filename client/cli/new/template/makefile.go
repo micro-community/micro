@@ -5,8 +5,8 @@ var (
 GOPATH:=$(shell go env GOPATH)
 .PHONY: init
 init:
-	go get -u github.com/golang/protobuf/proto
-	go get -u github.com/golang/protobuf/protoc-gen-go
+	go get -u google.golang.org/protobuf/proto
+	go get -u google.golang.org/protobuf/protoc-gen-go
 	go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 	go get github.com/micro-community/micro/v3/cmd/protoc-gen-openapi
 

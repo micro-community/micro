@@ -29,7 +29,7 @@ cargo install protobuf-codegen grpc-compiler
 # build proto related code
 pushd cmd/protoc-gen-client && go get ./... && popd
 pushd cmd/protoc-gen-micro && go get ./... && popd
-go get github.com/golang/protobuf/protoc-gen-go@v1.4.2
+go get google.golang.org/protobuf/protoc-gen-go@v1.4.2
 # delete the existing sdk directory
 rm -rf client/sdk
 # generate the clients

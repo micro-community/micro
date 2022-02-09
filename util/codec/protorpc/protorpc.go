@@ -22,8 +22,8 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/micro-community/micro/v3/util/codec"
+	"google.golang.org/protobuf/proto"
 )
 
 type flusher interface {

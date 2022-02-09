@@ -11,7 +11,7 @@ go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro@master
 Also required: 
 
 - [protoc](https://github.com/google/protobuf)
-- [protoc-gen-go](https://github.com/golang/protobuf)
+- [protoc-gen-go](https://google.golang.org/protobuf)
 
 ## Usage
 

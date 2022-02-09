@@ -34,7 +34,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	pberr "github.com/micro-community/micro/v3/proto/errors"
 	"github.com/micro-community/micro/v3/service/broker"
@@ -48,6 +47,7 @@ import (
 	mnet "github.com/micro-community/micro/v3/util/net"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/netutil"
+	"google.golang.org/protobuf/proto"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"

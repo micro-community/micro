@@ -5,10 +5,10 @@ import (
 	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"github.com/micro-community/micro/v3/service/logger"
 	"google.golang.org/protobuf/compiler/protogen"
+	"google.golang.org/protobuf/proto"
+	descriptor"google.golang.org/protobuf/types/descriptorpb"
 )
 
 const (
@@ -365,7 +365,7 @@ func (c *Converter) recursiveConvertMessageType(curPkg *ProtoPackage, msg *descr
 		componentSchema.Description = formatDescription(src)
 	}
 
-	logger.Tracef("Converting message (%s)", proto.MarshalTextString(msg))
+	logger.Tracef("Converting message (%s)", msg.String())
 
 	// Recurse each field:
 	for _, fieldDesc := range msg.GetField() {

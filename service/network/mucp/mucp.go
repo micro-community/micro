@@ -24,7 +24,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/micro-community/micro/v3/service/client"
 	cmucp "github.com/micro-community/micro/v3/service/client/mucp"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -41,6 +40,7 @@ import (
 	"github.com/micro-community/micro/v3/service/server"
 	smucp "github.com/micro-community/micro/v3/service/server/mucp"
 	"github.com/micro-community/micro/v3/util/backoff"
+	"google.golang.org/protobuf/proto"
 )
 
 var (

@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"github.com/micro-community/micro/v3/service/logger"
+	"google.golang.org/protobuf/types/descriptorpb"
 )
 
 // Converts a proto "SERVICE" into an OpenAPI path:

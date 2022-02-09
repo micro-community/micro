@@ -2,7 +2,7 @@ package converter
 
 import (
 	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/proto"
 )
 
 // defaultSpec creates a new OpenAPI3 document to fill in with schemas and paths:

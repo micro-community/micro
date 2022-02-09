@@ -221,8 +221,8 @@ Creating service go.micro.service.foobar in foobar
 download protobuf for micro:
 
 brew install protobuf
-go get -u github.com/golang/protobuf/proto
-go get -u github.com/golang/protobuf/protoc-gen-go
+go get -u google.golang.org/protobuf/proto
+go get -u google.golang.org/protobuf/protoc-gen-go
 go get github.com/micro-community/micro/v2/cmd/protoc-gen-micro@master
 
 compile the proto file foobar.proto:
@@ -233,8 +233,8 @@ protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/foobar/foobar.p
 
 As can be seen from the output above, before building the first service, the following tools must be installed:
 * [protoc](http://google.github.io/proto-lens/installing-protoc.html)
-* [protobuf/proto](github.com/golang/protobuf/protoc-gen-go)
-* [protoc-gen-micro](github.com/golang/protobuf/protoc-gen-go)
+* [protobuf/proto](google.golang.org/protobuf/protoc-gen-go)
+* [protoc-gen-micro](google.golang.org/protobuf/protoc-gen-go)
 
 They are all needed to translate proto files to actual Go code.
 Protos exist to provide a language agnostic way to describe service endpoints, their input and output types, and to have an efficient serialization format at hand.

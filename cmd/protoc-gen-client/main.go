@@ -19,7 +19,7 @@ import (
 var (
 	protocURL        = "https://github.com/protocolbuffers/protobuf/releases/download/v%s/protoc-%s-linux-x86_64.zip"
 	protocGenJavaURL = "https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-java/%s/protoc-gen-grpc-java-%s-linux-x86_64.exe"
-	protocGenGoURL   = "https://github.com/golang/protobuf/archive/v%s.zip"
+	protocGenGoURL   = "https://google.golang.org/protobuf/archive/v%s.zip"
 	protocGenJsURL   = "https://registry.npmjs.org/grpc-tools/-/grpc-tools-%v.tgz"
 	//protocGenJsURL       = "https://registry.npmjs.org/grpc/-/grpc-%v.tgz"
 	protocBin            = "protoc"
@@ -47,9 +47,9 @@ func download(path string, lang string) error {
 		}
 		var cmd *exec.Cmd
 		if gomod, ok := os.LookupEnv("GOMOD"); ok && len(gomod) > 0 {
-			cmd = exec.Command("go", "get", "-v", fmt.Sprintf("github.com/golang/protobuf/protoc-gen-go@v%s", protocGenGoVersion))
+			cmd = exec.Command("go", "get", "-v", fmt.Sprintf("google.golang.org/protobuf/protoc-gen-go@v%s", protocGenGoVersion))
 		} else {
-			cmd = exec.Command("go", "get", "-v", "github.com/golang/protobuf/protoc-gen-go")
+			cmd = exec.Command("go", "get", "-v", "google.golang.org/protobuf/protoc-gen-go")
 		}
 
 		cmd.Env = append(cmd.Env, []string{

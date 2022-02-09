@@ -6,7 +6,7 @@ package network
 import (
 	context "context"
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
+	proto "google.golang.org/protobuf/proto"
 	router "github.com/micro-community/micro/v3/proto/router"
 	grpc "google.golang.org/grpc"
 	math "math"

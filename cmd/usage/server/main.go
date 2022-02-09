@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/handlers"
 	pb "github.com/micro-community/micro/v3/cmd/usage/proto"
 	bolt "go.etcd.io/bbolt"
+	"google.golang.org/protobuf/proto"
 )
 
 var (

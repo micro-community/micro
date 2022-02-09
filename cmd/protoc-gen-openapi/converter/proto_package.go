@@ -3,8 +3,8 @@ package converter
 import (
 	"strings"
 
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"github.com/micro-community/micro/v3/service/logger"
+	"google.golang.org/protobuf/types/descriptorpb"
 )
 
 // ProtoPackage describes a package of Protobuf, which is an container of message types.

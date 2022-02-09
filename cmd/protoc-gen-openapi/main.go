@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/golang/protobuf/proto"
-	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
 	"github.com/micro-community/micro/v3/cmd/protoc-gen-openapi/converter"
 	"github.com/micro-community/micro/v3/service/logger"
+	"google.golang.org/protobuf/proto"
+	plugin "google.golang.org/protobuf/types/pluginpb"
 )
 
 func main() {

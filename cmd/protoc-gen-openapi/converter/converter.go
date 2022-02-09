@@ -8,13 +8,13 @@ import (
 	"path"
 	"strings"
 
+	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/micro-community/micro/v3/service/logger"
 
 	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
-	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
 	prot "google.golang.org/protobuf/compiler/protogen"
+	"google.golang.org/protobuf/proto"
+	plugin "google.golang.org/protobuf/types/pluginpb"
 )
 
 // Converter is everything you need to convert Micro protos into an OpenAPI spec:
