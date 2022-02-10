@@ -5,7 +5,6 @@ go 1.15
 require (
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
-	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/micro-community/micro/v3 v3.2.1
 	github.com/mitchellh/hashstructure v1.1.0
 	go.etcd.io/bbolt v1.3.6

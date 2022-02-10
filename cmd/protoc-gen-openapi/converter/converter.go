@@ -8,8 +8,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/micro-community/micro/v3/service/logger"
+	descriptor "google.golang.org/protobuf/types/descriptorpb"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	prot "google.golang.org/protobuf/compiler/protogen"

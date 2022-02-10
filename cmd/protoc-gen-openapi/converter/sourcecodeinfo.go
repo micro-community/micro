@@ -2,7 +2,7 @@ package converter
 
 import (
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/descriptorpb"
+	descriptor "google.golang.org/protobuf/types/descriptorpb"
 )
 
 // Protobuf tag values for relevant message fields. Full list here:

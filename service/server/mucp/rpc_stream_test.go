@@ -27,7 +27,6 @@ import (
 
 	"github.com/micro-community/micro/v3/util/codec/json"
 	protoCodec "github.com/micro-community/micro/v3/util/codec/proto"
-	"google.golang.org/protobuf/proto"
 )
 
 // protoStruct implements proto.Message
@@ -36,7 +35,7 @@ type protoStruct struct {
 }
 
 func (m *protoStruct) Reset()         { *m = protoStruct{} }
-func (m *protoStruct) String() string { return proto.CompactTextString(m) }
+func (m *protoStruct) String() string { return m.Payload }
 func (*protoStruct) ProtoMessage()    {}
 
 // safeBuffer throws away everything and wont Read data back
