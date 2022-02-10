@@ -5,11 +5,11 @@ Micro is a cloud platform for API development.
 
 ## Overview
 
-**A community fork and extension of [micro](https://github.com/micro/micro) with great hornor.**
+**A community fork and extension of [micro](https://github.com/micro-community/micro) with great hornor.**
 
-Micro addresses the key requirements for building services in the cloud. It leverages the microservices
-architecture pattern and provides a set of services which act as the building blocks of a platform. Micro deals
-with the complexity of distributed systems and provides simpler programmable abstractions to build on. 
+Micro addresses the key requirements for building services in the cloud. It leverages the microservices architecture
+pattern and provides a set of services which act as the building blocks of a platform. Micro deals with the complexity
+of distributed systems and provides simpler programmable abstractions to build on.
 
 ## Contents
 

@@ -19,8 +19,8 @@ import (
 	"time"
 
 	"github.com/micro-community/micro/v3/service/events"
-	"github.com/micro-community/micro/v3/service/store"
 	"github.com/micro-community/micro/v3/service/logger"
+	"github.com/micro-community/micro/v3/service/store"
 	"github.com/micro-community/micro/v3/service/store/memory"
 	"github.com/pkg/errors"
 )

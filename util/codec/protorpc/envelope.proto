@@ -2,13 +2,15 @@ syntax = "proto3";
 
 package protorpc;
 
+option go_package = "github.com/micro-community/micro/v3/util/codec/protorpc;protorpc";
+
 message Request {
-	string service_method = 1;
-	fixed64 seq = 2;
+  string service_method = 1;
+  fixed64 seq = 2;
 }
 
 message Response {
-	string service_method = 1;
-	fixed64 seq = 2;
-	string error = 3;
+  string service_method = 1;
+  fixed64 seq = 2;
+  string error = 3;
 }

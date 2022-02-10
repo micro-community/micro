@@ -1,18 +1,22 @@
 syntax = "proto3";
 
+package usage;
+
+option go_package = "github.com/micro-community/micro/v3/cmd/usage/proto;usage";
+
 message Usage {
-	// service name
-	string service = 1;
-	// version of service
-	string version = 2;
-	// unique service id
-	string id = 3;
-	// unix timestamp of report
-	uint64 timestamp = 4;
-	// window of report in seconds
-	uint64 window = 5;
-	// usage metrics
-	Metrics metrics = 6;
+  // service name
+  string service = 1;
+  // version of service
+  string version = 2;
+  // unique service id
+  string id = 3;
+  // unix timestamp of report
+  uint64 timestamp = 4;
+  // window of report in seconds
+  uint64 window = 5;
+  // usage metrics
+  Metrics metrics = 6;
 }
 
 message Metrics {

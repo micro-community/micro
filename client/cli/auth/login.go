@@ -3,9 +3,9 @@ package cli
 import (
 	"bufio"
 	"fmt"
-	"github.com/micro-community/micro/v3/cmd/cli/namespace"
-	"github.com/micro-community/micro/v3/cmd/cli/token"
-	"github.com/micro-community/micro/v3/cmd/cli/util"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/client/cli/token"
+	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/util/report"
 	"github.com/urfave/cli/v2"

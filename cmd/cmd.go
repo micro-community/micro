@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"github.com/micro-community/micro/v3/cmd/cli/util"
+	"github.com/micro-community/micro/v3/client/cli/util"
 	_ "github.com/micro-community/micro/v3/cmd/usage"
 	"github.com/micro-community/micro/v3/plugin"
 	"github.com/micro-community/micro/v3/profile"

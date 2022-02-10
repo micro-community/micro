@@ -23,12 +23,12 @@ import (
 
 	b "bytes"
 
-	"google.golang.org/protobuf/encoding/protojson"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
 	"github.com/oxtoacart/bpool"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
+	jsonpb "google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -37,9 +37,6 @@ type protoCodec struct{}
 type bytesCodec struct{}
 type wrapCodec struct{ encoding.Codec }
 
-var jsonpbMarshaler = &jsonpb.Marshaler{
-	EmitDefaults: true,
-}
 var useNumber bool
 
 // create buffer pool with 16 instances each preallocated with 256 bytes
@@ -134,12 +131,7 @@ func (jsonCodec) Marshal(v interface{}) ([]byte, error) {
 	}
 
 	if pb, ok := v.(proto.Message); ok {
-		buf := bufferPool.Get()
-		defer bufferPool.Put(buf)
-		if err := jsonpbMarshaler.Marshal(buf, pb); err != nil {
-			return nil, err
-		}
-		return buf.Bytes(), nil
+		return jsonpb.Marshal(pb)
 	}
 
 	return json.Marshal(v)
@@ -154,7 +146,7 @@ func (jsonCodec) Unmarshal(data []byte, v interface{}) error {
 		return nil
 	}
 	if pb, ok := v.(proto.Message); ok {
-		return jsonpb.Unmarshal(b.NewReader(data), pb)
+		return jsonpb.UnmarshalOptions{DiscardUnknown: true}.Unmarshal(data, pb)
 	}
 
 	dec := json.NewDecoder(b.NewReader(data))

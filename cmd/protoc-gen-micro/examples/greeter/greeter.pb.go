@@ -6,11 +6,11 @@ package greeter
 import (
 	context "context"
 	fmt "fmt"
-	proto "google.golang.org/protobuf/proto"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	proto "google.golang.org/protobuf/proto"
 	math "math"
 )
 

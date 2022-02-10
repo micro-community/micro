@@ -8,7 +8,6 @@ import (
 	"syscall"
 
 	"github.com/micro-community/micro/v3/cmd"
-	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"

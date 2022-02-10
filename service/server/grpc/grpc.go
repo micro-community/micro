@@ -47,8 +47,8 @@ import (
 	mnet "github.com/micro-community/micro/v3/util/net"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/netutil"
-	"google.golang.org/protobuf/proto"
 
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"

@@ -12,8 +12,8 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/micro-community/micro/v3/cmd/cli/namespace"
-	"github.com/micro-community/micro/v3/cmd/cli/util"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/client/cli/util"
 	proto "github.com/micro-community/micro/v3/proto/debug"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"

@@ -31,8 +31,8 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/go-acme/lego/log"
-	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
+	"github.com/go-acme/lego/v4/log"
+	"github.com/go-acme/lego/v4/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/micro-community/micro/v3/util/opentelemetry"
 	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"

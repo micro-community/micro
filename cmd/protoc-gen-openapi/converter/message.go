@@ -7,8 +7,7 @@ import (
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/micro-community/micro/v3/service/logger"
 	"google.golang.org/protobuf/compiler/protogen"
-	"google.golang.org/protobuf/proto"
-	descriptor"google.golang.org/protobuf/types/descriptorpb"
+	descriptor "google.golang.org/protobuf/types/descriptorpb"
 )
 
 const (

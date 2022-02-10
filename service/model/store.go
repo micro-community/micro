@@ -11,8 +11,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/micro-community/micro/v3/service/store"
 	"github.com/micro-community/micro/v3/service/auth"
+	"github.com/micro-community/micro/v3/service/store"
 	"github.com/stoewer/go-strcase"
 )
 

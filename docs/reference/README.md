@@ -725,16 +725,18 @@ func main() {
 }
 ```
 
-The above service will print the value of `key.subkey` and `key.subkey` every second.
-By passing in the `config.Secret(true)` option, we tell config to decrypt secret values for us, similarly to the `--secret` CLI flag.
+The above service will print the value of `key.subkey` and `key.subkey` every second. By passing in
+the `config.Secret(true)` option, we tell config to decrypt secret values for us, similarly to the `--secret` CLI flag.
 
-The [config interface](https://github.com/micro/micro/blob/master/service/config/config.go) specifies not just `Get` `Set` and `Delete` to access values,
-but a few convenience functions too in the `Value` interface.
+The [config interface](https://github.com/micro-community/micro/blob/master/service/config/config.go) specifies not
+just `Get` `Set` and `Delete` to access values, but a few convenience functions too in the `Value` interface.
 
-It is worth noting that `String` `Int` etc methods will do a best effort try at coercing types, ie. if the value saved is a string, `Int` will try to parse it.
-However, the same does not apply to the `Scan` method, which uses `json.Unmarshal` under the hood, which we all know fails when encountering type mismatches.
+It is worth noting that `String` `Int` etc methods will do a best effort try at coercing types, ie. if the value saved
+is a string, `Int` will try to parse it. However, the same does not apply to the `Scan` method, which
+uses `json.Unmarshal` under the hood, which we all know fails when encountering type mismatches.
 
-`Get` should, in all cases, return a non nil `Value`, so even if the `Get` errors, `Value.Int()` and other operations should never panic.
+`Get` should, in all cases, return a non nil `Value`, so even if the `Get` errors, `Value.Int()` and other operations
+should never panic.
 
 #### Advanced Concepts
 

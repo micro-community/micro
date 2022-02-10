@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/micro-community/micro/v3/cmd/cli/namespace"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/util/config"
 	"strings"
 	"testing"

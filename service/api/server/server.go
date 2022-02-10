@@ -41,8 +41,8 @@ import (
 	inHelper "github.com/micro-community/micro/v3/util/helper"
 	inSyncMemory "github.com/micro-community/micro/v3/util/sync/memory"
 
-	"github.com/go-acme/lego/log"
-	"github.com/go-acme/lego/v3/providers/dns/cloudflare"
+	"github.com/go-acme/lego/v4/log"
+	"github.com/go-acme/lego/v4/providers/dns/cloudflare"
 	"github.com/gorilla/mux"
 	"github.com/micro-community/micro/v3/util/opentelemetry"
 	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"

@@ -7,7 +7,6 @@ go 1.15
 
 require (
 	github.com/micro-community/micro/v3 v3.0.0
-	github.com/golang/protobuf latest
 	google.golang.org/protobuf latest
 )
 

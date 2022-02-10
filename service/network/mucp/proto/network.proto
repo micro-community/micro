@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package go.micro.network.mucp;
 
+option go_package = "github.com/micro-community/micro/v3/service/network/mucp/proto;go_micro_network_mucp";
+
 // AdvertType defines the type of advert
 enum AdvertType {
   AdvertAnnounce = 0;

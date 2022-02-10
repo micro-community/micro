@@ -20,14 +20,12 @@ import (
 	"encoding/json"
 	"strings"
 
-	b "bytes"
-
-	"google.golang.org/protobuf/encoding/protojson"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/metadata"
+	jsonpb "google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -35,12 +33,6 @@ type jsonCodec struct{}
 type bytesCodec struct{}
 type protoCodec struct{}
 type wrapCodec struct{ encoding.Codec }
-
-var jsonpbMarshaler = &jsonpb.Marshaler{
-	EnumsAsInts:  false,
-	EmitDefaults: true,
-	OrigName:     true,
-}
 
 var (
 	defaultGRPCCodecs = map[string]encoding.Codec{
@@ -102,8 +94,7 @@ func (protoCodec) Name() string {
 
 func (jsonCodec) Marshal(v interface{}) ([]byte, error) {
 	if pb, ok := v.(proto.Message); ok {
-		s, err := jsonpbMarshaler.MarshalToString(pb)
-		return []byte(s), err
+		return jsonpb.Marshal(pb)
 	}
 
 	return json.Marshal(v)
@@ -114,8 +105,7 @@ func (jsonCodec) Unmarshal(data []byte, v interface{}) error {
 		return nil
 	}
 	if pb, ok := v.(proto.Message); ok {
-		unmarshaler := jsonpb.Unmarshaler{AllowUnknownFields: true}
-		return unmarshaler.Unmarshal(b.NewReader(data), pb)
+		return jsonpb.UnmarshalOptions{DiscardUnknown: true}.Unmarshal(data, pb)
 	}
 	return json.Unmarshal(data, v)
 }

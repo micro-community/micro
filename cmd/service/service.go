@@ -13,6 +13,7 @@ import (
 	"github.com/micro-community/micro/v3/service/proxy"
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
+	"github.com/micro-community/micro/v3/service/web"
 	ccli "github.com/urfave/cli/v2"
 
 	"github.com/micro-community/micro/v3/service/proxy/grpc"

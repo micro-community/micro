@@ -32,7 +32,7 @@ func (j Marshaler) Marshal(v interface{}) ([]byte, error) {
 
 func (j Marshaler) Unmarshal(d []byte, v interface{}) error {
 	if pb, ok := v.(proto.Message); ok {
-		return jsonpb.Unmarshal(d, pb)
+		return jsonpb.UnmarshalOptions{DiscardUnknown: true}.Unmarshal(d, pb)
 	}
 	return json.Unmarshal(d, v)
 }
