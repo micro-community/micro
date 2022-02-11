@@ -25,7 +25,7 @@ type Marshaler struct{}
 
 func (j Marshaler) Marshal(v interface{}) ([]byte, error) {
 	if pb, ok := v.(proto.Message); ok {
-		return jsonpb.Marshal(pb)
+		return jsonpb.MarshalOptions{EmitUnpopulated: true, UseProtoNames: true}.Marshal(pb)
 	}
 	return json.Marshal(v)
 }
