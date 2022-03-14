@@ -21,6 +21,7 @@ M3O is an attempt to build a new public cloud platform with higher level buildin
 developers. M3O is powered by the open source [Micro](https://github.com/micro-community/micro) platform and
 programmable real world [Micro Services](https://github.com/micro/services).
 
+
 ## Features
 
 - **🔥 Dev UX** - The developer experience is first priority. A slick new UX for the next generation of developers.
@@ -86,12 +87,14 @@ See the full list at [m3o.com/explore](https://m3o.com/explore) or the source at
 
 ## How it Works
 
+
 M3O is built on existing public cloud infrastructure using managed kubernetes along with our
 own [infrastructure automation](https://github.com/m3o/platform)
 and abstraction layer for existing third party public APIs. We host the open
 source [Micro](https://github.com/micro-community/micro) project as our base OS and use it to power all
 the [Micro Services](https://github.com/micro/services), which provide simpler building blocks for existing cloud
 primitives.
+
 
 ### UX
 
@@ -123,7 +126,9 @@ The cloud hosted providers of Micro services:
 
 The core cloud OS and services exists in a vendor neutral org
 
+
 - [micro/micro](https://github.com/micro-community/micro) - an open source operating system for the cloud
+
 - [micro/services](https://github.com/micro/services) - open source micro services powering m3o.com
 
 ### M3O Dev UX

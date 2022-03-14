@@ -40,7 +40,9 @@ go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 Using Go:
 
 ```sh
-go get github.com/micro-community/micro/v3
+
+go install github.com/micro-community/micro/v3@latest
+
 ```
 
 ### Release Binary
@@ -397,7 +399,9 @@ func main() {
 	srv := service.New(service.Name("example"))
 	srv.Init()
 
-	records, err := store.Read("mykey")
+	records, err := store.Read("mykey", func(r *store.ReadOptions) {
+		r.Table = "example"
+	})
 	if err != nil {
 		fmt.Println("Error reading from store: ", err)
 	}
@@ -466,6 +470,7 @@ val
 While this alone is enough for a great many use cases, for purposes of organisation, Micro also support dot notation of keys. Let's overwrite our keys set previously:
 
 ```sh
+$ micro config del key
 $ micro config set key.subkey val
 $ micro config get key.subkey
 val
@@ -525,4 +530,3 @@ interested in learning more Micro magic, have a look at the following sources:
 
 - Read the [docs](../)
 - Learn by [example](https://github.com/micro/services)
-- Join us on [slack](https://slack.micro.mu)

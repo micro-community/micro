@@ -42,7 +42,7 @@ we think Micro can provide that through a completely vertically integrated solut
 Micro is Android for Cloud. PaaS 3.0. Or better known as a cloud operating system. As a framework Rails went far but it was incomplete 
 without the likes of Heroku to host it. Spring fell short as well and was acquired by VMWare to try make sense of this platform model. 
 We think Micro needs to take inspiration from Android, to encapsulate all the concerns of cloud, abstract away the hardware and 
-define a sofware lifecycle, development and consumption model for it.
+define a software lifecycle, development and consumption model for it.
 
 ## Design
 
@@ -71,8 +71,9 @@ different architectures whether its local, kubernetes or beyond.
 **Service Architecture**
 
 A Micro service makes use of a Go Service Framework which provides Go interfaces for accessing the services provided 
-by the Micro Server. It also initializes your server to run on the underlying runtime and exposes your services 
-via a gRPC server. Micro makes is so all you have to think about is the business logic. 
+
+by the Micro Server. It also initialises your server to run on the underlying runtime and exposes your services 
+via a gRPC server. Micro makes it so all you have to think about is the business logic. 
 
 <img src="../images/micro-service-3.0.png">
 
@@ -113,8 +114,10 @@ multi-language but consumption of Micro and services may extend outward.
 The Go service framework is a core piece which comes from the original go-micro framework started in 2015. This framework offered 
 core distributed systems primitives as Go interfaces and made them pluggable. With its complexity and overlap with Micro we 
 decided the best thing was to merge the two and create a Service Framework within Micro to define the defacto standard for building 
-Micro Services in Go. The framework provides pluggable abstractions with pre-initialized defaults. The developer 
-will import and use any of the packageswithin the framework without any initialisation, they in turn speak to the micro server 
+
+Micro Services in Go. The framework provides pluggable abstractions with pre-initialised defaults. The developer 
+will import and use any of the packages within the framework without any initialisation, they in turn speak to the micro server 
+
 or basically the core services via gRPC. 
 
 For the developer, this is their main point of interaction when writing code. We employ a build, run, manage philosophy where 
