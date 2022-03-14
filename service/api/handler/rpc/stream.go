@@ -174,8 +174,23 @@ func serveStream(ctx context.Context, w http.ResponseWriter, r *http.Request, se
 				}
 				return
 			}
+			var bufOut string
+			var apiRsp pbapi.Response
+			if err := json.Unmarshal(buf, &apiRsp); err == nil && apiRsp.StatusCode > 0 {
+				// bit of a hack. If the response is actually an api response we want to set the headers and status code
+				for _, v := range apiRsp.Header {
+					for _, s := range v.Values {
+						w.Header().Add(v.Key, s)
+					}
+				}
+				w.WriteHeader(int(apiRsp.StatusCode))
+				bufOut = apiRsp.Body
+			} else {
+				bufOut = string(buf)
+			}
+
 			// send the buffer
-			_, err = fmt.Fprint(w, string(buf))
+			_, err = fmt.Fprint(w, bufOut)
 			if err != nil {
 				if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
 					logger.Error(err)
@@ -341,7 +356,16 @@ func (s *stream) bufToClientLoop(cancel context.CancelFunc, wg *sync.WaitGroup, 
 
 // serveWebsocket will stream rpc back over websockets assuming json
 func serveWebsocket(ctx context.Context, w http.ResponseWriter, r *http.Request, service *api.Service, c client.Client) {
-	conn, err := upgrader.Upgrade(w, r, nil)
+	var rspHdr http.Header
+	// we use Sec-Websocket-Protocol to pass auth headers so just accept anything here
+	if prots := r.Header.Values("Sec-WebSocket-Protocol"); len(prots) > 0 {
+		rspHdr = http.Header{}
+		for _, p := range prots {
+			rspHdr.Add("Sec-WebSocket-Protocol", p)
+		}
+	}
+
+	conn, err := upgrader.Upgrade(w, r, rspHdr)
 	if err != nil {
 		if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
 			logger.Error(err)

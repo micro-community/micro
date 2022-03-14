@@ -1,6 +1,6 @@
 module github.com/micro-community/micro/v3
 
-go 1.15
+go 1.16
 
 require (
 	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect

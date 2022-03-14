@@ -24,7 +24,7 @@ of distributed systems and provides simpler programmable abstractions to build o
 - [FAQ](https://micro.arch.wiki/faq) - Frequently asked questions
 
 
-## Cloud
+## Getting Started
 
 Find the cloud hosted services at [m3o.com](https://m3o.com)
 Below are the core components that make up Micro.
@@ -176,6 +176,86 @@ message Response {
 
 Write them using Go:
 
+=======
+Install micro
+
+```sh
+go install github.com/micro-community/micro/v3@latest
+```
+
+Run the server 
+
+```sh
+micro server
+```
+
+Login with the username 'admin' and password 'micro':
+
+```sh
+$ micro login
+Enter username: admin
+Enter password:
+Successfully logged in.
+```
+
+See what's running:
+
+```sh
+$ micro services
+api
+auth
+broker
+config
+events
+network
+proxy
+registry
+runtime
+server
+store
+```
+
+Run a service
+
+```sh
+micro run github.com/micro/services/helloworld
+```
+
+Now check the status of the running service
+
+```sh
+$ micro status
+NAME		VERSION	SOURCE					STATUS	BUILD	UPDATED	METADATA
+helloworld	latest	github.com/micro/services/helloworld	running	n/a	4s ago	owner=admin, group=micro
+```
+
+We can also have a look at logs of the service to verify it's running.
+
+```sh
+$ micro logs helloworld
+2020-10-06 17:52:21  file=service/service.go:195 level=info Starting [service] helloworld
+2020-10-06 17:52:21  file=grpc/grpc.go:902 level=info Server [grpc] Listening on [::]:33975
+2020-10-06 17:52:21  file=grpc/grpc.go:732 level=info Registry [service] Registering node: helloworld-67627b23-3336-4b92-a032-09d8d13ecf95
+```
+
+Call the service
+
+```sh
+$ micro helloworld call --name=Jane
+{
+	"msg": "Hello Jane"
+}
+```
+
+Curl it
+
+```
+curl "http://localhost:8080/helloworld?name=John"
+```
+
+Write a client
+
+
 ```go
 package main
 
@@ -234,10 +314,50 @@ Curl it via the API
 ```
 curl http://localhost:8080/helloworld?name=Alice
 ```
+=======
+	"fmt"
+	"time"
+
+	"github.com/micro-community/micro/v3/service"
+	proto "github.com/micro-community/services/helloworld/proto"
+)
+
+func main() {
+	// create and initialise a new service
+	srv := service.New()
+
+	// create the proto client for helloworld
+	client := proto.NewHelloworldService("helloworld", srv.Client())
+
+	// call an endpoint on the service
+	rsp, err := client.Call(context.Background(), &proto.CallRequest{
+		Name: "John",
+	})
+	if err != nil {
+		fmt.Println("Error calling helloworld: ", err)
+		return
+	}
+
+	// print the response
+	fmt.Println("Response: ", rsp.Message)
+	
+	// let's delay the process for exiting for reasons you'll see below
+	time.Sleep(time.Second * 5)
+}
+```
+
+Run it
+
+```
+micro run .
+```
+
+For more see the [getting started](https://micro.dev/getting-started) guide.
+
 
 ## Usage
 
-See the [docs](https://micro.mu/docs) for detailed information on the architecture, installation and use of the platform.
+See the [docs](https://micro.dev/docs) for detailed information on the architecture, installation and use.
 
 ## License
 
