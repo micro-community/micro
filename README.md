@@ -299,7 +299,7 @@ import (
 	"context"
   
 	"github.com/micro-community/micro/v3/service/client"
-	pb "github.com/micro/services/helloworld/proto"
+	pb "github.com/micro-community/services/helloworld/proto"
 )
 
 // create a new helloworld service client
@@ -314,7 +314,11 @@ Curl it via the API
 ```
 curl http://localhost:8080/helloworld?name=Alice
 ```
-=======
+
+Hello world
+
+```go
+import (
 	"fmt"
 	"time"
 
@@ -364,7 +368,9 @@ See the [docs](https://micro.dev/docs) for detailed information on the architect
 See [LICENSE](LICENSE) which makes use of [Apache 2.0](https://opensource.org/licenses/Apache-2.0)
 
 Join us on GitHub [Discussions](https://github.com/micro-community/micro/discussions).
+
 ## Repo Clone for CN
+
 following cmd:
 
 ```bash
