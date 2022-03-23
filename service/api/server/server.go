@@ -42,7 +42,6 @@ import (
 	inSyncMemory "github.com/micro-community/micro/v3/util/sync/memory"
 
 	"github.com/go-acme/lego/v4/log"
-	"github.com/go-acme/lego/v4/providers/dns/cloudflare"
 	"github.com/gorilla/mux"
 	"github.com/micro-community/micro/v3/util/opentelemetry"
 	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"
@@ -184,13 +183,14 @@ func Run(ctx *cli.Context) error {
 				store.DefaultStore,
 			)
 
-			config := cloudflare.NewDefaultConfig()
-			config.AuthToken = apiToken
-			config.ZoneToken = apiToken
-			challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
-			if err != nil {
-				logger.Fatal(err.Error())
-			}
+			// config := cloudflare.NewDefaultConfig()
+			// config.AuthToken = apiToken
+			// config.ZoneToken = apiToken
+			// //challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
+			// dnsProvider, err := cloudflare.NewDNSProviderConfig(config)
+			// if err != nil {
+			// 	logger.Fatal(err.Error())
+			// }
 
 			opts = append(opts,
 				api.ACMEProvider(
@@ -198,7 +198,7 @@ func Run(ctx *cli.Context) error {
 						acme.AcceptToS(true),
 						acme.CA(ACMECA),
 						acme.Cache(storage),
-						acme.ChallengeProvider(challengeProvider),
+						acme.ChallengeProvider(certmagic.NewDNS01Resolver(apiToken)),
 						acme.OnDemand(false),
 					),
 				),

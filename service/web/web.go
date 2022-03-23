@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/fatih/camelcase"
-	"github.com/go-acme/lego/v4/providers/dns/cloudflare"
 	"github.com/gorilla/mux"
 	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/service"
@@ -610,13 +609,13 @@ func Run(ctx *cli.Context) error {
 			// create the store
 			storage := certmagic.NewStorage(memory.NewSync(), store.DefaultStore)
 
-			config := cloudflare.NewDefaultConfig()
-			config.AuthToken = apiToken
-			config.ZoneToken = apiToken
-			challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
-			if err != nil {
-				log.Fatal(err.Error())
-			}
+			// config := cloudflare.NewDefaultConfig()
+			// config.AuthToken = apiToken
+			// config.ZoneToken = apiToken
+			// challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
+			// if err != nil {
+			// 	log.Fatal(err.Error())
+			// }
 
 			opts = append(opts,
 				server.ACMEProvider(
@@ -624,7 +623,7 @@ func Run(ctx *cli.Context) error {
 						acme.AcceptToS(true),
 						acme.CA(ACMECA),
 						acme.Cache(storage),
-						acme.ChallengeProvider(challengeProvider),
+						acme.ChallengeProvider(certmagic.NewDNS01Resolver(apiToken)),
 						acme.OnDemand(false),
 					),
 				),

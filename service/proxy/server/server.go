@@ -32,7 +32,6 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/go-acme/lego/v4/log"
-	"github.com/go-acme/lego/v4/providers/dns/cloudflare"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/micro-community/micro/v3/util/opentelemetry"
 	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"
@@ -197,20 +196,20 @@ func Run(ctx *cli.Context) error {
 
 			storage := certmagic.NewStorage(memory.NewSync(), store.DefaultStore)
 
-			config := cloudflare.NewDefaultConfig()
-			config.AuthToken = apiToken
-			config.ZoneToken = apiToken
-			challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
-			if err != nil {
-				logger.Fatal(err.Error())
-			}
+			// config := cloudflare.NewDefaultConfig()
+			// config.AuthToken = apiToken
+			// config.ZoneToken = apiToken
+			// challengeProvider, err := cloudflare.NewDNSProviderConfig(config)
+			// if err != nil {
+			// 	logger.Fatal(err.Error())
+			// }
 
 			// define the provider
 			ap = certmagic.NewProvider(
 				acme.AcceptToS(true),
 				acme.CA(ACMECA),
 				acme.Cache(storage),
-				acme.ChallengeProvider(challengeProvider),
+				acme.ChallengeProvider(certmagic.NewDNS01Resolver(apiToken)),
 				acme.OnDemand(false),
 			)
 		default:
