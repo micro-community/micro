@@ -60,12 +60,16 @@
   "cSpell.allowCompoundWords": true,
   // Proto
   "clang-format.style": "google",
-  "clang-format.executable": "C:/Program Files/LLVM/bin/clang-format.exe",
+  //"clang-format.executable": "C:/Program Files/LLVM/bin/clang-format.exe",
+  //"clang-format.executable": "/opt/homebrew/bin/clang-format",
   "protoc": {
     "options": [
       "--proto_path=${workspaceRoot}",
       "--proto_path=${env.GOPATH}/src",
     ]
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "zxh404.vscode-proto3"
   },
   "fileheader.Author": "Edward",
   "fileheader.tpl": "/*\r\n * @Author: {author} https://github.com/crazybber\r\n * @Date: {createTime}\r\n * @Last Modified by: {lastModifiedBy}\r\n * @Last Modified time: {updateTime}\r\n * @Description:   \r\n */\r\n\r\n",
