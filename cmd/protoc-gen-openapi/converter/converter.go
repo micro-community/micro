@@ -19,7 +19,7 @@ import (
 // Converter is everything you need to convert Micro protos into an OpenAPI spec:
 type Converter struct {
 	microServiceName string
-	openAPISpec      *openapi3.Swagger
+	openAPISpec      *openapi3.T
 	sourceInfo       *sourceCodeInfo
 	req              *plugin.CodeGeneratorRequest
 	plug             *prot.Plugin

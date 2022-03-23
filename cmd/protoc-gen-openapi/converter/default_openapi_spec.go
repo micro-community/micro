@@ -9,7 +9,7 @@ import (
 func (c *Converter) defaultSpec() {
 
 	// Spec ready to take schemas:
-	c.openAPISpec = &openapi3.Swagger{
+	c.openAPISpec = &openapi3.T{
 		Components: openapi3.Components{
 			RequestBodies:   make(map[string]*openapi3.RequestBodyRef),
 			Responses:       make(map[string]*openapi3.ResponseRef),
