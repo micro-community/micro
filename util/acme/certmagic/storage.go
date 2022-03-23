@@ -18,6 +18,7 @@ package certmagic
 
 import (
 	"bytes"
+	"context"
 	"encoding/gob"
 	"errors"
 	"fmt"
@@ -46,7 +47,7 @@ type storage struct {
 	store store.Store
 }
 
-func (s *storage) Lock(key string) error {
+func (s *storage) Lock(ctx context.Context, key string) error {
 	return s.lock.Lock(key, sync.LockTTL(10*time.Minute))
 }
 
