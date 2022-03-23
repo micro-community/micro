@@ -1,4 +1,5 @@
 // Copyright 2020 Asim Aslam
+// Copyright 2022 Crazybber
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +17,9 @@
 
 package acme
 
-import "github.com/go-acme/lego/v4/challenge"
+import (
+	"github.com/mholt/acmez"
+)
 
 // Option (or Options) are passed to New() to configure providers
 type Option func(o *Options)
@@ -28,9 +31,10 @@ type Options struct {
 	AcceptToS bool
 	// CA is the CA to use
 	CA string
-	// ChallengeProvider is a go-acme/lego challenge provider. Set this if you
+	// DNS01Solver is a challenge provider. Set this if you
 	// want to use DNS Challenges. Otherwise, tls-alpn-01 will be used
-	ChallengeProvider challenge.Provider
+	//ChallengeProvider challenge.Provider
+	DNS01Solver acmez.Solver
 	// Issue certificates for domains on demand. Otherwise, certs will be
 	// retrieved / issued on start-up.
 	OnDemand bool
@@ -56,9 +60,9 @@ func CA(CA string) Option {
 
 // ChallengeProvider sets the Challenge provider of an acme.Options
 // if set, it enables the DNS challenge, otherwise tls-alpn-01 will be used.
-func ChallengeProvider(p challenge.Provider) Option {
+func ChallengeProvider(s acmez.Solver) Option {
 	return func(o *Options) {
-		o.ChallengeProvider = p
+		o.DNS01Solver = s
 	}
 }
 

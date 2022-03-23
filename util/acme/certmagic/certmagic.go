@@ -24,6 +24,8 @@ import (
 	"time"
 
 	"github.com/caddyserver/certmagic"
+	"github.com/libdns/cloudflare"
+	"github.com/mholt/acmez"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/util/acme"
 )
@@ -35,9 +37,11 @@ type certmagicProvider struct {
 // TODO: set self-contained options
 func (c *certmagicProvider) setup() {
 	certmagic.DefaultACME.CA = c.opts.CA
-	if c.opts.ChallengeProvider != nil {
+	if c.opts.DNS01Solver != nil {
 		// Enabling DNS Challenge disables the other challenges
-		certmagic.DefaultACME.DNSProvider = c.opts.ChallengeProvider
+		//	certmagic.DefaultACME.DNSProvider = c.opts.ChallengeProvider
+		certmagic.DefaultACME.DNS01Solver = c.opts.DNS01Solver
+
 	}
 	if c.opts.OnDemand {
 		certmagic.Default.OnDemand = new(certmagic.OnDemandConfig)
@@ -80,5 +84,12 @@ func NewProvider(options ...acme.Option) acme.Provider {
 
 	return &certmagicProvider{
 		opts: opts,
+	}
+}
+
+func NewDNS01Resolver(tokens string) acmez.Solver {
+
+	return &certmagic.DNS01Solver{
+		DNSProvider: &cloudflare.Provider{APIToken: tokens},
 	}
 }

@@ -8,12 +8,11 @@ import (
 	"path"
 	"strings"
 
-	"github.com/micro-community/micro/v3/service/logger"
-	descriptor "google.golang.org/protobuf/types/descriptorpb"
-
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/micro-community/micro/v3/service/logger"
 	prot "google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/proto"
+	descriptor "google.golang.org/protobuf/types/descriptorpb"
 	plugin "google.golang.org/protobuf/types/pluginpb"
 )
 
