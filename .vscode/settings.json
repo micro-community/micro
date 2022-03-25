@@ -65,7 +65,6 @@
   "protoc": {
     "options": [
       "--proto_path=${workspaceRoot}",
-      "--proto_path=${env.GOPATH}/../codes/micro-community/micro",
       "--proto_path=/usr/local/include",
     ]
   },
