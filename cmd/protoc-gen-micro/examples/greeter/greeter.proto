@@ -1,6 +1,10 @@
 syntax = "proto3";
 
+package greeter;
+
 import "google/api/annotations.proto";
+
+option go_package = "github.com/micro-community/micro/v3/cmd/protoc-gen-micro/greeter;greeter";
 
 service Greeter {
   rpc Hello(Request) returns (Response) {

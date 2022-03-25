@@ -1,6 +1,10 @@
 syntax = "proto3";
 
+package test;
+
 import "google/api/annotations.proto";
+
+option go_package = "github.com/micro-community/micro/v3/server/grpc/proto/test;test";
 
 service Test {
   rpc Call(Request) returns (Response) {
