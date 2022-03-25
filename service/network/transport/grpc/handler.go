@@ -24,8 +24,9 @@ import (
 	"google.golang.org/grpc/peer"
 )
 
-// microTransport satisfies the pb.TransportServer inteface
+// microTransport satisfies the pb.TransportServer interface
 type microTransport struct {
+	pb.UnimplementedTransportServer
 	addr string
 	fn   func(transport.Socket)
 }
