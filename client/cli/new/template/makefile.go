@@ -7,8 +7,8 @@ GOPATH:=$(shell go env GOPATH)
 init:
 	go get -u google.golang.org/protobuf/proto
 	go get -u google.golang.org/protobuf/protoc-gen-go
-	go get github.com/micro-community/micro/v3/cmd/protoc-gen-micro
-	go get github.com/micro-community/micro/v3/cmd/protoc-gen-openapi
+	go install github.com/micro-community/micro/v3/cmd/protoc-gen-micro
+	go install github.com/micro-community/micro/v3/cmd/protoc-gen-openapi
 
 .PHONY: api
 api:
