@@ -69,6 +69,8 @@ and `micro user set [namespace]`.
 
 ## Install
 
+
+
 **From Source**
 
 ```sh
@@ -81,31 +83,12 @@ go get github.com/micro-community/micro/v3
 
 ```sh
 # install
-docker pull crazybber/micro
+docker pull micro-comunity/micro
 
 # run it
 docker run -p 8080-8081:8080-8081/tcp crazybber/micro server
 ```
 
-**Helm Chart**
-
-```
-helm repo add micro https://micro.github.io/helm
-helm install micro micro/micro
-```
-
-**Release binaries**
-
-```sh
-# MacOS
-curl -fsSL https://raw.githubusercontent.com/micro-community/micro/master/scripts/install.sh | /bin/bash
-
-# Linux
-wget -q  https://raw.githubusercontent.com/micro-community/micro/master/scripts/install.sh -O - | /bin/bash
-
-# Windows
-powershell -Command "iwr -useb https://raw.githubusercontent.com/micro-community/micro/master/scripts/install.ps1 | iex"
-```
 
 ## Getting Started
 
@@ -265,7 +248,7 @@ import (
   
 	"github.com/micro-community/micro/v3/service"
 	"github.com/micro-community/micro/v3/service/logger"
-	pb "github.com/micro/services/helloworld/proto"
+	pb "github.com/micro-community/services/helloworld/proto"
 )
 
 type Helloworld struct{}
