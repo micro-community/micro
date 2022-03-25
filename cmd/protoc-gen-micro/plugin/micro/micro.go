@@ -151,7 +151,7 @@ func (g *micro) generateService(file *generator.FileDescriptor, service *pb.Serv
 	g.P("return []*", apiPkg, ".Endpoint{")
 	for _, method := range service.Method {
 		if method.Options != nil && proto.HasExtension(method.Options, options.E_Http) {
-			g.P("&", apiPkg, ".Endpoint{")
+			g.P("{")
 			g.generateEndpoint(servName, method)
 			g.P("},")
 		}
