@@ -411,7 +411,7 @@ func flagsToRequest(flags map[string][]string, req *registry.Value) (map[string]
 		// so we do that here
 		if strings.Contains(key, "_") {
 			parts := strings.Split(key, "_")
-			for i, _ := range parts {
+			for i := range parts {
 				pToCreate := strings.Join(parts[0:i], ".")
 				if i > 0 && i < len(parts) && !result.Has(pToCreate) {
 					result.Set(pToCreate, map[string]interface{}{})
