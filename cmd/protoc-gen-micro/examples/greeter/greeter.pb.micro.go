@@ -32,14 +32,14 @@ var _ server.Option
 
 func NewGreeterEndpoints() []*api.Endpoint {
 	return []*api.Endpoint{
-		&api.Endpoint{
+		{
 			Name:    "Greeter.Hello",
 			Path:    []string{"/hello"},
 			Method:  []string{"POST"},
 			Body:    "*",
 			Handler: "rpc",
 		},
-		&api.Endpoint{
+		{
 			Name:    "Greeter.Stream",
 			Path:    []string{"/stream"},
 			Method:  []string{"GET"},
