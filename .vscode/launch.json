@@ -1,29 +1,28 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Debug run go",
-        "type": "go",
-        "request": "launch",
-        "mode": "auto",
-        "program": "${workspaceFolder}/main.go",
-        "cwd": "${workspaceFolder}",
-        "env": {
-          // "MICRO_DEBUG_MODE": "true",
-          // "MICRO_CONFIG_FILE":"${workspaceFolder}/config1.json",
-          //  "MICRO_PROFILE":"simple",
-          // "MICRO_AUTH_ID":"admin",
-          // "MICRO_AUTH_SECRET":"micro",
-  //        "service_address":"localhost:80",
-        },
-        "args": [
-            "service",
-            "proxy",
-  //        "login",
-  //         "run",
-  //          "../../micro-community/example/helloworld",
-        ]
-      }
-    ]
-  }
-  
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug run go",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/main.go",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        // "MICRO_DEBUG_MODE": "true",
+        // "MICRO_CONFIG_FILE":"${workspaceFolder}/config1.json",
+        //  "MICRO_PROFILE":"simple",
+        // "MICRO_AUTH_ID":"admin",
+        // "MICRO_AUTH_SECRET":"micro",
+        //        "service_address":"localhost:80",
+      },
+      "args": [
+        "service",
+        "proxy",
+        //        "login",
+        //         "run",
+        //          "../../micro-community/example/helloworld",
+      ]
+    }
+  ]
+}

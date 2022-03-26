@@ -15,36 +15,36 @@ import (
 )
 
 type Request struct {
-	Name string `json:"name"`
+ Name string `json:"name"`
 }
 
 type Response struct {
-	Msg string `json:"msg"`
+ Msg string `json:"msg"`
 }
 
 var (
-	token, _ = os.Getenv("TOKEN")
-	token = os.Getenv("TOKEN")
+ token, _ = os.Getenv("TOKEN")
+ token = os.Getenv("TOKEN")
 )
 
 func main() {
-	c := api.NewClient(nil)
+ c := api.NewClient(nil)
 
-	// set your api token
-	c.SetToken(token)
+ // set your api token
+ c.SetToken(token)
 
-   	req := &Request{
-		Name: "John",
-	}
-	
-	var rsp Response
+    req := &Request{
+  Name: "John",
+ }
+ 
+ var rsp Response
 
-	if err := c.Call("helloworld", "call", req, &rsp); err != nil {
-		fmt.Println(err)
-		return
-	}
-	
-	fmt.Println(rsp)
+ if err := c.Call("helloworld", "call", req, &rsp); err != nil {
+  fmt.Println(err)
+  return
+ }
+ 
+ fmt.Println(rsp)
 }
 ```
 
@@ -56,43 +56,42 @@ The client supports streaming
 package main
 
 import (
-	"fmt"
+ "fmt"
 
-	"github.com/micro-community/micro/v3/client/api"
+ "github.com/micro-community/micro/v3/client/api"
 )
 
 type Request struct {
-	Count string `json:"count"`
+ Count string `json:"count"`
 }
 
 type Response struct {
-	Count string `json:"count"`
+ Count string `json:"count"`
 }
 
 var (
-	token, _ = os.Getenv("TOKEN")
+ token, _ = os.Getenv("TOKEN")
 )
 
 func main() {
-	c := api.NewClient(nil)
+ c := api.NewClient(nil)
 
-	// set your api token
-	c.SetToken(token)
-	
-	stream, err := c.Stream("streams", "subscribe", Request{Count: "10"})
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+ // set your api token
+ c.SetToken(token)
+ 
+ stream, err := c.Stream("streams", "subscribe", Request{Count: "10"})
+ if err != nil {
+  fmt.Println(err)
+  return
+ }
 
-	for {
-		var rsp Response
-		if err := stream.Recv(&rsp); err != nil {
-			fmt.Println(err)
-			return
-		}
-		fmt.Println("got", rsp.Count)
-	}
+ for {
+  var rsp Response
+  if err := stream.Recv(&rsp); err != nil {
+   fmt.Println(err)
+   return
+  }
+  fmt.Println("got", rsp.Count)
+ }
 }
 ```
-
