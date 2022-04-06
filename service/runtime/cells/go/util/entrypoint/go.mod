@@ -1,5 +1,5 @@
 module github.com/micro-community/micro/service/runtime/cells/go/util/entrypoint
 
-go 1.16
+go 1.18
 
 require github.com/micro-community/micro/v3 v3.10.4

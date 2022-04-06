@@ -1,3 +1,3 @@
 module github.com/micro-community/micro/cmd/protoc-gen-client
 
-go 1.16
+go 1.18

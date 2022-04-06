@@ -1,6 +1,6 @@
 module github.com/micro-community/micro/plugin/prometheus/v3
 
-go 1.16
+go 1.18
 
 require (
 	github.com/micro-community/micro/v3 v3.2.1

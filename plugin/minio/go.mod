@@ -1,6 +1,6 @@
 module github.com/micro-community/micro/plugin/minio/v3
 
-go 1.16
+go 1.18
 
 require (
 	github.com/json-iterator/go v1.1.12 // indirect
