@@ -1,4 +1,3 @@
 module github.com/micro-community/micro/service/runtime/cells/go/util/entrypoint
 
-go 1.15
-
+go 1.16

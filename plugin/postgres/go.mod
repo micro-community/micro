@@ -1,6 +1,6 @@
 module github.com/micro-community/micro/plugin/postgres/v3
 
-go 1.15
+go 1.16
 
 require (
 	github.com/lib/pq v1.10.4
