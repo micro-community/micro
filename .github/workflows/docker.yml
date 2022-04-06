@@ -27,7 +27,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: micro/micro
+        images: crazybber/micro
         flavor: latest=true
         tags: ${{ steps.unique_tag.outputs.tag }}
 
