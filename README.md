@@ -23,7 +23,6 @@ of distributed systems and provides simpler programmable abstractions to build o
 - [Users](https://micro.arch.wiki/users) - Developers and companies using Micro in production
 - [FAQ](https://micro.arch.wiki/faq) - Frequently asked questions
 
-
 ## Getting Started
 
 Find the cloud hosted services at [m3o.com](https://m3o.com)
@@ -31,9 +30,9 @@ Below are the core components that make up Micro.
 
 **Server**
 
-Micro is built as a microservices architecture and abstracts away the complexity of the underlying infrastructure. We compose 
-this as a single logical server to the user but decompose that into the various building block primitives that can be plugged 
-into any underlying system. 
+Micro is built as a microservices architecture and abstracts away the complexity of the underlying infrastructure. We compose
+this as a single logical server to the user but decompose that into the various building block primitives that can be plugged
+into any underlying system.
 
 The server is composed of the following services.
 
@@ -50,26 +49,24 @@ The server is composed of the following services.
 
 **Framework**
 
-Micro additionally now contains the incredibly popular Go Micro framework built in for service development. 
-The Go framework makes it drop dead simple to write your services without having to piece together lines and lines of boilerplate. Auto 
+Micro additionally now contains the incredibly popular Go Micro framework built in for service development.
+The Go framework makes it drop dead simple to write your services without having to piece together lines and lines of boilerplate. Auto
 configured and initialized by default, just import and get started quickly.
 
 **Command Line**
 
-Micro brings not only a rich architectural model but a command line experience tailored for that need. The command line interface includes 
-dynamic command mapping for all services running on the platform. Turns any service instantly into a CLI command along with flag parsing 
-for inputs. Includes support for multiple environments and namespaces, automatic refreshing of auth credentials, creating and running 
+Micro brings not only a rich architectural model but a command line experience tailored for that need. The command line interface includes
+dynamic command mapping for all services running on the platform. Turns any service instantly into a CLI command along with flag parsing
+for inputs. Includes support for multiple environments and namespaces, automatic refreshing of auth credentials, creating and running
 services, status info and log streaming, plus much, much more.
 
 **Environments**
 
-Finally Micro bakes in the concept of `Environments` and multi-tenancy through `Namespaces`. Run your server locally for 
-development and in the cloud for staging and production, seamlessly switch between them using the CLI commands `micro env set [environment]` 
+Finally Micro bakes in the concept of `Environments` and multi-tenancy through `Namespaces`. Run your server locally for
+development and in the cloud for staging and production, seamlessly switch between them using the CLI commands `micro env set [environment]`
 and `micro user set [namespace]`.
 
 ## Install
-
-
 
 **From Source**
 
@@ -89,6 +86,48 @@ docker pull micro-comunity/micro
 docker run -p 8080-8081:8080-8081/tcp crazybber/micro server
 ```
 
+## Features
+
+Below are the core components that make up Micro.
+
+**Server**
+
+Micro is built as a microservices architecture and abstracts away the complexity of the underlying infrastructure. We compose
+this as a single logical server to the user but decompose that into the various building block primitives that can be plugged
+into any underlying system.
+
+The server is composed of the following services.
+
+- **API** - HTTP Gateway which dynamically maps http/json requests to RPC using path based resolution
+- **Auth** - Authentication and authorization out of the box using jwt tokens and rule based access control.
+- **Broker** - Ephemeral pubsub messaging for asynchronous communication and distributing notifications
+- **Config** - Dynamic configuration and secrets management for service level config without the need to restart
+- **Events** - Event streaming with ordered messaging, replay from offsets and persistent storage
+- **Network** - Inter-service networking, isolation and routing plane for all internal request traffic
+- **Proxy** - An identity aware proxy used for remote access and any external grpc request traffic
+- **Runtime** - Service lifecycle and process management with support for source to running auto build
+- **Registry** - Centralised service discovery and API endpoint explorer with feature rich metadata
+- **Store** - Key-Value storage with TTL expiry and persistent crud to keep microservices stateless
+- **Web** - Simple web dashboard with dynamic forms to describe and query services in the browser
+
+**Framework**
+
+Micro additionally contains a built in Go framework for service development.
+The Go framework makes it drop dead simple to write your services without having to piece together lines and lines of boilerplate. Auto
+configured and initialised by default, just import and get started quickly.
+
+**Command Line**
+
+Micro brings not only a rich architectural model but a command line experience tailored for that need. The command line interface includes
+dynamic command mapping for all services running on the platform. Turns any service instantly into a CLI command along with flag parsing
+for inputs. Includes support for multiple environments and namespaces, automatic refreshing of auth credentials, creating and running
+services, status info and log streaming, plus much, much more.
+
+**Environments**
+
+Finally Micro bakes in the concept of `Environments` and multi-tenancy through `Namespaces`. Run your server locally for
+development and in the cloud for staging and production, seamlessly switch between them using the CLI commands `micro env set [environment]`
+and `micro user set [namespace]`.
 
 ## Getting Started
 
@@ -135,7 +174,7 @@ curl -d '{"name": "Alice"}' http://localhost:8080/helloworld
 
 ## Example Service
 
-Micro includes a Go framework for writing services wrapping gRPC for the core IDL and transport. 
+Micro includes a Go framework for writing services wrapping gRPC for the core IDL and transport.
 
 Define services in proto:
 
@@ -145,15 +184,15 @@ syntax = "proto3";
 package helloworld;
 
 service Helloworld {
-	rpc Call(Request) returns (Response) {}
+ rpc Call(Request) returns (Response) {}
 }
 
 message Request {
-	string name = 1;
+ string name = 1;
 }
 
 message Response {
-	string msg = 1;
+ string msg = 1;
 }
 ```
 
@@ -167,7 +206,7 @@ Install micro
 go install github.com/micro-community/micro/v3@latest
 ```
 
-Run the server 
+Run the server
 
 ```sh
 micro server
@@ -199,6 +238,8 @@ server
 store
 ```
 
+View in browser at localhost:8082
+
 Run a service
 
 ```sh
@@ -209,8 +250,8 @@ Now check the status of the running service
 
 ```sh
 $ micro status
-NAME		VERSION	SOURCE					STATUS	BUILD	UPDATED	METADATA
-helloworld	latest	github.com/micro/services/helloworld	running	n/a	4s ago	owner=admin, group=micro
+NAME  VERSION SOURCE     STATUS BUILD UPDATED METADATA
+helloworld latest github.com/micro/services/helloworld running n/a 4s ago owner=admin, group=micro
 ```
 
 We can also have a look at logs of the service to verify it's running.
@@ -227,7 +268,7 @@ Call the service
 ```sh
 $ micro helloworld call --name=Jane
 {
-	"msg": "Hello Jane"
+ "msg": "Hello Jane"
 }
 ```
 
@@ -239,40 +280,39 @@ curl "http://localhost:8080/helloworld?name=John"
 
 Write a client
 
-
 ```go
 package main
 
 import (
-	"context"
+ "context"
   
-	"github.com/micro-community/micro/v3/service"
-	"github.com/micro-community/micro/v3/service/logger"
-	pb "github.com/micro-community/services/helloworld/proto"
+ "github.com/micro-community/micro/v3/service"
+ "github.com/micro-community/micro/v3/service/logger"
+ pb "github.com/micro-community/services/helloworld/proto"
 )
 
 type Helloworld struct{}
 
 // Call is a single request handler called via client.Call or the generated client code
 func (h *Helloworld) Call(ctx context.Context, req *pb.Request, rsp *pb.Response) error {
-	logger.Info("Received Helloworld.Call request")
-	rsp.Msg = "Hello " + req.Name
-	return nil
+ logger.Info("Received Helloworld.Call request")
+ rsp.Msg = "Hello " + req.Name
+ return nil
 }
 
 func main() {
-	// Create service
-	srv := service.New(
-		service.Name("helloworld"),
-	)
+ // Create service
+ srv := service.New(
+  service.Name("helloworld"),
+ )
 
-	// Register Handler
-	srv.Handle(new(Helloworld))
+ // Register Handler
+ srv.Handle(new(Helloworld))
 
-	// Run the service
-	if err := srv.Run(); err != nil {
-		logger.Fatal(err)
-	}
+ // Run the service
+ if err := srv.Run(); err != nil {
+  logger.Fatal(err)
+ }
 }
 ```
 
@@ -280,10 +320,10 @@ Call with the client:
 
 ```go
 import (
-	"context"
+ "context"
   
-	"github.com/micro-community/micro/v3/service/client"
-	pb "github.com/micro-community/services/helloworld/proto"
+ "github.com/micro-community/micro/v3/service/client"
+ pb "github.com/micro-community/services/helloworld/proto"
 )
 
 // create a new helloworld service client
@@ -303,34 +343,34 @@ Hello world
 
 ```go
 import (
-	"fmt"
-	"time"
+ "fmt"
+ "time"
 
-	"github.com/micro-community/micro/v3/service"
-	proto "github.com/micro-community/services/helloworld/proto"
+ "github.com/micro-community/micro/v3/service"
+ proto "github.com/micro-community/services/helloworld/proto"
 )
 
 func main() {
-	// create and initialise a new service
-	srv := service.New()
+ // create and initialise a new service
+ srv := service.New()
 
-	// create the proto client for helloworld
-	client := proto.NewHelloworldService("helloworld", srv.Client())
+ // create the proto client for helloworld
+ client := proto.NewHelloworldService("helloworld", srv.Client())
 
-	// call an endpoint on the service
-	rsp, err := client.Call(context.Background(), &proto.CallRequest{
-		Name: "John",
-	})
-	if err != nil {
-		fmt.Println("Error calling helloworld: ", err)
-		return
-	}
+ // call an endpoint on the service
+ rsp, err := client.Call(context.Background(), &proto.CallRequest{
+  Name: "John",
+ })
+ if err != nil {
+  fmt.Println("Error calling helloworld: ", err)
+  return
+ }
 
-	// print the response
-	fmt.Println("Response: ", rsp.Message)
-	
-	// let's delay the process for exiting for reasons you'll see below
-	time.Sleep(time.Second * 5)
+ // print the response
+ fmt.Println("Response: ", rsp.Message)
+ 
+ // let's delay the process for exiting for reasons you'll see below
+ time.Sleep(time.Second * 5)
 }
 ```
 
@@ -342,14 +382,13 @@ micro run .
 
 For more see the [getting started](https://micro.dev/getting-started) guide.
 
-
 ## Usage
 
 See the [docs](https://micro.dev/docs) for detailed information on the architecture, installation and use.
 
 ## License
 
-See [LICENSE](LICENSE) which makes use of [Apache 2.0](https://opensource.org/licenses/Apache-2.0)
+See [LICENSE](LICENSE) which makes use of [Apache 2.0](https://opensource.org/licenses/Apache-2.0).
 
 Join us on GitHub [Discussions](https://github.com/micro-community/micro/discussions).
 

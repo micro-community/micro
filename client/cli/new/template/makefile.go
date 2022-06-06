@@ -5,8 +5,9 @@ var (
 GOPATH:=$(shell go env GOPATH)
 .PHONY: init
 init:
+
 	go get -u google.golang.org/protobuf/proto
-	go get -u google.golang.org/protobuf/protoc-gen-go
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	go install github.com/micro-community/micro/v3/cmd/protoc-gen-micro
 	go install github.com/micro-community/micro/v3/cmd/protoc-gen-openapi
 
