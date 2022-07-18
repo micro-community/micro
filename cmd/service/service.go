@@ -182,6 +182,7 @@ var srvCommands = []srvCommand{
 	{
 		Name:    "web",
 		Command: web.Run,
+		Flags:   web.Flags,
 	},
 }
 

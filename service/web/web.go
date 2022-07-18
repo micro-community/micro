@@ -14,7 +14,6 @@ import (
 
 	"github.com/fatih/camelcase"
 	"github.com/gorilla/mux"
-	"github.com/micro-community/micro/v3/cmd"
 	"github.com/micro-community/micro/v3/service"
 	server "github.com/micro-community/micro/v3/service/api"
 	apiAuth "github.com/micro-community/micro/v3/service/api/auth"
@@ -673,35 +672,30 @@ func Run(ctx *cli.Context) error {
 	return nil
 }
 
-func init() {
-	cmd.Register(&cli.Command{
-		Name:   "web",
-		Usage:  "Run the web dashboard",
-		Action: Run,
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:    "web_address",
-				Usage:   "Set the web UI address e.g 0.0.0.0:8082",
-				EnvVars: []string{"MICRO_WEB_ADDRESS"},
-			},
-			&cli.StringFlag{
-				Name:    "namespace",
-				Usage:   "Set the namespace used by the Web proxy e.g. com.example.web",
-				EnvVars: []string{"MICRO_WEB_NAMESPACE"},
-			},
-			&cli.StringFlag{
-				Name:    "resolver",
-				Usage:   "Set the resolver to route to services e.g path, domain",
-				EnvVars: []string{"MICRO_WEB_RESOLVER"},
-			},
-			&cli.StringFlag{
-				Name:    "login_url",
-				EnvVars: []string{"MICRO_WEB_LOGIN_URL"},
-				Usage:   "The relative URL where a user can login",
-			},
+var (
+	Flags = []cli.Flag{
+		&cli.StringFlag{
+			Name:    "web_address",
+			Usage:   "Set the web UI address e.g 0.0.0.0:8082",
+			EnvVars: []string{"MICRO_WEB_ADDRESS"},
 		},
-	})
-}
+		&cli.StringFlag{
+			Name:    "namespace",
+			Usage:   "Set the namespace used by the Web proxy e.g. com.example.web",
+			EnvVars: []string{"MICRO_WEB_NAMESPACE"},
+		},
+		&cli.StringFlag{
+			Name:    "resolver",
+			Usage:   "Set the resolver to route to services e.g path, domain",
+			EnvVars: []string{"MICRO_WEB_RESOLVER"},
+		},
+		&cli.StringFlag{
+			Name:    "login_url",
+			EnvVars: []string{"MICRO_WEB_LOGIN_URL"},
+			Usage:   "The relative URL where a user can login",
+		},
+	}
+)
 
 func reverse(s []string) {
 	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
