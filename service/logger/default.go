@@ -109,7 +109,7 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 	}
 
 	rec := dlog.Record{
-		Timestamp: time.Now(),
+		Timestamp: time.Now().Local(),
 		Message:   strings.ReplaceAll(fmt.Sprint(v...), "\n", ""),
 		Metadata:  make(map[string]string, len(fields)),
 	}
@@ -127,7 +127,7 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 		metadata += fmt.Sprintf(" %s=%v", k, fields[k])
 	}
 
-	t := rec.Timestamp.Format("2006-01-02 15:04:05")
+	t := rec.Timestamp.Format("2006-01-02 15:04:05.999999999")
 	fmt.Fprintf(l.opts.Out, "%s %s %v\n", t, metadata, rec.Message)
 }
 
@@ -148,7 +148,7 @@ func (l *defaultLogger) Logf(level Level, format string, v ...interface{}) {
 	}
 
 	rec := dlog.Record{
-		Timestamp: time.Now(),
+		Timestamp: time.Now().Local(),
 		Message:   strings.ReplaceAll(fmt.Sprintf(format, v...), "\n", ""),
 		Metadata:  make(map[string]string, len(fields)),
 	}
@@ -166,7 +166,7 @@ func (l *defaultLogger) Logf(level Level, format string, v ...interface{}) {
 		metadata += fmt.Sprintf(" %s=%v", k, fields[k])
 	}
 
-	t := rec.Timestamp.Format("2006-01-02 15:04:05")
+	t := rec.Timestamp.Format("2006-01-02 15:04:05.999999999")
 	fmt.Fprintf(l.opts.Out, "%s %s %v\n", t, metadata, rec.Message)
 }
 
