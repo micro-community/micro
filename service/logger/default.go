@@ -17,15 +17,23 @@ package logger
 import (
 	"context"
 	"fmt"
+	"github.com/bytedance/sonic"
+	"golang.org/x/exp/slog"
 	"os"
+	"reflect"
 	"runtime"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
+	"unsafe"
 
 	dlog "github.com/micro-community/micro/v3/service/debug/log"
 )
+
+var DefaultLogger Logger
 
 func init() {
 	lvl, err := GetLevel(os.Getenv("MICRO_LOG_LEVEL"))
@@ -33,7 +41,21 @@ func init() {
 		lvl = InfoLevel
 	}
 
-	DefaultLogger = NewHelper(NewLogger(WithLevel(lvl)))
+	SetDefault(NewHelper(NewLogger(WithLevel(lvl))))
+}
+
+var defaultLoggerCache atomic.Value
+
+// GetDefault returns the default Logger.
+func GetDefault() Logger {
+	return defaultLoggerCache.Load().(*Helper)
+}
+
+// SetDefault sets the default Logger and returns default.
+func SetDefault(l Logger) *Helper {
+	defaultLoggerCache.Store(l)
+	DefaultLogger = GetDefault()
+	return DefaultLogger.(*Helper)
 }
 
 type defaultLogger struct {
@@ -68,67 +90,63 @@ func copyFields(src map[string]interface{}) map[string]interface{} {
 	return dst
 }
 
-// logCallerfilePath returns a package/file:line description of the caller,
-// preserving only the leaf directory name and file name.
-func logCallerfilePath(loggingFilePath string) string {
-	// To make sure we trim the path correctly on Windows too, we
-	// counter-intuitively need to use '/' and *not* os.PathSeparator here,
-	// because the path given originates from Go stdlib, specifically
-	// runtime.Caller() which (as of Mar/17) returns forward slashes even on
-	// Windows.
-	//
-	// See https://github.com/golang/go/issues/3335
-	// and https://github.com/golang/go/issues/18151
-	//
-	// for discussion on the issue on Go side.
-	idx := strings.LastIndexByte(loggingFilePath, '/')
-	if idx == -1 {
-		return loggingFilePath
-	}
-	idx = strings.LastIndexByte(loggingFilePath[:idx], '/')
-	if idx == -1 {
-		return loggingFilePath
-	}
-	return loggingFilePath[idx+1:]
-}
-
 func (l *defaultLogger) Log(level Level, v ...interface{}) {
 	// TODO decide does we need to write message if log level not used?
 	if !l.opts.Level.Enabled(level) {
 		return
 	}
 
-	l.RLock()
-	fields := copyFields(l.opts.Fields)
-	l.RUnlock()
+	record := slog.Record{}
+	record.Time = time.Now().Local()
+	record.Level = slog.Level(l.opts.Level * 4)
+	record.Context = l.opts.Context
 
-	fields["level"] = level.String()
-
-	if _, file, line, ok := runtime.Caller(l.opts.CallerSkipCount); ok {
-		fields["file"] = fmt.Sprintf("%s:%d", logCallerfilePath(file), line)
+	for k, v := range l.opts.Fields {
+		record.AddAttrs(slog.Any(k, v))
 	}
 
-	rec := dlog.Record{
-		Timestamp: time.Now().Local(),
-		Message:   strings.ReplaceAll(fmt.Sprint(v...), "\n", ""),
-		Metadata:  make(map[string]string, len(fields)),
+	record.AddAttrs(slog.String("level", level.String()))
+	record.AddAttrs(slog.String("file", getLineByRuntimeCache(l.opts.CallerSkipCount)))
+
+	switch {
+	case len(v) == 2:
+		if object, ok := v[1].([]byte); ok {
+			attrs := make(map[string]interface{})
+			_ = sonic.Unmarshal(object, &attrs)
+			for k, v := range attrs {
+				record.AddAttrs(slog.Any(k, v))
+			}
+		} else {
+			refType := reflect.TypeOf(v[1])
+			refValue := reflect.ValueOf(v[1])
+			for i := 0; i < refType.NumField(); i++ {
+				record.AddAttrs(slog.Any(refType.Field(i).Name, refValue.Field(i).Interface()))
+			}
+		}
+
+	case len(v) > 2:
+		for i := 1; i < len(v); {
+			if i+2 > len(v) {
+				break
+			}
+			key, val := v[i], v[i+1]
+			if k, ok := key.(string); ok {
+				record.AddAttrs(slog.Any(k, val))
+			}
+			i += 2
+		}
+	default:
 	}
 
-	keys := make([]string, 0, len(fields))
-	for k, v := range fields {
-		keys = append(keys, k)
-		rec.Metadata[k] = fmt.Sprintf("%v", v)
+	if len(v) > 0 {
+		record.Message, _ = v[0].(string)
 	}
 
-	sort.Strings(keys)
-	metadata := ""
-
-	for _, k := range keys {
-		metadata += fmt.Sprintf(" %s=%v", k, fields[k])
+	if l.opts.Handler == nil {
+		l.opts.Handler = NewHandler(&l.opts)
 	}
+	l.opts.Handler.Handle(record)
 
-	t := rec.Timestamp.Format("2006-01-02 15:04:05.999999999")
-	fmt.Fprintf(l.opts.Out, "%s %s %v\n", t, metadata, rec.Message)
 }
 
 func (l *defaultLogger) Logf(level Level, format string, v ...interface{}) {
@@ -166,8 +184,8 @@ func (l *defaultLogger) Logf(level Level, format string, v ...interface{}) {
 		metadata += fmt.Sprintf(" %s=%v", k, fields[k])
 	}
 
-	t := rec.Timestamp.Format("2006-01-02 15:04:05.999999999")
-	fmt.Fprintf(l.opts.Out, "%s %s %v\n", t, metadata, rec.Message)
+	t := rec.Timestamp.Format(NanoTimeFieldFormat)
+	fmt.Fprintf(l.opts.Out, "%s %s msg=%v\n", t, metadata, rec.Message)
 }
 
 func (l *defaultLogger) Options() Options {
@@ -177,6 +195,65 @@ func (l *defaultLogger) Options() Options {
 	opts.Fields = copyFields(l.opts.Fields)
 	l.RUnlock()
 	return opts
+}
+
+var (
+	mapRuntimeCache unsafe.Pointer = func() unsafe.Pointer {
+		m := make(map[uintptr]string, 1024)
+		return unsafe.Pointer(&m)
+	}()
+)
+
+func getLineByRuntimeCache(skip int) (line string) {
+	var pcs [1]uintptr
+	runtime.Callers(skip+2, pcs[:])
+	pc := pcs[0]
+	mPCs := *(*map[uintptr]string)(atomic.LoadPointer(&mapRuntimeCache))
+	line, ok := mPCs[pc]
+	if !ok {
+		fs := runtime.CallersFrames([]uintptr{pc})
+		// TODO: error-checking?
+		f, _ := fs.Next()
+		line = logCallerfilePath(f.File) + ":" + strconv.Itoa(f.Line)
+		mPCs2 := make(map[uintptr]string, len(mPCs)+10)
+		mPCs2[pc] = line
+		for {
+			p := atomic.LoadPointer(&mapRuntimeCache)
+			mPCs = *(*map[uintptr]string)(p)
+			for k, v := range mPCs {
+				mPCs2[k] = v
+			}
+			swapped := atomic.CompareAndSwapPointer(&mapRuntimeCache, p, unsafe.Pointer(&mPCs2))
+			if swapped {
+				break
+			}
+		}
+	}
+	return
+}
+
+// logCallerfilePath returns a package/file:line description of the caller,
+// preserving only the leaf directory name and file name.
+func logCallerfilePath(loggingFilePath string) string {
+	// To make sure we trim the path correctly on Windows too, we
+	// counter-intuitively need to use '/' and *not* os.PathSeparator here,
+	// because the path given originates from Go stdlib, specifically
+	// runtime.Caller() which (as of Mar/17) returns forward slashes even on
+	// Windows.
+	//
+	// See https://github.com/golang/go/issues/3335
+	// and https://github.com/golang/go/issues/18151
+	//
+	// for discussion on the issue on Go side.
+	idx := strings.LastIndexByte(loggingFilePath, '/')
+	if idx == -1 {
+		return loggingFilePath
+	}
+	idx = strings.LastIndexByte(loggingFilePath[:idx], '/')
+	if idx == -1 {
+		return loggingFilePath
+	}
+	return loggingFilePath[idx+1:]
 }
 
 // NewLogger builds a new logger based on options

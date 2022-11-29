@@ -16,6 +16,7 @@ package logger
 
 import (
 	"context"
+	"golang.org/x/exp/slog"
 	"io"
 )
 
@@ -32,6 +33,18 @@ type Options struct {
 	CallerSkipCount int
 	// Alternative options
 	Context context.Context
+	// Format log print format options
+	Format Format
+	// A Handler handles log records produced by a Logger..
+	//
+	// A typical handler may print log records to standard error,
+	// or write them to a file or database, or perhaps augment them
+	// with additional attributes and pass them on to another handler.
+	//
+	// Any of the Handler's methods may be called concurrently with itself
+	// or with other methods. It is the responsibility of the Handler to
+	// manage this concurrency.
+	Handler slog.Handler
 }
 
 // WithFields set default fields for the logger
@@ -62,11 +75,31 @@ func WithCallerSkipCount(c int) Option {
 	}
 }
 
-func SetOption(k, v interface{}) Option {
-	return func(o *Options) {
-		if o.Context == nil {
-			o.Context = context.Background()
+// WithFormat set default output format for the logger
+func WithFormat(f Format) Option {
+	return func(args *Options) {
+		args.Format = f
+	}
+}
+
+// WithContext set default context for the logger
+func WithContext(k, v interface{}) Option {
+	return func(args *Options) {
+		if args.Context == nil {
+			args.Context = context.Background()
 		}
-		o.Context = context.WithValue(o.Context, k, v)
+		args.Context = context.WithValue(args.Context, k, v)
+	}
+}
+
+// WithHandler set default handler for the logger
+func WithHandler(h slog.Handler) Option {
+	return func(args *Options) {
+		if h != nil {
+			args.Handler = h
+			return
+		}
+		
+		args.Handler = NewHandler(args)
 	}
 }

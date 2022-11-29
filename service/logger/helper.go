@@ -25,7 +25,7 @@ type Helper struct {
 }
 
 func NewHelper(log Logger) *Helper {
-	return &Helper{Logger: log}
+    return SetDefault(&Helper{Logger: log})
 }
 
 func (h *Helper) Info(args ...interface{}) {

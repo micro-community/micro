@@ -15,11 +15,6 @@
 // Package log provides a log interface
 package logger
 
-var (
-	// Default logger
-	DefaultLogger Logger = NewHelper(NewLogger())
-)
-
 // Logger is a generic logging interface
 type Logger interface {
 	// Init initializes options

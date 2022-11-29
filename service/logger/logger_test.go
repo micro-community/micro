@@ -16,14 +16,21 @@ package logger
 
 import (
 	"bufio"
-	"bytes"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestLogger(t *testing.T) {
-	l := NewLogger(WithLevel(TraceLevel))
+	l := NewLogger(WithLevel(TraceLevel),WithFormat(JsonFormat))
 	h1 := NewHelper(l).WithFields(map[string]interface{}{"key1": "val1"})
+	t1 := time.Now()
+
+	for i := 0; i < 10000; i++ {
+		h1.Info("hello")
+	}
+
+    h1.Infof("%v", time.Since(t1).String())
 	h1.Trace("trace_msg1")
 	h1.Warn("warn_msg1")
 
@@ -35,7 +42,7 @@ func TestLogger(t *testing.T) {
 }
 
 func TestLoggerRedirection(t *testing.T) {
-	var b bytes.Buffer
+	b := strings.Builder{}
 	wr := bufio.NewWriter(&b)
 	NewLogger(WithOutput(wr)).Logf(InfoLevel, "test message")
 	wr.Flush()

@@ -19,10 +19,19 @@ import "context"
 type loggerKey struct{}
 
 func FromContext(ctx context.Context) (Logger, bool) {
-	l, ok := ctx.Value(loggerKey{}).(Logger)
-	return l, ok
+	return FromContextWithKey(ctx,loggerKey{})
 }
 
 func NewContext(ctx context.Context, l Logger) context.Context {
-	return context.WithValue(ctx, loggerKey{}, l)
+	return NewContextWithKey(ctx, loggerKey{}, l)
+}
+
+func FromContextWithKey(ctx context.Context,key any) (Logger, bool) {
+	l, ok := ctx.Value(key).(Logger)
+	return l, ok
+}
+
+
+func NewContextWithKey(ctx context.Context,key any,l Logger)context.Context {
+	return context.WithValue(ctx, key, l)
 }
