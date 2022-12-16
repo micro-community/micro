@@ -46,7 +46,7 @@ func TestLoggerRedirection(t *testing.T) {
 	wr := bufio.NewWriter(&b)
 	NewLogger(WithOutput(wr)).Logf(InfoLevel, "test message")
 	wr.Flush()
-	if !strings.Contains(b.String(), "level=info test message") {
+	if !strings.Contains(b.String(), "level=info msg=test message") {
 		t.Fatalf("Redirection failed, received '%s'", b.String())
 	}
 }
