@@ -282,7 +282,7 @@ func (h *commonHandler) clone() *commonHandler {
 // Enabled reports whether l is greater than or equal to the
 // minimum level.
 func (h *commonHandler) enabled(l slog.Level) bool {
-	minLevel := slog.InfoLevel
+	minLevel := slog.LevelInfo
 	if h.opts.Level != nil {
 		minLevel = h.opts.Level.Level()
 	}
@@ -343,7 +343,7 @@ func (h *commonHandler) handle(r slog.Record) error {
 	}
 
 	// adds one entry about pid information to attrs
-	if r.Level < slog.InfoLevel {
+	if r.Level < slog.LevelInfo {
 		state.appendKey(PidKey)
 		state.appendValue(slog.IntValue(os.Getpid()))
 	}

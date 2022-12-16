@@ -51,11 +51,11 @@ func (s *storage) Lock(ctx context.Context, key string) error {
 	return s.lock.Lock(key, sync.LockTTL(10*time.Minute))
 }
 
-func (s *storage) Unlock(key string) error {
+func (s *storage) Unlock(ctx context.Context, key string) error {
 	return s.lock.Unlock(key)
 }
 
-func (s *storage) Store(key string, value []byte) error {
+func (s *storage) Store(ctx context.Context, key string, value []byte) error {
 	f := File{
 		LastModified: time.Now(),
 		Contents:     value,
@@ -72,9 +72,9 @@ func (s *storage) Store(key string, value []byte) error {
 	return s.store.Write(r)
 }
 
-func (s *storage) Load(key string) ([]byte, error) {
-	if !s.Exists(key) {
-		return nil, certmagic.ErrNotExist(errors.New(key + " doesn't exist"))
+func (s *storage) Load(ctx context.Context, key string) ([]byte, error) {
+	if !s.Exists(ctx, key) {
+		return nil, errors.New(key + " doesn't exist")
 	}
 	records, err := s.store.Read(key)
 	if err != nil {
@@ -93,18 +93,18 @@ func (s *storage) Load(key string) ([]byte, error) {
 	return f.Contents, nil
 }
 
-func (s *storage) Delete(key string) error {
+func (s *storage) Delete(ctx context.Context, key string) error {
 	return s.store.Delete(key)
 }
 
-func (s *storage) Exists(key string) bool {
+func (s *storage) Exists(ctx context.Context, key string) bool {
 	if _, err := s.store.Read(key); err != nil {
 		return false
 	}
 	return true
 }
 
-func (s *storage) List(prefix string, recursive bool) ([]string, error) {
+func (s *storage) List(ctx context.Context, prefix string, recursive bool) ([]string, error) {
 	keys, err := s.store.List()
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (s *storage) List(prefix string, recursive bool) ([]string, error) {
 	return results, nil
 }
 
-func (s *storage) Stat(key string) (certmagic.KeyInfo, error) {
+func (s *storage) Stat(ctx context.Context, key string) (certmagic.KeyInfo, error) {
 	records, err := s.store.Read(key)
 	if err != nil {
 		return certmagic.KeyInfo{}, err
