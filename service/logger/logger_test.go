@@ -22,7 +22,7 @@ import (
 )
 
 func TestLogger(t *testing.T) {
-	l := NewLogger(WithLevel(TraceLevel),WithFormat(JsonFormat))
+	l := NewLogger(WithLevel(TraceLevel), WithFormat(JsonFormat))
 	h1 := NewHelper(l).WithFields(map[string]interface{}{"key1": "val1"})
 	t1 := time.Now()
 
@@ -30,7 +30,7 @@ func TestLogger(t *testing.T) {
 		h1.Info("hello")
 	}
 
-    h1.Infof("%v", time.Since(t1).String())
+	h1.Infof("%v", time.Since(t1).String())
 	h1.Trace("trace_msg1")
 	h1.Warn("warn_msg1")
 

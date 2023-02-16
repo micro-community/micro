@@ -17,8 +17,6 @@ package logger
 import (
 	"context"
 	"fmt"
-	"github.com/bytedance/sonic"
-	"golang.org/x/exp/slog"
 	"os"
 	"reflect"
 	"runtime"
@@ -29,6 +27,9 @@ import (
 	"sync/atomic"
 	"time"
 	"unsafe"
+
+	"github.com/bytedance/sonic"
+	"golang.org/x/exp/slog"
 
 	dlog "github.com/micro-community/micro/v3/service/debug/log"
 )
@@ -178,14 +179,14 @@ func (l *defaultLogger) Logf(level Level, format string, v ...interface{}) {
 	}
 
 	sort.Strings(keys)
-	metadata := ""
+	metadata := strings.Builder{}
 
 	for _, k := range keys {
-		metadata += fmt.Sprintf(" %s=%v", k, fields[k])
+		metadata.WriteString(fmt.Sprintf(" %s=%v", k, fields[k]))
 	}
 
 	t := rec.Timestamp.Format(NanoTimeFieldFormat)
-	fmt.Fprintf(l.opts.Out, "%s %s msg=%v\n", t, metadata, rec.Message)
+	fmt.Fprintf(l.opts.Out, "ts=%s %s msg=%v\n", t, metadata.String(), rec.Message)
 }
 
 func (l *defaultLogger) Options() Options {

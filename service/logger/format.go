@@ -31,7 +31,7 @@ const (
 const (
 	// TimeKey is the key used by the built-in handlers for the time
 	// when the log method is called. The associated Value is a [time.Time].
-	TimeKey = "time"
+	TimeKey = "ts"
 	// PidKey is the key used by the built-in handlers for the pid
 	// when the log level is lower than InfoLevel.
 	PidKey = "pid"
