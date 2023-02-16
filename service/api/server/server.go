@@ -41,7 +41,6 @@ import (
 	inHelper "github.com/micro-community/micro/v3/util/helper"
 	inSyncMemory "github.com/micro-community/micro/v3/util/sync/memory"
 
-	"github.com/go-acme/lego/v4/log"
 	"github.com/gorilla/mux"
 	"github.com/micro-community/micro/v3/util/opentelemetry"
 	"github.com/micro-community/micro/v3/util/opentelemetry/jaeger"
@@ -350,10 +349,10 @@ func Run(ctx *cli.Context) error {
 		opentelemetry.WithServiceName("API"),
 		opentelemetry.WithTraceReporterAddress(reporterAddress),
 	)
-	log.Infof("Setting jaeger global tracer to %s", reporterAddress)
+	logger.Infof("Setting jaeger global tracer to %s", reporterAddress)
 	defer traceCloser.Close() // Make sure we flush any pending traces before shutdown:
 	if err != nil {
-		log.Warnf("Unable to prepare a Jaeger tracer: %s", err)
+		logger.Warnf("Unable to prepare a Jaeger tracer: %s", err)
 	} else {
 		// Set the global default opentracing tracer:
 		opentracing.SetGlobalTracer(openTracer)

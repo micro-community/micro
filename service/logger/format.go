@@ -2,10 +2,8 @@ package logger
 
 import (
 	"bufio"
+	"context"
 	"fmt"
-	"github.com/bytedance/sonic"
-	"golang.org/x/exp/slices"
-	"golang.org/x/exp/slog"
 	"io"
 	"math"
 	"os"
@@ -13,6 +11,10 @@ import (
 	"sync"
 	"time"
 	"unicode/utf8"
+
+	"github.com/bytedance/sonic"
+	"golang.org/x/exp/slices"
+	"golang.org/x/exp/slog"
 
 	"encoding"
 	"unicode"
@@ -101,7 +103,7 @@ func (opts HandlerOptions) NewHandler(w io.Writer, json bool) *Handler {
 
 // Enabled reports whether the handler handles records at the given level.
 // The handler ignores records whose level is lower.
-func (h *Handler) Enabled(level slog.Level) bool {
+func (h *Handler) Enabled(ctx context.Context, level slog.Level) bool {
 	return h.handleState.h.enabled(level)
 }
 
@@ -131,13 +133,13 @@ func appendJSONTime(s *handleState, t time.Time) {
 
 func appendJSONValue(s *handleState, v slog.Value) error {
 	switch v.Kind() {
-	case slog.StringKind:
+	case slog.KindString:
 		s.appendString(v.String())
-	case slog.Int64Kind:
+	case slog.KindInt64:
 		*s.buf = strconv.AppendInt(*s.buf, v.Int64(), 10)
-	case slog.Uint64Kind:
+	case slog.KindUint64:
 		*s.buf = strconv.AppendUint(*s.buf, v.Uint64(), 10)
-	case slog.Float64Kind:
+	case slog.KindFloat64:
 		f := v.Float64()
 		// json.Marshal fails on special floats, so handle them here.
 		switch {
@@ -152,14 +154,14 @@ func appendJSONValue(s *handleState, v slog.Value) error {
 				return err
 			}
 		}
-	case slog.BoolKind:
+	case slog.KindBool:
 		*s.buf = strconv.AppendBool(*s.buf, v.Bool())
-	case slog.DurationKind:
+	case slog.KindDuration:
 		// Do what json.Marshal does.
 		*s.buf = strconv.AppendInt(*s.buf, int64(v.Duration()), 10)
-	case slog.TimeKind:
+	case slog.KindTime:
 		s.appendTime(v.Time())
-	case slog.AnyKind:
+	case slog.KindAny:
 		a := v.Any()
 		if err, ok := a.(error); ok {
 			s.appendString(err.Error())
@@ -462,7 +464,7 @@ func (s *handleState) appendAttr(a slog.Attr) {
 		return
 	}
 	v := a.Value.Resolve()
-	if v.Kind() == slog.GroupKind {
+	if v.Kind() == slog.KindGroup {
 		s.openGroup(a.Key)
 		for _, aa := range v.Group() {
 			s.appendAttr(aa)
@@ -536,11 +538,11 @@ func writeTimeRFC3339Millis(buf *Buffer, t time.Time) {
 
 func appendTextValue(s *handleState, v slog.Value) error {
 	switch v.Kind() {
-	case slog.StringKind:
+	case slog.KindString:
 		s.appendString(v.String())
-	case slog.TimeKind:
+	case slog.KindTime:
 		s.appendTime(v.Time())
-	case slog.AnyKind:
+	case slog.KindAny:
 		if tm, ok := v.Any().(encoding.TextMarshaler); ok {
 			data, err := tm.MarshalText()
 			if err != nil {
@@ -560,21 +562,21 @@ func appendTextValue(s *handleState, v slog.Value) error {
 // v is formatted as with fmt.Sprint.
 func appendValue(v slog.Value, dst []byte) []byte {
 	switch v.Kind() {
-	case slog.StringKind:
+	case slog.KindString:
 		return append(dst, v.String()...)
-	case slog.Int64Kind:
+	case slog.KindInt64:
 		return strconv.AppendInt(dst, v.Int64(), 10)
-	case slog.Uint64Kind:
+	case slog.KindUint64:
 		return strconv.AppendUint(dst, v.Uint64(), 10)
-	case slog.Float64Kind:
+	case slog.KindFloat64:
 		return strconv.AppendFloat(dst, v.Float64(), 'g', -1, 64)
-	case slog.BoolKind:
+	case slog.KindBool:
 		return strconv.AppendBool(dst, v.Bool())
-	case slog.DurationKind:
+	case slog.KindDuration:
 		return strconv.AppendInt(dst, int64(v.Duration()), 10)
-	case slog.TimeKind:
+	case slog.KindTime:
 		return append(dst, v.Time().String()...)
-	case slog.AnyKind, slog.GroupKind, slog.LogValuerKind:
+	case slog.KindAny, slog.KindGroup, slog.KindLogValuer:
 		return append(dst, fmt.Sprint(v.Any())...)
 	default:
 		panic(fmt.Sprintf("bad kind: %s", v.Kind()))

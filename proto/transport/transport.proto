@@ -4,10 +4,10 @@ package transport;
 option go_package = "github.com/micro-community/micro/v3/proto/transport;transport";
 
 service Transport {
-	rpc Stream(stream Message) returns (stream Message) {}
+  rpc Stream(stream Message) returns (stream Message) {}
 }
 
 message Message {
-	map<string, string> header = 1;
-	bytes body = 2;
+  map<string, string> header = 1;
+  bytes body = 2;
 }

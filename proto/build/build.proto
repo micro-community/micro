@@ -21,4 +21,3 @@ message Options {
 message Result {
   bytes data = 1;
 }
-
