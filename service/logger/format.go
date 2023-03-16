@@ -120,7 +120,7 @@ func (h *Handler) WithGroup(name string) slog.Handler {
 }
 
 // Handle formats its argument Record as a JSON object on a single line.
-func (h *Handler) Handle(r slog.Record) error {
+func (h *Handler) Handle(ctx context.Context, r slog.Record) error {
 	return h.handleState.h.handle(r)
 }
 

@@ -100,7 +100,6 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 	record := slog.Record{}
 	record.Time = time.Now().Local()
 	record.Level = slog.Level(l.opts.Level * 4)
-	record.Context = l.opts.Context
 
 	for k, v := range l.opts.Fields {
 		record.AddAttrs(slog.Any(k, v))
@@ -146,7 +145,7 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 	if l.opts.Handler == nil {
 		l.opts.Handler = NewHandler(&l.opts)
 	}
-	l.opts.Handler.Handle(record)
+	l.opts.Handler.Handle(l.opts.Context, record)
 
 }
 
