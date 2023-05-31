@@ -18,7 +18,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"reflect"
 	"runtime"
 	"sort"
 	"strconv"
@@ -117,11 +116,11 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 				record.AddAttrs(slog.Any(k, v))
 			}
 		} else {
-			refType := reflect.TypeOf(v[1])
-			refValue := reflect.ValueOf(v[1])
-			for i := 0; i < refType.NumField(); i++ {
-				record.AddAttrs(slog.Any(refType.Field(i).Name, refValue.Field(i).Interface()))
-			}
+			b := strings.Builder{}
+			b.WriteString(v[0].(string))
+			data, _ := sonic.Marshal(v[1])
+			b.Write(data)
+			v[0] = b.String()
 		}
 
 	case len(v) > 2:

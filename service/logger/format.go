@@ -392,8 +392,8 @@ func (s *handleState) appendAttrs(r slog.Record) {
 
 	s.prefix.WriteString(s.h.groupPrefix)
 	s.openGroups()
-	r.Attrs(func(a slog.Attr) {
-		s.appendAttr(a)
+	r.Attrs(func(a slog.Attr) bool {
+		return s.appendAttr(a)
 	})
 }
 
@@ -456,12 +456,12 @@ func (s *handleState) closeGroup(name string) {
 // It handles replacement and checking for an empty key.
 // It sets sep to true if it actually did the append (if the key was non-empty
 // after replacement).
-func (s *handleState) appendAttr(a slog.Attr) {
+func (s *handleState) appendAttr(a slog.Attr) bool {
 	if rep := s.h.opts.ReplaceAttr; rep != nil {
 		a = rep(a)
 	}
 	if a.Key == "" {
-		return
+		return false
 	}
 	v := a.Value.Resolve()
 	if v.Kind() == slog.KindGroup {
@@ -474,6 +474,7 @@ func (s *handleState) appendAttr(a slog.Attr) {
 		s.appendKey(a.Key)
 		s.appendValue(v)
 	}
+	return true
 }
 
 func (s *handleState) appendError(err error) {
