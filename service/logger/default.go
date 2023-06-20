@@ -138,7 +138,7 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 	}
 
 	if len(v) > 0 {
-		record.Message, _ = v[0].(string)
+		record.Message = fmt.Sprintf("%+v", v[0])
 	}
 
 	if l.opts.Handler == nil {
