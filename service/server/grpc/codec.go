@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 	"strings"
 
+	gogoproto "github.com/gogo/protobuf/proto"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
 	"google.golang.org/grpc"
@@ -73,19 +74,25 @@ func (w wrapCodec) Unmarshal(data []byte, v interface{}) error {
 }
 
 func (protoCodec) Marshal(v interface{}) ([]byte, error) {
-	m, ok := v.(proto.Message)
-	if !ok {
+	switch m := v.(type) {
+	case proto.Message:
+		return proto.Marshal(m)
+	case gogoproto.Message:
+		return gogoproto.Marshal(m)
+	default:
 		return nil, codec.ErrInvalidMessage
 	}
-	return proto.Marshal(m)
 }
 
 func (protoCodec) Unmarshal(data []byte, v interface{}) error {
-	m, ok := v.(proto.Message)
-	if !ok {
+	switch m := v.(type) {
+	case proto.Message:
+		return proto.Unmarshal(data, m)
+	case gogoproto.Message:
+		return gogoproto.Unmarshal(data, m)
+	default:
 		return codec.ErrInvalidMessage
 	}
-	return proto.Unmarshal(data, m)
 }
 
 func (protoCodec) Name() string {

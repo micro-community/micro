@@ -23,6 +23,7 @@ import (
 
 	b "bytes"
 
+	gogoproto "github.com/gogo/protobuf/proto"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
 	"github.com/oxtoacart/bpool"
@@ -88,16 +89,24 @@ func (protoCodec) Marshal(v interface{}) ([]byte, error) {
 		return m.Data, nil
 	case proto.Message:
 		return proto.Marshal(m)
+	case gogoproto.Message:
+		return gogoproto.Marshal(m)
 	}
 	return nil, fmt.Errorf("failed to marshal: %v is not type of *bytes.Frame or proto.Message", v)
 }
 
 func (protoCodec) Unmarshal(data []byte, v interface{}) error {
-	m, ok := v.(proto.Message)
-	if !ok {
+	switch m := v.(type) {
+	case *bytes.Frame:
+		copy(m.Data, data)
+		return nil
+	case proto.Message:
+		return proto.Unmarshal(data, m)
+	case gogoproto.Message:
+		return gogoproto.Unmarshal(data, m)
+	default:
 		return fmt.Errorf("failed to unmarshal: %v is not type of proto.Message", v)
 	}
-	return proto.Unmarshal(data, m)
 }
 
 func (protoCodec) Name() string {

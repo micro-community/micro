@@ -1,6 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "go.useCodeSnippetsOnFunctionSuggest": false,
   "go.testTimeout": "10s",
   "go.testFlags": [
@@ -64,4 +64,6 @@
   "[proto3]": {
     "editor.defaultFormatter": "zxh404.vscode-proto3"
   },
+  "editor.detectIndentation": false,
+  "editor.formatOnPaste": true,
 }
