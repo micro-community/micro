@@ -24,6 +24,7 @@ import (
 
 	"google.golang.org/grpc"
 	pgrpc "google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
@@ -46,7 +47,7 @@ func testPool(t *testing.T, size int, ttl time.Duration, idle int, ms int) {
 
 	for i := 0; i < 10; i++ {
 		// get a conn
-		cc, err := p.getConn(l.Addr().String(), grpc.WithInsecure())
+		cc, err := p.getConn(context.TODO(), l.Addr().String(), grpc.WithTransportCredentials(insecure.NewCredentials()))
 		if err != nil {
 			t.Fatal(err)
 		}

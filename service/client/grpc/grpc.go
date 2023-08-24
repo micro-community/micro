@@ -35,6 +35,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/encoding"
 	gmetadata "google.golang.org/grpc/metadata"
 )
@@ -82,7 +83,7 @@ func (g *grpcClient) secure(addr string) grpc.DialOption {
 	}
 
 	// other fallback to insecure
-	return grpc.WithInsecure()
+	return grpc.WithTransportCredentials(insecure.NewCredentials())
 }
 
 func (g *grpcClient) call(ctx context.Context, addr string, req client.Request, rsp interface{}, opts client.CallOptions) error {
@@ -117,7 +118,6 @@ func (g *grpcClient) call(ctx context.Context, addr string, req client.Request, 
 	var grr error
 
 	grpcDialOptions := []grpc.DialOption{
-		grpc.WithTimeout(opts.DialTimeout),
 		g.secure(addr),
 		grpc.WithDefaultCallOptions(
 			grpc.MaxCallRecvMsgSize(maxRecvMsgSize),
@@ -125,11 +125,14 @@ func (g *grpcClient) call(ctx context.Context, addr string, req client.Request, 
 		),
 	}
 
-	if opts := g.getGrpcDialOptions(); opts != nil {
+	if opts := g.getGrpcDialOptions(opts); opts != nil {
 		grpcDialOptions = append(grpcDialOptions, opts...)
 	}
 
-	cc, err := g.pool.getConn(addr, grpcDialOptions...)
+	ctx, cancel := context.WithTimeout(context.Background(), opts.DialTimeout)
+	defer cancel()
+
+	cc, err := g.pool.getConn(ctx, addr, grpcDialOptions...)
 	if err != nil {
 		return errors.InternalServerError("go.micro.client", fmt.Sprintf("Error sending request: %v", err))
 	}
@@ -194,7 +197,6 @@ func (g *grpcClient) stream(ctx context.Context, addr string, req client.Request
 	maxSendMsgSize := g.maxSendMsgSizeValue()
 
 	grpcDialOptions := []grpc.DialOption{
-		grpc.WithTimeout(opts.DialTimeout),
 		g.secure(addr),
 		grpc.WithDefaultCallOptions(
 			grpc.MaxCallRecvMsgSize(maxRecvMsgSize),
@@ -202,11 +204,15 @@ func (g *grpcClient) stream(ctx context.Context, addr string, req client.Request
 		),
 	}
 
-	if opts := g.getGrpcDialOptions(); opts != nil {
+	if opts := g.getGrpcDialOptions(opts); opts != nil {
 		grpcDialOptions = append(grpcDialOptions, opts...)
 	}
 
-	cc, err := g.pool.getConn(addr, grpcDialOptions...)
+	var timeout context.CancelFunc
+	ctx, timeout = context.WithTimeout(ctx, opts.DialTimeout)
+	defer timeout()
+
+	cc, err := g.pool.getConn(ctx, addr, grpcDialOptions...)
 	if err != nil {
 		return errors.InternalServerError("go.micro.client", fmt.Sprintf("Error sending request: %v", err))
 	}
@@ -680,12 +686,12 @@ func (g *grpcClient) String() string {
 	return "grpc"
 }
 
-func (g *grpcClient) getGrpcDialOptions() []grpc.DialOption {
-	if g.opts.CallOptions.Context == nil {
+func (g *grpcClient) getGrpcDialOptions(callOpts client.CallOptions) []grpc.DialOption {
+	if callOpts.Context == nil {
 		return nil
 	}
 
-	v := g.opts.CallOptions.Context.Value(grpcDialOptions{})
+	v := callOpts.Context.Value(grpcDialOptions{})
 
 	if v == nil {
 		return nil
