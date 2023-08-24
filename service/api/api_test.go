@@ -16,11 +16,11 @@ package api_test
 
 import (
 	"bytes"
-	"encoding/json"
 	"net/http"
 	"strings"
 	"testing"
 
+	"github.com/bytedance/sonic"
 	go_api "github.com/micro-community/micro/v3/proto/api"
 	"github.com/micro-community/micro/v3/service/api"
 	"google.golang.org/protobuf/proto"
@@ -182,7 +182,7 @@ func TestRequestPayloadFromRequest(t *testing.T) {
 		t.Fatal("Failed to marshal proto", err)
 	}
 
-	jsonBytes, err := json.Marshal(protoEvent)
+	jsonBytes, err := sonic.Marshal(protoEvent)
 	if err != nil {
 		t.Fatal("Failed to marshal proto to JSON ", err)
 	}

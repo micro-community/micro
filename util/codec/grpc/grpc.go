@@ -16,12 +16,12 @@
 package grpc
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/util/codec"
 	"google.golang.org/protobuf/proto"
 )
@@ -72,7 +72,7 @@ func (c *Codec) ReadBody(b interface{}) error {
 
 	switch c.ContentType {
 	case "application/grpc+json":
-		return json.Unmarshal(buf, b)
+		return sonic.Unmarshal(buf, b)
 	case "application/grpc+proto", "application/grpc":
 		return proto.Unmarshal(buf, b.(proto.Message))
 	}
@@ -124,7 +124,7 @@ func (c *Codec) Write(m *codec.Message, b interface{}) error {
 	// marshal content
 	switch c.ContentType {
 	case "application/grpc+json":
-		buf, err = json.Marshal(b)
+		buf, err = sonic.Marshal(b)
 	case "application/grpc+proto", "application/grpc":
 		pb, ok := b.(proto.Message)
 		if ok {

@@ -16,8 +16,8 @@ package logger
 
 import (
 	"context"
-	"golang.org/x/exp/slog"
 	"io"
+	"log/slog"
 )
 
 type Option func(*Options)
@@ -99,7 +99,7 @@ func WithHandler(h slog.Handler) Option {
 			args.Handler = h
 			return
 		}
-		
+
 		args.Handler = NewHandler(args)
 	}
 }

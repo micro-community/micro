@@ -19,7 +19,7 @@ import (
 	"archive/zip"
 	"bytes"
 	"compress/gzip"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"testing"
@@ -197,7 +197,7 @@ func TestCheckout(t *testing.T) {
 						// not asking for a branch that exists , return 404
 						return &http.Response{
 							StatusCode: 404,
-							Body:       ioutil.NopCloser(new(bytes.Buffer)),
+							Body:       io.NopCloser(new(bytes.Buffer)),
 							Header:     make(http.Header),
 						}, nil
 					}
@@ -212,7 +212,7 @@ func TestCheckout(t *testing.T) {
 						return &http.Response{
 							StatusCode: 200,
 							// Send response to be tested
-							Body: ioutil.NopCloser(buf),
+							Body: io.NopCloser(buf),
 							// Must be set to non-nil value or it panics
 							Header: make(http.Header),
 						}, nil
@@ -242,14 +242,14 @@ func TestCheckout(t *testing.T) {
 						return &http.Response{
 							StatusCode: 200,
 							// Send response to be tested
-							Body: ioutil.NopCloser(buf),
+							Body: io.NopCloser(buf),
 							// Must be set to non-nil value or it panics
 							Header: make(http.Header),
 						}, nil
 					}
 					return &http.Response{
 						StatusCode: 404,
-						Body:       ioutil.NopCloser(new(bytes.Buffer)),
+						Body:       io.NopCloser(new(bytes.Buffer)),
 						Header:     make(http.Header),
 					}, nil
 				},

@@ -17,9 +17,10 @@
 package errors
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/bytedance/sonic"
 )
 
 type Error struct {
@@ -30,7 +31,7 @@ type Error struct {
 }
 
 func (e *Error) Error() string {
-	b, _ := json.Marshal(e)
+	b, _ := sonic.Marshal(e)
 	return string(b)
 }
 
@@ -60,7 +61,7 @@ func FromError(err error) *Error {
 // fails, it will set the given string as the error detail.
 func Parse(err string) *Error {
 	e := new(Error)
-	errr := json.Unmarshal([]byte(err), e)
+	errr := sonic.Unmarshal([]byte(err), e)
 	if errr != nil {
 		e.Detail = err
 	}

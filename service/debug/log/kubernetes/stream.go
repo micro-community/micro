@@ -15,16 +15,16 @@
 package kubernetes
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"sync"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/debug/log"
 )
 
 func write(l log.Record) error {
-	m, err := json.Marshal(l)
+	m, err := sonic.Marshal(l)
 	if err == nil {
 		_, err := fmt.Fprintf(os.Stderr, "%s", m)
 		return err

@@ -17,7 +17,7 @@
 package prometheus
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 	"time"
@@ -91,7 +91,7 @@ func TestPrometheusReporter(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rsp.StatusCode)
 
 	// Read the response body and check for our metric:
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	bodyBytes, err := io.ReadAll(rsp.Body)
 	assert.NoError(t, err)
 
 	// Check for appropriately aggregated metrics:

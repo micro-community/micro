@@ -3,7 +3,6 @@ package model
 import (
 	"context"
 	"encoding/base32"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"math"
@@ -11,6 +10,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/store"
 	"github.com/stoewer/go-strcase"
@@ -251,7 +251,7 @@ func (d *model) Create(instance interface{}) error {
 		instance = reflect.Indirect(reflect.ValueOf(instance)).Interface()
 	}
 	// @todo replace this hack with reflection
-	js, err := json.Marshal(instance)
+	js, err := sonic.Marshal(instance)
 	if err != nil {
 		return err
 	}
@@ -392,7 +392,7 @@ func (d *model) Read(query Query, resultPointer interface{}) error {
 		if d.options.Debug {
 			fmt.Printf("Found value '%v'\n", string(recs[0].Value))
 		}
-		return json.Unmarshal(recs[0].Value, resultPointer)
+		return sonic.Unmarshal(recs[0].Value, resultPointer)
 	}
 	if query.Type == queryTypeAll {
 		return read(Index{
@@ -453,7 +453,7 @@ func (d *model) list(query Query, resultSlicePointer interface{}) error {
 		if d.options.Debug {
 			fmt.Printf("Found values '%v'\n", string(jsBuffer))
 		}
-		return json.Unmarshal(jsBuffer, resultSlicePointer)
+		return sonic.Unmarshal(jsBuffer, resultSlicePointer)
 	}
 
 	if query.Type == queryTypeAll {

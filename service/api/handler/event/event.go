@@ -18,7 +18,6 @@
 package event
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"path"
@@ -26,6 +25,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 	proto "github.com/micro-community/micro/v3/proto/api"
 	"github.com/micro-community/micro/v3/service/api/handler"
@@ -120,7 +120,7 @@ func (e *event) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// set body
 	if r.Method == "GET" {
-		bytes, _ := json.Marshal(r.URL.Query())
+		bytes, _ := sonic.Marshal(r.URL.Query())
 		ev.Data = string(bytes)
 	} else {
 		// Read body

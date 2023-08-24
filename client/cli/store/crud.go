@@ -1,13 +1,14 @@
 package cli
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
 	"text/tabwriter"
 	"time"
 	"unicode/utf8"
+
+	"encoding/json"
 
 	"github.com/dustin/go-humanize"
 	"github.com/micro-community/micro/v3/client/cli/namespace"

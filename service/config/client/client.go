@@ -1,9 +1,9 @@
 package client
 
 import (
-	"encoding/json"
 	"net/http"
 
+	"github.com/bytedance/sonic"
 	proto "github.com/micro-community/micro/v3/proto/config"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/config"
@@ -49,7 +49,7 @@ func (m *srv) Set(path string, value interface{}, options ...config.Option) erro
 	for _, option := range options {
 		option(&o)
 	}
-	dat, _ := json.Marshal(value)
+	dat, _ := sonic.Marshal(value)
 	_, err := m.client.Set(context.DefaultContext, &proto.SetRequest{
 		Namespace: m.namespace,
 		Path:      path,

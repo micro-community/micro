@@ -1,7 +1,7 @@
 package client
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"testing"
@@ -309,7 +309,7 @@ spec:
 			g.Expect(err).ToNot(HaveOccurred())
 			req := rt.RoundTripArgsForCall(0)
 			g.Expect(req.URL.String()).To(Equal(tc.expectedURL))
-			b, err := ioutil.ReadAll(req.Body)
+			b, err := io.ReadAll(req.Body)
 			g.Expect(err).ToNot(HaveOccurred())
 			g.Expect(strings.TrimSpace(string(b))).To(Equal(strings.TrimSpace(tc.expectedBody)))
 			g.Expect(req.Method).To(Equal(http.MethodPost))
@@ -488,7 +488,7 @@ func TestUpdate(t *testing.T) {
 			g.Expect(err).ToNot(HaveOccurred())
 			req := rt.RoundTripArgsForCall(0)
 			g.Expect(req.URL.String()).To(Equal(tc.expectedURL))
-			b, err := ioutil.ReadAll(req.Body)
+			b, err := io.ReadAll(req.Body)
 			g.Expect(err).ToNot(HaveOccurred())
 			g.Expect(strings.TrimSpace(string(b))).To(Equal(strings.TrimSpace(tc.expectedBody)))
 			g.Expect(req.Method).To(Equal(http.MethodPatch))

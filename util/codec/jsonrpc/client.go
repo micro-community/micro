@@ -15,11 +15,13 @@
 package jsonrpc
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"sync"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/util/codec"
 )
 
@@ -103,7 +105,7 @@ func (c *clientCodec) ReadBody(x interface{}) error {
 	if x == nil || c.resp.Result == nil {
 		return nil
 	}
-	return json.Unmarshal(*c.resp.Result, x)
+	return sonic.Unmarshal(*c.resp.Result, x)
 }
 
 func (c *clientCodec) Close() error {

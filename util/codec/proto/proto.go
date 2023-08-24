@@ -17,7 +17,6 @@ package proto
 
 import (
 	"io"
-	"io/ioutil"
 
 	"github.com/micro-community/micro/v3/util/codec"
 	"google.golang.org/protobuf/proto"
@@ -35,7 +34,7 @@ func (c *Codec) ReadBody(b interface{}) error {
 	if b == nil {
 		return nil
 	}
-	buf, err := ioutil.ReadAll(c.Conn)
+	buf, err := io.ReadAll(c.Conn)
 	if err != nil {
 		return err
 	}

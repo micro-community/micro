@@ -17,7 +17,6 @@ package file
 import (
 	"bytes"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -143,7 +142,7 @@ func (b *blobStore) Write(key string, blob io.Reader, opts ...store.BlobOption) 
 		}
 
 		// write to the bucket
-		value, err := ioutil.ReadAll(blob)
+		value, err := io.ReadAll(blob)
 		if err != nil {
 			return err
 		}

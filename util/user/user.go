@@ -9,7 +9,6 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/pem"
-	"io/ioutil"
 	"os"
 
 	"github.com/micro-community/micro/v3/service/logger"
@@ -44,7 +43,7 @@ func GetConfigSecretKey() (string, error) {
 		}
 	}
 	logger.Debugf("Loading config key from %v", key)
-	dat, err := ioutil.ReadFile(key)
+	dat, err := os.ReadFile(key)
 	if err != nil {
 		return "", err
 	}
@@ -63,7 +62,7 @@ func setupConfigSecretKey(path string) error {
 	}
 	file.Close()
 
-	err = ioutil.WriteFile(path, []byte(base64.StdEncoding.EncodeToString(bytes)), 0600)
+	err = os.WriteFile(path, []byte(base64.StdEncoding.EncodeToString(bytes)), 0600)
 	if err != nil {
 		return err
 	}
@@ -85,11 +84,11 @@ func GetJWTCerts() ([]byte, []byte, error) {
 			return nil, nil, err
 		}
 	}
-	privDat, err := ioutil.ReadFile(privKey)
+	privDat, err := os.ReadFile(privKey)
 	if err != nil {
 		return nil, nil, err
 	}
-	pubDat, err := ioutil.ReadFile(pubKey)
+	pubDat, err := os.ReadFile(pubKey)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -194,7 +193,7 @@ func writeKeyToFile(keyBytes []byte, saveFileTo string) error {
 	}
 	file.Close()
 
-	err = ioutil.WriteFile(saveFileTo, []byte(base64.StdEncoding.EncodeToString(keyBytes)), 0600)
+	err = os.WriteFile(saveFileTo, []byte(base64.StdEncoding.EncodeToString(keyBytes)), 0600)
 	if err != nil {
 		return err
 	}

@@ -17,10 +17,10 @@ package jsonrpc
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/util/codec"
 )
 
@@ -48,7 +48,7 @@ func (j *jsonCodec) Write(m *codec.Message, b interface{}) error {
 	case codec.Response, codec.Error:
 		return j.s.Write(m, b)
 	case codec.Event:
-		data, err := json.Marshal(b)
+		data, err := sonic.Marshal(b)
 		if err != nil {
 			return err
 		}
@@ -84,7 +84,7 @@ func (j *jsonCodec) ReadBody(b interface{}) error {
 		return j.c.ReadBody(b)
 	case codec.Event:
 		if b != nil {
-			return json.Unmarshal(j.buf.Bytes(), b)
+			return sonic.Unmarshal(j.buf.Bytes(), b)
 		}
 	default:
 		return fmt.Errorf("Unrecognised message type: %v", j.mt)

@@ -16,12 +16,12 @@ package kubernetes
 
 import (
 	"bytes"
-	"encoding/json"
 	"io"
 	"os"
 	"testing"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/debug/log"
 	"github.com/stretchr/testify/assert"
 )
@@ -61,8 +61,8 @@ func TestKubernetes(t *testing.T) {
 
 	var read log.Record
 
-	if err := json.Unmarshal(b.Bytes(), &read); err != nil {
-		t.Fatalf("json.Unmarshal failed: %s", err.Error())
+	if err := sonic.Unmarshal(b.Bytes(), &read); err != nil {
+		t.Fatalf("sonic.Unmarshal failed: %s", err.Error())
 	}
 
 	assert.Equal(t, write, read, "Write was not equal")

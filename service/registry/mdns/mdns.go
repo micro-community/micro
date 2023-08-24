@@ -19,15 +19,15 @@ import (
 	"compress/zlib"
 	"context"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
@@ -90,7 +90,7 @@ type mdnsWatcher struct {
 }
 
 func encode(txt *mdnsTxt) ([]string, error) {
-	b, err := json.Marshal(txt)
+	b, err := sonic.Marshal(txt)
 	if err != nil {
 		return nil, err
 	}
@@ -148,14 +148,14 @@ func decode(record []string) (*mdnsTxt, error) {
 	}
 	defer zr.Close()
 
-	rbuf, err := ioutil.ReadAll(zr)
+	rbuf, err := io.ReadAll(zr)
 	if err != nil {
 		return nil, err
 	}
 
 	var txt *mdnsTxt
 
-	if err := json.Unmarshal(rbuf, &txt); err != nil {
+	if err := sonic.Unmarshal(rbuf, &txt); err != nil {
 		return nil, err
 	}
 

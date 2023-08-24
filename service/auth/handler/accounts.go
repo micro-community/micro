@@ -2,9 +2,9 @@ package handler
 
 import (
 	"context"
-	"encoding/json"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"
@@ -41,7 +41,7 @@ func (a *Auth) List(ctx context.Context, req *pb.ListAccountsRequest, rsp *pb.Li
 	var accounts = make([]*auth.Account, 0, len(recs))
 	for _, rec := range recs {
 		var r *auth.Account
-		if err := json.Unmarshal(rec.Value, &r); err != nil {
+		if err := sonic.Unmarshal(rec.Value, &r); err != nil {
 			return errors.InternalServerError("auth.Accounts.List", "Error to unmarshaling json: %v. Value: %v", err, string(rec.Value))
 		}
 		accounts = append(accounts, r)
@@ -183,7 +183,7 @@ func (a *Auth) ChangeSecret(ctx context.Context, req *pb.ChangeSecretRequest, rs
 	acc.Secret = secret
 
 	// marshal to json
-	bytes, err := json.Marshal(acc)
+	bytes, err := sonic.Marshal(acc)
 	if err != nil {
 		return errors.InternalServerError("auth.Accounts.ChangeSecret", "Unable to marshal json: %v", err)
 	}

@@ -16,9 +16,10 @@
 package events
 
 import (
-	"encoding/json"
 	"errors"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 var (
@@ -69,7 +70,7 @@ type Event struct {
 
 // Unmarshal the events message into an object
 func (e *Event) Unmarshal(v interface{}) error {
-	return json.Unmarshal(e.Payload, v)
+	return sonic.Unmarshal(e.Payload, v)
 }
 
 // Ack acknowledges successful processing of the event in ManualAck mode

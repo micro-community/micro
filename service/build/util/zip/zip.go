@@ -7,7 +7,6 @@ import (
 	"archive/zip"
 	"bytes"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -36,13 +35,13 @@ func Unarchive(src io.Reader, dir string) error {
 			return err
 		}
 
-		bytes, err := ioutil.ReadAll(rc)
+		bytes, err := io.ReadAll(rc)
 		if err != nil {
 			return err
 		}
 
 		path := filepath.Join(dir, f.Name)
-		if err := ioutil.WriteFile(path, bytes, os.ModePerm); err != nil {
+		if err := os.WriteFile(path, bytes, os.ModePerm); err != nil {
 			return err
 		}
 

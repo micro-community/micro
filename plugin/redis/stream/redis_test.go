@@ -2,11 +2,11 @@ package stream
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"testing"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/events"
 	"github.com/stretchr/testify/assert"
 )
@@ -46,7 +46,7 @@ func TestStream(t *testing.T) {
 			assert.Equal(t, "bar", ev.Metadata["meta"])
 
 			var tes testObj
-			assert.NoError(t, json.Unmarshal(ev.Payload, &tes))
+			assert.NoError(t, sonic.Unmarshal(ev.Payload, &tes))
 			assert.Equal(t, tobj.One, tes.One)
 			assert.Equal(t, tobj.Two, tes.Two)
 		}
@@ -154,7 +154,7 @@ func TestStream(t *testing.T) {
 			// ch1 should have first message and ch2 should have second message
 			select {
 			case ev1 := <-ch1:
-				assert.NoError(t, json.Unmarshal(ev1.Payload, &tobj))
+				assert.NoError(t, sonic.Unmarshal(ev1.Payload, &tobj))
 				ch1Processed = true
 				if !seen[tobj.One] {
 					t.Errorf("Already processed this event %+v", tobj)
@@ -162,7 +162,7 @@ func TestStream(t *testing.T) {
 				}
 				ev1.Ack()
 			case ev2 := <-ch2:
-				assert.NoError(t, json.Unmarshal(ev2.Payload, &tobj))
+				assert.NoError(t, sonic.Unmarshal(ev2.Payload, &tobj))
 				ch2Processed = true
 				if !seen[tobj.One] {
 					t.Errorf("Already processed this event %+v", tobj)

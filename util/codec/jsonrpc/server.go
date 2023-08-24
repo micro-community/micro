@@ -15,10 +15,12 @@
 package jsonrpc
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/util/codec"
 )
 
@@ -79,7 +81,7 @@ func (c *serverCodec) ReadBody(x interface{}) error {
 	}
 	var params [1]interface{}
 	params[0] = x
-	return json.Unmarshal(*c.req.Params, &params)
+	return sonic.Unmarshal(*c.req.Params, &params)
 }
 
 var null = json.RawMessage([]byte("null"))

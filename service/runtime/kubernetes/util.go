@@ -16,10 +16,10 @@ package kubernetes
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/runtime/kubernetes/api"
@@ -215,6 +215,6 @@ func transformStatus(depStatus string) runtime.ServiceStatus {
 
 func parseError(err error) *api.Status {
 	status := new(api.Status)
-	json.Unmarshal([]byte(err.Error()), &status)
+	sonic.Unmarshal([]byte(err.Error()), &status)
 	return status
 }

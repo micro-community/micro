@@ -5,7 +5,6 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -90,12 +89,12 @@ func Set(path, value string) error {
 	config.Set(path, value)
 
 	// write to the file
-	return ioutil.WriteFile(File, config.Bytes(), 0644)
+	return os.WriteFile(File, config.Bytes(), 0644)
 }
 
 func moveConfig(from, to string) error {
 	// read the config
-	b, err := ioutil.ReadFile(from)
+	b, err := os.ReadFile(from)
 	if err != nil {
 		return fmt.Errorf("Failed to read config file %s: %v", from, err)
 	}
@@ -108,7 +107,7 @@ func moveConfig(from, to string) error {
 		return fmt.Errorf("Failed to create dir %s: %v", dir, err)
 	}
 	// write the file to new location
-	return ioutil.WriteFile(to, b, 0644)
+	return os.WriteFile(to, b, 0644)
 }
 
 // newConfig returns a loaded config
@@ -137,12 +136,12 @@ func newConfig() (*conf.JSONValues, error) {
 
 	// now write the file if it does not exist
 	if _, err := os.Stat(File); os.IsNotExist(err) {
-		ioutil.WriteFile(File, []byte(`{"env":"local"}`), 0644)
+		os.WriteFile(File, []byte(`{"env":"local"}`), 0644)
 	} else if err != nil {
 		return nil, fmt.Errorf("Failed to write config file %s: %v", File, err)
 	}
 
-	contents, err := ioutil.ReadFile(File)
+	contents, err := os.ReadFile(File)
 	if err != nil {
 		return nil, err
 	}

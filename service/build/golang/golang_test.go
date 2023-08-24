@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -115,7 +114,7 @@ func testBuilder(t *testing.T, buf io.Reader, opts ...build.Option) error {
 	}
 
 	// write the binary to a tmp file and make it executable
-	file, err := ioutil.TempFile(os.TempDir(), "res")
+	file, err := os.CreateTemp(os.TempDir(), "res")
 	if err != nil {
 		return fmt.Errorf("Error creating tmp output file: %v", err)
 	}

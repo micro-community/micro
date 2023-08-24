@@ -20,7 +20,6 @@ import (
 	"crypto/tls"
 	"errors"
 	"io"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
@@ -159,7 +158,7 @@ func (h *httpTransportClient) Recv(m *transport.Message) error {
 	}
 	defer rsp.Body.Close()
 
-	b, err := ioutil.ReadAll(rsp.Body)
+	b, err := io.ReadAll(rsp.Body)
 	if err != nil {
 		return err
 	}
@@ -233,7 +232,7 @@ func (h *httpTransportSocket) Recv(m *transport.Message) error {
 		}
 
 		// read body
-		b, err := ioutil.ReadAll(r.Body)
+		b, err := io.ReadAll(r.Body)
 		if err != nil {
 			return err
 		}
@@ -307,7 +306,7 @@ func (h *httpTransportSocket) Send(m *transport.Message) error {
 
 		rsp := &http.Response{
 			Header:        hdr,
-			Body:          ioutil.NopCloser(bytes.NewReader(m.Body)),
+			Body:          io.NopCloser(bytes.NewReader(m.Body)),
 			Status:        "200 OK",
 			StatusCode:    200,
 			Proto:         "HTTP/1.1",
@@ -358,7 +357,7 @@ func (h *httpTransportSocket) error(m *transport.Message) error {
 	if h.r.ProtoMajor == 1 {
 		rsp := &http.Response{
 			Header:        make(http.Header),
-			Body:          ioutil.NopCloser(bytes.NewReader(m.Body)),
+			Body:          io.NopCloser(bytes.NewReader(m.Body)),
 			Status:        "500 Internal Server Error",
 			StatusCode:    500,
 			Proto:         "HTTP/1.1",
@@ -418,12 +417,12 @@ func (h *httpTransportListener) Accept(fn func(transport.Socket)) error {
 
 		// read a regular request
 		if r.ProtoMajor == 1 {
-			b, err := ioutil.ReadAll(r.Body)
+			b, err := io.ReadAll(r.Body)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
-			r.Body = ioutil.NopCloser(bytes.NewReader(b))
+			r.Body = io.NopCloser(bytes.NewReader(b))
 			// hijack the conn
 			hj, ok := w.(http.Hijacker)
 			if !ok {

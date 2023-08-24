@@ -20,7 +20,6 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
@@ -209,7 +208,7 @@ func (g *binaryGitter) checkoutGitLabPublic(repo, branchOrCommit string) error {
 	// Gitlab zip/tar has contents inside a folder
 	// It has the format of eg. basic-micro-service-master-314b4a494ed472793e0a8bce8babbc69359aed7b
 	// Since we don't have the commit at this point we must list the dir
-	files, err := ioutil.ReadDir(g.folder)
+	files, err := os.ReadDir(g.folder)
 	if err != nil {
 		return err
 	}
@@ -273,7 +272,7 @@ func (g *binaryGitter) checkoutGitLabPrivate(repo, branchOrCommit string) error 
 	// Gitlab zip/tar has contents inside a folder
 	// It has the format of eg. basic-micro-service-master-314b4a494ed472793e0a8bce8babbc69359aed7b
 	// Since we don't have the commit at this point we must list the dir
-	files, err := ioutil.ReadDir(g.folder)
+	files, err := os.ReadDir(g.folder)
 	if err != nil {
 		return err
 	}
@@ -289,7 +288,7 @@ func (g *binaryGitter) RepoDir() string {
 }
 
 func NewGitter(secrets map[string]string) Gitter {
-	tmpdir, _ := ioutil.TempDir(os.TempDir(), "git-src-*")
+	tmpdir, _ := os.MkdirTemp(os.TempDir(), "git-src-*")
 
 	return &binaryGitter{
 		folder:  tmpdir,

@@ -9,15 +9,15 @@ package token
 import (
 	"bytes"
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/service/auth"
@@ -99,7 +99,7 @@ func getTokens() (map[string]token, error) {
 	if err != nil {
 		return nil, err
 	}
-	dat, err := ioutil.ReadAll(f)
+	dat, err := io.ReadAll(f)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ func getTokens() (map[string]token, error) {
 			return nil, fmt.Errorf("Error base64 decoding token: %v", err)
 		}
 		tok := token{}
-		err = json.Unmarshal(jsonMarshalled, &tok)
+		err = sonic.Unmarshal(jsonMarshalled, &tok)
 		if err != nil {
 			return nil, fmt.Errorf("Error unmarshalling token: %v", err)
 		}
@@ -180,7 +180,7 @@ func tokenKey(ctx *cli.Context, accountID string) (string, error) {
 func saveTokens(tokens map[string]token) error {
 	buf := bytes.NewBuffer([]byte{})
 	for key, t := range tokens {
-		marshalledToken, err := json.Marshal(t)
+		marshalledToken, err := sonic.Marshal(t)
 		if err != nil {
 			return err
 		}
@@ -190,7 +190,7 @@ func saveTokens(tokens map[string]token) error {
 			return err
 		}
 	}
-	return ioutil.WriteFile(tokensFilePath(), buf.Bytes(), 0700)
+	return os.WriteFile(tokensFilePath(), buf.Bytes(), 0700)
 }
 
 func saveToFile(ctx *cli.Context, authToken *auth.AccountToken) error {

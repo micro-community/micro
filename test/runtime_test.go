@@ -4,10 +4,8 @@
 package test
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"os/user"
@@ -15,6 +13,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 const (
@@ -245,7 +245,7 @@ func testRunGithubSource(t *T) {
 			return outp, err
 		}
 		rsp := map[string]string{}
-		err = json.Unmarshal(outp, &rsp)
+		err = sonic.Unmarshal(outp, &rsp)
 		if err != nil {
 			return outp, err
 		}
@@ -305,7 +305,7 @@ func testRunGithubSource(t *T) {
 			return outp, err
 		}
 		rsp := map[string]string{}
-		err = json.Unmarshal(outp, &rsp)
+		err = sonic.Unmarshal(outp, &rsp)
 		if err != nil {
 			return outp, err
 		}
@@ -519,7 +519,7 @@ func testRunLocalUpdateAndCall(t *T) {
 			return outp, err
 		}
 		rsp := map[string]string{}
-		err = json.Unmarshal(outp, &rsp)
+		err = sonic.Unmarshal(outp, &rsp)
 		if err != nil {
 			return outp, err
 		}
@@ -566,7 +566,7 @@ func testRunLocalUpdateAndCall(t *T) {
 			return append(outp, outp1...), err
 		}
 		rsp := map[string]string{}
-		err = json.Unmarshal(outp, &rsp)
+		err = sonic.Unmarshal(outp, &rsp)
 		if err != nil {
 			return outp, err
 		}
@@ -950,14 +950,14 @@ func testStreamLogsAndThirdPartyRepo(t *T) {
 }
 
 func replaceStringInFile(t *T, filepath string, original, newone string) {
-	input, err := ioutil.ReadFile(filepath)
+	input, err := os.ReadFile(filepath)
 	if err != nil {
 		t.Fatal(err)
 		return
 	}
 
 	output := strings.ReplaceAll(string(input), original, newone)
-	err = ioutil.WriteFile(filepath, []byte(output), 0644)
+	err = os.WriteFile(filepath, []byte(output), 0644)
 	if err != nil {
 		t.Fatal(err)
 		return

@@ -1,11 +1,11 @@
 package config
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 // Version represents ./micro/version
@@ -22,7 +22,7 @@ func WriteVersion(v string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return err
 	}
-	b, err := json.Marshal(&Version{
+	b, err := sonic.Marshal(&Version{
 		Version: v,
 		Updated: time.Now(),
 	})
@@ -30,19 +30,19 @@ func WriteVersion(v string) error {
 		return err
 	}
 	f := filepath.Join(dir, "version")
-	return ioutil.WriteFile(f, b, 0644)
+	return os.WriteFile(f, b, 0644)
 }
 
 // GetVersion returns the version from .micro/version. If it does not exist
 func GetVersion() (*Version, error) {
 	dir := filepath.Dir(File)
 	f := filepath.Join(dir, "version")
-	b, err := ioutil.ReadFile(f)
+	b, err := os.ReadFile(f)
 	if err != nil {
 		return nil, err
 	}
 	v := new(Version)
-	if err := json.Unmarshal(b, &v); err != nil {
+	if err := sonic.Unmarshal(b, &v); err != nil {
 		return nil, err
 	}
 	return v, nil

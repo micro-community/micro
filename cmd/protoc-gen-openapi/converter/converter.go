@@ -1,12 +1,12 @@
 package converter
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"path"
 	"strings"
+
+	"encoding/json"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -33,7 +33,7 @@ func New() *Converter {
 // ConvertFrom tells the convert to work on the given input:
 func (c *Converter) ConvertFrom(rd io.Reader) (*plugin.CodeGeneratorResponse, error) {
 	logger.Debug("Reading code generation request")
-	input, err := ioutil.ReadAll(rd)
+	input, err := io.ReadAll(rd)
 	if err != nil {
 		logger.Errorf("Failed to read request: %v", err)
 		return nil, err

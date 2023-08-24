@@ -3,7 +3,6 @@ package cli
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -12,6 +11,9 @@ import (
 	"text/tabwriter"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	proto "github.com/micro-community/micro/v3/proto/debug"
@@ -587,7 +589,7 @@ func streamService(c *cli.Context, args []string) ([]byte, error) {
 	var request map[string]interface{}
 
 	// ignore error
-	json.Unmarshal([]byte(strings.Join(args[2:], " ")), &request)
+	sonic.Unmarshal([]byte(strings.Join(args[2:], " ")), &request)
 
 	ctx := callContext(c)
 	opts := []client.CallOption{client.WithAuthToken()}

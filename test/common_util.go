@@ -4,11 +4,12 @@
 package test
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"regexp"
+
+	"github.com/bytedance/sonic"
 )
 
 func statusRunning(service, branch string, statusOutput []byte) bool {
@@ -27,11 +28,11 @@ func curl(serv Server, namespace, path string) (string, map[string]interface{}, 
 		return "", nil, err
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", nil, err
 	}
 
 	m := map[string]interface{}{}
-	return string(body), m, json.Unmarshal(body, &m)
+	return string(body), m, sonic.Unmarshal(body, &m)
 }

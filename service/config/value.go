@@ -15,13 +15,13 @@
 package config
 
 import (
-	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
 	"time"
 
 	simple "github.com/bitly/go-simplejson"
+	"github.com/bytedance/sonic"
 )
 
 type JSONValues struct {
@@ -95,7 +95,7 @@ func (j *JSONValues) Scan(v interface{}) error {
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(b, v)
+	return sonic.Unmarshal(b, v)
 }
 
 func (j *JSONValues) String() string {
@@ -212,7 +212,7 @@ func (j *JSONValue) Scan(v interface{}) error {
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(b, v)
+	return sonic.Unmarshal(b, v)
 }
 
 func (j *JSONValue) Bytes() []byte {

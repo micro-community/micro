@@ -15,11 +15,12 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
 	"testing"
+
+	"encoding/json"
 )
 
 type testcase struct {

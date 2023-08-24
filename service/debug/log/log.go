@@ -16,9 +16,10 @@
 package log
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 var (
@@ -65,6 +66,6 @@ func TextFormat(r Record) string {
 
 // JSONFormat is a json Format func
 func JSONFormat(r Record) string {
-	b, _ := json.Marshal(r)
+	b, _ := sonic.Marshal(r)
 	return string(b)
 }

@@ -4,6 +4,15 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"math/rand"
+	"os"
+	"os/exec"
+	"runtime/debug"
+	"sort"
+	"strings"
+	"sync"
+	"time"
+
 	"github.com/micro-community/micro/v3/client/cli/util"
 	_ "github.com/micro-community/micro/v3/cmd/usage"
 	"github.com/micro-community/micro/v3/plugin"
@@ -18,15 +27,6 @@ import (
 	"github.com/micro-community/micro/v3/service/runtime"
 	"github.com/micro-community/micro/v3/service/server"
 	"github.com/micro-community/micro/v3/service/store"
-	"io/ioutil"
-	"math/rand"
-	"os"
-	"os/exec"
-	"runtime/debug"
-	"sort"
-	"strings"
-	"sync"
-	"time"
 
 	mConfigCli "github.com/micro-community/micro/v3/service/config/client"
 	mConfigStore "github.com/micro-community/micro/v3/service/config/store"
@@ -40,7 +40,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-//Cmd for core cmd interface
+// Cmd for core cmd interface
 type Cmd interface {
 	// Init initializes options
 	// Note: Use Run to parse command line
@@ -67,7 +67,7 @@ type command struct {
 	service bool
 }
 
-//Default value
+// Default value
 var (
 	DefaultCmd Cmd = New()
 
@@ -280,7 +280,7 @@ func action(c *cli.Context) error {
 	return helper.MissingCommand(c)
 }
 
-//New return a cmd
+// New return a cmd
 func New(opts ...Option) Cmd {
 	options := Options{}
 	for _, o := range opts {
@@ -473,7 +473,7 @@ func (c *command) Before(ctx *cli.Context) error {
 		// load custom certificate authority
 		caCertPool := x509.NewCertPool()
 		if len(ctx.String("registry_tls_ca")) > 0 {
-			crt, err := ioutil.ReadFile(ctx.String("registry_tls_ca"))
+			crt, err := os.ReadFile(ctx.String("registry_tls_ca"))
 			if err != nil {
 				logger.Fatalf("Error loading registry tls certificate authority: %v", err)
 			}
@@ -507,7 +507,7 @@ func (c *command) Before(ctx *cli.Context) error {
 		// load custom certificate authority
 		caCertPool := x509.NewCertPool()
 		if len(ctx.String("broker_tls_ca")) > 0 {
-			crt, err := ioutil.ReadFile(ctx.String("broker_tls_ca"))
+			crt, err := os.ReadFile(ctx.String("broker_tls_ca"))
 			if err != nil {
 				logger.Fatalf("Error loading broker TLS certificate authority: %v", err)
 			}

@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -43,7 +42,7 @@ func (g *golang) Build(src io.Reader, opts ...build.Option) (io.Reader, error) {
 	}
 
 	// create a tmp dir to contain the source
-	dir, err := ioutil.TempDir(g.tmpDir, "src")
+	dir, err := os.MkdirTemp(g.tmpDir, "src")
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +83,7 @@ func (g *golang) Build(src io.Reader, opts ...build.Option) (io.Reader, error) {
 	}
 
 	// read the bytes from the file
-	dst, err := ioutil.ReadFile(filepath.Join(cmd.Dir, "micro_build"))
+	dst, err := os.ReadFile(filepath.Join(cmd.Dir, "micro_build"))
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +94,7 @@ func (g *golang) Build(src io.Reader, opts ...build.Option) (io.Reader, error) {
 // writeFile takes a single file to a directory
 func writeFile(src io.Reader, dir string) error {
 	// copy the source to the temp file
-	bytes, err := ioutil.ReadAll(src)
+	bytes, err := io.ReadAll(src)
 	if err != nil {
 		return err
 	}
@@ -103,7 +102,7 @@ func writeFile(src io.Reader, dir string) error {
 	// write the file, note: in order for the golang build to access the file, it cannot be
 	// os.ModeTemp. This is okay because we delete all the files in the tmp dir at the end of this
 	// function.
-	return ioutil.WriteFile(filepath.Join(dir, "main.go"), bytes, os.ModePerm)
+	return os.WriteFile(filepath.Join(dir, "main.go"), bytes, os.ModePerm)
 }
 
 // locateGo locates the go command

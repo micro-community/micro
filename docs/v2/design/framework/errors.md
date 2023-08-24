@@ -21,7 +21,7 @@ type Error struct {
 }
 
 func (e *Error) Error() string {
-	b, _ := json.Marshal(e)
+	b, _ := sonic.Marshal(e)
 	return string(b)
 }
 ```

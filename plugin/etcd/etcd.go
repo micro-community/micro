@@ -20,7 +20,6 @@ package etcd
 import (
 	"context"
 	"crypto/tls"
-	"encoding/json"
 	"errors"
 	"net"
 	"path"
@@ -29,6 +28,9 @@ import (
 	"sync"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/registry"
 	hash "github.com/mitchellh/hashstructure"
@@ -187,13 +189,13 @@ func getName(key, prefix string) (string, string, bool) {
 }
 
 func encode(s *registry.Service) string {
-	b, _ := json.Marshal(s)
+	b, _ := sonic.Marshal(s)
 	return string(b)
 }
 
 func decode(ds []byte) *registry.Service {
 	var s *registry.Service
-	json.Unmarshal(ds, &s)
+	sonic.Unmarshal(ds, &s)
 	return s
 }
 

@@ -19,7 +19,6 @@ package rpc
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -27,6 +26,9 @@ import (
 	"sync"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/gorilla/websocket"
 	pbapi "github.com/micro-community/micro/v3/proto/api"
 	"github.com/micro-community/micro/v3/service/api"
@@ -177,7 +179,7 @@ func serveStream(ctx context.Context, w http.ResponseWriter, r *http.Request, se
 			}
 			var bufOut string
 			var apiRsp pbapi.Response
-			if err := json.Unmarshal(buf, &apiRsp); err == nil && apiRsp.StatusCode > 0 {
+			if err := sonic.Unmarshal(buf, &apiRsp); err == nil && apiRsp.StatusCode > 0 {
 				// bit of a hack. If the response is actually an api response we want to set the headers and status code
 				for _, v := range apiRsp.Header {
 					for _, s := range v.Values {
@@ -299,7 +301,7 @@ func (s *stream) rspToBufLoop(cancel context.CancelFunc, wg *sync.WaitGroup, sto
 				return
 			}
 			// write error then close the connection
-			b, _ := json.Marshal(err)
+			b, _ := sonic.Marshal(err)
 			s.conn.WriteMessage(s.messageType, b)
 			s.conn.WriteMessage(websocket.CloseAbnormalClosure, []byte{})
 			return

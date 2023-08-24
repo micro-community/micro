@@ -17,11 +17,13 @@
 package nats
 
 import (
-	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 	"github.com/nats-io/nats.go"
 	stan "github.com/nats-io/stan.go"
@@ -135,7 +137,7 @@ func (s *stream) Publish(topic string, msg interface{}, opts ...events.PublishOp
 	if p, ok := msg.([]byte); ok {
 		payload = p
 	} else {
-		p, err := json.Marshal(msg)
+		p, err := sonic.Marshal(msg)
 		if err != nil {
 			return events.ErrEncodingMessage
 		}
@@ -152,7 +154,7 @@ func (s *stream) Publish(topic string, msg interface{}, opts ...events.PublishOp
 	}
 
 	// serialize the event to bytes
-	bytes, err := json.Marshal(event)
+	bytes, err := sonic.Marshal(event)
 	if err != nil {
 		return errors.Wrap(err, "Error encoding event")
 	}
@@ -195,7 +197,7 @@ func (s *stream) Consume(topic string, opts ...events.ConsumeOption) (<-chan eve
 
 		// decode the message
 		var evt events.Event
-		if err := json.Unmarshal(m.Data, &evt); err != nil {
+		if err := sonic.Unmarshal(m.Data, &evt); err != nil {
 			if logger.V(logger.ErrorLevel, logger.DefaultLogger) {
 				logger.Errorf("Error decoding message: %v", err)
 			}

@@ -19,11 +19,12 @@ package rpc
 
 import (
 	bts "bytes"
-	"encoding/json"
 	"io"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"encoding/json"
 
 	"github.com/micro-community/micro/v3/service/api"
 	"github.com/micro-community/micro/v3/service/api/handler"

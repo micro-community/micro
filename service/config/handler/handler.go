@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
 	"sync"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	pb "github.com/micro-community/micro/v3/proto/config"
 	"github.com/micro-community/micro/v3/service/config"
 	merrors "github.com/micro-community/micro/v3/service/errors"
@@ -153,7 +155,7 @@ func (c *Config) Read(ctx context.Context, req *pb.ReadRequest, rsp *pb.ReadResp
 
 func leavesToValues(data string, decodeSecrets bool, encryptionKey string) (interface{}, error) {
 	var m interface{}
-	err := json.Unmarshal([]byte(data), &m)
+	err := sonic.Unmarshal([]byte(data), &m)
 	if err != nil {
 		return m, err
 	}
@@ -205,7 +207,7 @@ func traverse(i interface{}, decodeSecrets bool, encryptionKey string) (interfac
 				marshalledValue = decrypted
 			}
 			var value interface{}
-			err := json.Unmarshal([]byte(marshalledValue), &value)
+			err := sonic.Unmarshal([]byte(marshalledValue), &value)
 			return value, err
 		}
 		ret := map[string]interface{}{}
@@ -268,7 +270,7 @@ func (c *Config) Set(ctx context.Context, req *pb.SetRequest, rsp *pb.SetRespons
 	// req.Value.Data is a json encoded value
 	data := req.Value.Data
 	var i interface{}
-	err = json.Unmarshal([]byte(data), &i)
+	err = sonic.Unmarshal([]byte(data), &i)
 	if err != nil {
 		return merrors.BadRequest("config.Config.Set", "Request is invalid JSON: %v", err)
 	}
@@ -278,7 +280,7 @@ func (c *Config) Set(ctx context.Context, req *pb.SetRequest, rsp *pb.SetRespons
 		// Need to nuke top level metadata as traverseMaps won't handle this
 		cleanNode(values, req.Path)
 		err = traverseMaps(m, strings.Split(req.Path, "."), func(p string, value interface{}) error {
-			val, err := json.Marshal(value)
+			val, err := sonic.Marshal(value)
 			if err != nil {
 				return err
 			}

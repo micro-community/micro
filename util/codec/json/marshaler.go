@@ -15,8 +15,7 @@
 package json
 
 import (
-	"encoding/json"
-
+	"github.com/bytedance/sonic"
 	"github.com/oxtoacart/bpool"
 	jsonpb "google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
@@ -31,14 +30,14 @@ func (j Marshaler) Marshal(v interface{}) ([]byte, error) {
 	if pb, ok := v.(proto.Message); ok {
 		return jsonpb.MarshalOptions{EmitUnpopulated: true, UseProtoNames: true}.Marshal(pb)
 	}
-	return json.Marshal(v)
+	return sonic.Marshal(v)
 }
 
 func (j Marshaler) Unmarshal(d []byte, v interface{}) error {
 	if pb, ok := v.(proto.Message); ok {
 		return jsonpb.UnmarshalOptions{DiscardUnknown: true}.Unmarshal(d, pb)
 	}
-	return json.Unmarshal(d, v)
+	return sonic.Unmarshal(d, v)
 }
 
 func (j Marshaler) String() string {

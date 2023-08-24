@@ -2,12 +2,12 @@ package handler
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 
 	pb "github.com/micro-community/micro/v3/proto/auth"
@@ -91,7 +91,7 @@ func (a *Auth) setupDefaultAccount(ns string) error {
 	hasUser := false
 	for _, rec := range recs {
 		acc := &auth.Account{}
-		err := json.Unmarshal(rec.Value, acc)
+		err := sonic.Unmarshal(rec.Value, acc)
 		if err != nil {
 			return err
 		}
@@ -203,7 +203,7 @@ func (a *Auth) createAccount(acc *auth.Account) error {
 	acc.Secret = secret
 
 	// marshal to json
-	bytes, err := json.Marshal(acc)
+	bytes, err := sonic.Marshal(acc)
 	if err != nil {
 		return errors.InternalServerError("auth.Auth.Generate", "Unable to marshal json: %v", err)
 	}
@@ -341,7 +341,7 @@ func (a *Auth) getAccountForID(id, namespace, errCode string) (*auth.Account, er
 
 	// Unmarshal the record
 	var acc *auth.Account
-	if err := json.Unmarshal(recs[0].Value, &acc); err != nil {
+	if err := sonic.Unmarshal(recs[0].Value, &acc); err != nil {
 		return nil, errors.InternalServerError(errCode, "Unable to unmarshal account: %v", err)
 	}
 	return acc, nil

@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
@@ -10,6 +9,9 @@ import (
 	"strings"
 	"unicode"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/service/client"
@@ -372,7 +374,7 @@ func flagsToRequest(flags map[string][]string, req *registry.Value) (map[string]
 			return value[0], nil
 		case "map[string]string":
 			var val map[string]string
-			if err := json.Unmarshal([]byte(value[0]), &val); err != nil {
+			if err := sonic.Unmarshal([]byte(value[0]), &val); err != nil {
 				return value[0], nil
 			}
 			return val, nil

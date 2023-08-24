@@ -2,11 +2,11 @@ package cache
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"hash/fnv"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context/metadata"
 	cache "github.com/patrickmn/go-cache"
@@ -48,7 +48,7 @@ func (c *Cache) List() map[string]string {
 
 	rsp := make(map[string]string, len(items))
 	for k, v := range items {
-		bytes, _ := json.Marshal(v.Object)
+		bytes, _ := sonic.Marshal(v.Object)
 		rsp[k] = string(bytes)
 	}
 
@@ -59,7 +59,7 @@ func (c *Cache) List() map[string]string {
 func key(ctx context.Context, req client.Request) string {
 	ns, _ := metadata.Get(ctx, "Micro-Namespace")
 
-	bytes, _ := json.Marshal(map[string]interface{}{
+	bytes, _ := sonic.Marshal(map[string]interface{}{
 		"namespace": ns,
 		"request": map[string]interface{}{
 			"service":  req.Service(),

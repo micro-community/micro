@@ -6,7 +6,6 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
@@ -78,6 +77,6 @@ func Report(ug *pb.Usage) error {
 		return err
 	}
 	defer rsp.Body.Close()
-	io.Copy(ioutil.Discard, rsp.Body)
+	io.Copy(io.Discard, rsp.Body)
 	return nil
 }

@@ -1,8 +1,12 @@
 package cli
 
 import (
-	"encoding/json"
 	"fmt"
+	"os"
+	"strings"
+	"text/tabwriter"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	pb "github.com/micro-community/micro/v3/proto/auth"
@@ -10,9 +14,6 @@ import (
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
 	"github.com/urfave/cli/v2"
-	"os"
-	"strings"
-	"text/tabwriter"
 )
 
 func listAccounts(ctx *cli.Context) error {
@@ -87,7 +88,7 @@ func createAccount(ctx *cli.Context) error {
 		return fmt.Errorf("Error creating account: %v", err)
 	}
 
-	json, _ := json.Marshal(acc)
+	json, _ := sonic.Marshal(acc)
 	fmt.Printf("Account created: %v\n", string(json))
 	return nil
 }

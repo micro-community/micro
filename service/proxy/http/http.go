@@ -21,7 +21,6 @@ import (
 	"bytes"
 	"context"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"path"
@@ -111,7 +110,7 @@ func (p *Proxy) ProcessMessage(ctx context.Context, msg server.Message) error {
 	}
 
 	// read body
-	b, err := ioutil.ReadAll(hRsp.Body)
+	b, err := io.ReadAll(hRsp.Body)
 	hRsp.Body.Close()
 	if err != nil {
 		return errors.InternalServerError(msg.Topic(), err.Error())
@@ -180,7 +179,7 @@ func (p *Proxy) ServeRequest(ctx context.Context, req server.Request, rsp server
 		}
 
 		// read body
-		b, err := ioutil.ReadAll(hRsp.Body)
+		b, err := io.ReadAll(hRsp.Body)
 		hRsp.Body.Close()
 		if err != nil {
 			return errors.InternalServerError(req.Service(), err.Error())

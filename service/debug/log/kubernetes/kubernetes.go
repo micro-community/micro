@@ -17,13 +17,13 @@ package kubernetes
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
 	"strconv"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/debug/log"
 	"github.com/micro-community/micro/v3/service/runtime/kubernetes/client"
 )
@@ -100,7 +100,7 @@ func (k *klog) getMatchingPods() ([]string, error) {
 func (k *klog) parse(line string) log.Record {
 	record := log.Record{}
 
-	if err := json.Unmarshal([]byte(line), &record); err != nil {
+	if err := sonic.Unmarshal([]byte(line), &record); err != nil {
 		record.Timestamp = time.Now().UTC()
 		record.Message = line
 		record.Metadata = make(map[string]string)

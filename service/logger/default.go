@@ -27,8 +27,9 @@ import (
 	"time"
 	"unsafe"
 
+	"log/slog"
+
 	"github.com/bytedance/sonic"
-	"golang.org/x/exp/slog"
 
 	dlog "github.com/micro-community/micro/v3/service/debug/log"
 )
@@ -138,7 +139,7 @@ func (l *defaultLogger) Log(level Level, v ...interface{}) {
 	}
 
 	if len(v) > 0 {
-		record.Message = fmt.Sprintf("%+v", v[0])
+		record.Message, _ = sonic.MarshalString(v[0])
 	}
 
 	if l.opts.Handler == nil {

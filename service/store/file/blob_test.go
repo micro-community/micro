@@ -16,7 +16,7 @@ package file
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"testing"
 
 	"github.com/micro-community/micro/v3/service/store"
@@ -54,7 +54,7 @@ func TestBlobStore(t *testing.T) {
 
 	t.Run("ReadValid", func(t *testing.T) {
 		val, err := blob.Read("hello")
-		bytes, _ := ioutil.ReadAll(val)
+		bytes, _ := io.ReadAll(val)
 		assert.Nilf(t, err, "Error should be nil")
 		assert.Equal(t, string(bytes), "world", "Value should be world")
 	})
@@ -67,7 +67,7 @@ func TestBlobStore(t *testing.T) {
 
 	t.Run("ReadCorrectNamespace", func(t *testing.T) {
 		val, err := blob.Read("hello", store.BlobNamespace("micro"))
-		bytes, _ := ioutil.ReadAll(val)
+		bytes, _ := io.ReadAll(val)
 		assert.Nil(t, err, "Error should be nil")
 		assert.Equal(t, string(bytes), "world", "Value should be world")
 	})

@@ -16,10 +16,10 @@
 package env
 
 import (
-	"encoding/json"
 	"os"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/config"
 )
 
@@ -49,7 +49,7 @@ func (c *envConfig) Get(path string, options ...config.Option) (config.Value, er
 
 func (c *envConfig) Set(path string, val interface{}, options ...config.Option) error {
 	key := formatKey(path)
-	v, err := json.Marshal(val)
+	v, err := sonic.Marshal(val)
 	if err != nil {
 		return err
 	}

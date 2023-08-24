@@ -3,11 +3,13 @@
 package util
 
 import (
-	"encoding/json"
 	"fmt"
 	"regexp"
 	"strings"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/errors"
 
 	"github.com/micro-community/micro/v3/util/config"
@@ -61,7 +63,7 @@ var defaultEnvs = map[string]Env{
 	},
 }
 
-//IsBuiltInService check service  type
+// IsBuiltInService check service  type
 func IsBuiltInService(command string) bool {
 	for _, service := range services {
 		if command == service {
@@ -99,14 +101,14 @@ func CLIProxyAddress(ctx *cli.Context) (string, error) {
 	return addr, nil
 }
 
-//Env for cli
+// Env for cli
 type Env struct {
 	Name         string
 	ProxyAddress string
 	Description  string
 }
 
-//AddEnv for cli
+// AddEnv for cli
 func AddEnv(env Env) error {
 	envs, err := getEnvs()
 	if err != nil {
@@ -135,7 +137,7 @@ func getEnvs() (map[string]Env, error) {
 }
 
 func setEnvs(envs map[string]Env) error {
-	envsJSON, err := json.Marshal(envs)
+	envsJSON, err := sonic.Marshal(envs)
 	if err != nil {
 		return err
 	}
@@ -162,7 +164,7 @@ func GetEnv(ctx *cli.Context) (Env, error) {
 	return GetEnvByName(envName)
 }
 
-//GetEnvByName for service
+// GetEnvByName for service
 func GetEnvByName(env string) (Env, error) {
 	envs, err := getEnvs()
 	if err != nil {
@@ -175,7 +177,7 @@ func GetEnvByName(env string) (Env, error) {
 	return envir, nil
 }
 
-//GetEnvs List env
+// GetEnvs List env
 func GetEnvs() ([]Env, error) {
 	envs, err := getEnvs()
 	if err != nil {
@@ -237,7 +239,7 @@ func DelEnv(ctx *cli.Context, envName string) error {
 	return setEnvs(envs)
 }
 
-//IsPlatform check platform type
+// IsPlatform check platform type
 func IsPlatform(ctx *cli.Context) bool {
 	env, err := GetEnv(ctx)
 	if err == nil && env.Name == EnvPlatform {
@@ -246,10 +248,10 @@ func IsPlatform(ctx *cli.Context) bool {
 	return false
 }
 
-//Exec for ctx
+// Exec for ctx
 type Exec func(*cli.Context, []string) ([]byte, error)
 
-//Print for Exec
+// Print for Exec
 func Print(e Exec) func(*cli.Context) error {
 	return func(c *cli.Context) error {
 		rsp, err := e(c, c.Args().Slice())

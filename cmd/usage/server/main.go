@@ -2,9 +2,8 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -12,6 +11,9 @@ import (
 	"sync"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/gorilla/handlers"
 	pb "github.com/micro-community/micro/v3/cmd/usage/proto"
 	bolt "go.etcd.io/bbolt"
@@ -154,7 +156,7 @@ func metrics(w http.ResponseWriter, r *http.Request) {
 	if v := r.Form.Get("pretty"); len(v) > 0 || ct != "application/json" {
 		buf, _ = json.MarshalIndent(metrics, "", "\t")
 	} else {
-		buf, _ = json.Marshal(metrics)
+		buf, _ = sonic.Marshal(metrics)
 	}
 
 	if len(buf) == 0 {
@@ -186,7 +188,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, err := ioutil.ReadAll(r.Body)
+	b, err := io.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return

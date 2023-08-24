@@ -1,13 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/bytedance/sonic"
 )
 
 type Result struct {
@@ -50,7 +51,7 @@ func years() [][]byte {
 		}
 		defer rsp.Body.Close()
 
-		b, err := ioutil.ReadAll(rsp.Body)
+		b, err := io.ReadAll(rsp.Body)
 		if err != nil {
 			fmt.Println(err)
 			return nil
@@ -79,7 +80,7 @@ func main() {
 	for _, year := range years() {
 		var res map[string]Result
 
-		if err := json.Unmarshal(year, &results); err != nil {
+		if err := sonic.Unmarshal(year, &results); err != nil {
 			fmt.Println(err)
 			return
 		}

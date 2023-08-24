@@ -15,9 +15,9 @@
 package store
 
 import (
-	"encoding/json"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/events"
 	"github.com/micro-community/micro/v3/service/logger"
 	"github.com/micro-community/micro/v3/service/store"
@@ -83,7 +83,7 @@ func (s *evStore) Read(topic string, opts ...events.ReadOption) ([]*events.Event
 	result := make([]*events.Event, len(recs))
 	for i, r := range recs {
 		var e events.Event
-		if err := json.Unmarshal(r.Value, &e); err != nil {
+		if err := sonic.Unmarshal(r.Value, &e); err != nil {
 			return nil, errors.Wrap(err, "Invalid event returned from stroe")
 		}
 		result[i] = &e
@@ -103,7 +103,7 @@ func (s *evStore) Write(event *events.Event, opts ...events.WriteOption) error {
 	}
 
 	// construct the store record
-	bytes, err := json.Marshal(event)
+	bytes, err := sonic.Marshal(event)
 	if err != nil {
 		return errors.Wrap(err, "Error mashaling event to JSON")
 	}

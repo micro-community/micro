@@ -12,9 +12,11 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"log/slog"
+
+	"slices"
+
 	"github.com/bytedance/sonic"
-	"golang.org/x/exp/slices"
-	"golang.org/x/exp/slog"
 
 	"encoding"
 	"unicode"
@@ -141,7 +143,7 @@ func appendJSONValue(s *handleState, v slog.Value) error {
 		*s.buf = strconv.AppendUint(*s.buf, v.Uint64(), 10)
 	case slog.KindFloat64:
 		f := v.Float64()
-		// json.Marshal fails on special floats, so handle them here.
+		// sonic.Marshal fails on special floats, so handle them here.
 		switch {
 		case math.IsInf(f, 1):
 			s.buf.WriteString(`"+Inf"`)
@@ -157,7 +159,7 @@ func appendJSONValue(s *handleState, v slog.Value) error {
 	case slog.KindBool:
 		*s.buf = strconv.AppendBool(*s.buf, v.Bool())
 	case slog.KindDuration:
-		// Do what json.Marshal does.
+		// Do what sonic.Marshal does.
 		*s.buf = strconv.AppendInt(*s.buf, int64(v.Duration()), 10)
 	case slog.KindTime:
 		s.appendTime(v.Time())

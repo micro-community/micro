@@ -16,9 +16,9 @@ package secrets
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/config"
 )
 
@@ -46,7 +46,7 @@ func (c *secretConf) Get(path string, options ...config.Option) (config.Value, e
 		return empty, err
 	}
 	var v interface{}
-	err = json.Unmarshal(val.Bytes(), &v)
+	err = sonic.Unmarshal(val.Bytes(), &v)
 	if err != nil {
 		return empty, err
 	}
@@ -54,7 +54,7 @@ func (c *secretConf) Get(path string, options ...config.Option) (config.Value, e
 	if err != nil {
 		return empty, err
 	}
-	dat, err := json.Marshal(v)
+	dat, err := sonic.Marshal(v)
 	if err != nil {
 		return empty, err
 	}
@@ -64,12 +64,12 @@ func (c *secretConf) Get(path string, options ...config.Option) (config.Value, e
 func (c *secretConf) Set(path string, val interface{}, options ...config.Option) error {
 	// marshal to JSON and back so we can iterate on the
 	// value without reflection
-	JSON, err := json.Marshal(val)
+	JSON, err := sonic.Marshal(val)
 	if err != nil {
 		return err
 	}
 	var v interface{}
-	err = json.Unmarshal(JSON, &v)
+	err = sonic.Unmarshal(JSON, &v)
 	if err != nil {
 		return err
 	}
@@ -102,7 +102,7 @@ func convertElements(elem interface{}, conversionFunc func(elem interface{}) (in
 }
 
 func (c *secretConf) toEncrypted(elem interface{}) (interface{}, error) {
-	dat, err := json.Marshal(elem)
+	dat, err := sonic.Marshal(elem)
 	if err != nil {
 		return nil, err
 	}
@@ -131,5 +131,5 @@ func (c *secretConf) fromEncrypted(elem interface{}) (interface{}, error) {
 		return elem, nil
 	}
 	var ret interface{}
-	return ret, json.Unmarshal([]byte(decrypted), &ret)
+	return ret, sonic.Unmarshal([]byte(decrypted), &ret)
 }

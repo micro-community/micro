@@ -16,7 +16,6 @@ package minio
 
 import (
 	"bytes"
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -86,7 +85,7 @@ func TestBlobStore(t *testing.T) {
 		assert.NotNilf(t, val, "Value should not be nil")
 
 		if val != nil {
-			bytes, err := ioutil.ReadAll(val)
+			bytes, err := io.ReadAll(val)
 			assert.Nilf(t, err, "Error should be nil")
 			assert.Equal(t, "world", string(bytes), "Value should be world")
 		}
@@ -104,7 +103,7 @@ func TestBlobStore(t *testing.T) {
 		assert.NotNilf(t, val, "Value should not be nil")
 
 		if val != nil {
-			bytes, err := ioutil.ReadAll(val)
+			bytes, err := io.ReadAll(val)
 			assert.Nilf(t, err, "Error should be nil")
 			assert.Equal(t, "world", string(bytes), "Value should be world")
 		}

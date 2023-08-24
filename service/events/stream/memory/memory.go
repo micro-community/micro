@@ -15,11 +15,11 @@
 package memory
 
 import (
-	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 	"github.com/micro-community/micro/v3/service/events"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -80,7 +80,7 @@ func (m *mem) Publish(topic string, msg interface{}, opts ...events.PublishOptio
 	if p, ok := msg.([]byte); ok {
 		payload = p
 	} else {
-		p, err := json.Marshal(msg)
+		p, err := sonic.Marshal(msg)
 		if err != nil {
 			return events.ErrEncodingMessage
 		}
@@ -97,7 +97,7 @@ func (m *mem) Publish(topic string, msg interface{}, opts ...events.PublishOptio
 	}
 
 	// serialize the event to bytes
-	bytes, err := json.Marshal(event)
+	bytes, err := sonic.Marshal(event)
 	if err != nil {
 		return errors.Wrap(err, "Error encoding event")
 	}
@@ -177,7 +177,7 @@ func (m *mem) lookupPreviousEvents(sub *subscriber, startTime time.Time) {
 	// loop through the records and send it to the channel if it matches
 	for _, r := range recs {
 		var ev events.Event
-		if err := json.Unmarshal(r.Value, &ev); err != nil {
+		if err := sonic.Unmarshal(r.Value, &ev); err != nil {
 			continue
 		}
 		if ev.Timestamp.Unix() < startTime.Unix() {

@@ -17,12 +17,13 @@ package api
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
+
+	"encoding/json"
 
 	"github.com/micro-community/micro/v3/service/logger"
 )
@@ -60,7 +61,7 @@ func (r *Request) verb(method string) *Request {
 	return r
 }
 
-//Context data
+// Context data
 func (r *Request) Context(ctx context.Context) {
 	r.context = ctx
 }

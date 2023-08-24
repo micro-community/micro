@@ -66,9 +66,9 @@ func TestGoPackageOption(t *testing.T) {
 	}{
 		{"", "", "", false},
 		{"foo", "", "foo", true},
-		{"github.com/golang/bar", "github.com/golang/bar", "bar", true},
-		{"github.com/golang/bar;baz", "github.com/golang/bar", "baz", true},
-		{"github.com/golang/string", "github.com/golang/string", "string", true},
+		{"google.golang.org/bar", "google.golang.org/bar", "bar", true},
+		{"google.golang.org/bar;baz", "google.golang.org/bar", "baz", true},
+		{"google.golang.org/string", "google.golang.org/string", "string", true},
 	}
 	for _, tc := range tests {
 		d := &FileDescriptor{
@@ -94,10 +94,10 @@ func TestPackageNames(t *testing.T) {
 		importPath GoImportPath
 		want       GoPackageName
 	}{
-		{"github.com/golang/foo", "foo"},
-		{"github.com/golang/second/package/named/foo", "foo1"},
-		{"github.com/golang/third/package/named/foo", "foo2"},
-		{"github.com/golang/conflicts/with/predeclared/ident/string", "string1"},
+		{"google.golang.org/foo", "foo"},
+		{"google.golang.org/second/package/named/foo", "foo1"},
+		{"google.golang.org/third/package/named/foo", "foo2"},
+		{"google.golang.org/conflicts/with/predeclared/ident/string", "string1"},
 	} {
 		if got := g.GoPackageName(test.importPath); got != test.want {
 			t.Errorf("GoPackageName(%v) = %v, want %v", test.importPath, got, test.want)

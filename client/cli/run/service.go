@@ -2,7 +2,6 @@
 package runtime
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -15,6 +14,7 @@ import (
 	"text/tabwriter"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/service/logger"
@@ -835,7 +835,7 @@ func getLogs(ctx *cli.Context) error {
 	for record := range logs.Chan() {
 		switch output {
 		case "json":
-			b, _ := json.Marshal(record)
+			b, _ := sonic.Marshal(record)
 			fmt.Printf("%v\n", string(b))
 		default:
 			fmt.Printf("%v\n", record.Message)

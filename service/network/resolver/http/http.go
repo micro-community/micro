@@ -16,12 +16,12 @@
 package http
 
 import (
-	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/network/resolver"
 )
 
@@ -76,7 +76,7 @@ func (r *Resolver) Resolve(name string) ([]*resolver.Record, error) {
 	if rsp.StatusCode != 200 {
 		return nil, errors.New("non 200 response")
 	}
-	b, err := ioutil.ReadAll(rsp.Body)
+	b, err := io.ReadAll(rsp.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (r *Resolver) Resolve(name string) ([]*resolver.Record, error) {
 	// encoding format is assumed to be json
 	var response *Response
 
-	if err := json.Unmarshal(b, &response); err != nil {
+	if err := sonic.Unmarshal(b, &response); err != nil {
 		return nil, err
 	}
 

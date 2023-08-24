@@ -1,10 +1,10 @@
 package config
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/client/cli/namespace"
 	"github.com/micro-community/micro/v3/client/cli/util"
 	"github.com/micro-community/micro/v3/cmd"
@@ -42,7 +42,7 @@ func setConfig(ctx *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	v, _ := json.Marshal(parsedVal)
+	v, _ := sonic.Marshal(parsedVal)
 
 	// TODO: allow the specifying of a config.Key. This will be service name
 	// The actual key-val set is a path e.g micro/accounts/key
@@ -65,10 +65,10 @@ func setConfig(ctx *cli.Context) error {
 
 func parseValue(s string) (interface{}, error) {
 	var i interface{}
-	err := json.Unmarshal([]byte(s), &i)
+	err := sonic.Unmarshal([]byte(s), &i)
 	if err != nil {
 		// special exception for strings
-		return i, json.Unmarshal([]byte(fmt.Sprintf("\"%v\"", s)), &i)
+		return i, sonic.Unmarshal([]byte(fmt.Sprintf("\"%v\"", s)), &i)
 	}
 	return i, nil
 }

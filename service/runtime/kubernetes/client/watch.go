@@ -17,10 +17,12 @@ package client
 import (
 	"bufio"
 	"context"
-	"encoding/json"
 	"errors"
 	"net/http"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/runtime/kubernetes/api"
 )
 
@@ -89,7 +91,7 @@ func (wr *bodyWatcher) stream() {
 
 			// send the event
 			var event Event
-			if err := json.Unmarshal(b, &event); err != nil {
+			if err := sonic.Unmarshal(b, &event); err != nil {
 				continue
 			}
 

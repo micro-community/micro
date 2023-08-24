@@ -16,14 +16,15 @@ package api
 
 import (
 	"crypto/tls"
-	"encoding/json"
 	"errors"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"regexp"
 	"strings"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	jsonpatch "github.com/evanphx/json-patch/v5"
 	"github.com/micro-community/micro/v3/service/registry"
 	"github.com/micro-community/micro/v3/service/server"
@@ -242,7 +243,7 @@ func Validate(e *Endpoint) error {
 	return nil
 }
 
-//WithEndpoint for api
+// WithEndpoint for api
 func WithEndpoint(e *Endpoint) server.HandlerOption {
 	return server.EndpointMetadata(e.Name, Encode(e))
 }
@@ -308,7 +309,7 @@ func RequestPayload(r *http.Request) ([]byte, error) {
 		}
 
 		// marshal
-		return json.Marshal(vals)
+		return sonic.Marshal(vals)
 	case strings.Contains(ct, "multipart/form-data"):
 		// 10MB buffer
 		if err := r.ParseMultipartForm(int64(10 << 20)); err != nil {
@@ -323,13 +324,13 @@ func RequestPayload(r *http.Request) ([]byte, error) {
 			if err != nil {
 				return nil, err
 			}
-			b, err := ioutil.ReadAll(f)
+			b, err := io.ReadAll(f)
 			if err != nil {
 				return nil, err
 			}
 			vals[k] = b
 		}
-		return json.Marshal(vals)
+		return sonic.Marshal(vals)
 		// TODO: application/grpc
 	}
 
@@ -402,7 +403,7 @@ func RequestPayload(r *http.Request) ([]byte, error) {
 	}
 	pathbuf := []byte("{}")
 	if len(req) > 0 {
-		pathbuf, err = json.Marshal(req)
+		pathbuf, err = sonic.Marshal(req)
 		if err != nil {
 			return nil, err
 		}
@@ -447,7 +448,7 @@ func RequestPayload(r *http.Request) ([]byte, error) {
 		}
 		var jsonbody map[string]interface{}
 		if json.Valid(bodybuf) {
-			if err = json.Unmarshal(bodybuf, &jsonbody); err != nil {
+			if err = sonic.Unmarshal(bodybuf, &jsonbody); err != nil {
 				return nil, err
 			}
 		}
@@ -476,7 +477,7 @@ func RequestPayload(r *http.Request) ([]byte, error) {
 			dstmap[ps[0]] = em
 		}
 
-		bodyout, err := json.Marshal(dstmap)
+		bodyout, err := sonic.Marshal(dstmap)
 		if err != nil {
 			return nil, err
 		}

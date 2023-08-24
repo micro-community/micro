@@ -18,8 +18,11 @@ package postgres
 
 import (
 	"database/sql/driver"
-	"encoding/json"
 	"errors"
+
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 )
 
 // Metadata https://github.com/upper/db/blob/master/postgresql/custom_types.go#L43
@@ -33,7 +36,7 @@ func (m *Metadata) Scan(src interface{}) error {
 	}
 
 	var i interface{}
-	err := json.Unmarshal(source, &i)
+	err := sonic.Unmarshal(source, &i)
 	if err != nil {
 		return err
 	}
@@ -48,7 +51,7 @@ func (m *Metadata) Scan(src interface{}) error {
 
 // Value satisfies the driver.Valuer interface.
 func (m Metadata) Value() (driver.Value, error) {
-	j, err := json.Marshal(m)
+	j, err := sonic.Marshal(m)
 	return j, err
 }
 

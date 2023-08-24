@@ -17,9 +17,10 @@
 package store
 
 import (
-	"encoding/json"
 	"errors"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 // Order
@@ -73,7 +74,7 @@ type Record struct {
 
 // NewRecord returns a record from key, val
 func NewRecord(key string, val interface{}) *Record {
-	b, _ := json.Marshal(val)
+	b, _ := sonic.Marshal(val)
 	return &Record{
 		Key:   key,
 		Value: b,
@@ -82,7 +83,7 @@ func NewRecord(key string, val interface{}) *Record {
 
 // Encode will marshal any type into the byte Value field
 func (r *Record) Encode(v interface{}) error {
-	b, err := json.Marshal(v)
+	b, err := sonic.Marshal(v)
 	if err != nil {
 		return err
 	}
@@ -92,7 +93,7 @@ func (r *Record) Encode(v interface{}) error {
 
 // Decode is a convenience helper for decoding records
 func (r *Record) Decode(v interface{}) error {
-	return json.Unmarshal(r.Value, v)
+	return sonic.Unmarshal(r.Value, v)
 }
 
 // Read records

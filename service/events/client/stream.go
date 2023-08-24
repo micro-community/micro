@@ -2,9 +2,9 @@ package client
 
 import (
 	gocontext "context"
-	"encoding/json"
 	"time"
 
+	"github.com/bytedance/sonic"
 	pb "github.com/micro-community/micro/v3/proto/events"
 	"github.com/micro-community/micro/v3/service/client"
 	"github.com/micro-community/micro/v3/service/context"
@@ -36,7 +36,7 @@ func (s *stream) Publish(topic string, msg interface{}, opts ...events.PublishOp
 	if p, ok := msg.([]byte); ok {
 		payload = p
 	} else {
-		p, err := json.Marshal(msg)
+		p, err := sonic.Marshal(msg)
 		if err != nil {
 			return events.ErrEncodingMessage
 		}

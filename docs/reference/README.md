@@ -546,7 +546,7 @@ function.
 
 Publisher:
 ```go
-bytes, err := json.Marshal(&Healthcheck{
+bytes, err := sonic.Marshal(&Healthcheck{
 	Healthy: true,
 	Service: "foo",
 })
@@ -561,7 +561,7 @@ Subscriber:
 ```go
 handler := func(msg *broker.Message) error {
 	var hc Healthcheck
-	if err := json.Unmarshal(msg.Body, &hc); err != nil {
+	if err := sonic.Unmarshal(msg.Body, &hc); err != nil {
 		return err
 	}
 	
@@ -736,7 +736,7 @@ just `Get` `Set` and `Delete` to access values, but a few convenience functions 
 
 It is worth noting that `String` `Int` etc methods will do a best effort try at coercing types, ie. if the value saved
 is a string, `Int` will try to parse it. However, the same does not apply to the `Scan` method, which
-uses `json.Unmarshal` under the hood, which we all know fails when encountering type mismatches.
+uses `sonic.Unmarshal` under the hood, which we all know fails when encountering type mismatches.
 
 `Get` should, in all cases, return a non nil `Value`, so even if the `Get` errors, `Value.Int()` and other operations
 should never panic.

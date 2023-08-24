@@ -4,13 +4,14 @@
 package test
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 func TestConfig(t *testing.T) {
@@ -149,7 +150,7 @@ func testConfig(t *T) {
 			return
 		}
 		var m map[string]interface{}
-		err = json.Unmarshal(outp, &m)
+		err = sonic.Unmarshal(outp, &m)
 		if err != nil {
 			t.Fatal(err)
 			return
@@ -217,7 +218,7 @@ func testConfig(t *T) {
 			return
 		}
 		result := map[string]interface{}{}
-		err = json.Unmarshal(outp, &result)
+		err = sonic.Unmarshal(outp, &result)
 		if err != nil {
 			t.Fatal(err)
 			return
@@ -253,7 +254,7 @@ func testConfig(t *T) {
 			return
 		}
 		result := map[string]interface{}{}
-		err = json.Unmarshal(outp, &result)
+		err = sonic.Unmarshal(outp, &result)
 		if err != nil {
 			t.Fatal(err)
 			return

@@ -2,7 +2,6 @@
 package web
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -12,6 +11,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/fatih/camelcase"
 	"github.com/gorilla/mux"
 	"github.com/micro-community/micro/v3/service"
@@ -36,7 +36,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-//Meta Fields of micro web
+// Meta Fields of micro web
 var (
 	Name                  = "web"
 	Address               = ":8082"
@@ -323,7 +323,7 @@ func (s *srv) registryHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if r.Header.Get("Content-Type") == "application/json" {
-			b, err := json.Marshal(map[string]interface{}{
+			b, err := sonic.Marshal(map[string]interface{}{
 				"services": s,
 			})
 			if err != nil {
@@ -347,7 +347,7 @@ func (s *srv) registryHandler(w http.ResponseWriter, r *http.Request) {
 	sort.Sort(sortedServices{services})
 
 	if r.Header.Get("Content-Type") == "application/json" {
-		b, err := json.Marshal(map[string]interface{}{
+		b, err := sonic.Marshal(map[string]interface{}{
 			"services": services,
 		})
 		if err != nil {
@@ -394,7 +394,7 @@ func (s *srv) callHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Header.Get("Content-Type") == "application/json" {
-		b, err := json.Marshal(map[string]interface{}{
+		b, err := sonic.Marshal(map[string]interface{}{
 			"services": services,
 		})
 		if err != nil {
@@ -439,7 +439,7 @@ func (s *srv) serviceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Header.Get("Content-Type") == "application/json" {
-		b, err := json.Marshal(map[string]interface{}{
+		b, err := sonic.Marshal(map[string]interface{}{
 			"services": services,
 		})
 		if err != nil {

@@ -3,7 +3,6 @@ package file
 import (
 	"context"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -13,7 +12,7 @@ import (
 	"github.com/micro-community/micro/v3/service/server"
 )
 
-//Proxy for a proxy instance
+// Proxy for a proxy instance
 type Proxy struct {
 	options proxy.Options
 
@@ -82,7 +81,7 @@ func (p *Proxy) ServeRequest(ctx context.Context, req server.Request, rsp server
 		file := filePath(p.Endpoint, endpoint)
 
 		// lookup the file
-		b, err := ioutil.ReadFile(file)
+		b, err := os.ReadFile(file)
 		if err != nil {
 			return errors.InternalServerError(req.Service(), err.Error())
 		}
@@ -105,7 +104,7 @@ func (p *Proxy) String() string {
 	return "file"
 }
 
-//NewSingleHostProxy returns a Proxy which stand for a endpoint.
+// NewSingleHostProxy returns a Proxy which stand for a endpoint.
 func NewSingleHostProxy(url string) proxy.Proxy {
 	return &Proxy{
 		Endpoint: url,

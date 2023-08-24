@@ -1,13 +1,15 @@
 package broker
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
 	"testing"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/broker"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
@@ -53,7 +55,7 @@ func TestBroker(t *testing.T) {
 			assert.NotEmpty(t, message.Body)
 			assert.NotEmpty(t, message.Header)
 			var tobj testObj
-			assert.NoError(t, json.Unmarshal(message.Body, &tobj))
+			assert.NoError(t, sonic.Unmarshal(message.Body, &tobj))
 			i, err := strconv.Atoi(tobj.One)
 			assert.NoError(t, err)
 			assert.Equal(t, int64(i), tobj.Two)
@@ -74,7 +76,7 @@ func TestBroker(t *testing.T) {
 				One: fmt.Sprintf("%d", i),
 				Two: int64(i),
 			}
-			by, _ := json.Marshal(tobj)
+			by, _ := sonic.Marshal(tobj)
 			assert.NoError(t, b.Publish("foo", &broker.Message{
 				Header: map[string]string{"fooheader": "bar"},
 				Body:   by,
@@ -113,7 +115,7 @@ func TestBroker(t *testing.T) {
 			One: "1",
 			Two: 2,
 		}
-		by, _ := json.Marshal(tobj)
+		by, _ := sonic.Marshal(tobj)
 		assert.NoError(t, b.Publish("fooerror", &broker.Message{
 			Header: map[string]string{"fooheader": "bar"},
 			Body:   by,
@@ -169,7 +171,7 @@ func TestBroker(t *testing.T) {
 				One: fmt.Sprintf("%d", i),
 				Two: int64(i),
 			}
-			by, _ := json.Marshal(tobj)
+			by, _ := sonic.Marshal(tobj)
 			assert.NoError(t, b.Publish("fooqueue", &broker.Message{
 				Header: map[string]string{"fooheader": "bar"},
 				Body:   by,

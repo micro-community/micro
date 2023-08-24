@@ -3,14 +3,16 @@ package api
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/gorilla/websocket"
 )
 
@@ -103,7 +105,7 @@ func (client *Client) SetTimeout(d time.Duration) {
 func (client *Client) Handle(service, endpoint string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
-		b, err := ioutil.ReadAll(r.Body)
+		b, err := io.ReadAll(r.Body)
 		if err != nil {
 			http.Error(w, "Error reading body", 500)
 			return
@@ -158,7 +160,7 @@ func (client *Client) Call(service, endpoint string, request, response interface
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
@@ -226,9 +228,9 @@ func (s *Stream) Send(v interface{}) error {
 }
 
 func marshalRequest(service, endpoint string, v interface{}) ([]byte, error) {
-	return json.Marshal(v)
+	return sonic.Marshal(v)
 }
 
 func unmarshalResponse(body []byte, v interface{}) error {
-	return json.Unmarshal(body, &v)
+	return sonic.Unmarshal(body, &v)
 }

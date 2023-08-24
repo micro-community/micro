@@ -4,14 +4,15 @@
 package test
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/micro-community/micro/v3/client/cli/namespace"
-	"github.com/micro-community/micro/v3/util/config"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/bytedance/sonic"
+	"github.com/micro-community/micro/v3/client/cli/namespace"
+	"github.com/micro-community/micro/v3/util/config"
 )
 
 // Test no default account generation in non-default namespaces
@@ -199,7 +200,7 @@ func ServerAuth(t *T) {
 			return outp, err
 		}
 		rsp := map[string]interface{}{}
-		err = json.Unmarshal(outp, &rsp)
+		err = sonic.Unmarshal(outp, &rsp)
 		token, ok := rsp["token"].(map[string]interface{})
 		if !ok {
 			return outp, errors.New("Can't find token")

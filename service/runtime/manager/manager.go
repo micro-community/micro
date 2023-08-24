@@ -1,15 +1,14 @@
 package manager
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/build"
 	"github.com/micro-community/micro/v3/service/build/util/tar"
@@ -108,7 +107,7 @@ func (m *manager) checkServices() {
 
 // writeService to the store
 func (m *manager) writeService(srv *service) error {
-	bytes, err := json.Marshal(srv)
+	bytes, err := sonic.Marshal(srv)
 	if err != nil {
 		return err
 	}
@@ -142,7 +141,7 @@ func (m *manager) readServices(namespace string, srv *runtime.Service) ([]*servi
 	srvs := make([]*service, 0, len(recs))
 	for _, r := range recs {
 		var s *service
-		if err := json.Unmarshal(r.Value, &s); err != nil {
+		if err := sonic.Unmarshal(r.Value, &s); err != nil {
 			return nil, err
 		}
 		srvs = append(srvs, s)
@@ -355,7 +354,7 @@ func (m *manager) checkoutBlobSource(srv *service) (string, error) {
 		return "", err
 	}
 
-	dir, err := ioutil.TempDir(os.TempDir(), "blob-*")
+	dir, err := os.MkdirTemp(os.TempDir(), "blob-*")
 	if err != nil {
 		return "", err
 	}

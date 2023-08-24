@@ -17,12 +17,14 @@
 package grpc
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
 
+	"encoding/json"
+
 	b "bytes"
 
+	"github.com/bytedance/sonic"
 	gogoproto "github.com/gogo/protobuf/proto"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
@@ -143,7 +145,7 @@ func (jsonCodec) Marshal(v interface{}) ([]byte, error) {
 		return jsonpb.MarshalOptions{EmitUnpopulated: true, UseProtoNames: true}.Marshal(pb)
 	}
 
-	return json.Marshal(v)
+	return sonic.Marshal(v)
 }
 
 func (jsonCodec) Unmarshal(data []byte, v interface{}) error {

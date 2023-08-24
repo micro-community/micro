@@ -17,11 +17,11 @@ package file
 
 import (
 	"bytes"
-	"encoding/json"
 	"os"
 	"path/filepath"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/store"
 	bolt "go.etcd.io/bbolt"
 )
@@ -170,7 +170,7 @@ func (m *fileStore) list(db *bolt.DB, order store.Order, limit, offset uint, pre
 		for ; k != nil && cont(k); k, v = c.Next() {
 			storedRecord := &record{}
 
-			if err := json.Unmarshal(v, storedRecord); err != nil {
+			if err := sonic.Unmarshal(v, storedRecord); err != nil {
 				return err
 			}
 			if !storedRecord.ExpiresAt.IsZero() {
@@ -240,7 +240,7 @@ func (m *fileStore) get(db *bolt.DB, k string) (*store.Record, error) {
 
 	storedRecord := &record{}
 
-	if err := json.Unmarshal(value, storedRecord); err != nil {
+	if err := sonic.Unmarshal(value, storedRecord); err != nil {
 		return nil, err
 	}
 
@@ -280,7 +280,7 @@ func (m *fileStore) set(db *bolt.DB, r *store.Record) error {
 	}
 
 	// marshal the data
-	data, _ := json.Marshal(item)
+	data, _ := sonic.Marshal(item)
 
 	return db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(dataBucket))

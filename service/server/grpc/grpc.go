@@ -21,7 +21,6 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/base64"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net"
@@ -34,6 +33,9 @@ import (
 	"sync"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	pberr "github.com/micro-community/micro/v3/proto/errors"
 	"github.com/micro-community/micro/v3/service/broker"
@@ -409,7 +411,7 @@ func (g *grpcServer) processRequest(stream grpc.ServerStream, service *service, 
 			if err := cd.Unmarshal(raw, argv.Interface()); err != nil {
 				// let's try parsing it manually
 				var gen map[string]interface{}
-				if err := json.Unmarshal(raw, &gen); err != nil {
+				if err := sonic.Unmarshal(raw, &gen); err != nil {
 					return err
 				}
 				for i := 0; i < argv.Elem().NumField(); i++ {

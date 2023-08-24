@@ -15,9 +15,9 @@
 package store
 
 import (
-	"encoding/json"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/config"
 	"github.com/micro-community/micro/v3/service/store"
 )
@@ -60,12 +60,12 @@ func (c *conf) Set(path string, val interface{}, options ...config.Option) error
 	// marshal to JSON and back so we can iterate on the
 	// value without reflection
 	// @todo only do this if a struct
-	JSON, err := json.Marshal(val)
+	JSON, err := sonic.Marshal(val)
 	if err != nil {
 		return err
 	}
 	var v interface{}
-	err = json.Unmarshal(JSON, &v)
+	err = sonic.Unmarshal(JSON, &v)
 	if err != nil {
 		return err
 	}

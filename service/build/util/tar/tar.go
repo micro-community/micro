@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -26,7 +25,7 @@ func Unarchive(src io.Reader, dir string) error {
 		}
 
 		path := filepath.Join(dir, hdr.Name)
-		bytes, err := ioutil.ReadAll(tr)
+		bytes, err := io.ReadAll(tr)
 		if err != nil {
 			return err
 		}
@@ -37,7 +36,7 @@ func Unarchive(src io.Reader, dir string) error {
 				err = os.Mkdir(path, os.ModePerm)
 			}
 		case tar.TypeReg:
-			err = ioutil.WriteFile(path, bytes, os.ModePerm)
+			err = os.WriteFile(path, bytes, os.ModePerm)
 		default:
 			err = fmt.Errorf("Unknown tar header type flag: %v", string(hdr.Typeflag))
 		}
@@ -100,7 +99,7 @@ func Archive(dir string) (io.Reader, error) {
 		}
 
 		// read the contents of the file
-		bytes, err := ioutil.ReadFile(path)
+		bytes, err := os.ReadFile(path)
 		if err != nil {
 			return err
 		}

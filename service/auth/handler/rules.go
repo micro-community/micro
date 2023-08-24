@@ -2,10 +2,10 @@ package handler
 
 import (
 	"context"
-	"encoding/json"
 	"strings"
 	"sync"
 
+	"github.com/bytedance/sonic"
 	pb "github.com/micro-community/micro/v3/proto/auth"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/errors"
@@ -189,7 +189,7 @@ func (r *Rules) List(ctx context.Context, req *pb.ListRequest, rsp *pb.ListRespo
 	rsp.Rules = make([]*pb.Rule, 0, len(recs))
 	for _, rec := range recs {
 		var r *pb.Rule
-		if err := json.Unmarshal(rec.Value, &r); err != nil {
+		if err := sonic.Unmarshal(rec.Value, &r); err != nil {
 			return errors.InternalServerError("auth.Rules.List", "Error to unmarshaling json: %v. Value: %v", err, string(rec.Value))
 		}
 		rsp.Rules = append(rsp.Rules, r)
@@ -206,7 +206,7 @@ func (r *Rules) writeRule(rule *pb.Rule, ns string) error {
 	}
 
 	// Encode the rule
-	bytes, err := json.Marshal(rule)
+	bytes, err := sonic.Marshal(rule)
 	if err != nil {
 		return errors.InternalServerError("auth.Rules.Create", "Unable to marshal rule: %v", err)
 	}

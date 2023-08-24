@@ -1,9 +1,11 @@
 package postgres
 
 import (
-	"encoding/json"
 	"testing"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/store"
 	"github.com/stretchr/testify/assert"
 )
@@ -18,7 +20,7 @@ func TestPostgres(t *testing.T) {
 		s := NewStore(store.Nodes("postgresql://postgres@localhost:5432/?sslmode=disable"))
 		base := s.(*sqlStore)
 		base.dbConn.Exec("DROP SCHENA IF EXISTS micro")
-		b, _ := json.Marshal(testObj{
+		b, _ := sonic.Marshal(testObj{
 			One: "1",
 			Two: 2,
 		})
@@ -38,7 +40,7 @@ func TestPostgres(t *testing.T) {
 		assert.Equal(t, "val1", recs[0].Metadata["meta1"])
 
 		var tobj testObj
-		assert.NoError(t, json.Unmarshal(recs[0].Value, &tobj))
+		assert.NoError(t, sonic.Unmarshal(recs[0].Value, &tobj))
 		assert.Equal(t, "1", tobj.One)
 		assert.Equal(t, int64(2), tobj.Two)
 	})
@@ -46,7 +48,7 @@ func TestPostgres(t *testing.T) {
 		s := NewStore(store.Nodes("postgresql://postgres@localhost:5432/?sslmode=disable"))
 		base := s.(*sqlStore)
 		base.dbConn.Exec("DROP SCHENA IF EXISTS micro")
-		b, _ := json.Marshal(testObj{
+		b, _ := sonic.Marshal(testObj{
 			One: "1",
 			Two: 2,
 		})
@@ -79,7 +81,7 @@ func TestPostgres(t *testing.T) {
 		base := s1.(*sqlStore)
 		base.dbConn.Exec("DROP SCHENA IF EXISTS t1")
 		base.dbConn.Exec("DROP SCHENA IF EXISTS t2")
-		b1, _ := json.Marshal(testObj{
+		b1, _ := sonic.Marshal(testObj{
 			One: "1",
 			Two: 2,
 		})
@@ -88,7 +90,7 @@ func TestPostgres(t *testing.T) {
 			Value: b1,
 		})
 		assert.NoError(t, err)
-		b2, _ := json.Marshal(testObj{
+		b2, _ := sonic.Marshal(testObj{
 			One: "1",
 			Two: 2,
 		})
@@ -114,7 +116,7 @@ func TestPostgres(t *testing.T) {
 		base := s1.(*sqlStore)
 		base.dbConn.Exec("DROP DATABASE EXISTS d1")
 		base.dbConn.Exec("DROP DATABASE EXISTS d2")
-		b1, _ := json.Marshal(testObj{
+		b1, _ := sonic.Marshal(testObj{
 			One: "1",
 			Two: 2,
 		})
@@ -123,7 +125,7 @@ func TestPostgres(t *testing.T) {
 			Value: b1,
 		})
 		assert.NoError(t, err)
-		b2, _ := json.Marshal(testObj{
+		b2, _ := sonic.Marshal(testObj{
 			One: "1",
 			Two: 2,
 		})

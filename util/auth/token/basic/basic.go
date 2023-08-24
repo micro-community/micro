@@ -17,10 +17,10 @@
 package basic
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
+	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 	"github.com/micro-community/micro/v3/service/auth"
 	"github.com/micro-community/micro/v3/service/store"
@@ -55,7 +55,7 @@ func (b *Basic) Generate(acc *auth.Account, opts ...token.GenerateOption) (*toke
 	options := token.NewGenerateOptions(opts...)
 
 	// marshal the account to bytes
-	bytes, err := json.Marshal(acc)
+	bytes, err := sonic.Marshal(acc)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ func (b *Basic) Inspect(t string) (*auth.Account, error) {
 
 	// unmarshal the bytes
 	var acc *auth.Account
-	if err := json.Unmarshal(bytes, &acc); err != nil {
+	if err := sonic.Unmarshal(bytes, &acc); err != nil {
 		return nil, err
 	}
 

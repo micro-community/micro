@@ -2,7 +2,6 @@ package stream
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"math/rand"
 	"strconv"
@@ -10,6 +9,9 @@ import (
 	"sync"
 	"time"
 
+	"encoding/json"
+
+	"github.com/bytedance/sonic"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/uuid"
 	"github.com/micro-community/micro/v3/service/events"
@@ -69,7 +71,7 @@ func (r *redisStream) Publish(topic string, msg interface{}, opts ...events.Publ
 	if p, ok := msg.([]byte); ok {
 		payload = p
 	} else {
-		p, err := json.Marshal(msg)
+		p, err := sonic.Marshal(msg)
 		if err != nil {
 			return events.ErrEncodingMessage
 		}
@@ -86,7 +88,7 @@ func (r *redisStream) Publish(topic string, msg interface{}, opts ...events.Publ
 	}
 
 	// serialize the event to bytes
-	bytes, err := json.Marshal(event)
+	bytes, err := sonic.Marshal(event)
 	if err != nil {
 		return errors.Wrap(err, "Error encoding event")
 	}
@@ -266,7 +268,7 @@ func (r *redisStream) processMessages(msgs []redis.XMessage, ch chan events.Even
 			r.redisClient.XAck(context.Background(), topic, group, vid)
 			continue
 		}
-		if err := json.Unmarshal([]byte(bStr), &ev); err != nil {
+		if err := sonic.Unmarshal([]byte(bStr), &ev); err != nil {
 			logger.Warnf("Failed to unmarshal event, discarding %s %s", err, vid)
 			r.redisClient.XAck(context.Background(), topic, group, vid)
 			continue
@@ -299,7 +301,7 @@ func (r *redisStream) processMessages(msgs []redis.XMessage, ch chan events.Even
 					r.Unlock()
 					return nil
 				}
-				bytes, err := json.Marshal(ev)
+				bytes, err := sonic.Marshal(ev)
 				if err != nil {
 					return errors.Wrap(err, "Error encoding event")
 				}

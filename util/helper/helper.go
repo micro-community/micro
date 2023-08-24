@@ -6,8 +6,8 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/micro-community/micro/v3/service/context/metadata"
@@ -45,7 +45,7 @@ func TLSConfig(ctx *cli.Context) (*tls.Config, error) {
 		}
 
 		if len(ca) > 0 {
-			caCert, err := ioutil.ReadFile(ca)
+			caCert, err := os.ReadFile(ca)
 			if err != nil {
 				return nil, err
 			}

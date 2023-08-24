@@ -17,9 +17,9 @@
 package grpc
 
 import (
-	"encoding/json"
 	"strings"
 
+	"github.com/bytedance/sonic"
 	"github.com/micro-community/micro/v3/service/errors"
 	"github.com/micro-community/micro/v3/util/codec"
 	"github.com/micro-community/micro/v3/util/codec/bytes"
@@ -73,7 +73,7 @@ func grpcErrToMicroErr(stat *status.Status) error {
 	ret = stat.Err()
 	for {
 		merr := &errors.Error{}
-		if err := json.Unmarshal(errBytes, merr); err != nil {
+		if err := sonic.Unmarshal(errBytes, merr); err != nil {
 			return ret
 		}
 		ret = merr
