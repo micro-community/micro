@@ -129,10 +129,10 @@ func (g *grpcClient) call(ctx context.Context, addr string, req client.Request, 
 		grpcDialOptions = append(grpcDialOptions, opts...)
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), opts.DialTimeout)
-	defer cancel()
+	dialCtx, timeout := context.WithTimeout(ctx, opts.DialTimeout)
+	defer timeout()
 
-	cc, err := g.pool.getConn(ctx, addr, grpcDialOptions...)
+	cc, err := g.pool.getConn(dialCtx, addr, grpcDialOptions...)
 	if err != nil {
 		return errors.InternalServerError("go.micro.client", fmt.Sprintf("Error sending request: %v", err))
 	}
@@ -208,11 +208,10 @@ func (g *grpcClient) stream(ctx context.Context, addr string, req client.Request
 		grpcDialOptions = append(grpcDialOptions, opts...)
 	}
 
-	var timeout context.CancelFunc
-	ctx, timeout = context.WithTimeout(ctx, opts.DialTimeout)
+	dialCtx, timeout := context.WithTimeout(ctx, opts.DialTimeout)
 	defer timeout()
 
-	cc, err := g.pool.getConn(ctx, addr, grpcDialOptions...)
+	cc, err := g.pool.getConn(dialCtx, addr, grpcDialOptions...)
 	if err != nil {
 		return errors.InternalServerError("go.micro.client", fmt.Sprintf("Error sending request: %v", err))
 	}
